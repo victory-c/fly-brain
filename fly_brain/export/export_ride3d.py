@@ -8,7 +8,10 @@ onto pivots so they spin and steer. Without a model, a procedural S-Works Tarmac
 
 The left panel shows the followed rider's whole brain as the same point cloud and regions as the drinks
 dashboard (Fly Brain Live), from a recording made with `runs.ride --brain-out` (found next to the trace as
-<name>_brain.npz, or given with --brain).
+<name>_brain.npz, or given with --brain). The map can be enlarged (corner button or B key, remembered in localStorage).
+
+Every visible string comes in English and Simplified Chinese (switch in the control bar; ?lang=en|zh, else the saved
+choice in localStorage 'flybrain.lang', else the browser language).
 
 usage: python -m export.export_ride3d results/ride_trace.json results/ride_3d.html [--bike PATH|none] [--brain NPZ|none]
 """
@@ -25,44 +28,98 @@ DEFAULT_BIKE = ROOT / "assets" / "colnago_v4rs.glb"
 DN_SHOWN = ["DNp20_L", "DNp20_R", "DNg46_L", "DNg46_R", "DNp22_L", "DNp22_R", "b1 MN_L", "b1 MN_R", "DNp15_L", "DNp15_R"]
 
 HTML = r"""<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><title>🪰 Fly rides a road bike</title>
+<html lang="en"><head><meta charset="utf-8"><title>🪰 Fly rides a road bike</title>
 <style>
+:root{--ctlh:54px;--bw:368px}body.bigbrain{--bw:calc(min(820px,60vw) + 28px)}body.nobrain{--bw:14px}
 html,body{margin:0;height:100%;background:#0b0d12;color:#eee;font:14px/1.4 system-ui,sans-serif;overflow:hidden}
 #c{position:fixed;inset:0;display:block}
 .panel{position:fixed;background:rgba(10,12,18,.72);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 14px}
 #hud{top:14px;right:14px;min-width:220px}
 #hud .big{font-size:40px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}#hud .unit{font-size:14px;color:#9aa;margin-left:4px}
 #hud .row{display:flex;justify-content:space-between;gap:16px;color:#cbd;margin-top:6px;font-variant-numeric:tabular-nums}#hud .row b{color:#fff}
-#brain{top:14px;left:14px;width:272px;max-height:calc(100vh - 110px);overflow:auto}#brain h4{margin:0 0 6px;font-weight:600;font-size:13px;color:#9aa}
-#bmap{position:relative;height:210px;margin:0 -6px 2px;border-radius:9px;overflow:hidden;background:#0d1017}#bc{width:100%;height:100%;display:block;cursor:grab}
+#brain{top:14px;left:14px;width:340px;max-width:calc(100vw - 28px);box-sizing:border-box;max-height:calc(100vh - var(--ctlh) - 56px);overflow:auto}#brain h4{margin:0 0 6px;font-weight:600;font-size:13px;color:#9aa}
+body.bigbrain #brain{width:min(820px,60vw)}
+#bmap{position:relative;height:300px;margin:0 -6px 2px;border-radius:9px;overflow:hidden;background:#0d1017}#bc{width:100%;height:100%;display:block;cursor:grab}
+body.bigbrain #bmap{height:min(600px,66vh,calc(100vh - var(--ctlh) - 302px));min-height:300px}
+#bbig{position:absolute;top:6px;right:6px;padding:0 7px;font-size:17px;line-height:1.5;background:rgba(27,31,39,.8);border-color:rgba(255,255,255,.14);color:#cbd}#bbig:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 #bnote{position:absolute;left:8px;right:8px;bottom:5px;font-size:10.5px;color:#8a93a6;pointer-events:none;line-height:1.3}
 .sub{font-size:11px;color:#778;margin:8px 0 3px}
-.reg{display:grid;grid-template-columns:8px 118px 1fr 30px;gap:6px;align-items:center;font-size:11.5px;margin:2px 0;color:#cbd}
+.reg{display:grid;grid-template-columns:8px var(--regw,118px) 1fr 30px;gap:6px;align-items:center;font-size:11.5px;margin:2px 0;color:#cbd}.reg span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .reg s{width:8px;height:8px;border-radius:50%;display:block}.reg i{display:block;height:8px;border-radius:4px;background:linear-gradient(90deg,#ff8c1a,#ffd28a);transform-origin:left;transform:scaleX(0)}
 .reg b{font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+body.bigbrain #regs{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}body.bigbrain #bars{display:grid;grid-template-columns:repeat(3,1fr);column-gap:24px}
 .bar{display:grid;grid-template-columns:62px 1fr 1fr;gap:6px;align-items:center;font-size:12px;margin:3px 0}
 .bar i{display:block;height:9px;border-radius:5px;background:linear-gradient(90deg,#4da3ff,#8ec5ff);transform-origin:left}.bar i.r{background:linear-gradient(90deg,#ff4d4d,#ff9a9a)}
-#ctl{bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;white-space:nowrap}
+#ctl{bottom:14px;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 28px);box-sizing:border-box;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;align-items:center;white-space:nowrap}
 button,select{background:#1b1f27;color:#eee;border:1px solid #333;border-radius:8px;padding:6px 12px;font-size:14px;cursor:pointer}button.on{background:#ff4d4d;border-color:#ff4d4d}
-input[type=range]{width:260px}
-#title{top:14px;left:50%;transform:translateX(-50%);color:#9aa;font-size:12px;white-space:nowrap}
-#fall{position:fixed;top:40%;left:50%;transform:translateX(-50%);font-size:44px;font-weight:800;color:#ff4d4d;text-shadow:0 2px 12px #000;display:none}
+input[type=range]{width:220px}
+.lang{display:inline-flex;border:1px solid #333;border-radius:8px;overflow:hidden}.lang button{border:0;border-radius:0;padding:6px 10px;color:#9aa}.lang button+button{border-left:1px solid #333}.lang button.on{color:#fff}
+#title{top:14px;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 2*var(--bw));box-sizing:border-box;text-align:center;text-wrap:balance;color:#9aa;font-size:12px}
+body.bigbrain #title{top:auto;left:auto;right:14px;bottom:calc(var(--ctlh) + 26px);margin:0;max-width:min(380px,calc(100vw - var(--bw) - 28px));text-align:right}
+#fall{position:fixed;top:40%;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 2*var(--bw));text-align:center;text-wrap:balance;line-height:1.15;font-size:44px;font-weight:800;color:#ff4d4d;text-shadow:0 2px 12px #000;display:none}
+body.bigbrain #fall{left:var(--bw);max-width:calc(100vw - var(--bw) - 28px);font-size:38px}
 </style></head><body>
 <canvas id="c"></canvas>
 <div id="hud" class="panel"><div><span class="big" id="v">0.0</span><span class="unit">km/h</span></div>
-<div class="row"><span>倾角 lean</span><b id="phi">0°</b></div><div class="row"><span>把角 steer</span><b id="delta">0°</b></div>
-<div class="row"><span>转向扭矩</span><b id="T">0 Nm</b></div><div class="row"><span>踩踏功率</span><b id="P">0 W</b></div>
-<div class="row"><span>踏频</span><b id="cad">0 rpm</b></div><div class="row"><span>里程</span><b id="x">0 m</b></div><div class="row"><span>离路中心</span><b id="lat">0 m</b></div>
-<div class="row"><span>这名骑手在路上</span><b id="road">—</b></div><div class="row"><span>仍在路上的骑手</span><b id="alive"></b></div></div>
-<div id="brain" class="panel"><h4>🪰 苍蝇全脑 <span id="pop"></span> spikes/s</h4>
-<div id="bmap"><canvas id="bc"></canvas><div id="bnote"></div></div>
-<div id="regsec"><div class="sub">各脑区平均放电（不含被驱动的感觉神经元），Hz</div><div id="regs"></div></div>
-<div class="sub">下行神经元 左(蓝) / 右(红)，Hz</div><div id="bars"></div></div>
-<div id="ctl" class="panel"><button id="play">▶ 播放</button><select id="speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+<div class="row"><span data-i18n="lean"></span><b id="phi">0°</b></div><div class="row"><span data-i18n="steer"></span><b id="delta">0°</b></div>
+<div class="row"><span data-i18n="torque"></span><b id="T">0 Nm</b></div><div class="row"><span data-i18n="power"></span><b id="P">0 W</b></div>
+<div class="row"><span data-i18n="cadence"></span><b id="cad">0 rpm</b></div><div class="row"><span data-i18n="dist"></span><b id="x">0 m</b></div><div class="row"><span data-i18n="lat"></span><b id="lat">0 m</b></div>
+<div class="row"><span data-i18n="roadT"></span><b id="road">—</b></div><div class="row"><span data-i18n="alive"></span><b id="alive"></b></div></div>
+<div id="brain" class="panel"><h4><span data-i18n="brainA"></span> <span id="pop"></span> <span data-i18n="brainB"></span></h4>
+<div id="bmap"><canvas id="bc"></canvas><button id="bbig" data-i18n-title="bigOn">⤢</button><div id="bnote"></div></div>
+<div id="regsec"><div class="sub" data-i18n="regCap"></div><div id="regs"></div></div>
+<div class="sub" data-i18n="dnCap"></div><div id="bars"></div></div>
+<div id="ctl" class="panel"><button id="play" data-i18n="play"></button><select id="speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
 <input id="time" type="range" min="0" value="0"><span id="clock" style="font-variant-numeric:tabular-nums;min-width:56px">0.00 s</span>
-<button id="cam0" class="on">跟拍</button><button id="cam1">侧拍</button><button id="cam2">苍蝇视角</button><button id="cam3">特写</button><button id="ghosts" class="on">其他骑手</button>
-<select id="paint" title="车架涂装"></select><select id="rider"></select></div>
-<div id="title" class="panel">加载车模…</div><div id="fall">倒了！</div>
+<button id="cam0" class="on" data-i18n="cam0"></button><button id="cam1" data-i18n="cam1"></button><button id="cam2" data-i18n="cam2"></button><button id="cam3" data-i18n="cam3"></button><button id="ghosts" class="on" data-i18n="ghosts"></button>
+<select id="paint" data-i18n-title="paint"></select><select id="rider"></select>
+<span id="lang" class="lang" data-i18n-title="lang"><button data-l="en">EN</button><button data-l="zh">中文</button></span></div>
+<div id="title" class="panel" data-i18n="loading"></div><div id="fall"></div>
+<script>
+// ---------- language: ?lang=en|zh (saved), else the saved choice, else the browser's language. Every visible string comes from here.
+const I18N={
+ en:{lean:'Lean',steer:'Steer angle',torque:'Steer torque',power:'Pedal power',cadence:'Cadence',dist:'Distance',lat:'From the road centre',
+  roadT:'Time on the road',alive:'Riders still on the road',left:'left',right:'right',
+  brainA:'🪰 Whole fly brain ·',brainB:'spikes/s',regCap:'Mean firing per brain region (driven sensory neurons excluded), Hz',dnCap:'Descending neurons, left (blue) / right (red), Hz',
+  unpacking:'Unpacking the whole-brain recording…',noteOwn:(r,ms)=>'Rider #'+r+' · bright = fired in this '+ms+' ms · drag to rotate',
+  noteOther:(rec,r)=>'Only rider #'+rec+' was recorded neuron by neuron; rider #'+r+' shows region averages',
+  bigOn:'Enlarge the brain map (B)',bigOff:'Shrink the brain map (B)',
+  play:'▶ Play',pause:'⏸ Pause',replay:'↺ Replay',cam0:'Chase cam',cam1:'Side cam',cam2:"Fly's eyes",cam3:'Close-up',ghosts:'Other riders',
+  paint:'Frame paint',pOrig:'Factory blue',pUAE:'UAE white',pRed:'Racing red',pCarbon:'Carbon black',pSW:'S-Works red',pWhite:'White',pBlue:'Blue',
+  riderOpt:n=>'Rider #'+n,lang:'Language',loading:'Loading the bike model…',fell:'He fell!',offroad:'Off the road!',
+  docTitle:'🪰 Fly rides a road bike',docTitleBike:n=>'🪰 Fly rides a '+n,
+  mode:m=>m==='oracle'?'PD rider without a brain (oracle)':m,
+  titleLine:(bike,mode,n,t)=>bike+' · '+mode+' · '+n+' riders · '+t+' s · male fly CNS, 166,700 neurons'},
+ zh:{lean:'倾角',steer:'把角',torque:'转向扭矩',power:'踩踏功率',cadence:'踏频',dist:'里程',lat:'离路中心',
+  roadT:'在路上的时间',alive:'仍在路上的骑手',left:'左',right:'右',
+  brainA:'🪰 苍蝇全脑 · 每秒',brainB:'次放电',regCap:'各脑区平均放电（不含被驱动的感觉神经元），Hz',dnCap:'下行神经元 左(蓝) / 右(红)，Hz',
+  unpacking:'解压全脑数据…',noteOwn:(r,ms)=>'亮点：骑手 #'+r+' 这 '+ms+' ms 里放电的神经元 · 拖动旋转',
+  noteOther:(rec,r)=>'逐个神经元只录了骑手 #'+rec+'；骑手 #'+r+' 按脑区平均着色',
+  bigOn:'放大全脑图（B 键）',bigOff:'缩小全脑图（B 键）',
+  play:'▶ 播放',pause:'⏸ 暂停',replay:'↺ 重播',cam0:'跟拍',cam1:'侧拍',cam2:'苍蝇视角',cam3:'特写',ghosts:'其他骑手',
+  paint:'车架涂装',pOrig:'原厂蓝',pUAE:'UAE 白',pRed:'赛车红',pCarbon:'碳黑',pSW:'S-Works 红',pWhite:'白',pBlue:'蓝',
+  riderOpt:n=>'骑手 #'+n,lang:'语言',loading:'加载车模…',fell:'倒了！',offroad:'出界 · 骑进草地了',
+  docTitle:'🪰 苍蝇骑公路车',docTitleBike:n=>'🪰 苍蝇骑 '+n,
+  mode:m=>m==='oracle'?'无大脑的 PD 骑手（oracle）':m.startsWith('replay of ')?'回放 '+m.slice(10):({'open loop (prior decoder: no steering, ~70 W)':'开环（先验解码器：不扶车把，约 70 W）'}[m]||m),
+  titleLine:(bike,mode,n,t)=>bike+' · '+mode+' · '+n+' 名骑手 · '+t+' s · 雄果蝇全中枢神经系统 166,700 神经元'}};
+const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
+let LANG=(()=>{const q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='zh'){LS.set('flybrain.lang',q);return q}
+ const s=LS.get('flybrain.lang');if(s==='en'||s==='zh')return s;return /^zh/i.test(navigator.language||'')?'zh':'en'})();
+let BIKE_NAME=null;const LANG_HOOKS=[];
+function tt(k,...a){const v=I18N[LANG][k];return typeof v==='function'?v(...a):(v===undefined?k:v)}
+function say(el,k){el.dataset.i18n=k;el.textContent=tt(k,el.dataset.i18nArg)}
+function applyLang(){document.documentElement.lang=LANG==='zh'?'zh-CN':'en';document.title=BIKE_NAME?tt('docTitleBike',BIKE_NAME):tt('docTitle');
+ for(const el of document.querySelectorAll('[data-i18n]'))el.textContent=tt(el.dataset.i18n,el.dataset.i18nArg);
+ for(const el of document.querySelectorAll('[data-i18n-title]'))el.title=tt(el.dataset.i18nTitle);
+ for(const b of document.querySelectorAll('#lang button'))b.classList.toggle('on',b.dataset.l===LANG);
+ for(const f of LANG_HOOKS)f()}
+function setLang(l){if(l===LANG||!I18N[l])return;LANG=l;LS.set('flybrain.lang',l);
+ try{const u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',l);history.replaceState(history.state,'',u)}}catch(e){}applyLang()}
+for(const b of document.querySelectorAll('#lang button'))b.onclick=()=>setLang(b.dataset.l);
+applyLang();
+// the brain panel and the title stay clear of the control bar, however many rows it wraps to
+new ResizeObserver(()=>document.documentElement.style.setProperty('--ctlh',document.getElementById('ctl').offsetHeight+'px')).observe(document.getElementById('ctl'));
+</script>
 <script id="data" type="application/json">__DATA__</script>
 <script id="bikeglb" type="application/octet-stream">__BIKE__</script>
 <script id="brainbin" type="application/json">__BRAIN__</script>
@@ -215,12 +272,22 @@ function setPaint(hex){scene.traverse(o=>{if(o.isMesh&&o.material&&o.material.us
 const BR=D.brain||null,RC={taste:[1,.55,.2],feeding:[1,.35,.25],smell:[.4,.85,.6],memory:[.85,.55,1],nav:[.4,.7,1],vision:[.35,.45,.6],touch:[.8,.8,.4],descending:[1,.8,.3],cord:[.5,.75,.75],motor:[1,.3,.5],other:[.55,.6,.7]};
 const REST=[0.016,0.021,0.038],HOT=[1,0.55,0.12],PEAK=[1,0.97,0.85];let bm=null;  // dim rest: the small panel stacks many points per pixel
 const SHORT={memory:'蘑菇体',nav:'中央复合体',cord:'腹神经索',touch:'躯体感觉神经元'};
+const REG_EN={taste:'Gustatory neurons',feeding:'Subesophageal zone (SEZ)',smell:'Smell',memory:'Mushroom body',nav:'Central complex',vision:'Vision',
+ touch:'Somatosensory neurons',descending:'Descending neurons',cord:'Ventral nerve cord',motor:'Motor neurons',other:'Other central brain'};
+const regLabel=x=>LANG==='en'?(REG_EN[x.id]||x.label):(SHORT[x.id]||x.label);
+// big brain map: a toggle in the map's corner (or the B key), remembered per browser
+let bigOK=false;
+function setBig(on){document.body.classList.toggle('bigbrain',on);const b=document.getElementById('bbig');b.textContent=on?'⤡':'⤢';b.dataset.i18nTitle=on?'bigOff':'bigOn';b.title=tt(b.dataset.i18nTitle);viewShift()}
+function viewShift(){  // big map: shift the road view right so the followed rider stays in sight beside the panel
+ if(document.body.classList.contains('bigbrain'))camera.setViewOffset(innerWidth,innerHeight,-document.getElementById('brain').getBoundingClientRect().right/2,0,innerWidth,innerHeight);else camera.clearViewOffset()}
+function toggleBig(){if(!bigOK)return;const on=!document.body.classList.contains('bigbrain');setBig(on);LS.set('flybrain.bigbrain',on?'1':'0')}
 async function inflate(s){const bin=atob(s),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
  return new Uint8Array(await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('deflate'))).arrayBuffer())}
 async function initBrain(){const $=id=>document.getElementById(id);
- if(!BR&&!dnNames.length){$('brain').style.display='none';return}  // PD rider: no brain in the loop
+ if(!BR&&!dnNames.length){$('brain').style.display='none';document.body.classList.add('nobrain');return}  // PD rider: no brain in the loop
  if(!BR||typeof DecompressionStream==='undefined'){$('bmap').style.display='none';$('regsec').style.display='none';return}
- $('bnote').textContent='解压全脑数据…';
+ bigOK=true;setBig(LS.get('flybrain.bigbrain')==='1');$('bbig').onclick=toggleBig;
+ say($('bnote'),'unpacking');
  const bin=JSON.parse($('brainbin').textContent),[q,reg,act]=await Promise.all([inflate(bin.xyz),inflate(bin.reg),inflate(bin.act)]);
  const nP=BR.points,qq=new Uint16Array(q.buffer),xyz=new Float32Array(nP*3);
  // cloud axes: x left-right, y ventral, z from the brain down the nerve cord -> show the CNS lying along x, dorsal side up
@@ -232,14 +299,16 @@ async function initBrain(){const $=id=>document.getElementById(id);
  sc.add(new THREE.Points(g,new THREE.PointsMaterial({size:0.016,vertexColors:true,transparent:true,opacity:0.85,blending:THREE.AdditiveBlending,depthWrite:false})));
  const ids=BR.regions.map(x=>x.id),rows=[];const regs=$('regs');
  BR.regions.forEach((x,j)=>{if(x.id==='taste')return;const d=document.createElement('div');d.className='reg';const cc=RC[x.id]||[.6,.6,.6];
-  d.innerHTML='<s style="background:rgb('+cc.map(v=>Math.round(v*255)).join(',')+')"></s><span>'+(SHORT[x.id]||x.label)+'</span><i></i><b></b>';regs.appendChild(d);rows.push({j,i:d.querySelector('i'),b:d.querySelector('b')})});
+  d.innerHTML='<s style="background:rgb('+cc.map(v=>Math.round(v*255)).join(',')+')"></s><span></span><i></i><b></b>';regs.appendChild(d);rows.push({j,x,s:d.querySelector('span'),i:d.querySelector('i'),b:d.querySelector('b')})});
+ const relabel=()=>{let wmax=0;regs.style.setProperty('--regw','0px');for(const w of rows){w.s.textContent=w.s.title=regLabel(w.x);wmax=Math.max(wmax,w.s.scrollWidth)}  // label column fits the longest name
+  if(wmax)regs.style.setProperty('--regw',Math.min(190,wmax+2)+'px')};relabel();LANG_HOOKS.push(relabel);
  bm={r,sc,cam,g,col,act,reg,ids,rows,nP,rotY:0,rotX:0.6,drag:false,px:0,py:0,key:'',ph:0};
  c.addEventListener('pointerdown',e=>{bm.drag=true;bm.px=e.clientX;bm.py=e.clientY;c.setPointerCapture(e.pointerId)});
  c.addEventListener('pointermove',e=>{if(!bm.drag)return;bm.rotY+=(e.clientX-bm.px)*0.008;bm.rotX=Math.max(-1.4,Math.min(1.4,bm.rotX+(e.clientY-bm.py)*0.008));bm.px=e.clientX;bm.py=e.clientY});
  c.addEventListener('pointerup',()=>bm.drag=false);
  const rs=()=>{const w=c.clientWidth,h=c.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};new ResizeObserver(rs).observe(c);rs()}
 function paintBrain(t){if(!bm)return;const nB=BR.bins,f=t*1000/BR.binMs-0.5,i=Math.max(0,Math.min(nB-1,Math.floor(f))),j=Math.min(nB-1,i+1),a=Math.max(0,Math.min(1,f-i));
- const own=rider===BR.rider,key=rider+':'+i+':'+a.toFixed(3);
+ const own=rider===BR.rider,key=LANG+':'+rider+':'+i+':'+a.toFixed(3);
  if(key!==bm.key){bm.key=key;const col=bm.col,nP=bm.nP,act=bm.act,RH=BR.regionHz;
   const rhz=bm.ids.map((_,r)=>RH[i][rider][r]*(1-a)+RH[j][rider][r]*a);
   const ramp=(v,k)=>{const g=v<0.5?v*2:1,h=v<0.5?0:(v-0.5)*2;col[k]=REST[0]+(HOT[0]-REST[0])*g+(PEAK[0]-HOT[0])*h;col[k+1]=REST[1]+(HOT[1]-REST[1])*g+(PEAK[1]-HOT[1])*h;col[k+2]=REST[2]+(HOT[2]-REST[2])*g+(PEAK[2]-HOT[2])*h};
@@ -247,7 +316,7 @@ function paintBrain(t){if(!bm)return;const nB=BR.bins,f=t*1000/BR.binMs-0.5,i=Ma
   else{const rv=rhz.map(h=>Math.min(1,h/BR.cloudHz));for(let p=0,k=0;p<nP;p++,k+=3)ramp(rv[bm.reg[p]],k)}
   bm.g.attributes.color.needsUpdate=true;
   for(const w of bm.rows){const v=rhz[w.j];w.i.style.transform='scaleX('+Math.min(1,v/8)+')';w.b.textContent=v.toFixed(1)}
-  document.getElementById('bnote').textContent=own?'亮点：骑手 #'+rider+' 这 '+BR.binMs+' ms 里放电的神经元 · 拖动旋转':'逐个神经元只录了骑手 #'+BR.rider+'；骑手 #'+rider+' 按脑区平均着色'}
+  const note=document.getElementById('bnote');note.removeAttribute('data-i18n');note.textContent=own?tt('noteOwn',rider,BR.binMs):tt('noteOther',BR.rider,rider)}
  if(!bm.drag)bm.ph+=0.006;const ry=bm.rotY+0.5*Math.sin(bm.ph),d=3.3;  // sway around a dorsolateral view
  bm.cam.position.set(d*Math.sin(ry)*Math.cos(bm.rotX),d*Math.sin(bm.rotX),d*Math.cos(ry)*Math.cos(bm.rotX));bm.cam.lookAt(0,0,0);bm.r.render(bm.sc,bm.cam)}
 // ---------- playback + cameras
@@ -268,38 +337,40 @@ function frame(){const row=tr[k];for(let i=0;i<shown;i++){bikes[i].root.visible=
  $('T').textContent=row.steer[rider].toFixed(2)+' Nm';$('P').textContent=row.power[rider].toFixed(0)+' W';$('cad').textContent=(row.done[rider]?0:s[3]/(2*Math.PI*G.R)/1.5*60).toFixed(0)+' rpm';$('x').textContent=s[0].toFixed(1)+' m';
  const RH=D.road_half||3.5,onRoad=(r,i)=>!r.done[i]&&Math.abs(r.state[i][1])<=RH;
  $('alive').textContent=row.state.filter((_,i)=>onRoad(row,i)&&(!D.road_time||row.t<=D.road_time[i]+1e-6)).length+' / '+B;$('pop').textContent=row.pop_hz?Math.round(row.pop_hz[rider]).toLocaleString():'—';
- $('lat').textContent=(s[1]>=0?'右 ':'左 ')+Math.abs(s[1]).toFixed(2)+' m';
+ $('lat').textContent=tt(s[1]>=0?'right':'left')+' '+Math.abs(s[1]).toFixed(2)+' m';
  if(D.road_time)$('road').textContent=Math.min(row.t,D.road_time[rider]).toFixed(1)+' / '+tr[tr.length-1].t.toFixed(0)+' s';
- const fallEl=$('fall');if(row.done[rider]){fallEl.textContent='倒了！';fallEl.style.display='block'}else if(Math.abs(s[1])>RH){fallEl.textContent='出界 · 骑进草地了';fallEl.style.display='block'}else fallEl.style.display='none';$('clock').textContent=row.t.toFixed(2)+' s';slider.value=k;
+ const fallEl=$('fall');if(row.done[rider]){say(fallEl,'fell');fallEl.style.display='block'}else if(Math.abs(s[1])>RH){say(fallEl,'offroad');fallEl.style.display='block'}else fallEl.style.display='none';$('clock').textContent=row.t.toFixed(2)+' s';slider.value=k;
  if(row.dn_hz){const d=row.dn_hz[rider];for(const p of pairs){p.el[0].style.transform='scaleX('+Math.min(1,d[p.l]/120)+')';p.el[1].style.transform='scaleX('+Math.min(1,d[p.r]/120)+')'}}
  paintBrain(row.t);snap=false;renderer.render(scene,camera);window.DONE=1}
-function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}addEventListener('resize',resize);resize();
-function loop(ts){if(playing){const sp=parseFloat(document.getElementById('speed').value);if(ts-last>dt*1000/sp){last=ts;k=Math.min(k+1,tr.length-1);if(k===tr.length-1){playing=false;document.getElementById('play').textContent='↺ 重播'}}}frame();requestAnimationFrame(loop)}
+function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();viewShift()}addEventListener('resize',resize);resize();
+function loop(ts){if(playing){const sp=parseFloat(document.getElementById('speed').value);if(ts-last>dt*1000/sp){last=ts;k=Math.min(k+1,tr.length-1);if(k===tr.length-1){playing=false;say(document.getElementById('play'),'replay')}}}frame();requestAnimationFrame(loop)}
 function start(){G=MODEL?modelGeo():procGeo();FIT=fitFrom(G);
  if(!MODEL)paint.color.setHex(G.paint).convertSRGBToLinear();else paint.color.setHex(0x2440c8).convertSRGBToLinear();
  for(let i=0;i<shown;i++){const bk=buildBike(true,false);scene.add(bk.root);bikes.push(bk)}hero=buildBike(false,!!MODEL);scene.add(hero.root);
- document.title='🪰 Fly rides a '+G.name;
- document.getElementById('title').textContent=G.name+' · '+D.mode+' · '+B+' 名骑手 · '+tr[tr.length-1].t.toFixed(1)+' s · 男性果蝇全中枢神经系统 166,700 神经元';
- const paints=MODEL?[['orig','原厂蓝'],[0xf2f2f2,'UAE 白'],[0xc8102e,'赛车红'],[0x16181c,'碳黑']]:[['orig','S-Works 红'],[0xf2f2f2,'白'],[0x16181c,'碳黑'],[0x2440c8,'蓝']];
- for(const [v,t] of paints){const o=document.createElement('option');o.value=v;o.textContent=t;psel.appendChild(o)}psel.onchange=e=>setPaint(e.target.value==='orig'?'orig':+e.target.value);
+ BIKE_NAME=G.name;document.title=tt('docTitleBike',G.name);
+ const titleLine=()=>{const el=document.getElementById('title');el.removeAttribute('data-i18n');el.textContent=tt('titleLine',G.name,tt('mode',D.mode),B,tr[tr.length-1].t.toFixed(1))};titleLine();LANG_HOOKS.push(titleLine);
+ const paints=MODEL?[['orig','pOrig'],[0xf2f2f2,'pUAE'],[0xc8102e,'pRed'],[0x16181c,'pCarbon']]:[['orig','pSW'],[0xf2f2f2,'pWhite'],[0x16181c,'pCarbon'],[0x2440c8,'pBlue']];
+ for(const [v,t] of paints){const o=document.createElement('option');o.value=v;say(o,t);psel.appendChild(o)}psel.onchange=e=>setPaint(e.target.value==='orig'?'orig':+e.target.value);
  if(Q.get('paint'))setPaint(+Q.get('paint'));
- for(let i=0;i<B;i++){const o=document.createElement('option');o.value=i;o.textContent='骑手 #'+i;rsel.appendChild(o)}
+ for(let i=0;i<B;i++){const o=document.createElement('option');o.value=i;o.dataset.i18nArg=i;say(o,'riderOpt');rsel.appendChild(o)}
  rider=Math.min(B-1,+(Q.get('rider')??(D.best_rider||0)));rsel.value=rider;
  k=Math.min(tr.length-1,Math.round((+Q.get('t')||0)/dt));slider.max=tr.length-1;
  for(const j of[0,1,2,3])document.getElementById('cam'+j).classList.toggle('on',j===camMode);document.getElementById('ghosts').classList.toggle('on',showGhosts);
  requestAnimationFrame(loop)}
-document.getElementById('play').onclick=()=>{if(k>=tr.length-1)k=0;playing=!playing;document.getElementById('play').textContent=playing?'⏸ 暂停':'▶ 播放'};
+LANG_HOOKS.push(()=>{if(hero)frame()});  // redraw now: HUD, banner and brain note are written per frame
+document.getElementById('play').onclick=()=>{if(k>=tr.length-1)k=0;playing=!playing;say(document.getElementById('play'),playing?'pause':'play')};
 slider.oninput=e=>{k=+e.target.value;snap=true};rsel.onchange=e=>{rider=+e.target.value;snap=true};
 document.getElementById('ghosts').onclick=e=>{showGhosts=!showGhosts;e.target.classList.toggle('on',showGhosts)};
 for(const i of[0,1,2,3]){document.getElementById('cam'+i).onclick=()=>{camMode=i;snap=true;for(const j of[0,1,2,3])document.getElementById('cam'+j).classList.toggle('on',j===i)}}
-addEventListener('keydown',e=>{if(e.key===' '){e.preventDefault();document.getElementById('play').click()}if('1234'.includes(e.key))document.getElementById('cam'+(+e.key-1)).click()});
+addEventListener('keydown',e=>{if(e.key===' '){e.preventDefault();document.getElementById('play').click()}if('1234'.includes(e.key))document.getElementById('cam'+(+e.key-1)).click();
+ if((e.key==='b'||e.key==='B')&&!e.ctrlKey&&!e.metaKey&&!e.altKey)toggleBig()});
 // ---------- boot: decode the embedded model (if any), then build the scene
 const b64=document.getElementById('bikeglb').textContent.trim();
 if(b64){const bin=atob(b64),buf=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)buf[i]=bin.charCodeAt(i);
  const gl=new THREE.GLTFLoader(),dl=new THREE.DRACOLoader();dl.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/draco/');gl.setDRACOLoader(dl);
  gl.parse(buf.buffer,'',g=>{MODEL=g.scene;start()},e=>{console.warn('bike model failed, using the procedural bike',e);start()})}
 else start();
-initBrain().catch(e=>{console.warn('brain map failed',e);document.getElementById('bmap').style.display='none';document.getElementById('regsec').style.display='none'});
+initBrain().catch(e=>{console.warn('brain map failed',e);bigOK=false;setBig(false);document.getElementById('bmap').style.display='none';document.getElementById('regsec').style.display='none'});
 </script></body></html>
 """
 
