@@ -91,6 +91,12 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 36519 | 2026-10-03 19:55 | FAILED | 00:00:04 | 4 cpu, 16G |  | `srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/python -m runs.ride --device cpu --readout lane --lane hs --lane-filter results/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=5...` (in `./fly_brain`) | `/tmp/claude-93015/-home-s-st-stevejobs-flybrain/ff3d4c1f-4087-4f88-b1bd-f60320256b54/scratchpad/att_test/cem.json` |
 | 36520 | 2026-10-03 19:56 | COMPLETED | 00:00:52 | 4 cpu, 16G |  | `srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/python -m runs.ride --device cpu --readout lane --lane hs --lane-filter results/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=5...` (in `./fly_brain`) | `results/attempts_test/cem.json` |
 | 36521 | 2026-10-03 19:58 | COMPLETED | 02:45:41 | 8 cpu, 64G, 1 gpu | learning to ride from a blank decoder, every attempt recorded (ride-attempts.sbatch) -> results/attempts/ (the attempts page) | `sbatch ride-attempts.sbatch` | [flyattempt-36521.out](logs/flyattempt-36521.out) |
+| 36533 | 2026-10-04 05:35 | COMPLETED | 00:00:30 | 8 cpu, 64G |  | `sbatch -p ocf-hpc -w corruption -c 8 --mem=64G -J connectome-build -o ../logs/rewrite/connectome-build-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain && ...` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
+| 36534 | 2026-10-04 05:38 | COMPLETED | 00:00:03 | 4 cpu, 32G |  | `srun -p ocf-hpc -w corruption -c 4 --mem=32G /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
+| 36535 | 2026-10-04 05:39 | COMPLETED | 00:05:50 | 8 cpu, 48G, 1 gpu |  | `sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -J engine-equiv -o ../logs/rewrite/equiv-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain && ~/...` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
+| 36536 | 2026-10-04 05:49 | COMPLETED | 00:00:23 | 8 cpu, 48G, 1 gpu |  | `srun -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -t 30 /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m pytest -q tests/test_engine.py tests/test_graph.py` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
+| 36537 | 2026-10-04 05:50 | COMPLETED | 00:01:09 | 8 cpu, 48G, 1 gpu |  | `srun -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -t 30 /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m pytest -q -rs tests/test_engine.py tests/test_graph.py` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
+| 36538 | 2026-10-04 05:53 | RUNNING | 00:06:45 | 16 cpu, 96G, 1 gpu |  | `sbatch calibrate-wsyn.sbatch` (in `./.claude/worktrees/commit-dc73073-investigation-a94327`) |  |
 
 ## Full command lines
 
@@ -249,4 +255,16 @@ srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/pyth
 
 ```bash
 srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/python -m runs.ride --device cpu --readout lane --lane hs --lane-filter results/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --offroad 3.5 --center-batch --zbar results/lane/zbar_mu.npy --sigma-pedal 0 --init-theta results/attempts/init_blank.json --sigma-new 0.1 --sigma0 0.3 --riders 3 --seconds 0.6 --generations 2 --seed 5 --out results/attempts_test/cem.json --log-attempts results/attempts_test
+```
+
+**36533** (connectome-build)
+
+```bash
+sbatch -p ocf-hpc -w corruption -c 8 --mem=64G -J connectome-build -o ../logs/rewrite/connectome-build-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain && ~/flybrain/venv-cuda/bin/python -m brain.connectome
+```
+
+**36535** (engine-equiv)
+
+```bash
+sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -J engine-equiv -o ../logs/rewrite/equiv-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain && ~/flybrain/venv-cuda/bin/python ../logs/rewrite/equiv.py
 ```
