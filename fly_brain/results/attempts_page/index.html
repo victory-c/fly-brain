@@ -26,9 +26,9 @@ body.dragging,body.dragging *{user-select:none!important}body.dragv,body.dragv *
 #atitle{font-size:24px;font-weight:600;color:var(--acc);letter-spacing:-.01em;line-height:1.1;font-variant-numeric:tabular-nums}
 #atitle.tick{animation:tick .12s}@keyframes tick{0%{color:#fff}100%{color:var(--acc)}}
 .tiny{font-size:10px;color:var(--dim);margin-top:5px}.caps{text-transform:uppercase;letter-spacing:.1em}
-#stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0 14px}
+#stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(66px,1fr));gap:8px;margin:14px 0 14px}
 .lab{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-.val{font-size:17px;font-weight:600;margin-top:3px;font-variant-numeric:tabular-nums;color:#fff}.val.best{color:var(--acc)}
+.val{font-size:17px;font-weight:600;margin-top:3px;font-variant-numeric:tabular-nums;color:#fff;white-space:nowrap}.val.best{color:var(--acc)}.val small{font-size:9.5px;font-weight:500;color:#9aa0aa;margin-left:3px;letter-spacing:.02em}
 #card{background:#1c1f26;border-left:2px solid var(--acc);padding:7px 10px;font-size:11.5px;margin-bottom:12px;color:#e9ebef;line-height:1.35}
 #status{font-size:18px;font-weight:600;margin:5px 0 10px;color:#fff}
 #log{flex:1;min-height:0;overflow:hidden;-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
@@ -56,7 +56,7 @@ button:hover{border-color:#666}button.on{background:var(--acc);color:#111;border
    <div id="atitle">—</div>
    <div class="tiny" id="brainline"></div>
    <div class="tiny caps" id="genline"></div>
-   <div id="stats"><div><div class="lab" id="l-dist"></div><div class="val" id="v-dist">0.0 m</div></div><div><div class="lab" id="l-best"></div><div class="val best" id="v-best">0.0 m</div></div><div><div class="lab" id="l-time"></div><div class="val" id="v-time">0:00.0</div></div></div>
+   <div id="stats"><div><div class="lab" id="l-dist"></div><div class="val" id="v-dist">0.0 m</div></div><div><div class="lab" id="l-best"></div><div class="val best" id="v-best">0.0 m</div></div><div><div class="lab" id="l-time"></div><div class="val" id="v-time">0:00.0</div></div><div><div class="lab" id="l-spd"></div><div class="val" id="v-spd">0.0<small>km/h</small></div></div></div>
    <div id="card" class="hide"></div>
    <div class="lab" id="l-log"></div>
    <div id="status"></div>
@@ -347,7 +347,7 @@ const OUT_EN=['finished','fell','off the road','bailed'],OUT_ZH=['骑满','倒�
 const I18N={
 en:{title:'Fly learns to ride',chips:'Male CNS v1.0 · 166,700 neurons · connectome unchanged · Whipple physics on',
  attempt:k=>'Attempt #'+k,brainline:'166,700 neurons · 124M synapses',genline:(g,r)=>'Generation '+g+' · Rider '+r,
- dist:'Distance',best:'Best',time:'Time',log:'Action log',
+ dist:'Distance',best:'Best',time:'Time',spd:'Speed',log:'Action log',
  noRec:'No whole-brain recording for this attempt',rec:'Whole-brain recording · bright = fired in this 100 ms · drag to rotate',loadingRec:'Loading the whole-brain recording…',
  climb:'Climb on the bike',pedal:'Pedal',mark:m=>m+' m',gustL:'Gust from the left',gustR:'Gust from the right',wobL:'Wobble left, corrected',wobR:'Wobble right, corrected',
  driftL:'Drifting left',driftR:'Drifting right',centre:'Back to the centre',record:'New record',up:'Still upright',
@@ -364,7 +364,7 @@ en:{title:'Fly learns to ride',chips:'Male CNS v1.0 · 166,700 neurons · connec
  paintT:'Frame paint',pOrig:'Factory blue',pUAE:'UAE white',pRed:'Racing red',pCarbon:'Carbon black'},
 zh:{title:'苍蝇学骑车',chips:'雄性 CNS v1.0 · 166,700 神经元 · 连接组不变 · Whipple 物理开',
  attempt:k=>'第 '+k+' 次尝试',brainline:'166,700 神经元 · 1.24 亿突触',genline:(g,r)=>'第 '+g+' 代 · 骑手 '+r,
- dist:'里程',best:'最佳',time:'时间',log:'动作记录',
+ dist:'里程',best:'最佳',time:'时间',spd:'速度',log:'动作记录',
  noRec:'这次没有全脑记录',rec:'全脑记录 · 亮点 = 这 100 ms 里放电的神经元 · 拖动旋转',loadingRec:'正在加载全脑记录…',
  climb:'上车',pedal:'踩踏',mark:m=>m+' m',gustL:'左边来阵风',gustR:'右边来阵风',wobL:'向左晃，纠正了',wobR:'向右晃，纠正了',
  driftL:'向左偏',driftR:'向右偏',centre:'回到路中间',record:'新纪录',up:'还没倒',
@@ -387,7 +387,7 @@ function tt(k,...a){const v=I18N[LANG][k];return typeof v==='function'?v(...a):(
 const LANG_HOOKS=[];
 function applyLang(){document.documentElement.lang=LANG==='zh'?'zh-CN':'en';document.title=tt('title');
  $('chips').textContent=tt('chips');$('brainline').textContent=tt('brainline');
- for(const k of['dist','best','time','log'])$('l-'+k).textContent=tt(k);
+ for(const k of['dist','best','time','spd','log'])$('l-'+k).textContent=tt(k);
  $('credits').textContent=tt('credits');
  $('legend').innerHTML=[['lgFell',COL[1]],['lgOff',COL[2]],['lgFin',COL[0]],['lgBail',COL[3]],['lgRec','#fff']].map(([k,c])=>'<span><i style="background:'+c+'"></i>'+tt(k)+'</span>').join('');
  $('prev').title=tt('prev');$('next').title=tt('next');$('speed').title=tt('speed');$('lang').title=tt('lang');$('cam').title=tt('camT');
@@ -678,6 +678,7 @@ function refreshPanel(){const a=ST.att;if(!a)return;const ph=ST.phase,riding=ph=
  setT('atitle',tt('attempt',a.id));setT('genline',tt('genline',a.gen,a.rider));
  const dist=riding?live:(ph==='load'?0:a.d),t=riding?ST.tA:(ph==='load'?0:a.t);
  setT('v-dist',fmtD(dist));setT('v-best',fmtD(Math.max(BB[ST.cur]||0,dist)));setT('v-time',fmtT(t));
+ const sp=(ST.rows&&ph!=='load'?stateAt(riding?ST.tA:a.t)[3]:0)*3.6,spS=sp.toFixed(1);if($('v-spd').dataset.v!==spS){$('v-spd').dataset.v=spS;$('v-spd').innerHTML=spS+'<small>km/h</small>'}
  const card=$('card');if(ph==='card'){card.classList.remove('hide');card.textContent=tt('card',a.id,a.o,a.t,a.d)}
  else if(ph==='flip'){card.classList.remove('hide');card.textContent=tt('skip',Math.max(1,ST.flipN))}else card.classList.add('hide');
  const ended=ph==='end'||ph==='card'||ph==='flip',endKey=['fin','fell','off','bail'][a.o]||'fell';
