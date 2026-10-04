@@ -41,3 +41,9 @@ gen 28  fit best  16.51 mean  13.88  upright 12.93 s (max 15.00,  60% finish)  d
 gen 29  fit best  16.45 mean  14.21  upright 13.31 s (max 15.00,  67% finish)  dist  70.0 m  |y| 1.99 m  v 5.23  bailed 0  pop 71,131 sp/s  298s
 gen 30  fit best  16.44 mean  14.33  upright 13.42 s (max 15.00,  67% finish)  dist  70.4 m  |y| 1.95 m  v 5.20  bailed 0  pop 69,978 sp/s  297s
 gen 31  fit best  16.42 mean  13.09  upright 12.26 s (max 15.00,  54% finish)  dist  65.0 m  |y| 2.20 m  v 5.24  bailed 0  pop 68,873 sp/s  297s
+gen 32  fit best  16.44 mean  13.70  upright 12.88 s (max 15.00,  58% finish)  dist  67.6 m  |y| 2.16 m  v 5.17  bailed 0  pop 70,907 sp/s  297s
+gen 33  fit best  16.43 mean  14.90  upright 13.93 s (max 15.00,  73% finish)  dist  73.6 m  |y| 2.01 m  v 5.26  bailed 0  pop 70,501 sp/s  298s
+gen 34  fit best  16.44 mean  13.45  upright 12.61 s (max 15.00,  60% finish)  dist  66.0 m  |y| 1.91 m  v 5.22  bailed 0  pop 71,619 sp/s  297s
+stopping before gen 35: --max-minutes 170
+done: best fitness 16.51, results -> results/attempts/cem.json  (165.6 min)
+== done Sat Oct  3 10:43:49 PM PDT 2026

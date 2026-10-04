@@ -167,6 +167,12 @@ from the trace. "Significant" attempts (the first, every new distance record, ea
 its earliest and longest failure, the last) play in full; the rest are flipped through. The timeline at the
 bottom has one bar per attempt and jumps to any of them.
 
+The run (job 36521, 166 min on one A6000): 35 generations, 1,680 attempts. Generation 0: 42 of 48 fall within a
+second (mean 0.9 s on the bike, record 25 m). Generation 10: mean 10.5 s. Generation 34: 29 of 48 ride the full
+15 s, 5 fall, 14 leave the road (mean 12.6 s). 16 distance records, the last one 84.7 m at attempt 1,200. Over all
+attempts: 580 finished, 259 fell, 841 left the road, none bailed. The learned lane gain and the balance weights come
+out of nothing but trial and error on 91 numbers; the connectome is never touched.
+
 ```bash
 sbatch ride-attempts.sbatch                       # ~3 GPU h -> results/attempts/{attempts.json, gen*.npz, cem.json}
 python -m export.export_attempts                  # -> results/attempts_page/ (served as /ride/)
