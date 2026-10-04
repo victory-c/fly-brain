@@ -90,7 +90,7 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 36494 | 2026-10-03 14:07 | COMPLETED | 00:09:20 | 8 cpu, 48G, 1 gpu | /ride/ page replays with the brain recorded: round-2 decoder and hands-off (ride-page.sbatch) | `sbatch ride-page.sbatch results/lane/cem_mu.json` | [flypage-36494.out](logs/flypage-36494.out) |
 | 36519 | 2026-10-03 19:55 | FAILED | 00:00:04 | 4 cpu, 16G |  | `srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/python -m runs.ride --device cpu --readout lane --lane hs --lane-filter results/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=5...` (in `./fly_brain`) | `/tmp/claude-93015/-home-s-st-stevejobs-flybrain/ff3d4c1f-4087-4f88-b1bd-f60320256b54/scratchpad/att_test/cem.json` |
 | 36520 | 2026-10-03 19:56 | COMPLETED | 00:00:52 | 4 cpu, 16G |  | `srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/python -m runs.ride --device cpu --readout lane --lane hs --lane-filter results/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=5...` (in `./fly_brain`) | `results/attempts_test/cem.json` |
-| 36521 | 2026-10-03 19:58 | RUNNING | 00:01:53 | 8 cpu, 64G, 1 gpu |  | `sbatch ride-attempts.sbatch` | [flyattempt-36521.out](logs/flyattempt-36521.out) |
+| 36521 | 2026-10-03 19:58 | RUNNING | 00:31:53 | 8 cpu, 64G, 1 gpu |  | `sbatch ride-attempts.sbatch` | [flyattempt-36521.out](logs/flyattempt-36521.out) |
 
 ## Full command lines
 

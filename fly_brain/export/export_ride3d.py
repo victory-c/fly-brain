@@ -39,7 +39,7 @@ html,body{margin:0;height:100%;background:#0b0d12;color:#eee;font:14px/1.4 syste
 #hud .row{display:flex;justify-content:space-between;gap:16px;color:#cbd;margin-top:6px;font-variant-numeric:tabular-nums}#hud .row b{color:#fff}
 #brain{top:14px;left:14px;width:340px;max-width:calc(100vw - 28px);box-sizing:border-box;max-height:calc(100vh - var(--ctlh) - 56px);overflow:auto}#brain h4{margin:0 0 6px;font-weight:600;font-size:13px;color:#9aa}
 body.bigbrain #brain{width:min(820px,60vw)}
-#bmap{position:relative;height:300px;margin:0 -6px 2px;border-radius:9px;overflow:hidden;background:#0d1017}#bc{width:100%;height:100%;display:block;cursor:grab}
+#bmap{position:relative;height:clamp(210px,calc(100vh - var(--ctlh) - 450px),300px);margin:0 -6px 2px;border-radius:9px;overflow:hidden;background:#0d1017}#bc{width:100%;height:100%;display:block;cursor:grab}
 body.bigbrain #bmap{height:min(600px,66vh,calc(100vh - var(--ctlh) - 302px));min-height:300px}
 #bbig{position:absolute;top:6px;right:6px;padding:0 7px;font-size:17px;line-height:1.5;background:rgba(27,31,39,.8);border-color:rgba(255,255,255,.14);color:#cbd}#bbig:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 #bnote{position:absolute;left:8px;right:8px;bottom:5px;font-size:10.5px;color:#8a93a6;pointer-events:none;line-height:1.3}
@@ -53,11 +53,14 @@ body.bigbrain #regs{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}b
 #ctl{bottom:14px;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 28px);box-sizing:border-box;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;align-items:center;white-space:nowrap}
 button,select{background:#1b1f27;color:#eee;border:1px solid #333;border-radius:8px;padding:6px 12px;font-size:14px;cursor:pointer}button.on{background:#ff4d4d;border-color:#ff4d4d}
 input[type=range]{width:220px}
+@media (max-width:1399px){#ctl{gap:8px}input[type=range]{width:150px}}
+@media (max-width:1300px){#ctl button,#ctl select{padding:6px 9px}input[type=range]{width:120px}}
+@media (max-width:1200px){input[type=range]{width:90px}}
 .lang{display:inline-flex;border:1px solid #333;border-radius:8px;overflow:hidden}.lang button{border:0;border-radius:0;padding:6px 10px;color:#9aa}.lang button+button{border-left:1px solid #333}.lang button.on{color:#fff}
-#title{top:14px;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 2*var(--bw));box-sizing:border-box;text-align:center;text-wrap:balance;color:#9aa;font-size:12px}
+#title{top:14px;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 2*var(--bw));box-sizing:border-box;text-align:center;text-wrap:balance;color:#9aa;font-size:12px}#title .seg{display:inline-block;max-width:100%}
 body.bigbrain #title{top:auto;left:auto;right:14px;bottom:calc(var(--ctlh) + 26px);margin:0;max-width:min(380px,calc(100vw - var(--bw) - 28px));text-align:right}
 #fall{position:fixed;top:40%;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 2*var(--bw));text-align:center;text-wrap:balance;line-height:1.15;font-size:44px;font-weight:800;color:#ff4d4d;text-shadow:0 2px 12px #000;display:none}
-body.bigbrain #fall{left:var(--bw);max-width:calc(100vw - var(--bw) - 28px);font-size:38px}
+body.bigbrain #fall{left:var(--bw);top:max(40%,calc(var(--hudb,306px) + 16px));max-width:calc(100vw - var(--bw) - 28px);font-size:38px}
 </style></head><body>
 <canvas id="c"></canvas>
 <div id="hud" class="panel"><div><span class="big" id="v">0.0</span><span class="unit">km/h</span></div>
@@ -88,11 +91,12 @@ const I18N={
   paint:'Frame paint',pOrig:'Factory blue',pUAE:'UAE white',pRed:'Racing red',pCarbon:'Carbon black',pSW:'S-Works red',pWhite:'White',pBlue:'Blue',
   riderOpt:n=>'Rider #'+n,lang:'Language',loading:'Loading the bike model…',fell:'He fell!',offroad:'Off the road!',
   docTitle:'🪰 Fly rides a road bike',docTitleBike:n=>'🪰 Fly rides a '+n,
-  mode:m=>m==='oracle'?'PD rider without a brain (oracle)':m,
-  titleLine:(bike,mode,n,t)=>bike+' · '+mode+' · '+n+' riders · '+t+' s · male fly CNS, 166,700 neurons'},
+  mode:m=>m==='oracle'?'PD rider without a brain (oracle)'
+   :m.replace(/^open loop \(prior decoder: no steering, ~(\d+) W\)$/,'Open loop (prior decoder: hands-off, ~$1\u00a0W)').replace(/^[a-z]/,c=>c.toUpperCase()),
+  titleParts:(bike,mode,n,t)=>[bike,mode,n+'\u00a0riders',t+'\u00a0s','male fly CNS, 166,700\u00a0neurons']},
  zh:{lean:'倾角',steer:'把角',torque:'转向扭矩',power:'踩踏功率',cadence:'踏频',dist:'里程',lat:'离路中心',
   roadT:'在路上的时间',alive:'仍在路上的骑手',left:'左',right:'右',
-  brainA:'🪰 苍蝇全脑 · 每秒',brainB:'次放电',regCap:'各脑区平均放电（不含被驱动的感觉神经元），Hz',dnCap:'下行神经元 左(蓝) / 右(红)，Hz',
+  brainA:'🪰 苍蝇全脑 · 每秒',brainB:'次放电',regCap:'各脑区平均放电（不含被驱动的感觉神经元），Hz',dnCap:'下行神经元：左（蓝）/ 右（红），Hz',
   unpacking:'解压全脑数据…',noteOwn:(r,ms)=>'亮点：骑手 #'+r+' 这 '+ms+' ms 里放电的神经元 · 拖动旋转',
   noteOther:(rec,r)=>'逐个神经元只录了骑手 #'+rec+'；骑手 #'+r+' 按脑区平均着色',
   bigOn:'放大全脑图（B 键）',bigOff:'缩小全脑图（B 键）',
@@ -100,8 +104,9 @@ const I18N={
   paint:'车架涂装',pOrig:'原厂蓝',pUAE:'UAE 白',pRed:'赛车红',pCarbon:'碳黑',pSW:'S-Works 红',pWhite:'白',pBlue:'蓝',
   riderOpt:n=>'骑手 #'+n,lang:'语言',loading:'加载车模…',fell:'倒了！',offroad:'出界 · 骑进草地了',
   docTitle:'🪰 苍蝇骑公路车',docTitleBike:n=>'🪰 苍蝇骑 '+n,
-  mode:m=>m==='oracle'?'无大脑的 PD 骑手（oracle）':m.startsWith('replay of ')?'回放 '+m.slice(10):({'open loop (prior decoder: no steering, ~70 W)':'开环（先验解码器：不扶车把，约 70 W）'}[m]||m),
-  titleLine:(bike,mode,n,t)=>bike+' · '+mode+' · '+n+' 名骑手 · '+t+' s · 雄果蝇全中枢神经系统 166,700 神经元'}};
+  mode:m=>m==='oracle'?'无大脑的 PD 骑手（oracle 模式）':m.startsWith('replay of ')?'回放 '+m.slice(10)
+   :m.replace(/^open loop \(prior decoder: no steering, ~(\d+) W\)$/,'开环（先验解码器：不扶车把，约 $1\u00a0W）').replace(/^open loop\b/,'开环'),
+  titleParts:(bike,mode,n,t)=>[bike,mode,n+'\u00a0名骑手',t+'\u00a0s','雄果蝇全中枢神经系统，166,700\u00a0个神经元']}};
 const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 let LANG=(()=>{const q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='zh'){LS.set('flybrain.lang',q);return q}
  const s=LS.get('flybrain.lang');if(s==='en'||s==='zh')return s;return /^zh/i.test(navigator.language||'')?'zh':'en'})();
@@ -119,6 +124,7 @@ for(const b of document.querySelectorAll('#lang button'))b.onclick=()=>setLang(b
 applyLang();
 // the brain panel and the title stay clear of the control bar, however many rows it wraps to
 new ResizeObserver(()=>document.documentElement.style.setProperty('--ctlh',document.getElementById('ctl').offsetHeight+'px')).observe(document.getElementById('ctl'));
+{const h=document.getElementById('hud');new ResizeObserver(()=>document.documentElement.style.setProperty('--hudb',h.offsetTop+h.offsetHeight+'px')).observe(h)}
 </script>
 <script id="data" type="application/json">__DATA__</script>
 <script id="bikeglb" type="application/octet-stream">__BIKE__</script>
@@ -302,11 +308,12 @@ async function initBrain(){const $=id=>document.getElementById(id);
   d.innerHTML='<s style="background:rgb('+cc.map(v=>Math.round(v*255)).join(',')+')"></s><span></span><i></i><b></b>';regs.appendChild(d);rows.push({j,x,s:d.querySelector('span'),i:d.querySelector('i'),b:d.querySelector('b')})});
  const relabel=()=>{let wmax=0;regs.style.setProperty('--regw','0px');for(const w of rows){w.s.textContent=w.s.title=regLabel(w.x);wmax=Math.max(wmax,w.s.scrollWidth)}  // label column fits the longest name
   if(wmax)regs.style.setProperty('--regw',Math.min(190,wmax+2)+'px')};relabel();LANG_HOOKS.push(relabel);
- bm={r,sc,cam,g,col,act,reg,ids,rows,nP,rotY:0,rotX:0.6,drag:false,px:0,py:0,key:'',ph:0};
+ bm={r,sc,cam,g,col,act,reg,ids,rows,nP,rotY:0,rotX:0.6,drag:false,px:0,py:0,key:'',ph:0,d:3.3};
  c.addEventListener('pointerdown',e=>{bm.drag=true;bm.px=e.clientX;bm.py=e.clientY;c.setPointerCapture(e.pointerId)});
  c.addEventListener('pointermove',e=>{if(!bm.drag)return;bm.rotY+=(e.clientX-bm.px)*0.008;bm.rotX=Math.max(-1.4,Math.min(1.4,bm.rotX+(e.clientY-bm.py)*0.008));bm.px=e.clientX;bm.py=e.clientY});
  c.addEventListener('pointerup',()=>bm.drag=false);
- const rs=()=>{const w=c.clientWidth,h=c.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};new ResizeObserver(rs).observe(c);rs()}
+ // the camera distance fits the cloud to the canvas shape: at d=3.3 and aspect 1 it spans |x|<=1.25, |y|<=0.87 (NDC) over the sway
+ const rs=()=>{const w=c.clientWidth,h=c.clientHeight;if(!w||!h)return;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();bm.d=3.3*Math.max(1.25/cam.aspect,0.87)/0.92};new ResizeObserver(rs).observe(c);rs()}
 function paintBrain(t){if(!bm)return;const nB=BR.bins,f=t*1000/BR.binMs-0.5,i=Math.max(0,Math.min(nB-1,Math.floor(f))),j=Math.min(nB-1,i+1),a=Math.max(0,Math.min(1,f-i));
  const own=rider===BR.rider,key=LANG+':'+rider+':'+i+':'+a.toFixed(3);
  if(key!==bm.key){bm.key=key;const col=bm.col,nP=bm.nP,act=bm.act,RH=BR.regionHz;
@@ -317,7 +324,7 @@ function paintBrain(t){if(!bm)return;const nB=BR.bins,f=t*1000/BR.binMs-0.5,i=Ma
   bm.g.attributes.color.needsUpdate=true;
   for(const w of bm.rows){const v=rhz[w.j];w.i.style.transform='scaleX('+Math.min(1,v/8)+')';w.b.textContent=v.toFixed(1)}
   const note=document.getElementById('bnote');note.removeAttribute('data-i18n');note.textContent=own?tt('noteOwn',rider,BR.binMs):tt('noteOther',BR.rider,rider)}
- if(!bm.drag)bm.ph+=0.006;const ry=bm.rotY+0.5*Math.sin(bm.ph),d=3.3;  // sway around a dorsolateral view
+ if(!bm.drag)bm.ph+=0.006;const ry=bm.rotY+0.5*Math.sin(bm.ph),d=bm.d;  // sway around a dorsolateral view, at the distance that fits the canvas
  bm.cam.position.set(d*Math.sin(ry)*Math.cos(bm.rotX),d*Math.sin(bm.rotX),d*Math.cos(ry)*Math.cos(bm.rotX));bm.cam.lookAt(0,0,0);bm.r.render(bm.sc,bm.cam)}
 // ---------- playback + cameras
 let bikes=[],hero=null,shown=Math.min(B,24),rider=0,k=0,playing=false,camMode=+(Q.get('cam')||0),last=0,snap=true,showGhosts=Q.get('ghosts')!=='0';
@@ -348,7 +355,8 @@ function start(){G=MODEL?modelGeo():procGeo();FIT=fitFrom(G);
  if(!MODEL)paint.color.setHex(G.paint).convertSRGBToLinear();else paint.color.setHex(0x2440c8).convertSRGBToLinear();
  for(let i=0;i<shown;i++){const bk=buildBike(true,false);scene.add(bk.root);bikes.push(bk)}hero=buildBike(false,!!MODEL);scene.add(hero.root);
  BIKE_NAME=G.name;document.title=tt('docTitleBike',G.name);
- const titleLine=()=>{const el=document.getElementById('title');el.removeAttribute('data-i18n');el.textContent=tt('titleLine',G.name,tt('mode',D.mode),B,tr[tr.length-1].t.toFixed(1))};titleLine();LANG_HOOKS.push(titleLine);
+ const titleLine=()=>{const el=document.getElementById('title'),parts=tt('titleParts',G.name,tt('mode',D.mode),B,tr[tr.length-1].t.toFixed(1));el.removeAttribute('data-i18n');
+  el.replaceChildren(...parts.flatMap((x,i)=>{const sp=document.createElement('span');sp.className='seg';sp.textContent=x+(i<parts.length-1?' ·':'');return i?[' ',sp]:[sp]}))};titleLine();LANG_HOOKS.push(titleLine);
  const paints=MODEL?[['orig','pOrig'],[0xf2f2f2,'pUAE'],[0xc8102e,'pRed'],[0x16181c,'pCarbon']]:[['orig','pSW'],[0xf2f2f2,'pWhite'],[0x16181c,'pCarbon'],[0x2440c8,'pBlue']];
  for(const [v,t] of paints){const o=document.createElement('option');o.value=v;say(o,t);psel.appendChild(o)}psel.onchange=e=>setPaint(e.target.value==='orig'?'orig':+e.target.value);
  if(Q.get('paint'))setPaint(+Q.get('paint'));

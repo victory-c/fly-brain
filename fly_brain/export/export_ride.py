@@ -18,7 +18,7 @@ HTML = r"""<!doctype html>
 body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.4 system-ui,sans-serif}
 header{padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #222}
 header b{font-size:16px} header .mode{color:var(--dim)}
-header #time{flex:1 1 140px;max-width:260px;min-width:0}
+header #time{flex:1 1 60px;max-width:260px;min-width:0} header #clock{font-variant-numeric:tabular-nums} header #play{box-sizing:border-box}
 button,select,input[type=range]{background:#1b1f27;color:var(--fg);border:1px solid #333;border-radius:6px;padding:4px 10px}
 header .lang{margin-left:auto;display:inline-flex;gap:2px;padding:2px;border:1px solid #333;border-radius:999px;background:#1b1f27}
 header .lang button{border:0;border-radius:999px;background:none;color:var(--dim);padding:3px 10px;font:inherit;font-size:13px;cursor:pointer}
@@ -27,7 +27,7 @@ header .lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
 main{display:grid;grid-template-columns:420px 1fr;gap:12px;padding:12px 16px}
 canvas{background:#141821;border-radius:10px;width:100%;display:block}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
-.stat{background:#141821;border-radius:8px;padding:8px 10px}.stat small{color:var(--dim);display:block}
+.stat{background:#141821;border-radius:8px;padding:8px 10px}.stat small{color:var(--dim);display:block;white-space:nowrap}
 .stat span{font-size:18px;font-variant-numeric:tabular-nums}
 #charts canvas{margin-bottom:8px}
 </style></head><body>
@@ -45,7 +45,7 @@ canvas{background:#141821;border-radius:10px;width:100%;display:block}
 <div class="stat"><small data-i18n="s_v">Speed</small><span id="s_v"></span></div>
 <div class="stat"><small data-i18n="s_T">Steer torque</small><span id="s_T"></span></div>
 <div class="stat"><small data-i18n="s_P">Pedal power</small><span id="s_P"></span></div>
-<div class="stat"><small data-i18n="s_pop">Whole-brain spikes/s</small><span id="s_pop"></span></div>
+<div class="stat"><small data-i18n="s_pop">Brain spikes/s</small><span id="s_pop"></span></div>
 <div class="stat"><small data-i18n="s_done">Status</small><span id="s_done"></span></div>
 <div class="stat"><small data-i18n="s_alive">Still riding</small><span id="s_alive"></span></div>
 </div></div>
@@ -57,22 +57,23 @@ canvas{background:#141821;border-radius:10px;width:100%;display:block}
 const I18N={
  en:{title:'🪰 Fly rides a Colnago V4Rs',brand:'🪰🚴 Fly brain × Colnago V4Rs',lang:'Language',time:'Time',
   play:'▶ Play',pause:'⏸ Pause',replay:'↺ Replay',speed:'Speed',rider:'Rider',
-  s_phi:'Lean',s_delta:'Steer angle',s_v:'Speed',s_T:'Steer torque',s_P:'Pedal power',s_pop:'Whole-brain spikes/s',s_done:'Status',s_alive:'Still riding',
+  s_phi:'Lean',s_delta:'Steer angle',s_v:'Speed',s_T:'Steer torque',s_P:'Pedal power',s_pop:'Brain spikes/s',s_done:'Status',s_alive:'Still riding',
   riding:'Riding',fell:'Fell',fellBanner:'Fell / bailed',
   riders:n=>n+' riders',
-  rear:(p,d)=>'rear view · lean '+p+'° · steer angle '+d+'°',
+  rear:(p,d)=>'rear · lean '+p+'° · steer '+d+'°',
   top:x=>'top view · x 0…'+x+' m, road edges ±3.5 m',
   c_phi:'Lean (°)',c_T:'Steer torque (Nm)',c_v:'Speed v (m/s)',c_dn:n=>n+'  L (blue) / R (red)  Hz',
-  mode:m=>m==='oracle'?'PD rider without a brain (oracle)':m},
+  mode:m=>m==='oracle'?'PD rider without a brain (oracle)'
+   :m.replace(/^open loop \(prior decoder: no steering, ~(\d+) W\)$/,'Open loop (prior decoder: hands-off, ~$1 W)').replace(/^[a-z]/,c=>c.toUpperCase())},
  zh:{title:'🪰 果蝇骑 Colnago V4Rs',brand:'🪰🚴 果蝇大脑 × Colnago V4Rs',lang:'语言',time:'时间',
   play:'▶ 播放',pause:'⏸ 暂停',replay:'↺ 重播',speed:'速度',rider:'骑手',
-  s_phi:'倾角',s_delta:'把角',s_v:'速度',s_T:'转向扭矩',s_P:'踩踏功率',s_pop:'全脑放电 spikes/s',s_done:'状态',s_alive:'没倒的骑手',
+  s_phi:'倾角',s_delta:'把角',s_v:'速度',s_T:'转向扭矩',s_P:'踩踏功率',s_pop:'全脑 spikes/s',s_done:'状态',s_alive:'没倒的骑手',
   riding:'骑行中',fell:'倒了',fellBanner:'倒了 / 跳车',
   riders:n=>n+' 名骑手',
   rear:(p,d)=>'后视 · 倾角 '+p+'° · 把角 '+d+'°',
   top:x=>'俯视 · x 0…'+x+' m，路沿 ±3.5 m',
   c_phi:'倾角 (°)',c_T:'转向扭矩 (Nm)',c_v:'速度 v (m/s)',c_dn:n=>n+'  左（蓝）/ 右（红）  Hz',
-  mode:m=>m==='oracle'?'无大脑的 PD 骑手（oracle）':m.startsWith('replay of ')?'回放 '+m.slice(10)
+  mode:m=>m==='oracle'?'无大脑的 PD 骑手（oracle 模式）':m.startsWith('replay of ')?'回放 '+m.slice(10)
    :m.replace(/^open loop \(prior decoder: no steering, ~(\d+) W\)$/,'开环（先验解码器：不扶车把，约 $1 W）').replace(/^open loop\b/,'开环')}};
 const LANG_KEY='flybrain.lang';
 function saveLang(l){try{localStorage.setItem(LANG_KEY,l)}catch(e){}}
@@ -133,6 +134,8 @@ function drawCharts(kk){series.forEach((s,i)=>{const c=charts[i],g=c.getContext(
  g.strokeStyle='#e8e8e8';g.beginPath();g.moveTo(X(kk),8);g.lineTo(X(kk),H-8);g.stroke();
  g.fillStyle='#8a8f98';g.font='11px system-ui';g.fillText(s.name()+'  '+s.f(tr[kk],rider).toFixed(1)+(s.f2?' / '+s.f2(tr[kk],rider).toFixed(1):''),24,12)})}
 function setPlayLabel(){playBtn.textContent=playing?L.pause:(k>=tr.length-1?L.replay:L.play)}
+function fixHeaderWidths(){playBtn.style.minWidth='';playBtn.style.minWidth=Math.max(...[L.play,L.pause,L.replay].map(t=>{playBtn.textContent=t;return playBtn.getBoundingClientRect().width}))+'px';
+ const c=document.getElementById('clock');c.style.minWidth='';c.textContent=tr[tr.length-1].t.toFixed(2)+' s';c.style.minWidth=c.getBoundingClientRect().width+'px'}
 function render(){const row=tr[k];drawRear(row);drawTop(k);drawCharts(k);const s=row.state[rider];
  document.getElementById('clock').textContent=row.t.toFixed(2)+' s';slider.value=k;
  document.getElementById('s_phi').textContent=deg(s[4]).toFixed(1)+'°';document.getElementById('s_delta').textContent=deg(s[5]).toFixed(1)+'°';
@@ -146,7 +149,7 @@ function applyLang(l){lang=l==='zh'?'zh':'en';L=I18N[lang];
  document.getElementById('lang').setAttribute('aria-label',L.lang);slider.setAttribute('aria-label',L.time);
  document.querySelectorAll('#lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));
  document.getElementById('mode').textContent=L.mode(D.mode||'')+' · '+L.riders(B)+' · '+tr[tr.length-1].t+' s';
- render();}
+ fixHeaderWidths();render();}
 document.querySelectorAll('#lang button').forEach(b=>b.onclick=()=>{const l=b.dataset.lang;saveLang(l);applyLang(l);
  try{const u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',l);history.replaceState(null,'',u)}}catch(e){}});
 function tick(ts){if(playing){const sp=parseFloat(document.getElementById('speed').value);const dt=(tr[1].t-tr[0].t)*1000/sp;if(ts-last>dt){last=ts;k=Math.min(k+1,tr.length-1);if(k===tr.length-1)playing=false;render()}}requestAnimationFrame(tick)}

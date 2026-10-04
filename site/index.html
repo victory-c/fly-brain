@@ -14,7 +14,7 @@
   --bg:#f3f1ec; --panel:#fff; --line:#d9d5cc; --ink:#1c1b18; --ink2:#5f5b53; --mute:#8b867c;
   --accent:#d8501f; --bar:#b8452a; --dash:#2f7fc5; --ride:#2b8a5b; --classic:#8a6d1f;
   --font:"Manrope","PingFang SC","Noto Sans SC",system-ui,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,"PingFang SC","Noto Sans SC",monospace;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -32,10 +32,16 @@
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55}
 a{color:inherit}
 main{max-width:1040px;margin:0 auto;padding:56px 16px 40px}
-header h1{font-size:clamp(34px,6vw,56px);line-height:1.05;margin:0 0 14px;font-weight:800;letter-spacing:-.02em}
+header .top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:0 16px}
+header h1{font-size:clamp(34px,6vw,56px);line-height:1.05;margin:0 0 14px;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+@media (max-width:400px){header h1{font-size:8.5vw}}
 header h1 span{color:var(--accent)}
-.lede{font-size:clamp(17px,2.2vw,20px);color:var(--ink2);max-width:720px;margin:0 0 6px}
-.zh{color:var(--mute);margin:0 0 22px}
+.lang{flex:none;display:inline-flex;gap:2px;margin:4px 0 14px auto;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--panel)}
+.lang button{font:500 13px/1 var(--mono);color:var(--ink2);background:none;border:0;border-radius:999px;padding:7px 12px;cursor:pointer}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.lang button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.lede{font-size:clamp(17px,2.2vw,20px);color:var(--ink2);max-width:720px;margin:0 0 22px}
 .stats{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--mono);font-size:13px;color:var(--ink2);margin:0 0 40px;padding:0;list-style:none}
 .stats b{color:var(--ink);font-weight:500}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
@@ -44,8 +50,7 @@ header h1 span{color:var(--accent)}
 .card:hover{transform:translateY(-2px);border-color:var(--c)}
 .card .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--c);margin-bottom:6px}
 .card h2{margin:0 0 8px;font-size:22px;line-height:1.2}
-.card p{margin:0 0 12px;color:var(--ink2);font-size:15px}
-.card .zh{font-size:14px;margin:0 0 14px}
+.card p{margin:0 0 14px;color:var(--ink2);font-size:15px}
 .card .go{margin-top:auto;font-weight:700;color:var(--c)}
 .links{display:flex;flex-wrap:wrap;gap:6px 14px;margin:-4px 0 0;padding:0;list-style:none;font-size:14px}
 .links a{color:var(--ink2);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
@@ -55,78 +60,161 @@ section.about h3{color:var(--ink);font-size:16px;margin:0 0 6px}
 section.about p{margin:0}
 footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--mute);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between}
 footer a{color:var(--ink2)}
+:lang(zh) .card .kicker{letter-spacing:.08em}
+:lang(zh) .card p,:lang(zh) section.about{line-height:1.7}
 </style>
 </head>
 <body>
 <main>
 <header>
-  <h1>flybrain<span>-play</span></h1>
-  <p class="lede">We took the complete wiring diagram of a male fruit fly's central nervous system, ran current through it, and asked it to taste drinks and ride a road bike.</p>
-  <p class="zh">果蝇全脑连接组模拟：尝饮料、骑公路车。</p>
+  <div class="top">
+    <h1>flybrain<span>-play</span></h1>
+    <div class="lang" role="group" aria-label="Language" data-i18n-aria="lang">
+      <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="zh" lang="zh-CN" aria-pressed="false">中文</button>
+    </div>
+  </div>
+  <p class="lede" data-i18n="lede">We took the complete wiring diagram of a male fruit fly's central nervous system, ran current through it, and asked it to taste drinks and ride a road bike.</p>
   <ul class="stats">
-    <li><b>166,700</b> neurons</li>
-    <li>every synapse from <b>male CNS v1.0</b></li>
-    <li>leaky integrate-and-fire, <b>0.1 ms</b> steps</li>
-    <li>connectome never trained</li>
+    <li data-i18n="s1"><b>166,700</b> neurons</li>
+    <li data-i18n="s2">every synapse from <b>male CNS v1.0</b></li>
+    <li data-i18n="s3">leaky integrate-and-fire, <b>0.1&nbsp;ms</b> steps</li>
+    <li data-i18n="s4">connectome never trained</li>
   </ul>
 </header>
 
 <div class="grid">
   <a class="card" href="/ride/" style="--c:var(--ride)">
-    <div class="kicker">3D replay · new</div>
-    <h2>The fly rides a Colnago V4Rs</h2>
-    <p>The whole brain rides a Colnago V4Rs down a 7 m road at 20 km/h in side gusts. It balances with the descending neurons it uses to stabilise flight and reads the lane from its horizontal-system optic-flow cells; the side panel shows his whole brain firing, as in Fly Brain Live. 16 riders, 20 s each: 11.6 s on the road on average (hands-off: 4.9 s), 4 stay on all the way.</p>
-    <p class="zh">苍蝇大脑骑 Colnago V4Rs 沿路骑：跟拍 / 侧拍 / 苍蝇视角 / 全脑放电图</p>
-    <span class="go">Watch the ride →</span>
+    <div class="kicker" data-i18n="rideK">3D replay · new</div>
+    <h2 data-i18n="rideH">The fly rides a Colnago V4Rs</h2>
+    <p data-i18n="rideP">Driven by his whole brain, the fly rides a Colnago V4Rs down a 7&nbsp;m road at 20&nbsp;km/h in side gusts. He balances with the descending neurons he uses to stabilise flight and reads the lane from his horizontal-system (HS) optic-flow cells; the side panel shows his whole brain firing, as in Fly Brain Live. 16 riders, 20&nbsp;s each: 11.6&nbsp;s on the road on average (hands-off: 4.9&nbsp;s), and 4 stay on all the way.</p>
+    <span class="go" data-i18n="rideGo">Watch the ride →</span>
   </a>
   <a class="card" href="/dashboard/" style="--c:var(--dash)">
-    <div class="kicker">Live brain · 11 drinks</div>
-    <h2>Fly Brain Live</h2>
-    <p>The firing of all 140,638 neurons with a known position, in 50 ms frames, while the fly tastes orange juice, bubble tea, cola, espresso, lager and more. Watch whether the feeding motor neuron MN9 fires.</p>
-    <p class="zh">果蝇尝饮料时全脑活动回放</p>
-    <span class="go">Open the dashboard →</span>
+    <div class="kicker" data-i18n="dashK">Live brain · 11 drinks</div>
+    <h2 data-i18n="dashH">Fly Brain Live</h2>
+    <p data-i18n="dashP">The firing of all 140,638 neurons with a known position, in 50&nbsp;ms frames, while the fly tastes orange juice, bubble tea, cola, espresso, lager and more. Watch whether the feeding motor neuron MN9 fires.</p>
+    <span class="go" data-i18n="dashGo">Open the dashboard →</span>
   </a>
   <a class="card" href="/bar/" style="--c:var(--bar)">
-    <div class="kicker">3D web app · 9 cocktails</div>
-    <h2>Fly Bar</h2>
-    <p>A fly walks into a bar. Each cocktail becomes a taste vector on its real gustatory neurons; the bar ranks what it likes, and the 3D brain lights up. Piña Colada wins.</p>
-    <p class="zh">苍蝇酒吧：鸡尾酒排行榜与 3D 大脑</p>
-    <span class="go">Enter the bar →</span>
+    <div class="kicker" data-i18n="barK">3D web app · 9 cocktails</div>
+    <h2 data-i18n="barH">Fly Bar</h2>
+    <p data-i18n="barP">A fly walks into a bar. Each cocktail becomes a taste vector on his real gustatory neurons; the bar ranks what he likes, and the 3D brain lights up. Piña Colada wins.</p>
+    <span class="go" data-i18n="barGo">Enter the bar →</span>
   </a>
   <a class="card" href="/classic" style="--c:var(--classic)">
-    <div class="kicker">Single page</div>
-    <h2>Fly Bar, classic</h2>
-    <p>The original one-file version of the bar: from tongue to proboscis, the taste channels and the circuit that ends at MN9, rebuilt from our run.</p>
-    <p class="zh">单页版苍蝇酒吧</p>
-    <span class="go">Open →</span>
+    <div class="kicker" data-i18n="clsK">Single page</div>
+    <h2 data-i18n="clsH">Fly Bar, classic</h2>
+    <p data-i18n="clsP">The original one-file version of the bar: from tongue to proboscis, the taste channels and the circuit that ends at MN9, rebuilt from our run.</p>
+    <span class="go" data-i18n="clsGo">Open →</span>
   </a>
 </div>
 
 <section class="about">
   <div>
-    <h3>More ride replays</h3>
+    <h3 data-i18n="moreH">More ride replays</h3>
     <ul class="links">
-      <li><a href="/ride/charts">brain rider, charts</a></li>
-      <li><a href="/ride/oracle">PD rider, no brain</a></li>
-      <li><a href="/ride/oracle-charts">PD rider, charts</a></li>
-      <li><a href="/ride/open-loop">brain in loop, no steering</a></li>
-      <li><a href="/ride/open-loop-charts">open loop, charts</a></li>
+      <li><a href="/ride/charts" data-i18n="l1">brain rider, charts</a></li>
+      <li><a href="/ride/oracle" data-i18n="l2">PD rider, no brain</a></li>
+      <li><a href="/ride/oracle-charts" data-i18n="l3">PD rider, charts</a></li>
+      <li><a href="/ride/open-loop" data-i18n="l4">brain in the loop, no steering</a></li>
+      <li><a href="/ride/open-loop-charts" data-i18n="l5">open loop, charts</a></li>
     </ul>
   </div>
   <div>
-    <h3>What is real</h3>
-    <p>Neurons, synapses and their signs come from the Janelia / Google male CNS v1.0 connectome; the neuron model follows Shiu et al., <i>Nature</i> 2024. How a drink or a bike's lean maps onto sensory neurons is modeled, and so is the bike decoder.</p>
+    <h3 data-i18n="realH">What is real</h3>
+    <p data-i18n="realP">Neurons, synapses and their signs come from the Janelia / Google male CNS v1.0 connectome; the neuron model follows Shiu et al., <i>Nature</i> 2024. How a drink or a bike's lean maps onto sensory neurons is modeled, and so is the bike decoder.</p>
   </div>
   <div>
-    <h3>Where it ran</h3>
-    <p>On a Slurm node with RTX A6000 GPUs. One whole-brain trial takes ~8 s per simulated second; batched on the GPU, 128 trials take 35 s. In the bike loop, 48 riders run at ~20 s of wall time per second of bike time.</p>
+    <h3 data-i18n="ranH">Where it ran</h3>
+    <p data-i18n="ranP">On a Slurm node with RTX A6000 GPUs. One whole-brain trial takes ~8&nbsp;s per simulated second; batched on the GPU, 128 trials take 35&nbsp;s. In the bike loop, 48 riders run at ~20&nbsp;s of wall time per second of bike time.</p>
   </div>
 </section>
 
 <footer>
-  <span>Built on a third-party simulator · data <a href="https://male-cns.janelia.org/download">male-cns.janelia.org</a></span>
-  <a href="https://github.com/victory-c/flybrain-play">Source on GitHub</a>
+  <span data-i18n="built">Built on a third-party simulator · data <a href="https://male-cns.janelia.org/download">male-cns.janelia.org</a></span>
+  <a href="https://github.com/victory-c/flybrain-play" data-i18n="src">Source on GitHub</a>
 </footer>
 </main>
+<script>
+// Language switch (EN | 中文). English lives in the markup above; ZH holds the Chinese for every [data-i18n] key.
+(function(){
+  var ZH = {
+    title: 'flybrain-play · 果蝇全脑模拟',
+    desc: '一只果蝇完整的中枢神经系统（166,700 个神经元，每一个突触）尝饮料、骑公路车。附交互式回放。',
+    lang: '语言',
+    lede: '我们拿来一只雄性果蝇中枢神经系统的完整接线图，给它通上电，让它尝饮料、骑公路车。',
+    s1: '<b>166,700</b> 个神经元',
+    s2: '每个突触都来自 <b>male CNS v1.0</b>',
+    s3: '漏积分放电模型，步长 <b>0.1&nbsp;ms</b>',
+    s4: '连接组未经任何训练',
+    rideK: '3D 回放 · 新',
+    rideH: '果蝇骑上了 Colnago V4Rs',
+    rideP: '果蝇用全脑骑一辆 Colnago V4Rs：路宽 7&nbsp;m，车速 20&nbsp;km/h，还有阵阵侧风。它靠飞行时稳定身体的下行神经元保持平衡，用 HS（水平系统）光流细胞读出车道；侧边面板像 Fly Brain Live 一样显示它全脑的放电。16 名骑手，每人骑 20 秒：平均在路上的时间 11.6 秒（不扶车把只有 4.9 秒），4 名骑手全程留在路上。',
+    rideGo: '看它骑车 →',
+    dashK: '全脑实况 · 11 种饮料',
+    dashH: 'Fly Brain Live',
+    dashP: '逐帧回放果蝇品尝橙汁、珍珠奶茶、可乐、浓缩咖啡、拉格啤酒等饮料时，全部 140,638 个有位置坐标的神经元的放电，每帧 50&nbsp;ms。看看摄食运动神经元 MN9 会不会被激活。',
+    dashGo: '打开仪表盘 →',
+    barK: '3D 网页应用 · 9 款鸡尾酒',
+    barH: '苍蝇酒吧',
+    barP: '一只果蝇走进酒吧。每款鸡尾酒都换算成作用在它真实味觉神经元上的味道向量；酒吧按它的喜好排名，3D 大脑随之亮起。椰林飘香（Piña Colada）夺冠。',
+    barGo: '走进酒吧 →',
+    clsK: '单页版',
+    clsH: '苍蝇酒吧 · 经典版',
+    clsP: '酒吧最初的单文件版本：从舌头到口器，味觉通道和终止于 MN9 的神经回路，都按我们的模拟结果重建。',
+    clsGo: '打开 →',
+    moreH: '更多骑行回放',
+    l1: '大脑骑手 · 图表',
+    l2: '无大脑的 PD 骑手',
+    l3: 'PD 骑手 · 图表',
+    l4: '大脑接入，不扶车把',
+    l5: '开环 · 图表',
+    realH: '哪些是真的',
+    realP: '神经元、突触以及突触的正负（兴奋或抑制）都来自 Janelia / Google 的 male CNS v1.0 连接组；神经元模型沿用 Shiu et al., <i>Nature</i> 2024。饮料和车身倾角怎样映射到感觉神经元，属于建模部分，自行车解码器也是。',
+    ranH: '在哪里跑的',
+    ranP: '在一台配有 RTX A6000 GPU 的 Slurm 节点上运行。单次全脑试验每模拟 1 秒约需 8 秒；在 GPU 上批量运行，128 次试验只要 35 秒。骑车闭环里同时模拟 48 名骑手，每 1 秒骑行时间约耗 20 秒实际时间。',
+    built: '基于第三方模拟器构建 · 数据来自 <a href="https://male-cns.janelia.org/download">male-cns.janelia.org</a>',
+    src: 'GitHub 源代码'
+  };
+  var KEY = 'flybrain.lang';
+  var meta = document.querySelector('meta[name="description"]');
+  var nodes = document.querySelectorAll('[data-i18n]');
+  var ariaNodes = document.querySelectorAll('[data-i18n-aria]');
+  var EN = {title: document.title, desc: meta ? meta.content : ''};
+  nodes.forEach(function(el){ EN[el.dataset.i18n] = el.innerHTML; });
+  ariaNodes.forEach(function(el){ EN[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
+  var DICT = {en: EN, zh: ZH};
+
+  function save(l){ try { localStorage.setItem(KEY, l); } catch (e) {} }
+  function initial(){
+    var q = null;
+    try { q = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+    if (q === 'en' || q === 'zh') { save(q); return q; }
+    try { var s = localStorage.getItem(KEY); if (s === 'en' || s === 'zh') return s; } catch (e) {}
+    return /^zh/i.test(navigator.language || '') ? 'zh' : 'en';
+  }
+  function apply(l){
+    var d = DICT[l];
+    document.documentElement.lang = l === 'zh' ? 'zh-CN' : 'en';
+    document.title = d.title;
+    if (meta) meta.content = d.desc;
+    nodes.forEach(function(el){ var v = d[el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+    ariaNodes.forEach(function(el){ var v = d[el.dataset.i18nAria]; if (v != null) el.setAttribute('aria-label', v); });
+    document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
+  }
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var l = b.dataset.lang;
+      save(l); apply(l);
+      try {  // keep an explicit ?lang= in the address bar in step with the switch
+        var u = new URL(location.href);
+        if (u.searchParams.has('lang')) { u.searchParams.set('lang', l); history.replaceState(null, '', u); }
+      } catch (e) {}
+    });
+  });
+  apply(initial());
+})();
+</script>
 </body>
 </html>
