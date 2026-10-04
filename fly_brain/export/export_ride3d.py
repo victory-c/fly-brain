@@ -25,6 +25,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BIKE = ROOT / "assets" / "colnago_v4rs.glb"
+LIVERY_JS = (Path(__file__).with_name("bike_livery.js")).read_text(encoding="utf-8")  # paints, decals, tyres, rims; shared with export_attempts
 DN_SHOWN = ["DNp20_L", "DNp20_R", "DNg46_L", "DNg46_R", "DNp22_L", "DNp22_R", "b1 MN_L", "b1 MN_R", "DNp15_L", "DNp15_R"]
 
 HTML = r"""<!doctype html>
@@ -88,7 +89,7 @@ const I18N={
   noteOther:(rec,r)=>'Only rider #'+rec+' was recorded neuron by neuron; rider #'+r+' shows region averages',
   bigOn:'Enlarge the brain map (B)',bigOff:'Shrink the brain map (B)',
   play:'▶ Play',pause:'⏸ Pause',replay:'↺ Replay',cam0:'Chase cam',cam1:'Side cam',cam2:"Fly's eyes",cam3:'Close-up',ghosts:'Other riders',
-  paint:'Frame paint',pOrig:'Factory blue',pUAE:'UAE white',pRed:'Racing red',pCarbon:'Carbon black',pSW:'S-Works red',pWhite:'White',pBlue:'Blue',
+  paint:'Frame paint',pOrig:'Factory blue',pUAE:'UAE white',pRainbow:'Pogačar rainbow',pRed:'Racing red',pCarbon:'Carbon black',pSW:'S-Works red',pWhite:'White',pBlue:'Blue',
   riderOpt:n=>'Rider #'+n,lang:'Language',loading:'Loading the bike model…',fell:'He fell!',offroad:'Off the road!',
   docTitle:'🪰 Fly rides a road bike',docTitleBike:n=>'🪰 Fly rides a '+n,
   mode:m=>m==='oracle'?'PD rider without a brain (oracle)'
@@ -101,7 +102,7 @@ const I18N={
   noteOther:(rec,r)=>'逐个神经元只录了骑手 #'+rec+'；骑手 #'+r+' 按脑区平均着色',
   bigOn:'放大全脑图（B 键）',bigOff:'缩小全脑图（B 键）',
   play:'▶ 播放',pause:'⏸ 暂停',replay:'↺ 重播',cam0:'跟拍',cam1:'侧拍',cam2:'苍蝇视角',cam3:'特写',ghosts:'其他骑手',
-  paint:'车架涂装',pOrig:'原厂蓝',pUAE:'UAE 白',pRed:'赛车红',pCarbon:'碳黑',pSW:'S-Works 红',pWhite:'白',pBlue:'蓝',
+  paint:'车架涂装',pOrig:'原厂蓝',pUAE:'UAE 白',pRainbow:'波加查彩虹',pRed:'赛车红',pCarbon:'碳黑',pSW:'S-Works 红',pWhite:'白',pBlue:'蓝',
   riderOpt:n=>'骑手 #'+n,lang:'语言',loading:'加载车模…',fell:'倒了！',offroad:'出界 · 骑进草地了',
   docTitle:'🪰 苍蝇骑公路车',docTitleBike:n=>'🪰 苍蝇骑 '+n,
   mode:m=>m==='oracle'?'无大脑的 PD 骑手（oracle 模式）':m.startsWith('replay of ')?'回放 '+m.slice(10)
@@ -132,6 +133,7 @@ new ResizeObserver(()=>document.documentElement.style.setProperty('--ctlh',docum
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/DecalGeometry.js"></script>
 <script>
 const D=JSON.parse(document.getElementById('data').textContent),tr=D.trace,B=tr[0].state.length,dt=tr[1].t-tr[0].t;
 const Q=new URLSearchParams(location.search);const dnNames=D.dn_names||[];
@@ -177,6 +179,7 @@ function spin(p,a){p.quaternion.copy(p.userData.q0).multiply(_q.setFromAxisAngle
 // ---------- bike geometry. Roll frame: origin at the rear contact point, x forward, y up, z to the rider's right.
 let MODEL=null,G=null,FIT=null;
 const SN=n=>THREE.PropertyBinding.sanitizeNodeName(n);  // GLTFLoader renames nodes: spaces -> _, drops []:./
+__LIVERY__
 function procGeo(){ // S-Works Tarmac SL9, 56 cm: wheelbase 981, head angle 73.5, BB drop 72, 172.5 cranks
  return {name:'Specialized S-Works Tarmac SL9',decal:'S-WORKS',paint:0xd21f2b,R:0.336,LAM:16.5*Math.PI/180,
   RH:V(0,0.336),FH:V(0.981,0.336),BB:V(0.405,0.264),SAD:V(0.20,0.975),HT:V(0.785,0.85),HB:V(0.826,0.71),HOOD:V(0.96,0.905),hoodZ:0.19,crankLen:0.1725,crank0:0}}
@@ -209,8 +212,7 @@ function rigModel(){const m=MODEL,g=G,root=new THREE.Group();root.add(m);m.posit
  const rs=group(g.RH,['Dummy_Wheel_BoraWTO_Back','reardiscA','reardiscB','disc_break_rear03']);
  const cs=group(g.BB,['crank arm part 01','crank armLogo','crank armLogo2','CogOuter','CrankInner','CrankOuter','chain ring text']);
  const handL=mk(root,V(g.HOOD.x,g.HOOD.y,-g.hoodZ)),handR=mk(root,V(g.HOOD.x,g.HOOD.y,g.hoodZ));steer.attach(handL);steer.attach(handR);
- const paintMats=[];m.traverse(o=>{if(o.isMesh){o.castShadow=true;if(o.material&&o.material.name==='RVBU'&&!paintMats.includes(o.material))paintMats.push(o.material)}});
- for(const pm of paintMats){pm.userData.paint=true;pm.userData.orig=pm.color.getHex()}
+ m.traverse(o=>{if(o.isMesh)o.castShadow=true});liveryRig(m,root);  // paint, decals, tyres, rims: bike_livery.js
  return {root,steer,fs,rs,cs,hands:[handL,handR]}}
 // ---------- the procedural bike (ghost riders, or everyone when no model is embedded)
 function procBike(bk){const g=G,roll=bk.roll,{RH,FH,BB,SAD,HT,HB,HOOD}=g;
@@ -273,7 +275,9 @@ function pose(bk,s,done,pop){const [x,y,psi,v,phi,delta]=s,F=FIT;bk.root.positio
   const elbow=shp.clone().lerp(hw,0.5).addScaledVector(V(d.y,-d.x,0).normalize(),Math.sqrt(seg*seg-half*half)).add(V(0,0,A.s*0.03));
   setTube(A.upper,shp,elbow);setTube(A.fore,elbow,hw)}
  const g=Math.min(1,(pop||0)/150000);if(!bk.ghost)bk.glow.intensity=0.4+1.2*g;bk.halo.material.opacity=0.08+0.3*g;bk.halo.scale.setScalar(1+0.6*g)}
-function setPaint(hex){scene.traverse(o=>{if(o.isMesh&&o.material&&o.material.userData.paint){const m=o.material;if(hex==='orig'){if(m.userData.orig!==undefined)m.color.setHex(m.userData.orig);else m.color.setHex(G.paint||0xd21f2b).convertSRGBToLinear()}else m.color.setHex(hex).convertSRGBToLinear()}})}
+// frame paint: the Colnago's liveries (LIVERIES, bike_livery.js), plain colours on the procedural Tarmac; ?paint=, else remembered per browser
+let PAINT_LIST=LIVERIES;
+function setPaint(v){liveryApply(v,scene,PAINT_LIST)}
 // ---------- brain map: the followed rider's whole brain, drawn like the drinks dashboard (Fly Brain Live)
 const BR=D.brain||null,RC={taste:[1,.55,.2],feeding:[1,.35,.25],smell:[.4,.85,.6],memory:[.85,.55,1],nav:[.4,.7,1],vision:[.35,.45,.6],touch:[.8,.8,.4],descending:[1,.8,.3],cord:[.5,.75,.75],motor:[1,.3,.5],other:[.55,.6,.7]};
 const REST=[0.016,0.021,0.038],HOT=[1,0.55,0.12],PEAK=[1,0.97,0.85];let bm=null;  // dim rest: the small panel stacks many points per pixel
@@ -352,14 +356,14 @@ function frame(){const row=tr[k];for(let i=0;i<shown;i++){bikes[i].root.visible=
 function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();viewShift()}addEventListener('resize',resize);resize();
 function loop(ts){if(playing){const sp=parseFloat(document.getElementById('speed').value);if(ts-last>dt*1000/sp){last=ts;k=Math.min(k+1,tr.length-1);if(k===tr.length-1){playing=false;say(document.getElementById('play'),'replay')}}}frame();requestAnimationFrame(loop)}
 function start(){G=MODEL?modelGeo():procGeo();FIT=fitFrom(G);
- if(!MODEL)paint.color.setHex(G.paint).convertSRGBToLinear();else paint.color.setHex(0x2440c8).convertSRGBToLinear();
+ if(!MODEL)paint.color.setHex(G.paint).convertSRGBToLinear();else paint.color.setHex(0x2440c8).convertSRGBToLinear();paint.userData.orig=paint.color.getHex();
  for(let i=0;i<shown;i++){const bk=buildBike(true,false);scene.add(bk.root);bikes.push(bk)}hero=buildBike(false,!!MODEL);scene.add(hero.root);
  BIKE_NAME=G.name;document.title=tt('docTitleBike',G.name);
  const titleLine=()=>{const el=document.getElementById('title'),parts=tt('titleParts',G.name,tt('mode',D.mode),B,tr[tr.length-1].t.toFixed(1));el.removeAttribute('data-i18n');
   el.replaceChildren(...parts.flatMap((x,i)=>{const sp=document.createElement('span');sp.className='seg';sp.textContent=x+(i<parts.length-1?' ·':'');return i?[' ',sp]:[sp]}))};titleLine();LANG_HOOKS.push(titleLine);
- const paints=MODEL?[['orig','pOrig'],[0xf2f2f2,'pUAE'],[0xc8102e,'pRed'],[0x16181c,'pCarbon']]:[['orig','pSW'],[0xf2f2f2,'pWhite'],[0x16181c,'pCarbon'],[0x2440c8,'pBlue']];
- for(const [v,t] of paints){const o=document.createElement('option');o.value=v;say(o,t);psel.appendChild(o)}psel.onchange=e=>setPaint(e.target.value==='orig'?'orig':+e.target.value);
- if(Q.get('paint'))setPaint(+Q.get('paint'));
+ PAINT_LIST=MODEL?LIVERIES:[['orig','pSW'],['f2f2f2','pWhite','f2f2f2'],['16181c','pCarbon','16181c'],['2440c8','pBlue','2440c8']];
+ for(const [v,t] of PAINT_LIST){const o=document.createElement('option');o.value=v;say(o,t);psel.appendChild(o)}psel.onchange=e=>{LS.set('flybrain.paint',e.target.value);setPaint(e.target.value)};
+ {const q=Q.get('paint'),sv=LS.get('flybrain.paint'),has=v=>PAINT_LIST.some(x=>x[0]===v);psel.value=has(q)?q:has(sv)?sv:'orig';setPaint(psel.value)}
  for(let i=0;i<B;i++){const o=document.createElement('option');o.value=i;o.dataset.i18nArg=i;say(o,'riderOpt');rsel.appendChild(o)}
  rider=Math.min(B-1,+(Q.get('rider')??(D.best_rider||0)));rsel.value=rider;
  k=Math.min(tr.length-1,Math.round((+Q.get('t')||0)/dt));slider.max=tr.length-1;
@@ -437,7 +441,7 @@ def main():
     if npz is not None and npz.exists():
         data["brain"], brain_bin = brain_payload(npz, data["best_rider"])
         print(f"  brain map: {npz.name}, rider #{data['best_rider']} neuron by neuron, {len(brain_bin) / 1e6:.1f} MB embedded")
-    html = (HTML.replace("__DATA__", json.dumps(data, separators=(",", ":")).replace("</", "<\\/"))
+    html = (HTML.replace("__LIVERY__", LIVERY_JS).replace("__DATA__", json.dumps(data, separators=(",", ":")).replace("</", "<\\/"))
             .replace("__BIKE__", bike).replace("__BRAIN__", brain_bin))
     dst.write_text(html)
     print(f"{dst}  ({dst.stat().st_size / 1e6:.1f} MB, {len(data['trace'])} steps, {len(data['trace'][0]['state'])} riders, "

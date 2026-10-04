@@ -33,6 +33,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BIKE = ROOT / "assets" / "colnago_v4rs.glb"
+LIVERY_JS = (Path(__file__).with_name("bike_livery.js")).read_text(encoding="utf-8")  # paints, decals, tyres, rims; shared with export_ride3d
 NEURONS, SYNAPSES = 166_700, 124_177_616
 REG_EN = {"taste": "Gustatory neurons", "feeding": "Subesophageal zone (SEZ)", "smell": "Smell", "memory": "Mushroom body",
           "nav": "Central complex", "vision": "Vision", "touch": "Somatosensory neurons",
@@ -121,6 +122,7 @@ button:hover{border-color:#666}button.on{background:var(--acc);color:#111;border
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/DecalGeometry.js"></script>
 <script>
 // ---- fly.js: the procedural low-poly fly (window.makeFly / window.poseFly), inlined by export_attempts.py ----
 // fly.js — procedural low-poly fly rider for three.js r128 (plain script, no modules).
@@ -400,10 +402,10 @@ en:{title:'Fly learns to ride',chips:'Male CNS v1.0 · 166,700 neurons · connec
  play:'Play (space)',pause:'Pause (space)',prev:'Previous attempt (←)',next:'Next attempt (→)',sigOn:'Significant only',sigOff:'All attempts',
  sigT:'Significant attempts: the first, every new record, the mean rider of each generation, its earliest and its longest failure, the last. The rest are flipped through.',
  speed:'Playback speed (keys 1 2 4 · 5 = ½× · [ ] slower/faster)',camSide:'Side',camChase:'Chase',camQuarter:'¾ view',camT:'Camera (c)',lang:'Language',
- credits:'flybrain-play · male CNS v1.0 · Colnago V4Rs',loading:'Loading…',loadingBike:'Loading the bike model…',noData:'No attempts yet',
+ credits:'flybrain-play · male CNS v1.0 · Colnago V4Rs · Continental GP5000 TT',loading:'Loading…',loadingBike:'Loading the bike model…',noData:'No attempts yet',
  lgFell:'fell',lgOff:'off road',lgFin:'finished',lgBail:'bailed',lgRec:'record',
  splitV:'Drag to resize the panel · double-click to reset',splitH:'Drag to resize the brain map · double-click to reset',
- paintT:'Frame paint',pOrig:'Factory blue',pUAE:'UAE white',pRed:'Racing red',pCarbon:'Carbon black'},
+ paintT:'Frame paint',pOrig:'Factory blue',pUAE:'UAE white',pRainbow:'Pogačar rainbow',pRed:'Racing red',pCarbon:'Carbon black'},
 zh:{title:'苍蝇学骑车',chips:'雄性 CNS v1.0 · 166,700 神经元 · 连接组不变 · Whipple 物理开',
  attempt:k=>'第 '+k+' 次尝试',brainline:'166,700 神经元 · 1.24 亿突触',genline:(g,r)=>'第 '+g+' 代 · 骑手 '+r,
  dist:'里程',best:'最佳',time:'时间',spd:'速度',log:'动作记录',
@@ -417,10 +419,10 @@ zh:{title:'苍蝇学骑车',chips:'雄性 CNS v1.0 · 166,700 神经元 · 连�
  play:'播放（空格）',pause:'暂停（空格）',prev:'上一次（←）',next:'下一次（→）',sigOn:'只看关键尝试',sigOff:'所有尝试',
  sigT:'关键尝试：第一次、每个新纪录、每代的均值骑手、每代最早和最久的失败、最后一次。其余快进跳过。',
  speed:'播放速度（按键 1 2 4 · 5 = ½× · [ ] 减速/加速）',camSide:'侧拍',camChase:'跟拍',camQuarter:'斜拍',camT:'镜头（c）',lang:'语言',
- credits:'flybrain-play · 雄性 CNS v1.0 · Colnago V4Rs',loading:'加载中…',loadingBike:'加载车模…',noData:'还没有尝试',
+ credits:'flybrain-play · 雄性 CNS v1.0 · Colnago V4Rs · Continental GP5000 TT',loading:'加载中…',loadingBike:'加载车模…',noData:'还没有尝试',
  lgFell:'倒了',lgOff:'出界',lgFin:'骑满',lgBail:'跳车',lgRec:'纪录',
  splitV:'拖动调节侧栏宽度 · 双击复位',splitH:'拖动调节脑图高度 · 双击复位',
- paintT:'车架涂装',pOrig:'原厂蓝',pUAE:'UAE 白',pRed:'赛车红',pCarbon:'碳黑'}};
+ paintT:'车架涂装',pOrig:'原厂蓝',pUAE:'UAE 白',pRainbow:'波加查彩虹',pRed:'赛车红',pCarbon:'碳黑'}};
 const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 const Q=new URLSearchParams(location.search);
 let LANG=(()=>{const q=Q.get('lang');if(q==='en'||q==='zh'){LS.set('flybrain.lang',q);return q}
@@ -441,11 +443,12 @@ function setLang(l){if(l===LANG||!I18N[l])return;LANG=l;LS.set('flybrain.lang',l
  try{const u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',l);history.replaceState(history.state,'',u)}}catch(e){}applyLang()}
 for(const b of document.querySelectorAll('#lang button'))b.onclick=()=>setLang(b.dataset.l);
 const COL=['#3fb950','#e5484d','#f0883e','#a371f7'];  // finished, fell, off the road, bailed
-// frame paint: ?paint=orig|f2f2f2|c8102e|16181c, remembered per browser; applied to the GLB's 'RVBU' paint material once the bike is rigged
-const PAINTS=[['orig','pOrig'],['f2f2f2','pUAE'],['c8102e','pRed'],['16181c','pCarbon']];let PAINT='orig',BIKE_MODEL=null;
-function setPaint(){(BIKE_MODEL||scene).traverse(o=>{if(o.isMesh&&o.material&&o.material.userData.paint){const m=o.material;if(PAINT==='orig'){if(m.userData.orig!==undefined)m.color.setHex(m.userData.orig)}else m.color.setHex(parseInt(PAINT,16)).convertSRGBToLinear()}})}
-(function(){const sel=$('paint');for(const [v,k] of PAINTS){const o=document.createElement('option');o.value=v;o.dataset.k=k;o.textContent=tt(k);sel.appendChild(o)}
- const q=Q.get('paint'),sv=LS.get('flybrain.paint');PAINT=PAINTS.some(x=>x[0]===q)?q:PAINTS.some(x=>x[0]===sv)?sv:'orig';sel.value=PAINT;
+__LIVERY__
+// frame paint: ?paint=orig|f2f2f2|rainbow|c8102e|16181c (LIVERIES, bike_livery.js), remembered per browser; applied once the bike is built
+let PAINT='orig';
+function setPaint(){liveryApply(PAINT,scene)}
+(function(){const sel=$('paint');for(const [v,k] of LIVERIES){const o=document.createElement('option');o.value=v;o.dataset.k=k;o.textContent=tt(k);sel.appendChild(o)}
+ const q=Q.get('paint'),sv=LS.get('flybrain.paint');PAINT=LIVERIES.some(x=>x[0]===q)?q:LIVERIES.some(x=>x[0]===sv)?sv:'orig';sel.value=PAINT;
  sel.onchange=()=>{PAINT=sel.value;LS.set('flybrain.paint',PAINT);setPaint()}})();
 // splitters: panel width (--pw) and brain-map height (--bmh), remembered per browser; the renderers follow via ResizeObserver
 (function(){const root=document.documentElement.style,panel=$('panel');
@@ -548,11 +551,10 @@ function rigModel(){const m=MODEL,g=G,root=new THREE.Group();root.add(m);m.posit
  const rs=group(g.RH,['Dummy_Wheel_BoraWTO_Back','reardiscA','reardiscB','disc_break_rear03']);
  const cs=group(g.BB,['crank arm part 01','crank armLogo','crank armLogo2','CogOuter','CrankInner','CrankOuter','chain ring text']);
  const handL=mk(root,V(g.HOOD.x,g.HOOD.y,-g.hoodZ)),handR=mk(root,V(g.HOOD.x,g.HOOD.y,g.hoodZ));steer.attach(handL);steer.attach(handR);
- const paintMats=[];m.traverse(o=>{if(o.isMesh){o.castShadow=true;if(o.material&&o.material.name==='RVBU'&&!paintMats.includes(o.material))paintMats.push(o.material)}});
- for(const pm of paintMats){pm.userData.paint=true;pm.userData.orig=pm.color.getHex()}BIKE_MODEL=m;setPaint();
+ m.traverse(o=>{if(o.isMesh)o.castShadow=true});liveryRig(m,root);  // paint, decals, tyres, rims: bike_livery.js
  return {root,steer,fs,rs,cs,hands:[handL,handR]}}
 function procRig(){ // a plain bike when the GLB cannot be decoded: two wheels, a frame of tubes, bars
- const g=G,root=new THREE.Group(),black=flat(0x1a1a1c),paint=flat(0xc8102e);paint.userData.paint=true;paint.userData.orig=paint.color.getHex();BIKE_MODEL=root;
+ const g=G,root=new THREE.Group(),black=flat(0x1a1a1c),paint=flat(0xc8102e);paint.userData.paint=true;paint.userData.orig=paint.color.getHex();
  const wheel=at=>{const w=new THREE.Group();w.position.copy(at);const t=new THREE.Mesh(new THREE.TorusGeometry(g.R-0.012,0.013,10,48),black);t.castShadow=true;w.add(t);
   for(let i=0;i<12;i++){const sp=new THREE.Mesh(new THREE.BoxGeometry(0.003,2*g.R-0.06,0.002),flat(0x999999));sp.rotation.z=i/12*Math.PI;w.add(sp)}w.userData.q0=w.quaternion.clone();return w};
  const rs=wheel(g.RH);root.add(rs);
@@ -567,7 +569,7 @@ function procRig(){ // a plain bike when the GLB cannot be decoded: two wheels, 
  const cs=new THREE.Group();cs.position.copy(g.BB);root.add(cs);cs.userData.q0=cs.quaternion.clone();
  for(const s of[-1,1]){const arm=new THREE.Mesh(new THREE.BoxGeometry(g.crankLen,0.02,0.012),black);arm.position.set(g.crankLen/2*s,0,s*0.075);cs.add(arm)}
  root.traverse(o=>{if(o.isMesh)o.castShadow=true});return {root,steer,fs,rs,cs,hands}}
-function buildBike(){const root=new THREE.Group(),roll=new THREE.Group();root.add(roll);const rig=MODEL?rigModel():procRig();roll.add(rig.root);return {root,roll,rig}}
+function buildBike(){const root=new THREE.Group(),roll=new THREE.Group();root.add(roll);const rig=MODEL?rigModel():procRig();roll.add(rig.root);liveryApply(PAINT,rig.root);return {root,roll,rig}}
 // =====================================================================================================
 // THE RIDER: the procedural fly (fly.js, inlined above) on the bike. Two functions, nothing else touches him:
 //   buildRider(G) -> THREE.Object3D   builds him in the roll frame (origin rear contact, x forward, y up, z rider's right, metres).
@@ -912,7 +914,7 @@ def main():
              "built": time.strftime("%Y-%m-%dT%H:%M:%S"), "attempts": attempts}
     write_atomic(data / "index.json", json.dumps(index, separators=(",", ":")))
     bike = "" if a.bike == "none" or not Path(a.bike).exists() else base64.b64encode(Path(a.bike).read_bytes()).decode()
-    write_atomic(dst / "index.html", HTML.replace("__BIKE__", bike))
+    write_atomic(dst / "index.html", HTML.replace("__LIVERY__", LIVERY_JS).replace("__BIKE__", bike))
     n_brain = sum(at["b"] for at in attempts)
     print(f"{dst}: {len(attempts)} attempts in {len(gens_done)} generations, {n_brain} with whole-brain recordings, "
           f"index.html {(dst / 'index.html').stat().st_size / 1e6:.1f} MB (bike: {Path(a.bike).name if bike else 'procedural'})")
