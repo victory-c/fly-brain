@@ -148,6 +148,31 @@ sbatch lane-next.sbatch                                       # the whole round,
 sbatch ride-page.sbatch results/lane/cem_mu.json              # 16 x 20 s replays for the /ride/ pages, brain recorded
 ```
 
+## Learning from nothing, every attempt kept (`ride-attempts.sbatch`, the /ride/ page)
+
+The public page is a learning montage: one rider at a time, attempt after attempt. Its data is one CEM run that
+starts from a *blank* decoder (no steering weights, pedal ~80 W, `results/attempts/init_blank.json`) at road
+speed (5.5 m/s, 5 Nm gusts, leaving the road ends a run) with the round-2 fixes (batch centring, bias searched at
+the riding operating point, pedal/brake frozen), 48 riders x 15 s per generation. `--log-attempts DIR` makes
+`runs.ride` keep every rider of every generation (`AttemptRecorder`): bike state, steering, pedalling and the gust
+every 50 ms, each region's mean rate every 100 ms, and the whole brain (the dashboard's point cloud) for the
+population mean, the generation's record and its earliest and longest failure. Attempt k = generation k // 48,
+rider k % 48 (the 48 ride in parallel on the GPU; the page shows them one by one).
+
+`export/export_attempts.py` turns `results/attempts/` into `results/attempts_page/` (index.html with the Colnago and
+a procedural fly rider embedded, plus `data/`: one json per generation, the cloud, and a zlib brain recording per
+recorded attempt); it is incremental, so it can be re-run while the job is still writing. The page's action log
+(climb on, pedal, gust from the left, wobble right corrected, 10 m, new record, fell / off the road) is derived
+from the trace. "Significant" attempts (the first, every new distance record, each generation's mean rider and
+its earliest and longest failure, the last) play in full; the rest are flipped through. The timeline at the
+bottom has one bar per attempt and jumps to any of them.
+
+```bash
+sbatch ride-attempts.sbatch                       # ~3 GPU h -> results/attempts/{attempts.json, gen*.npz, cem.json}
+python -m export.export_attempts                  # -> results/attempts_page/ (served as /ride/)
+python -m http.server 8000 --directory results/attempts_page
+```
+
 ## The 3D bike in the replay
 
 The followed rider rides `assets/colnago_v4rs.glb`: the Colnago V4Rs (size 510, Campagnolo Super
