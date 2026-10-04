@@ -25,16 +25,16 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:12px/1.
 #log{flex:1;min-height:0;overflow:hidden;-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
 .ev{margin-bottom:7px}.ev .ts{font-size:9px;color:var(--dim);letter-spacing:.06em;font-variant-numeric:tabular-nums}.ev .tx{font-size:12px;color:#b9bec6}.ev:first-child .tx{color:#fff}
 #bar{grid-area:2/1/3/2;background:var(--bbg);display:flex;align-items:center;gap:12px;padding:0 12px;min-width:0;border-top:1px solid #000}
-#credits{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#6f747c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;min-width:0}
-@media(max-width:1250px){#legend{display:none}}
-#legend{display:flex;gap:7px;font-size:8.5px;color:#8a8f98;white-space:nowrap;flex:none}#legend i{display:inline-block;width:7px;height:7px;border-radius:1px;margin-right:3px;vertical-align:-1px}
-#tl{position:relative;flex:1 1 260px;min-width:160px;height:30px}#tlc{width:100%;height:100%;display:block;cursor:pointer}
+#credits{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#6f747c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;min-width:0;max-width:26%}
+#legend{display:flex;flex-wrap:wrap;gap:3px 9px;font-size:8.5px;color:#8a8f98;white-space:nowrap;flex:none;padding:6px 16px 8px;border-top:1px solid #1b1e24}#legend i{display:inline-block;width:7px;height:7px;border-radius:1px;margin-right:3px;vertical-align:-1px}
+#tl{position:relative;flex:1 1 320px;min-width:180px;height:30px}#tlc{width:100%;height:100%;display:block;cursor:pointer}
 #tip{position:absolute;bottom:34px;transform:translateX(-50%);background:#22252c;color:#e9ebef;font-size:10px;padding:4px 7px;border-radius:3px;white-space:nowrap;pointer-events:none;border:1px solid #333;z-index:2}
 #ctl{display:flex;align-items:center;gap:6px;flex:none}
 button,select{font:11px var(--mono);background:#22252c;color:#d9dce1;border:1px solid #30343c;border-radius:3px;padding:0 8px;cursor:pointer;height:24px;line-height:22px}
 button:hover{border-color:#666}button.on{background:var(--acc);color:#111;border-color:var(--acc)}
 .lang{display:inline-flex;border:1px solid #30343c;border-radius:3px;overflow:hidden;height:24px}.lang button{border:0;border-radius:0;color:#8a8f98;padding:0 7px;height:22px}.lang button+button{border-left:1px solid #30343c}.lang button.on{color:#fff;background:#2c3038}
-@media(max-width:1100px){:root{--pw:300px}#app{grid-template-rows:1fr auto}#bar{flex-wrap:wrap;padding:6px 10px;row-gap:4px}#tl{flex:1 1 100%;order:3;height:22px}#legend,#credits{display:none}}
+@media(max-width:1250px){#app{grid-template-rows:1fr auto}#bar{flex-wrap:wrap;padding:6px 10px;row-gap:4px}#tl{flex:1 1 100%;order:3;height:24px}#credits{display:none}}
+@media(max-width:1100px){:root{--pw:300px}}
 @media(max-width:760px){#app{grid-template-columns:1fr;grid-template-rows:1fr auto 42vh}#stage{grid-area:1/1/2/2}#bar{grid-area:2/1/3/2;flex-wrap:wrap;height:auto;padding:6px 10px;gap:8px}#panel{grid-area:3/1/4/2;border-left:0;border-top:1px solid #000}#bmap{height:110px}#credits,#legend{display:none}#atitle{font-size:20px}}
 </style></head><body>
 <div id="app">
@@ -51,10 +51,10 @@ button:hover{border-color:#666}button.on{background:var(--acc);color:#111;border
    <div id="status"></div>
    <div id="log"></div>
   </div>
+  <div id="legend"></div>
  </aside>
  <div id="bar">
   <div id="credits"></div>
-  <div id="legend"></div>
   <div id="tl"><canvas id="tlc"></canvas><div id="tip" class="hide"></div></div>
   <div id="ctl">
    <select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select>
@@ -346,8 +346,8 @@ en:{title:'Fly learns to ride',chips:'Male CNS v1.0 · 166,700 neurons · connec
  tip:a=>'Attempt #'+a.id+' · gen '+a.gen+' rider '+a.rider+' · '+a.d.toFixed(1)+' m · '+OUT_EN[a.o]+(a.o===0?'':' at '+a.t.toFixed(1)+' s')+(a.r?' · record':''),
  play:'Play (space)',pause:'Pause (space)',prev:'Previous attempt (←)',next:'Next attempt (→)',sigOn:'Significant only',sigOff:'All attempts',
  sigT:'Significant attempts: the first, every new record, the mean rider of each generation, its earliest and its longest failure, the last. The rest are flipped through.',
- speed:'Playback speed (keys 1-4)',camSide:'Side',camChase:'Chase',camT:'Camera',lang:'Language',
- credits:'flybrain-play · male CNS v1.0 · Whipple bicycle · Colnago V4Rs',loading:'Loading…',loadingBike:'Loading the bike model…',noData:'No attempts yet',
+ speed:'Playback speed (keys 1 2 4 · 5 = ½× · [ ] slower/faster)',camSide:'Side',camChase:'Chase',camQuarter:'¾ view',camT:'Camera (c)',lang:'Language',
+ credits:'flybrain-play · male CNS v1.0 · Whipple bike · Colnago V4Rs',loading:'Loading…',loadingBike:'Loading the bike model…',noData:'No attempts yet',
  lgFell:'fell',lgOff:'off road',lgFin:'finished',lgBail:'bailed',lgRec:'record'},
 zh:{title:'苍蝇学骑车',chips:'雄性 CNS v1.0 · 166,700 神经元 · 连接组不变 · Whipple 物理开',
  attempt:k=>'第 '+k+' 次尝试',brainline:'166,700 神经元 · 1.24 亿突触',genline:(g,r)=>'第 '+g+' 代 · 骑手 '+r,
@@ -361,8 +361,8 @@ zh:{title:'苍蝇学骑车',chips:'雄性 CNS v1.0 · 166,700 神经元 · 连�
  tip:a=>'第 '+a.id+' 次尝试 · 第 '+a.gen+' 代 骑手 '+a.rider+' · '+a.d.toFixed(1)+' m · '+(a.o===0?'骑满':a.t.toFixed(1)+' 秒'+OUT_ZH[a.o])+(a.r?' · 纪录':''),
  play:'播放（空格）',pause:'暂停（空格）',prev:'上一次（←）',next:'下一次（→）',sigOn:'只看关键尝试',sigOff:'所有尝试',
  sigT:'关键尝试：第一次、每个新纪录、每代的均值骑手、每代最早和最久的失败、最后一次。其余快进跳过。',
- speed:'播放速度（按键 1-4）',camSide:'侧拍',camChase:'跟拍',camT:'镜头',lang:'语言',
- credits:'flybrain-play · 雄性 CNS v1.0 · Whipple 自行车模型 · Colnago V4Rs',loading:'加载中…',loadingBike:'加载车模…',noData:'还没有尝试',
+ speed:'播放速度（按键 1 2 4 · 5 = ½× · [ ] 减速/加速）',camSide:'侧拍',camChase:'跟拍',camQuarter:'斜拍',camT:'镜头（c）',lang:'语言',
+ credits:'flybrain-play · 雄性 CNS v1.0 · Whipple 车模 · Colnago V4Rs',loading:'加载中…',loadingBike:'加载车模…',noData:'还没有尝试',
  lgFell:'倒了',lgOff:'出界',lgFin:'骑满',lgBail:'跳车',lgRec:'纪录'}};
 const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 const Q=new URLSearchParams(location.search);
@@ -505,28 +505,31 @@ function buildBike(){const root=new THREE.Group(),roll=new THREE.Group();root.ad
 // wings folded, spreading for half a second whenever |lean| > 8 deg (flight reflex); head counter-rolls; halteres and antennae
 // swing with the roll rate; the body counter-leans a little. FB.RP holds the tunables, FB.setRider swaps him.
 // =====================================================================================================
-const RP={scale:1.3,dx:0.11,dy:0.175,pitch:10,droop:0.38,midU:0.5,midZ:0.055,midUp:0.025,pedalZ:0.13,counter:0.12,headK:0.6,jiggle:0.25};
-const _X=V(1,0,0),_qj=new THREE.Quaternion();
+const RP={scale:1.3,dx:0.11,dy:0.175,pitch:10,droop:0.38,midU:0.5,midZ:0.055,midUp:0.025,pedalZ:0.13,counter:0.12,headK:0.6,jiggle:0.25,flare:12};
+const _X=V(1,0,0),_qj=new THREE.Quaternion(),_bq=new THREE.Quaternion(),_bu=new THREE.Vector3();
 function buildRider(G){const rig=new THREE.Group();rig.name='rider';const fly=makeFly({srgb:true});fly.root.scale.setScalar(RP.scale);rig.add(fly.root);
  fly.root.traverse(o=>{if(o.isMesh&&o.material!==fly.materials.wing)o.castShadow=true});
  const dark=flat(0x26272b),pedals=[];
  for(const s of[-1,1]){const p=new THREE.Group();const plate=new THREE.Mesh(new THREE.BoxGeometry(0.095,0.016,0.065),dark);plate.castShadow=true;p.add(plate);
   const sp=new THREE.Mesh(new THREE.CylinderGeometry(0.007,0.007,0.07,6),dark);sp.rotation.x=Math.PI/2;sp.position.z=-s*0.035;p.add(sp);rig.add(p);pedals.push(p)}
- rig.userData={fly,G,pedals,w:0,hold:0,rate:0,prevRoll:0,prevT:0,feet:[0,1,2,3,4,5].map(()=>V(0,0)),
-  poles:[V(0.6,0.5,-1),V(0.6,0.5,1),V(0.25,0.35,-1),V(0.25,0.35,1),V(0.8,0.6,-0.7),V(0.8,0.6,0.7)],body:{pos:V(0,0),pitch:0,roll:0}};
+ rig.userData={fly,G,pedals,w:0,hold:0,rate:0,prevRoll:0,prevT:0,bail:false,bailRoll:0,bailPos:V(0,0),wingMode:0,feet:[0,1,2,3,4,5].map(()=>V(0,0)),
+  poles:[V(0.6,0.5,-1),V(0.6,0.5,1),V(0.25,0.35,-1),V(0.25,0.35,1),V(0.8,0.6,-0.7),V(0.8,0.6,0.7)],body:{pos:V(0,0),pitch:0,roll:0,quaternion:null}};
  return rig}
 function poseRider(rider,s,crankAngle,hoods,roll){const U=rider.userData,{fly,G}=U,now=performance.now()/1000;roll=roll||0;
  const dt=U.prevT?Math.min(0.1,Math.max(1e-3,now-U.prevT)):0.016;U.prevT=now;
  const rr=Math.max(-4,Math.min(4,(roll-U.prevRoll)/dt));U.prevRoll=roll;U.rate+=(rr-U.rate)*(1-Math.exp(-dt/0.06));
- if(Math.abs(roll)>8*Math.PI/180)U.hold=0.5;else U.hold=Math.max(0,U.hold-dt);
- const bail=rider.position.lengthSq()>1e-6,wt=bail||U.hold>0?1:0;U.w+=(wt-U.w)*(1-Math.exp(-dt/(wt>U.w?0.08:0.35)));
+ const bail=!!U.bail,wm=U.wingMode||0;                                                   // bail: standing on the ground beside the bike; wingMode: page override (+1 out, -1 folded)
+ if(!bail&&Math.abs(roll)>RP.flare*Math.PI/180)U.hold=0.6;else U.hold=Math.max(0,U.hold-dt);   // flight reflex: wings out for a moment when the lean gets big
+ const wt=wm>0?1:wm<0?0:(U.hold>0?1:0);U.w+=(wt-U.w)*(1-Math.exp(-dt/(wt>U.w?0.08:wm<0?0.22:0.35)));
  const F=U.feet;F[0].copy(hoods[0]);F[1].copy(hoods[1]);
  const mx=G.HB.x+(G.BB.x-G.HB.x)*RP.midU,my=G.HB.y+(G.BB.y-G.HB.y)*RP.midU+RP.midUp;F[2].set(mx,my,-RP.midZ);F[3].set(mx,my,RP.midZ);
  for(const k of[0,1]){const sg=k?1:-1,a=G.crank0+crankAngle+(k?0:Math.PI),p=U.pedals[k];
   p.position.set(G.BB.x+G.crankLen*Math.cos(a),G.BB.y+G.crankLen*Math.sin(a),sg*RP.pedalZ);F[4+k].copy(p.position);F[4+k].y+=0.012}
- const B=U.body;B.pos.set(G.SAD.x+RP.dx,G.SAD.y+RP.dy,0);B.pitch=RP.pitch*Math.PI/180;B.roll=-RP.counter*roll;
- poseFly(fly,{feet:bail?null:F,poles:bail?null:U.poles,body:B,wings:U.w,abdomen:RP.droop,t:now});
- fly.head.rotation.x=Math.max(-0.6,Math.min(0.6,-RP.headK*roll));                       // gaze stabilisation: the head stays more level than the bike
+ const B=U.body;
+ if(bail){_bq.setFromAxisAngle(_X,-U.bailRoll);B.quaternion=_bq;B.pos.copy(U.bailPos).add(_bu.set(0,fly.standHeight*RP.scale,0)).applyQuaternion(_bq)}   // upright on six feet at bailPos (bike frame), undoing the bike's roll
+ else{B.quaternion=null;B.pos.set(G.SAD.x+RP.dx,G.SAD.y+RP.dy,0);B.pitch=RP.pitch*Math.PI/180;B.roll=-RP.counter*roll}
+ poseFly(fly,{feet:bail?null:F,poles:bail?null:U.poles,body:B,wings:U.w,abdomen:bail?0.18:RP.droop,t:now});
+ fly.head.rotation.x=bail?0:Math.max(-0.6,Math.min(0.6,-RP.headK*roll));                       // gaze stabilisation: the head stays more level than the bike
  const j=Math.max(-0.5,Math.min(0.5,RP.jiggle*U.rate));                                 // roll rate -> halteres and antennae lag behind
  for(let i=0;i<2;i++){fly.halteres[i].quaternion.premultiply(_qj.setFromAxisAngle(_X,-j));fly.antennae[i].rotation.x=-0.8*j}}
 let makeRider=buildRider,poseRiderFn=poseRider;
@@ -565,7 +568,8 @@ function paintBrain(t){if(!bm)return;const a=ST.att,act=ST.act,has=!!(a&&act&&ST
 // =====================================================================================================
 // the montage: attempts in id order; significant ones are played, the others flipped through at 25/s; one rider on the road at a time
 // =====================================================================================================
-const ST={cur:-1,att:null,phase:'idle',tA:0,tE:0,tC:0,flipAcc:0,flipN:0,playing:true,speed:1,sig:Q.get('sig')!=='0',cam:Q.get('cam')==='chase'?'chase':'side',
+const CAMS=['side','chase','quarter'],VIEWS={side:{off:V(0.5,1.35,4.0),tgt:V(0.3,0.7,0)},quarter:{off:V(1.55,1.25,5.2),tgt:V(0.3,0.7,0)}};
+const ST={cur:-1,att:null,phase:'idle',tA:0,tE:0,tC:0,flipAcc:0,flipN:0,playing:true,speed:1,sig:Q.get('sig')!=='0',cam:CAMS.includes(Q.get('cam'))?Q.get('cam'):'side',
  T:null,rows:null,played:null,evs:[],act:null,actId:-1,brainState:'none',token:0,snap:true,camFrozen:false,ready:false};
 function stateAt(t){const T=ST.T,R=ST.rows,n=R.length;if(n===1)return R[0];
  let k=Math.min(n-1,Math.max(0,Math.floor(t/0.05)));while(k>0&&T[k]>t)k--;while(k<n-1&&T[k+1]<=t)k++;
@@ -581,7 +585,11 @@ function deriveEvents(T,rows,a,prevBest){const ev=[],push=(t,k,arg)=>ev.push({t,
   if(!rec&&prevBest>0&&x>prevBest){push(t,'record');rec=true}
   if(!up5&&t>=5){push(t,'up');up5=true}if(!up10&&t>=10){push(t,'up');up10=true}}
  push(a.t,['fin','fell','off','bail'][a.o]||'fell');return ev}
-const endDur=o=>o===2?1.5:o===0?0.7:1.3;
+const endDur=o=>o===2?1.5:o===0?0.7:1.3,TIP=1.26;   // a fall tips bike and rider 72 deg to the lean side (the bars and his legs prop them up)
+const _bx=new THREE.Box3();
+function lowestY(o,skip){if(skip&&skip.indexOf(o)>=0)return Infinity;let m=Infinity;const g=o.geometry;   // lowest world y of an object tree (bbox corners)
+ if(g){if(!g.boundingBox)g.computeBoundingBox();_bx.copy(g.boundingBox).applyMatrix4(o.matrixWorld);m=_bx.min.y}
+ for(const c of o.children){const v=lowestY(c,skip);if(v<m)m=v}return m}
 let hintKey='';function hint(k){if(k===hintKey)return;hintKey=k;const h=$('hint');if(!k)h.classList.add('hide');else{h.classList.remove('hide');h.textContent=tt(k)}}
 function nextSig(i,dir){const n=ATT.length;for(let s=1;s<=n;s++){const j=((i+dir*s)%n+n)%n;if(!ST.sig||SIG.has(j))return j}return i}
 async function goTo(i){const n=ATT.length;if(!n)return;i=((i%n)+n)%n;const a=ATT[i],tok=++ST.token;
@@ -602,27 +610,29 @@ function step(dt){const a=ST.att;if(!a)return;
   case 'end':ST.tE+=dt*ST.speed;if(ST.tE>=endDur(a.o)){ST.phase='card';ST.tC=0}break;
   case 'card':ST.tC+=dt;if(ST.tC>=1.1)advance();break;
   case 'flip':ST.flipAcc+=dt;while(ST.flipAcc>=0.04){ST.flipAcc-=0.04;const nx=(ST.cur+1)%ATT.length;if(!ST.sig||SIG.has(nx)){goTo(nx);break}ST.cur=nx;ST.att=ATT[nx];ST.flipN--;tick();drawTimeline()}break}}
-// ---------- camera: three-quarter view from the rider's right (drive side), slightly ahead and above, following with a lerp; or a chase cam
+// ---------- camera: side view from the rider's right (drive side), low and close like the reference, following with a lerp; or a chase cam or a three-quarter view
 const camPos=V(5.4,1.6,1.6),camTgt=V(0,0.8,0),camDes=V(0,0,0),tgtDes=V(0,0,0);
 function updateCam(s,dt){if(s){const base=V(s[0],0,s[1]),frozen=ST.camFrozen;  // frozen (off the road): the camera stays put and only pans after him
   if(ST.view){if(!frozen)camDes.copy(base).add(ST.view.off);tgtDes.copy(base).add(ST.view.tgt)}
   else if(ST.cam==='chase'){const yaw=-s[2],fwd=V(Math.cos(yaw),0,-Math.sin(yaw)),right=V(Math.sin(yaw),0,Math.cos(yaw));
    if(!frozen)camDes.copy(base).addScaledVector(fwd,-5.2).addScaledVector(right,1.4).add(V(0,1.9,0));tgtDes.copy(base).add(V(0,0.9,0)).addScaledVector(fwd,frozen?0:1.5)}
-  else{if(!frozen)camDes.copy(base).add(V(1.55,1.25,5.2));tgtDes.copy(base).add(V(frozen?0:0.3,0.7,0))}}
+  else{const v=VIEWS[ST.cam]||VIEWS.side;if(!frozen)camDes.copy(base).add(v.off);tgtDes.copy(base).add(V(frozen?0:v.tgt.x,v.tgt.y,v.tgt.z))}}
  const snap=ST.snap&&!!s,k=snap?1:1-Math.exp(-dt/0.22);camPos.lerp(camDes,k);camTgt.lerp(tgtDes,snap?1:1-Math.exp(-dt/0.14));camera.position.copy(camPos);camera.lookAt(camTgt);if(s)ST.snap=false;
  if(s){sun.position.set(s[0]-5,15,7);sun.target.position.set(s[0],0,0)}}
 // ---------- one frame: pose, camera, panel, brain, render
 let lastTs=0,logKey='',done=false;
 function draw(dt){const a=ST.att;let s=null;
- if(bike&&ST.rows&&ST.played){const p=ST.played,ph=ST.phase;let roll=0;
+ if(bike&&ST.rows&&ST.played){const p=ST.played,ph=ST.phase,U=rider?rider.userData:null;let roll=0,lift=false;
+  if(U){U.bail=false;U.wingMode=0}
   if(ph==='ride'){s=stateAt(ST.tA);roll=s[4]}
   else{const e=stateAt(p.t),tE=ph==='end'?ST.tE:99;s=e.slice();
    if(p.o===2){const u=Math.min(tE,1.5);s[0]=e[0]+e[3]*Math.cos(e[2])*u;s[1]=e[1]+e[3]*Math.sin(e[2])*u;roll=e[4];ST.camFrozen=true}   // rolls on into the grey, camera stays
-   else if(p.o===1||p.o===3){const sg=e[4]>=0?1:-1,u=ease(Math.min(1,tE/0.6));roll=e[4]+(sg*1.45-e[4])*u;                                   // tips over to the lean side
-    if(rider&&p.o===3){const h=Math.min(tE,0.7);rider.position.set(0,Math.max(0,2.6*h-4.9*h*h)+0.6*h,-sg*1.6*h)}}
+   else if(p.o===1||p.o===3){const sg=e[4]>=0?1:-1,u=ease(Math.min(1,tE/0.6));roll=e[4]+(sg*TIP-e[4])*u;                                    // tips over to the lean side
+    if(p.o===1){lift=true;if(U)U.wingMode=tE<0.2?1:-1}                                                                                      // startle, then the wings fold as he lies there
+    else if(U){const h=Math.min(tE,0.7)/0.7;U.bail=true;U.bailRoll=roll;U.bailPos.set(0.35*h,0.55*Math.sin(Math.PI*h),-sg*1.7*h);U.wingMode=h<1?1:-1}}   // hops off to the other side, lands on six feet
    else{const u=Math.min(tE,0.7);s[0]=e[0]+e[3]*Math.cos(e[2])*u*0.6;s[1]=e[1]+e[3]*Math.sin(e[2])*u*0.6;roll=e[4]}}
-  if(rider&&!(p.o===3&&ph!=='ride'))rider.position.set(0,0,0);
-  poseBike(s,roll)}
+  poseBike(s,roll);
+  if(lift){const low=Math.min(lowestY(bike.rig.root),U?lowestY(rider,U.fly.wings):Infinity);if(low<0){bike.root.position.y=-low;bike.root.updateMatrixWorld(true)}}}   // a fallen rider rests on the ground, not through it
  updateCam(s,dt);
  hint(!ST.ready?'loadingBike':!ATT.length?'noData':ST.phase==='load'?'loading':'');
  refreshPanel();paintBrain(ST.phase==='ride'?ST.tA:(a?a.t:0));renderer.render(scene,camera);
@@ -644,23 +654,30 @@ function loop(ts){const dt=Math.min(0.1,lastTs?(ts-lastTs)/1000:0);lastTs=ts;if(
 // ---------- timeline: one thin bar per attempt, height = distance, colour by outcome, records dotted; hover for details, click to jump
 function drawTimeline(){const c=$('tlc'),w=c.clientWidth,h=c.clientHeight;if(!w||!h)return;const dpr=Math.min(2,devicePixelRatio||1);if(c.width!==Math.round(w*dpr)||c.height!==Math.round(h*dpr)){c.width=Math.round(w*dpr);c.height=Math.round(h*dpr)}
  const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,w,h);const n=ATT.length;if(!n)return;const bw=w/n;
- for(let i=0;i<n;i++){const a=ATT[i],bh=Math.max(1.5,(h-7)*a.d/DMAX);x.globalAlpha=(ST.sig&&!SIG.has(i))?0.3:0.9;x.fillStyle=COL[a.o]||COL[1];x.fillRect(i*bw,h-bh,Math.max(0.8,bw-0.4),bh);
-  if(a.r){x.globalAlpha=1;x.fillStyle='#fff';x.fillRect(i*bw+bw/2-1,h-bh-4,2,2)}}
- if(ST.cur>=0){x.globalAlpha=1;x.strokeStyle='#fff';x.lineWidth=1;x.strokeRect(ST.cur*bw+0.5,0.5,Math.max(2,bw)-1,h-1)}}
-{const tl=$('tl'),c=$('tlc'),tip=$('tip');const at=e=>{const r=c.getBoundingClientRect();return Math.max(0,Math.min(ATT.length-1,Math.floor((e.clientX-r.left)/r.width*ATT.length)))};
+ const R=META?META.riders:48,gw=bw*R;x.globalAlpha=1;x.fillStyle='#2a2e36';x.font='8px '+getComputedStyle(document.body).fontFamily;x.textBaseline='top';
+ for(let i=0;i<n;i+=R){x.fillStyle='#2a2e36';x.fillRect(Math.round(i*bw),0,1,h);if(gw>=22){x.fillStyle='#6f747c';x.fillText(String(ATT[i].gen),i*bw+3,1)}}   // one tick per generation
+ for(let i=0;i<n;i++){const a=ATT[i],bh=Math.max(1.5,(h-9)*a.d/DMAX);x.globalAlpha=(ST.sig&&!SIG.has(i))?0.3:0.9;x.fillStyle=COL[a.o]||COL[1];x.fillRect(i*bw,h-bh,Math.max(0.8,bw-0.4),bh)}
+ x.globalAlpha=1;x.fillStyle='#fff';for(let i=0;i<n;i++){const a=ATT[i];if(a.r)x.fillRect(i*bw+bw/2-1,h-Math.max(1.5,(h-9)*a.d/DMAX)-4,2,2)}
+ if(ST.cur>=0){x.strokeStyle='#fff';x.lineWidth=1;x.strokeRect(Math.round(ST.cur*bw)+0.5,0.5,Math.max(2,bw)-1,h-1)}}
+{const tl=$('tl'),c=$('tlc'),tip=$('tip');
+ const at=e=>{const r=c.getBoundingClientRect(),n=ATT.length,u=(e.clientX-r.left)/r.width*n;let i=Math.max(0,Math.min(n-1,Math.floor(u)));   // hover/click: the attempt under the pointer, in significant-only mode the nearest significant one
+  if(ST.sig&&!SIG.has(i)){let bd=Infinity;for(const j of SIG){const d=Math.abs(j+0.5-u);if(d<bd){bd=d;i=j}}}return i};
  c.onmousemove=e=>{if(!ATT.length)return;const i=at(e),r=c.getBoundingClientRect();tip.classList.remove('hide');tip.textContent=tt('tip',ATT[i]);tip.style.left=Math.max(80,Math.min(r.width-80,e.clientX-r.left))+'px'};
- c.onmouseleave=()=>tip.classList.add('hide');c.onclick=e=>{if(ATT.length)goTo(at(e))};new ResizeObserver(drawTimeline).observe(tl)}
+ c.onmouseleave=()=>tip.classList.add('hide');c.onclick=e=>{if(ATT.length)goTo(at(e))};
+ c.addEventListener('wheel',e=>{e.preventDefault();if(ATT.length)goTo(nextSig(ST.cur,e.deltaY>0||e.deltaX>0?1:-1))},{passive:false});new ResizeObserver(drawTimeline).observe(tl)}
 // ---------- controls
 function setPlaying(p){ST.playing=p;const b=$('play');b.textContent=p?'❚❚':'▶';b.title=tt(p?'pause':'play')}
 function setSpeed(v){ST.speed=v;$('speed').value=String(v)}
 function setSig(on){ST.sig=on;const b=$('sig');b.classList.toggle('on',on);b.textContent=tt(on?'sigOn':'sigOff');drawTimeline()}
-function setCam(c){ST.cam=c;ST.snap=true;$('cam').textContent=tt(c==='chase'?'camChase':'camSide')}
+function setCam(c){ST.cam=c;ST.snap=true;$('cam').textContent=tt(c==='chase'?'camChase':c==='quarter'?'camQuarter':'camSide')}
 $('play').onclick=()=>setPlaying(!ST.playing);$('speed').onchange=e=>setSpeed(parseFloat(e.target.value));
 $('prev').onclick=()=>goTo(nextSig(ST.cur,-1));$('next').onclick=()=>goTo(nextSig(ST.cur,1));
-$('sig').onclick=()=>setSig(!ST.sig);$('cam').onclick=()=>setCam(ST.cam==='chase'?'side':'chase');
+$('sig').onclick=()=>setSig(!ST.sig);$('cam').onclick=()=>setCam(CAMS[(CAMS.indexOf(ST.cam)+1)%CAMS.length]);
 addEventListener('keydown',e=>{if(e.target&&/^(SELECT|INPUT|TEXTAREA)$/.test(e.target.tagName))return;
  if(e.key===' '){e.preventDefault();setPlaying(!ST.playing)}else if(e.key==='ArrowLeft')$('prev').click();else if(e.key==='ArrowRight')$('next').click();
- else if('1234'.includes(e.key)&&e.key)setSpeed([0.5,1,2,4][+e.key-1])});
+ else if(e.key==='1'||e.key==='2'||e.key==='4')setSpeed(+e.key);else if(e.key==='5')setSpeed(0.5);
+ else if(e.key==='['||e.key===']'){const sp=[0.5,1,2,4],k=Math.max(0,Math.min(3,sp.indexOf(ST.speed)+(e.key===']'?1:-1)));setSpeed(sp[k])}
+ else if(e.key==='c'||e.key==='C')$('cam').click()});
 LANG_HOOKS.push(()=>{setPlaying(ST.playing);setSig(ST.sig);setCam(ST.cam);logKey='';hintKey='';if(ST.att)refreshPanel()});
 applyLang();
 if(Q.get('speed'))setSpeed(parseFloat(Q.get('speed'))||1);
