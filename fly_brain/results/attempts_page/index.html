@@ -70,7 +70,7 @@ button:hover{border-color:#666}button.on{background:var(--acc);color:#111;border
   <div id="ctl">
    <select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select>
    <button id="prev">«</button><button id="play">❚❚</button><button id="next">»</button>
-   <button id="sig" class="on"></button><button id="cam"></button>
+   <button id="sig" class="on"></button><button id="cam"></button><select id="paint"></select>
    <span id="lang" class="lang"><button data-l="en">EN</button><button data-l="zh">中文</button></span>
   </div>
  </div>
@@ -360,7 +360,8 @@ en:{title:'Fly learns to ride',chips:'Male CNS v1.0 · 166,700 neurons · connec
  speed:'Playback speed (keys 1 2 4 · 5 = ½× · [ ] slower/faster)',camSide:'Side',camChase:'Chase',camQuarter:'¾ view',camT:'Camera (c)',lang:'Language',
  credits:'flybrain-play · male CNS v1.0 · Colnago V4Rs',loading:'Loading…',loadingBike:'Loading the bike model…',noData:'No attempts yet',
  lgFell:'fell',lgOff:'off road',lgFin:'finished',lgBail:'bailed',lgRec:'record',
- splitV:'Drag to resize the panel · double-click to reset',splitH:'Drag to resize the brain map · double-click to reset'},
+ splitV:'Drag to resize the panel · double-click to reset',splitH:'Drag to resize the brain map · double-click to reset',
+ paintT:'Frame paint',pOrig:'Factory blue',pUAE:'UAE white',pRed:'Racing red',pCarbon:'Carbon black'},
 zh:{title:'苍蝇学骑车',chips:'雄性 CNS v1.0 · 166,700 神经元 · 连接组不变 · Whipple 物理开',
  attempt:k=>'第 '+k+' 次尝试',brainline:'166,700 神经元 · 1.24 亿突触',genline:(g,r)=>'第 '+g+' 代 · 骑手 '+r,
  dist:'里程',best:'最佳',time:'时间',log:'动作记录',
@@ -376,7 +377,8 @@ zh:{title:'苍蝇学骑车',chips:'雄性 CNS v1.0 · 166,700 神经元 · 连�
  speed:'播放速度（按键 1 2 4 · 5 = ½× · [ ] 减速/加速）',camSide:'侧拍',camChase:'跟拍',camQuarter:'斜拍',camT:'镜头（c）',lang:'语言',
  credits:'flybrain-play · 雄性 CNS v1.0 · Colnago V4Rs',loading:'加载中…',loadingBike:'加载车模…',noData:'还没有尝试',
  lgFell:'倒了',lgOff:'出界',lgFin:'骑满',lgBail:'跳车',lgRec:'纪录',
- splitV:'拖动调节侧栏宽度 · 双击复位',splitH:'拖动调节脑图高度 · 双击复位'}};
+ splitV:'拖动调节侧栏宽度 · 双击复位',splitH:'拖动调节脑图高度 · 双击复位',
+ paintT:'车架涂装',pOrig:'原厂蓝',pUAE:'UAE 白',pRed:'赛车红',pCarbon:'碳黑'}};
 const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 const Q=new URLSearchParams(location.search);
 let LANG=(()=>{const q=Q.get('lang');if(q==='en'||q==='zh'){LS.set('flybrain.lang',q);return q}
@@ -390,12 +392,19 @@ function applyLang(){document.documentElement.lang=LANG==='zh'?'zh-CN':'en';docu
  $('legend').innerHTML=[['lgFell',COL[1]],['lgOff',COL[2]],['lgFin',COL[0]],['lgBail',COL[3]],['lgRec','#fff']].map(([k,c])=>'<span><i style="background:'+c+'"></i>'+tt(k)+'</span>').join('');
  $('prev').title=tt('prev');$('next').title=tt('next');$('speed').title=tt('speed');$('lang').title=tt('lang');$('cam').title=tt('camT');
  $('sig').title=tt('sigT');$('vsplit').title=tt('splitV');$('hsplit').title=tt('splitH');
+ $('paint').title=tt('paintT');for(const o of $('paint').options)o.textContent=tt(o.dataset.k);
  for(const b of document.querySelectorAll('#lang button'))b.classList.toggle('on',b.dataset.l===LANG);
  for(const f of LANG_HOOKS)f()}
 function setLang(l){if(l===LANG||!I18N[l])return;LANG=l;LS.set('flybrain.lang',l);
  try{const u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',l);history.replaceState(history.state,'',u)}}catch(e){}applyLang()}
 for(const b of document.querySelectorAll('#lang button'))b.onclick=()=>setLang(b.dataset.l);
 const COL=['#3fb950','#e5484d','#f0883e','#a371f7'];  // finished, fell, off the road, bailed
+// frame paint: ?paint=orig|f2f2f2|c8102e|16181c, remembered per browser; applied to the GLB's 'RVBU' paint material once the bike is rigged
+const PAINTS=[['orig','pOrig'],['f2f2f2','pUAE'],['c8102e','pRed'],['16181c','pCarbon']];let PAINT='orig',BIKE_MODEL=null;
+function setPaint(){(BIKE_MODEL||scene).traverse(o=>{if(o.isMesh&&o.material&&o.material.userData.paint){const m=o.material;if(PAINT==='orig'){if(m.userData.orig!==undefined)m.color.setHex(m.userData.orig)}else m.color.setHex(parseInt(PAINT,16)).convertSRGBToLinear()}})}
+(function(){const sel=$('paint');for(const [v,k] of PAINTS){const o=document.createElement('option');o.value=v;o.dataset.k=k;o.textContent=tt(k);sel.appendChild(o)}
+ const q=Q.get('paint'),sv=LS.get('flybrain.paint');PAINT=PAINTS.some(x=>x[0]===q)?q:PAINTS.some(x=>x[0]===sv)?sv:'orig';sel.value=PAINT;
+ sel.onchange=()=>{PAINT=sel.value;LS.set('flybrain.paint',PAINT);setPaint()}})();
 // splitters: panel width (--pw) and brain-map height (--bmh), remembered per browser; the renderers follow via ResizeObserver
 (function(){const root=document.documentElement.style,panel=$('panel');
  const lim={pw:()=>[240,Math.max(240,Math.min(innerWidth*0.7,1000))],bmh:()=>[90,Math.max(90,panel.clientHeight-230)]};
@@ -498,10 +507,10 @@ function rigModel(){const m=MODEL,g=G,root=new THREE.Group();root.add(m);m.posit
  const cs=group(g.BB,['crank arm part 01','crank armLogo','crank armLogo2','CogOuter','CrankInner','CrankOuter','chain ring text']);
  const handL=mk(root,V(g.HOOD.x,g.HOOD.y,-g.hoodZ)),handR=mk(root,V(g.HOOD.x,g.HOOD.y,g.hoodZ));steer.attach(handL);steer.attach(handR);
  const paintMats=[];m.traverse(o=>{if(o.isMesh){o.castShadow=true;if(o.material&&o.material.name==='RVBU'&&!paintMats.includes(o.material))paintMats.push(o.material)}});
- for(const pm of paintMats){pm.userData.paint=true;pm.userData.orig=pm.color.getHex()}
+ for(const pm of paintMats){pm.userData.paint=true;pm.userData.orig=pm.color.getHex()}BIKE_MODEL=m;setPaint();
  return {root,steer,fs,rs,cs,hands:[handL,handR]}}
 function procRig(){ // a plain bike when the GLB cannot be decoded: two wheels, a frame of tubes, bars
- const g=G,root=new THREE.Group(),black=flat(0x1a1a1c),paint=flat(0xc8102e);
+ const g=G,root=new THREE.Group(),black=flat(0x1a1a1c),paint=flat(0xc8102e);paint.userData.paint=true;paint.userData.orig=paint.color.getHex();BIKE_MODEL=root;
  const wheel=at=>{const w=new THREE.Group();w.position.copy(at);const t=new THREE.Mesh(new THREE.TorusGeometry(g.R-0.012,0.013,10,48),black);t.castShadow=true;w.add(t);
   for(let i=0;i<12;i++){const sp=new THREE.Mesh(new THREE.BoxGeometry(0.003,2*g.R-0.06,0.002),flat(0x999999));sp.rotation.z=i/12*Math.PI;w.add(sp)}w.userData.q0=w.quaternion.clone();return w};
  const rs=wheel(g.RH);root.add(rs);
