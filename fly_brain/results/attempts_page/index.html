@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fly learns to ride</title>
 <style>
-:root{--pw:340px;--bh:44px;--mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Noto Sans Mono",monospace;--bg:#e8e9eb;--pbg:#111317;--bbg:#15171b;--fg:#dfe2e7;--dim:#7f858f;--acc:#f0a24a}
+:root{--pw:340px;--bh:44px;--bmh:230px;--mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Noto Sans Mono",monospace;--bg:#e8e9eb;--pbg:#111317;--bbg:#15171b;--fg:#dfe2e7;--dim:#7f858f;--acc:#f0a24a}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:12px/1.4 var(--mono);overflow:hidden}
 #app{display:grid;grid-template-columns:1fr var(--pw);grid-template-rows:1fr var(--bh);height:100%}
 #stage{grid-area:1/1/2/2;position:relative;overflow:hidden;min-width:0;min-height:0;background:var(--bg)}
@@ -10,8 +10,17 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:12px/1.
 #chips{position:absolute;top:10px;left:14px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#6f747c;pointer-events:none}
 #hint{position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#5d626a;background:rgba(255,255,255,.65);padding:3px 8px;border-radius:3px;pointer-events:none}
 .hide{display:none!important}
-#panel{grid-area:1/2/3/3;background:var(--pbg);display:flex;flex-direction:column;min-height:0;overflow:hidden;border-left:1px solid #000}
-#bmap{position:relative;height:230px;flex:none;background:#0d1017}#bc{width:100%;height:100%;display:block;cursor:grab}
+#panel{grid-area:1/2/3/3;position:relative;background:var(--pbg);display:flex;flex-direction:column;min-height:0;overflow:hidden;border-left:1px solid #000}
+/* splitters: drag the grip to change the split, double-click to reset */
+#vsplit{position:absolute;left:-5px;top:0;bottom:0;width:10px;cursor:col-resize;z-index:5;touch-action:none}
+#hsplit{position:relative;height:8px;flex:none;cursor:row-resize;z-index:5;touch-action:none;background:#0d1017}
+#vsplit i,#hsplit i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;background:#262a33;border:1px solid #3a3f4a;border-radius:7px;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+#vsplit i{width:12px;height:46px}#hsplit i{width:46px;height:12px}
+#vsplit i::after,#hsplit i::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#7f858f;border-radius:1px}
+#vsplit i::after{width:2px;height:18px;box-shadow:3px 0 0 #7f858f,-3px 0 0 #7f858f}#hsplit i::after{width:18px;height:2px;box-shadow:0 3px 0 #7f858f,0 -3px 0 #7f858f}
+#vsplit:hover i,#hsplit:hover i,#vsplit.on i,#hsplit.on i{background:#30353f;border-color:var(--acc)}
+body.dragging,body.dragging *{user-select:none!important}body.dragv,body.dragv *{cursor:col-resize!important}body.dragh,body.dragh *{cursor:row-resize!important}
+#bmap{position:relative;height:var(--bmh);flex:none;background:#0d1017}#bc{width:100%;height:100%;display:block;cursor:grab}
 #bnote{position:absolute;left:10px;right:10px;bottom:6px;font-size:9.5px;color:#6b7280;letter-spacing:.02em;pointer-events:none}
 #pbody{padding:14px 16px 10px;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
 #atitle{font-size:24px;font-weight:600;color:var(--acc);letter-spacing:-.01em;line-height:1.1;font-variant-numeric:tabular-nums}
@@ -35,12 +44,14 @@ button:hover{border-color:#666}button.on{background:var(--acc);color:#111;border
 .lang{display:inline-flex;border:1px solid #30343c;border-radius:3px;overflow:hidden;height:24px}.lang button{border:0;border-radius:0;color:#8a8f98;padding:0 7px;height:22px}.lang button+button{border-left:1px solid #30343c}.lang button.on{color:#fff;background:#2c3038}
 @media(max-width:1250px){#app{grid-template-rows:1fr auto}#bar{flex-wrap:wrap;padding:6px 10px;row-gap:4px}#tl{flex:1 1 100%;order:3;height:24px}#credits{display:none}}
 @media(max-width:1100px){:root{--pw:300px}}
-@media(max-width:760px){#app{grid-template-columns:1fr;grid-template-rows:1fr auto 42vh}#stage{grid-area:1/1/2/2}#bar{grid-area:2/1/3/2;flex-wrap:wrap;height:auto;padding:6px 10px;gap:8px}#panel{grid-area:3/1/4/2;border-left:0;border-top:1px solid #000}#bmap{height:110px}#credits,#legend{display:none}#atitle{font-size:20px}}
+@media(max-width:760px){#app{grid-template-columns:1fr;grid-template-rows:1fr auto 42vh}#stage{grid-area:1/1/2/2}#bar{grid-area:2/1/3/2;flex-wrap:wrap;height:auto;padding:6px 10px;gap:8px}#panel{grid-area:3/1/4/2;border-left:0;border-top:1px solid #000}#bmap{height:110px!important}#vsplit,#hsplit{display:none}#credits,#legend{display:none}#atitle{font-size:20px}}
 </style></head><body>
 <div id="app">
  <div id="stage"><canvas id="c"></canvas><div id="chips"></div><div id="hint"></div></div>
  <aside id="panel">
+  <div id="vsplit"><i></i></div>
   <div id="bmap"><canvas id="bc"></canvas><div id="bnote"></div></div>
+  <div id="hsplit"><i></i></div>
   <div id="pbody">
    <div id="atitle">—</div>
    <div class="tiny" id="brainline"></div>
@@ -348,7 +359,8 @@ en:{title:'Fly learns to ride',chips:'Male CNS v1.0 · 166,700 neurons · connec
  sigT:'Significant attempts: the first, every new record, the mean rider of each generation, its earliest and its longest failure, the last. The rest are flipped through.',
  speed:'Playback speed (keys 1 2 4 · 5 = ½× · [ ] slower/faster)',camSide:'Side',camChase:'Chase',camQuarter:'¾ view',camT:'Camera (c)',lang:'Language',
  credits:'flybrain-play · male CNS v1.0 · Colnago V4Rs',loading:'Loading…',loadingBike:'Loading the bike model…',noData:'No attempts yet',
- lgFell:'fell',lgOff:'off road',lgFin:'finished',lgBail:'bailed',lgRec:'record'},
+ lgFell:'fell',lgOff:'off road',lgFin:'finished',lgBail:'bailed',lgRec:'record',
+ splitV:'Drag to resize the panel · double-click to reset',splitH:'Drag to resize the brain map · double-click to reset'},
 zh:{title:'苍蝇学骑车',chips:'雄性 CNS v1.0 · 166,700 神经元 · 连接组不变 · Whipple 物理开',
  attempt:k=>'第 '+k+' 次尝试',brainline:'166,700 神经元 · 1.24 亿突触',genline:(g,r)=>'第 '+g+' 代 · 骑手 '+r,
  dist:'里程',best:'最佳',time:'时间',log:'动作记录',
@@ -363,7 +375,8 @@ zh:{title:'苍蝇学骑车',chips:'雄性 CNS v1.0 · 166,700 神经元 · 连�
  sigT:'关键尝试：第一次、每个新纪录、每代的均值骑手、每代最早和最久的失败、最后一次。其余快进跳过。',
  speed:'播放速度（按键 1 2 4 · 5 = ½× · [ ] 减速/加速）',camSide:'侧拍',camChase:'跟拍',camQuarter:'斜拍',camT:'镜头（c）',lang:'语言',
  credits:'flybrain-play · 雄性 CNS v1.0 · Colnago V4Rs',loading:'加载中…',loadingBike:'加载车模…',noData:'还没有尝试',
- lgFell:'倒了',lgOff:'出界',lgFin:'骑满',lgBail:'跳车',lgRec:'纪录'}};
+ lgFell:'倒了',lgOff:'出界',lgFin:'骑满',lgBail:'跳车',lgRec:'纪录',
+ splitV:'拖动调节侧栏宽度 · 双击复位',splitH:'拖动调节脑图高度 · 双击复位'}};
 const LS={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
 const Q=new URLSearchParams(location.search);
 let LANG=(()=>{const q=Q.get('lang');if(q==='en'||q==='zh'){LS.set('flybrain.lang',q);return q}
@@ -376,13 +389,28 @@ function applyLang(){document.documentElement.lang=LANG==='zh'?'zh-CN':'en';docu
  $('credits').textContent=tt('credits');
  $('legend').innerHTML=[['lgFell',COL[1]],['lgOff',COL[2]],['lgFin',COL[0]],['lgBail',COL[3]],['lgRec','#fff']].map(([k,c])=>'<span><i style="background:'+c+'"></i>'+tt(k)+'</span>').join('');
  $('prev').title=tt('prev');$('next').title=tt('next');$('speed').title=tt('speed');$('lang').title=tt('lang');$('cam').title=tt('camT');
- $('sig').title=tt('sigT');
+ $('sig').title=tt('sigT');$('vsplit').title=tt('splitV');$('hsplit').title=tt('splitH');
  for(const b of document.querySelectorAll('#lang button'))b.classList.toggle('on',b.dataset.l===LANG);
  for(const f of LANG_HOOKS)f()}
 function setLang(l){if(l===LANG||!I18N[l])return;LANG=l;LS.set('flybrain.lang',l);
  try{const u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',l);history.replaceState(history.state,'',u)}}catch(e){}applyLang()}
 for(const b of document.querySelectorAll('#lang button'))b.onclick=()=>setLang(b.dataset.l);
 const COL=['#3fb950','#e5484d','#f0883e','#a371f7'];  // finished, fell, off the road, bailed
+// splitters: panel width (--pw) and brain-map height (--bmh), remembered per browser; the renderers follow via ResizeObserver
+(function(){const root=document.documentElement.style,panel=$('panel');
+ const lim={pw:()=>[240,Math.max(240,Math.min(innerWidth*0.7,1000))],bmh:()=>[90,Math.max(90,panel.clientHeight-230)]};
+ const setv=(k,v)=>{const [lo,hi]=lim[k]();v=Math.round(Math.max(lo,Math.min(hi,v)));root.setProperty('--'+k,v+'px');return v};
+ if(innerWidth>760){const pw=+LS.get('flybrain.attempts.pw'),bmh=+LS.get('flybrain.attempts.bmh');if(pw)setv('pw',pw);if(bmh)setv('bmh',bmh)}
+ function wire(id,k,cls,delta){const h=$(id);let x0=0,y0=0,v0=0;
+  h.addEventListener('pointerdown',e=>{if(e.button)return;e.preventDefault();x0=e.clientX;y0=e.clientY;v0=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--'+k))||0;
+   h.classList.add('on');document.body.classList.add('dragging',cls);try{h.setPointerCapture(e.pointerId)}catch(err){}});
+  h.addEventListener('pointermove',e=>{if(!h.classList.contains('on'))return;setv(k,v0+delta(e.clientX-x0,e.clientY-y0))});
+  const end=e=>{if(!h.classList.contains('on'))return;h.classList.remove('on');document.body.classList.remove('dragging',cls);
+   LS.set('flybrain.attempts.'+k,String(setv(k,v0+delta(e.clientX-x0,e.clientY-y0))))};
+  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+  h.addEventListener('dblclick',()=>{root.removeProperty('--'+k);LS.set('flybrain.attempts.'+k,'')})}
+ wire('vsplit','pw','dragv',(dx,dy)=>-dx);wire('hsplit','bmh','dragh',(dx,dy)=>dy);
+ addEventListener('resize',()=>{for(const k of['pw','bmh']){const v=parseFloat(root.getPropertyValue('--'+k));if(v)setv(k,v)}})})();
 const fmtD=d=>d.toFixed(1)+' m',fmtT=t=>{const m=Math.floor(t/60),s=t-60*m;return m+':'+(s<10?'0':'')+s.toFixed(1)};
 const ease=u=>u*u*(3-2*u);
 // =====================================================================================================
