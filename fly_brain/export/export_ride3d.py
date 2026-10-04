@@ -57,9 +57,9 @@ input[type=range]{width:220px}
 @media (max-width:1300px){#ctl button,#ctl select{padding:6px 9px}input[type=range]{width:120px}}
 @media (max-width:1200px){input[type=range]{width:90px}}
 .lang{display:inline-flex;border:1px solid #333;border-radius:8px;overflow:hidden}.lang button{border:0;border-radius:0;padding:6px 10px;color:#9aa}.lang button+button{border-left:1px solid #333}.lang button.on{color:#fff}
-#title{top:14px;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 2*var(--bw));box-sizing:border-box;text-align:center;text-wrap:balance;color:#9aa;font-size:12px}#title .seg{display:inline-block;max-width:100%}
+#title{top:14px;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 2*max(var(--bw),var(--hudw,300px) + 28px));box-sizing:border-box;text-align:center;text-wrap:balance;color:#9aa;font-size:12px}#title .seg{display:inline-block;max-width:100%}
 body.bigbrain #title{top:auto;left:auto;right:14px;bottom:calc(var(--ctlh) + 26px);margin:0;max-width:min(380px,calc(100vw - var(--bw) - 28px));text-align:right}
-#fall{position:fixed;top:40%;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 2*var(--bw));text-align:center;text-wrap:balance;line-height:1.15;font-size:44px;font-weight:800;color:#ff4d4d;text-shadow:0 2px 12px #000;display:none}
+#fall{position:fixed;top:40%;left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100vw - 2*max(var(--bw),var(--hudw,300px) + 28px));text-align:center;text-wrap:balance;line-height:1.15;font-size:44px;font-weight:800;color:#ff4d4d;text-shadow:0 2px 12px #000;display:none}
 body.bigbrain #fall{left:var(--bw);top:max(40%,calc(var(--hudb,306px) + 16px));max-width:calc(100vw - var(--bw) - 28px);font-size:38px}
 </style></head><body>
 <canvas id="c"></canvas>
@@ -122,9 +122,9 @@ function setLang(l){if(l===LANG||!I18N[l])return;LANG=l;LS.set('flybrain.lang',l
  try{const u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',l);history.replaceState(history.state,'',u)}}catch(e){}applyLang()}
 for(const b of document.querySelectorAll('#lang button'))b.onclick=()=>setLang(b.dataset.l);
 applyLang();
-// the brain panel and the title stay clear of the control bar, however many rows it wraps to
+// the brain panel and the title stay clear of the control bar, however many rows it wraps to; the title and the banner stay clear of the HUD
 new ResizeObserver(()=>document.documentElement.style.setProperty('--ctlh',document.getElementById('ctl').offsetHeight+'px')).observe(document.getElementById('ctl'));
-{const h=document.getElementById('hud');new ResizeObserver(()=>document.documentElement.style.setProperty('--hudb',h.offsetTop+h.offsetHeight+'px')).observe(h)}
+{const h=document.getElementById('hud'),st=document.documentElement.style;new ResizeObserver(()=>{st.setProperty('--hudb',h.offsetTop+h.offsetHeight+'px');st.setProperty('--hudw',h.offsetWidth+'px')}).observe(h)}
 </script>
 <script id="data" type="application/json">__DATA__</script>
 <script id="bikeglb" type="application/octet-stream">__BIKE__</script>
