@@ -96,7 +96,12 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 36535 | 2026-10-04 05:39 | COMPLETED | 00:05:50 | 8 cpu, 48G, 1 gpu |  | `sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -J engine-equiv -o ../logs/rewrite/equiv-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain && ~/...` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
 | 36536 | 2026-10-04 05:49 | COMPLETED | 00:00:23 | 8 cpu, 48G, 1 gpu |  | `srun -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -t 30 /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m pytest -q tests/test_engine.py tests/test_graph.py` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
 | 36537 | 2026-10-04 05:50 | COMPLETED | 00:01:09 | 8 cpu, 48G, 1 gpu |  | `srun -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -t 30 /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m pytest -q -rs tests/test_engine.py tests/test_graph.py` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
-| 36538 | 2026-10-04 05:53 | RUNNING | 00:06:45 | 16 cpu, 96G, 1 gpu |  | `sbatch calibrate-wsyn.sbatch` (in `./.claude/worktrees/commit-dc73073-investigation-a94327`) |  |
+| 36538 | 2026-10-04 05:53 | COMPLETED | 00:09:29 | 16 cpu, 96G, 1 gpu |  | `sbatch calibrate-wsyn.sbatch` (in `./.claude/worktrees/commit-dc73073-investigation-a94327`) |  |
+| 36539 | 2026-10-04 06:03 | COMPLETED | 00:14:26 | 16 cpu, 96G, 1 gpu |  | `sbatch calibrate-wsyn.sbatch` (in `./.claude/worktrees/commit-dc73073-investigation-a94327`) |  |
+| 36540 | 2026-10-04 06:18 | CANCELLED | 00:04:17 | 8 cpu, 48G, 1 gpu |  | `sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -t 60 -J ride-replay-new -o ../logs/rewrite/ride-replay-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/...` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) | `/tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-commit-dc73073-investigation-a94327/429f3982-d7b5-4efc-acd7-32979c1cb3e7/scratchpad/road_trace_new.json`, `/tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-commit-dc73073-investigation-a94327/429f3982-d7b5-4efc-acd7-32979c1cb3e7/scratchpad/pilot_trace_new.json` |
+| 36541 | 2026-10-04 06:22 | COMPLETED | 00:01:35 | 8 cpu, 64G, 1 gpu |  | `sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=64G -t 60 -J dashboard-export -o ../logs/rewrite/dashboard-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/f...` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
+| 36542 | 2026-10-04 06:24 | COMPLETED | 00:04:00 | 8 cpu, 48G, 1 gpu |  | `sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -t 60 -J ride-replay-045 -o ../logs/rewrite/ride-replay-045-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94...` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
+| 36543 | 2026-10-04 06:29 | RUNNING | 00:00:46 | 8 cpu, 64G, 1 gpu |  | `sbatch ride-relearn.sbatch` (in `./.claude/worktrees/commit-dc73073-investigation-a94327`) |  |
 
 ## Full command lines
 
@@ -267,4 +272,22 @@ sbatch -p ocf-hpc -w corruption -c 8 --mem=64G -J connectome-build -o ../logs/re
 
 ```bash
 sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -J engine-equiv -o ../logs/rewrite/equiv-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain && ~/flybrain/venv-cuda/bin/python ../logs/rewrite/equiv.py
+```
+
+**36540** (ride-replay-new)
+
+```bash
+sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -t 60 -J ride-replay-new -o ../logs/rewrite/ride-replay-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain && P=~/flybrain/venv-cuda/bin/python; $P -m runs.ride --replay results/lane/cem_mu.json --tau-lane-ms 300 --lane-filter results/probe.json --readout lane --lane hs --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --riders 16 --seconds 20 --seed 7 --center-batch --trace /tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-commit-dc73073-investigation-a94327/429f3982-d7b5-4efc-acd7-32979c1cb3e7/scratchpad/road_trace_new.json 2>&1 | grep -E '^replay|Error|Traceback|error' ; $P -m runs.ride --open-loop --tau-lane-ms 300 --lane-filter results/probe.json --readout lane --lane hs --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --riders 16 --seconds 20 --seed 7 --center-batch --trace /tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-commit-dc73073-investigation-a94327/429f3982-d7b5-4efc-acd7-32979c1cb3e7/scratchpad/pilot_trace_new.json 2>&1 | grep -E '^open loop|Error|Traceback|error'
+```
+
+**36541** (dashboard-export)
+
+```bash
+sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=64G -t 60 -J dashboard-export -o ../logs/rewrite/dashboard-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain && ~/flybrain/venv-cuda/bin/python -m export.export_dashboard && ~/flybrain/venv-cuda/bin/python export/pack_dashboard.py
+```
+
+**36542** (ride-replay-045)
+
+```bash
+sbatch -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=48G -t 60 -J ride-replay-045 -o ../logs/rewrite/ride-replay-045-%j.out --wrap cd /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain && ~/flybrain/venv-cuda/bin/python -m runs.ride --replay results/lane/cem_mu.json --tau-lane-ms 300 --lane-filter results/probe.json --readout lane --lane hs --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --riders 16 --seconds 20 --seed 7 --center-batch --w-syn-scale 0.45 2>&1 | grep -E '^replay|Error|Traceback|rror:'
 ```
