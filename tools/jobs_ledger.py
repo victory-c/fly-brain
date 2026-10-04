@@ -56,6 +56,7 @@ NOTES = {
     "36492": "replay on the road with the whole brain recorded, CPU -> results/ride_road_trace.json + ride_road_brain.npz (/ride/)",
     "36493": "lane keeping round 2 (lane-next.sbatch): batch centring + look-ahead/gain replays, operating-point CEM, held-out seed 59 -> results/lane/",
     "36494": "/ride/ page replays with the brain recorded: round-2 decoder and hands-off (ride-page.sbatch)",
+    "36521": "learning to ride from a blank decoder, every attempt recorded (ride-attempts.sbatch) -> results/attempts/ (the attempts page)",
 }
 
 
