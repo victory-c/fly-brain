@@ -88,6 +88,9 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 36492 | 2026-10-03 03:10 | COMPLETED | 00:34:56 | 12 cpu, 48G | replay on the road with the whole brain recorded, CPU -> results/ride_road_trace.json + ride_road_brain.npz (/ride/) | `srun -p ocf-hpc -w corruption -c 12 --mem=48G -t 120 --quiet ../venv-cuda/bin/python -m runs.ride --replay results/ride_slow_mu.json --device cpu --tau-lane-ms 300 --lane-filter results/probe.json --readout lane --lan...` (in `./fly_brain`) | `results/ride_road_trace.json` |
 | 36493 | 2026-10-03 11:13 | COMPLETED | 02:51:57 | 8 cpu, 48G, 1 gpu | lane keeping round 2 (lane-next.sbatch): batch centring + look-ahead/gain replays, operating-point CEM, held-out seed 59 -> results/lane/ | `sbatch lane-next.sbatch` | [flylane-36493.out](logs/flylane-36493.out) |
 | 36494 | 2026-10-03 14:07 | COMPLETED | 00:09:20 | 8 cpu, 48G, 1 gpu | /ride/ page replays with the brain recorded: round-2 decoder and hands-off (ride-page.sbatch) | `sbatch ride-page.sbatch results/lane/cem_mu.json` | [flypage-36494.out](logs/flypage-36494.out) |
+| 36519 | 2026-10-03 19:55 | FAILED | 00:00:04 | 4 cpu, 16G |  | `srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/python -m runs.ride --device cpu --readout lane --lane hs --lane-filter results/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=5...` (in `./fly_brain`) | `/tmp/claude-93015/-home-s-st-stevejobs-flybrain/ff3d4c1f-4087-4f88-b1bd-f60320256b54/scratchpad/att_test/cem.json` |
+| 36520 | 2026-10-03 19:56 | COMPLETED | 00:00:52 | 4 cpu, 16G |  | `srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/python -m runs.ride --device cpu --readout lane --lane hs --lane-filter results/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=5...` (in `./fly_brain`) | `results/attempts_test/cem.json` |
+| 36521 | 2026-10-03 19:58 | RUNNING | 00:01:53 | 8 cpu, 64G, 1 gpu |  | `sbatch ride-attempts.sbatch` | [flyattempt-36521.out](logs/flyattempt-36521.out) |
 
 ## Full command lines
 
@@ -234,4 +237,16 @@ srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/pyth
 
 ```bash
 srun -p ocf-hpc -w corruption -c 12 --mem=48G -t 120 --quiet ../venv-cuda/bin/python -m runs.ride --replay results/ride_slow_mu.json --device cpu --tau-lane-ms 300 --lane-filter results/probe.json --readout lane --lane hs --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --riders 16 --seconds 20 --seed 7 --trace results/ride_road_trace.json --brain-out results/ride_road_brain.npz
+```
+
+**36519** (python)
+
+```bash
+srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/python -m runs.ride --device cpu --readout lane --lane hs --lane-filter results/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --offroad 3.5 --center-batch --zbar results/lane/zbar_mu.npy --sigma-pedal 0 --riders 3 --seconds 0.6 --generations 2 --seed 5 --out /tmp/claude-93015/-home-s-st-stevejobs-flybrain/ff3d4c1f-4087-4f88-b1bd-f60320256b54/scratchpad/att_test/cem.json --log-attempts /tmp/claude-93015/-home-s-st-stevejobs-flybrain/ff3d4c1f-4087-4f88-b1bd-f60320256b54/scratchpad/att_test
+```
+
+**36520** (python)
+
+```bash
+srun -p ocf-hpc -w corruption -c 4 --mem=16G -t 14 --quiet ../venv-cuda/bin/python -m runs.ride --device cpu --readout lane --lane hs --lane-filter results/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --offroad 3.5 --center-batch --zbar results/lane/zbar_mu.npy --sigma-pedal 0 --init-theta results/attempts/init_blank.json --sigma-new 0.1 --sigma0 0.3 --riders 3 --seconds 0.6 --generations 2 --seed 5 --out results/attempts_test/cem.json --log-attempts results/attempts_test
 ```

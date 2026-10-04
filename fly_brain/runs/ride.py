@@ -71,6 +71,66 @@ class BrainRecorder:
         print(f"brain -> {path}  ({act.shape[0]} bins of {self.bin_ms:.0f} ms, {act.shape[1]} riders, {act.shape[2]:,} points)")
 
 
+class AttemptRecorder(BrainRecorder):
+    """Every rider of every CEM generation as an 'attempt' (runs/ride.py --log-attempts): the bike state, steering,
+    pedalling and the gust every 50 ms for all riders, each region's mean rate per bin for all riders, and the whole
+    brain (the dashboard's point cloud) for a few riders chosen at the end of the generation: the population mean,
+    any new distance record, the earliest and the longest failure. Everything stays on the GPU until the generation
+    ends, one compressed npz per generation (export/export_attempts.py turns them into the attempts page)."""
+
+    def __init__(self, meta, stim_idx, bin_ms, device, every_ms=50.0, ctrl_ms=10.0):
+        super().__init__(meta, stim_idx, bin_ms, device)
+        self.every = max(1, int(round(every_ms / ctrl_ms)))
+        self.ctrl_ms = ctrl_ms
+        self.rows = []
+
+    def start(self):
+        self.act, self.reg, self.rows = [], [], []
+
+    def add(self, counts):
+        hz = counts.float() / (self.bin_ms / 1000.0)
+        self.act.append((hz[:, self.point_idx] * (255.0 / self.cloud_hz)).clamp(0, 255).round().to(torch.uint8))
+        self.reg.append(hz @ self.M)
+
+    def step(self, k, bikes, steer, power):
+        """after bikes.step at control step k (0-based)."""
+        if (k + 1) % self.every == 0 or k == 0:
+            self.rows.append(torch.cat([bikes.state, steer[:, None], power[:, None], bikes.gust[:, None],
+                                        bikes.done[:, None].float()], 1))
+
+    def save(self, path, theta, fitness, bailed, best_before, extra_keep=()):
+        rows = torch.stack(self.rows).cpu().numpy()  # (T, B, 12): state(8), steer, power, gust, done
+        T, B, _ = rows.shape
+        t = np.array([(1 if i == 0 else (i * self.every)) * self.ctrl_ms / 1000.0 for i in range(T)], np.float32)
+        done = rows[:, :, 11] > 0.5
+        state = rows[:, :, :8]
+        first_done = np.where(done.any(0), done.argmax(0), T - 1)
+        t_end = t[first_done]
+        # outcome: 0 finished, 1 fell, 2 off the road, 3 bailed (giant fibre)
+        off = np.abs(state[first_done, np.arange(B), 1]) > 3.5
+        outcome = np.where(~done.any(0), 0, np.where(bailed, 3, np.where(off, 2, 1))).astype(np.int8)
+        dist = state[first_done, np.arange(B), 0]
+        keep = {0}
+        rec = best_before
+        i = int(np.argmax(dist))  # the generation's longest ride, if it is a new record
+        if dist[i] > best_before:
+            keep.add(i)
+        fail = np.where(outcome != 0)[0]
+        if len(fail):
+            keep.add(int(fail[np.argmin(t_end[fail])])); keep.add(int(fail[np.argmax(t_end[fail])]))
+        keep |= set(int(i) for i in extra_keep)
+        keep = np.array(sorted(keep))
+        act = torch.stack(self.act)[:, torch.as_tensor(keep, device=self.act[0].device)].cpu().numpy() if self.act else np.zeros((0, 0, 0), np.uint8)
+        np.savez_compressed(path, t=t, state=state.astype(np.float32), steer=rows[:, :, 8], power=rows[:, :, 9], gust=rows[:, :, 10],
+                            done=done, t_end=t_end, distance=dist.astype(np.float32), outcome=outcome, theta=theta, fitness=fitness,
+                            region_hz=torch.stack(self.reg).cpu().numpy().round(2) if self.reg else np.zeros((0, B, len(self.reg_ids)), np.float32),
+                            keep=keep, act=act, bin_ms=self.bin_ms, cloud_hz=self.cloud_hz, regions=np.array(self.reg_ids),
+                            labels=np.array(self.reg_labels), point_region=self.point_region)
+        self.start()
+        return {"t_end": t_end.tolist(), "distance": dist.tolist(), "outcome": outcome.tolist(), "keep": keep.tolist(),
+                "best_after": float(max(best_before, dist.max()))}
+
+
 def parse():
     ap = argparse.ArgumentParser()
     ap.add_argument("--riders", type=int, default=32, help="parallel bikes = brain batch size")
@@ -120,6 +180,7 @@ def parse():
     ap.add_argument("--trace", default="results/ride_trace.json")
     ap.add_argument("--brain-out", default=None, help="replay/open loop: record every rider's whole brain to this npz (brain map)")
     ap.add_argument("--brain-bin-ms", type=float, default=100.0, help="time bin of the brain recording")
+    ap.add_argument("--log-attempts", default=None, help="CEM: record every rider of every generation to this dir (attempts page)")
     ap.add_argument("--quiet", action="store_true")
     return ap.parse_args()
 
@@ -154,7 +215,7 @@ class Ride:
                   f"w_syn {w:.4f} mV", flush=True)
 
     @torch.no_grad()
-    def episode(self, theta=None, oracle=False, seed=0, log=None, verbose=False, collect=None, beta=0.0, brain=None):
+    def episode(self, theta=None, oracle=False, seed=0, log=None, verbose=False, collect=None, beta=0.0, brain=None, attempts=None):
         """collect: dict with lists 'X', 'y' -> appends (readout features / rate_scale, PD rider's torque) for every
         alive rider and step (DAgger labels). beta: probability per rider and step of executing the PD rider's torque.
         brain: a BrainRecorder, fed every neuron's spikes per bin from the end of warm-up on."""
@@ -220,6 +281,8 @@ class Ride:
             s = bikes.state
             if a.offroad > 0:
                 bikes.done |= s[:, 1].abs() > a.offroad
+            if attempts is not None:
+                attempts.step(k, bikes, steer, power)
             al = alive.float()
             upright += al * dt
             fitness += al * dt * (1.0 + 0.02 * s[:, 3] - a.lane_penalty * (s[:, 1] ** 2).clamp(max=a.lane_cap) - 0.002 * steer ** 2)
@@ -328,6 +391,10 @@ def main():
     mu = to_u(mu)
     n_elite = max(2, int(round(a.elite * a.riders)))
     history, best_theta, best_fit = [], to_theta(mu), -np.inf
+    rec, best_dist, attempts = None, 0.0, []
+    if a.log_attempts:
+        (ROOT / a.log_attempts).mkdir(parents=True, exist_ok=True)
+        rec = AttemptRecorder(ride.meta, ride.senses.idx, a.brain_bin_ms, ride.dev, ctrl_ms=a.ctrl_ms)
     t_all = time.time()
     for gen in range(a.generations):
         if a.max_minutes and history and (time.time() - t_all + history[-1]["wall_s"]) / 60 > a.max_minutes:
@@ -337,9 +404,18 @@ def main():
         u_np[0] = mu
         theta_np = to_theta(u_np).astype(np.float32)
         theta = torch.tensor(theta_np, device=ride.dev)
-        r = ride.episode(theta, seed=a.seed + 1000 * (gen + 1), verbose=(gen == 0))
+        if rec is not None:
+            rec.start()
+        r = ride.episode(theta, seed=a.seed + 1000 * (gen + 1), verbose=(gen == 0), brain=rec, attempts=rec)
         fit = r["fitness"]
         order = np.argsort(-fit)
+        if rec is not None:
+            info = rec.save(ROOT / a.log_attempts / f"gen{gen:03d}.npz", theta_np, fit, r["bailed"], best_dist, extra_keep=[int(order[0])])
+            best_dist = info["best_after"]
+            attempts.append(dict(gen=gen, file=f"gen{gen:03d}.npz", **info))
+            (ROOT / a.log_attempts / "attempts.json").write_text(json.dumps({
+                "config": vars(a), "riders": a.riders, "seconds": a.seconds, "decoder_names": dec_names(dec),
+                "regions": rec.reg_ids, "labels": rec.reg_labels, "bin_ms": a.brain_bin_ms, "generations": attempts}, ensure_ascii=False))
         elite = u_np[order[:n_elite]]
         mu = elite.mean(0)
         sigma = np.maximum(elite.std(0), a.sigma_min).astype(np.float32)
