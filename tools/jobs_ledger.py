@@ -52,7 +52,7 @@ NOTES = {
     "36494": "/ride/ page replays with the brain recorded: round-2 decoder and hands-off (ride-page.sbatch)",
     "36521": "learning to ride from a blank decoder, every attempt recorded (ride-attempts.sbatch) -> results/attempts/ (the attempts page)",
     "36533": "rewrite: build brain.npz with brain/connectome.py (identical edges and weights to the old build)",
-    "36535": "rewrite: old engine vs new engine on sugar/bitter, same seed -> identical spikes (logs/rewrite/equiv.json)",
+    "36535": "rewrite: old engine vs new engine on sugar/bitter, same seed -> identical spikes",
     "36538": "rewrite: w_syn scale sweep vs Shiu's FlyWire feeding curve, first grid (superseded by 36539)",
     "36539": "rewrite: w_syn scale sweep vs Shiu's FlyWire feeding curve -> results/calibrate_wsyn.json, scale 0.47",
     "36540": "rewrite: replay of the 3D-page decoder (results/lane/cem_mu.json) on the new engine: 10.0 s upright (old 18.1 s)",
