@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+    return io.open(self, mode, buffering, encoding, errors, newline)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-commit-dc73073-investigation-a94327/429f3982-d7b5-4efc-acd7-32979c1cb3e7/scratchpad/road_trace_new.json'
+replay of results/lane/cem_mu.json: upright 10.03 s (max 20.00,  19% finish)  dist  55.5 m  |y| 2.16 m  v 5.73  bailed 0  pop 56,926 sp/s  233s
+slurmstepd-corruption: error: *** JOB 36540 ON corruption CANCELLED AT 2026-10-04T06:22:43 ***

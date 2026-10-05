@@ -20,10 +20,10 @@ every 10 ms of bike time.
 | Piece | Status |
 |---|---|
 | Neurons, synapses, signs, L/R identity | connectome (Janelia / Google male CNS v1.0) |
-| Neuron model and constants | Shiu et al. 2024, synapse scale 0.45 as in the Fly Bar |
+| Neuron model and constants | Shiu et al. 2024 (`brain/engine.py`); synapse scale 0.47 from `runs/calibrate_wsyn.py` (see [Simulator change](#simulator-change)) |
 | Which sensory neurons carry roll, yaw, lean, wind, handlebar, goal | real cell types (VS/HS cells, halteres, Johnston's organ, front-leg proprioceptors, ORN_DM1); the mapping from bike state to their rates is **modeled** |
 | Which descending neurons mean steer / forward / back / escape | literature (DNa01/02/03, DNb01, DNg100, DNp09, DNg97, MDN, DNp01) |
-| Decoder: DN rates → torque, power, brake | **learned** (71 parameters: 66 L/R steering weights, a bias, 4 pedal/brake terms; cross-entropy method); the connectome is never changed |
+| Decoder: DN rates → torque, power, brake | **learned** (the /ride/ decoder: 84 L/R steering weights on 42 descending and wing-motor neuron types, a lane-filter gain, a bias, 4 pedal/brake terms; cross-entropy method); the connectome is never changed |
 | The bicycle | Whipple–Carvallo linearised model, verified against Meijaard et al. 2007; Tarmac SL9 56 cm geometry, 6.9 kg bike, 70 kg rider (assumed mass distribution) |
 
 "Teaching" here means learning the interface, the way a brain–machine interface decoder is fitted:
@@ -33,6 +33,19 @@ about the bike's lean to steer it. If they do not, no decoder will ride, which i
 The Tarmac with a 70 kg rider is self-stable between 4.7 and 7.7 m/s (17 to 28 km/h): above 17 km/h
 it rides itself, hands off. Riding starts at 4 m/s, below that range, with 15 Nm side gusts, so the
 brain has to do something.
+
+## Simulator change
+
+The screen and the lane-keeping rounds below were run on the earlier simulator, a port of Shiu's model at synapse
+scale 0.45 that missed two Brian2 rules (Poisson-driven neurons have no refractory period; input reaching a
+refractory neuron is dropped). The bike now runs on `brain/engine.py`, which follows those rules, at scale 0.47.
+The rules lower the brain's activity: with the same decoder and the same gusts, 71,000 spikes/s per brain before,
+49,000 on the new simulator at the old scale, 57,000 at 0.47. A decoder fitted to the old dynamics does not carry
+over: the round-2 lane decoder (`results/lane/cem_mu.json`) stays upright 10.0 s of 20 instead of 18.1 s
+(12.1 s at the old scale, so the rules break it, not the scale). The learning-from-blank run was therefore
+repeated on the new simulator with its inputs remade (the probe's lane filter, the riding operating point):
+`ride-relearn.sbatch`, below. The /ride/ pages show that run and its final decoder; the screen and lane-keeping
+numbers in the next sections are the earlier simulator's and were not re-run.
 
 ## What the screen found
 
@@ -47,7 +60,7 @@ neuron's rate with the bike's lean. Two things came out:
   (ExR, PEN, FB neurons) and those DNs, which is the fly's gaze/flight stabilisation pathway. So the
   fly steers the bike with the reflex it uses to stabilise flight. The decoder reads those neurons.
 * A food odour marking the goal (ORN_DM1 at 20 Hz) drives the antennal lobe and mushroom body into
-  saturation (APL at 436 Hz, half a million spikes per second) at the Fly Bar's synapse scale, so
+  saturation (APL at 436 Hz, half a million spikes per second) at synapse scale 0.45, so
   `--goal odor` is off by default. Without it the brain sits at ~35,000 spikes/s and is stable.
 
 The learning starts from a "teacher" fit: ridge regression of the PD rider's torque on the decoder's
@@ -57,8 +70,8 @@ the weights in closed loop, where the fly steers on its own.
 ## Run
 
 ```bash
-python -m tests.test_bike                        # Whipple matrices vs the paper, SL9 stability range
-python -m tests.test_ride                        # bike falls / PD rider holds it; loop on a toy brain
+python -m pytest tests/test_bike.py              # Whipple matrices vs the paper, SL9 stability range
+python -m pytest tests/test_ride.py              # bike falls / PD rider holds it; loop on a toy brain
 python -m runs.ride --oracle                     # PD rider, no brain
 python -m runs.ride --open-loop --riders 8       # brain in the loop, prior decoder (no steering)
 python -m runs.screen --riders 16 --seconds 8    # passenger screen -> results/screen*.{json,parquet,npz}
@@ -148,10 +161,10 @@ sbatch lane-next.sbatch                                       # the whole round,
 sbatch ride-page.sbatch results/lane/cem_mu.json              # 16 x 20 s replays for the /ride/ pages, brain recorded
 ```
 
-## Learning from nothing, every attempt kept (`ride-attempts.sbatch`, the /ride/ page)
+## Learning from nothing, every attempt kept (`ride-relearn.sbatch`, the /ride/ page)
 
 The public page is a learning montage: one rider at a time, attempt after attempt. Its data is one CEM run that
-starts from a *blank* decoder (no steering weights, pedal ~80 W, `results/attempts/init_blank.json`) at road
+starts from a *blank* decoder (no steering weights, pedal ~80 W, `results/relearn/attempts/init_blank.json`) at road
 speed (5.5 m/s, 5 Nm gusts, leaving the road ends a run) with the round-2 fixes (batch centring, bias searched at
 the riding operating point, pedal/brake frozen), 48 riders x 15 s per generation. `--log-attempts DIR` makes
 `runs.ride` keep every rider of every generation (`AttemptRecorder`): bike state, steering, pedalling and the gust
@@ -159,7 +172,7 @@ every 50 ms, each region's mean rate every 100 ms, and the whole brain (the dash
 population mean, the generation's record and its earliest and longest failure. Attempt k = generation k // 48,
 rider k % 48 (the 48 ride in parallel on the GPU; the page shows them one by one).
 
-`export/export_attempts.py` turns `results/attempts/` into `results/attempts_page/` (index.html with the Colnago and
+`export/export_attempts.py` turns `results/relearn/attempts/` into `results/attempts_page/` (index.html with the Colnago and
 a procedural fly rider embedded, plus `data/`: one json per generation, the cloud, and a zlib brain recording per
 recorded attempt); it is incremental, so it can be re-run while the job is still writing. The page's action log
 (climb on, pedal, gust from the left, wobble right corrected, 10 m, new record, fell / off the road) is derived
@@ -167,15 +180,27 @@ from the trace. "Significant" attempts (the first, every new distance record, ea
 its earliest and longest failure, the last) play in full; the rest are flipped through. The timeline at the
 bottom has one bar per attempt and jumps to any of them.
 
-The run (job 36521, 166 min on one A6000): 35 generations, 1,680 attempts. Generation 0: 42 of 48 fall within a
-second (mean 0.9 s on the bike, record 25 m). Generation 10: mean 10.5 s. Generation 34: 29 of 48 ride the full
-15 s, 5 fall, 14 leave the road (mean 12.6 s). 16 distance records, the last one 84.7 m at attempt 1,200. Over all
-attempts: 580 finished, 259 fell, 841 left the road, none bailed. The learned lane gain and the balance weights come
-out of nothing but trial and error on 91 numbers; the connectome is never touched.
+The run (job 36555, 165 min on one A6000): 37 generations, 1,776 attempts. Generation 0: 36 of 48 are down
+within a second (mean 1.0 s on the bike, record 26 m). Generation 10: mean 10.9 s. Generation 36: 35 of 48 ride
+the full 15 s, none falls, 13 leave the road (mean 13.8 s). 20 distance records, the last one 87.5 m at attempt
+1,700. Over all attempts: 836 finished, 162 fell, 778 left the road, none bailed. (An identical run before the
+display regions were redefined, job 36543, ended the same way: 35 of 48 finishing, 885 finished overall; GPU
+summation order makes repeat runs drift apart.) The learned lane gain and the
+balance weights come out of nothing but trial and error on 90 numbers; the connectome is never touched.
+
+The final population mean (`results/relearn/cem_mu.json`), replayed for the 3D page (16 riders x 20 s, seed 7, no
+cut-off), keeps all 16 riders upright for the full 20 s and on the road for 19.2 s on average, 12 of them the whole
+time (the round-2 decoder on the earlier simulator: 11.6 s, 4 of 16). Hands-off, the same brains keep the bike
+upright at 5.4 m/s, but it leaves the road after 5.1 s on average.
+
+The same run on the earlier simulator (job 36521, `ride-attempts.sbatch`): 35 generations, 1,680 attempts, 29 of 48
+finishing in the last generation, 580 finished overall; its recordings are not kept.
 
 ```bash
-sbatch ride-attempts.sbatch                       # ~3 GPU h -> results/attempts/{attempts.json, gen*.npz, cem.json}
-python -m export.export_attempts                  # -> results/attempts_page/ (served as /ride/)
+sbatch ride-relearn.sbatch                        # ~3 GPU h: probe, operating point, then the search -> results/relearn/
+python -m runs.attempts_stats results/relearn/attempts            # the numbers above
+python -m export.export_attempts results/relearn/attempts         # -> results/attempts_page/ (served as /ride/)
+sbatch ride-page.sbatch results/relearn/cem_mu.json results/relearn/probe.json   # replays for /ride/3d etc.
 python -m http.server 8000 --directory results/attempts_page
 ```
 
@@ -199,18 +224,19 @@ are read off the model, and the rider is sized to them.
 ## The brain map in the replay
 
 The left panel of the 3D page shows the followed rider's whole brain while it rides: the same point cloud
-(140,638 neurons with a 3D position) and the same regions as the drinks dashboard (Fly Brain Live), every
+(140,638 neurons with a 3D position) and the same regions as the activity dashboard (Fly Brain Live), every
 100 ms. `--brain-out` makes `runs.ride --replay` record every rider's spikes per bin
 (`results/<name>_brain.npz`, git-ignored, ~0.5 GB uncompressed for 16 riders x 20 s); the exporter picks it
 up next to the trace and embeds the default rider neuron by neuron and every rider's region means (other
 riders are coloured by region). Region means leave out the sensory neurons the bike drives.
 
-The page's run is the round-2 decoder (`ride-page.sbatch results/lane/cem_mu.json`): 11.6 s on the road on
-average and 4 of 16 riders on it for all 20 s; the same brains hands-off, 4.9 s and none
-(`results/ride_pilot_road_trace.json`, the open-loop page, which has its own brain map).
+The page's run is the decoder learned from blank on the current simulator
+(`ride-page.sbatch results/relearn/cem_mu.json results/relearn/probe.json`): 19.2 s on the road on average and 12 of
+16 riders on it for all 20 s; the same brains hands-off, 5.1 s and none (`results/ride_pilot_road_trace.json`, the
+open-loop page, which has its own brain map). On the earlier simulator the round-2 decoder managed 11.6 s and 4 of 16.
 
 ```bash
-python -m runs.ride --replay results/lane/cem_mu.json --center-batch --tau-lane-ms 300 --lane-filter results/probe.json \
+python -m runs.ride --replay results/relearn/cem_mu.json --center-batch --tau-lane-ms 300 --lane-filter results/relearn/probe.json \
     --readout lane --lane hs --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --riders 16 --seconds 20 --seed 7 \
     --trace results/ride_road_trace.json --brain-out results/ride_road_brain.npz
 python -m export.export_ride3d results/ride_road_trace.json results/ride_3d.html

@@ -1,0 +1,7 @@
+== 09:19:00 replay results/relearn/cem_mu.json
+replay of results/relearn/cem_mu.json: upright 20.00 s (max 20.00, 100% finish)  dist 112.7 m  |y| 3.75 m  v 5.80  bailed 0  pop 38,196 sp/s  236s
+brain -> /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain/results/ride_road_brain.npz  (200 bins of 100 ms, 16 riders, 140,638 points)
+== 09:23:06 hands-off
+open loop (prior decoder: no steering, ~70 W): upright 20.00 s (max 20.00, 100% finish)  dist  64.2 m  |y| 42.84 m  v 5.36  bailed 0  pop 33,384 sp/s  236s
+brain -> /home/s/st/stevejobs/flybrain/.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain/results/ride_pilot_road_brain.npz  (200 bins of 100 ms, 16 riders, 140,638 points)
+== done Sun Oct  4 09:27:11 AM PDT 2026
