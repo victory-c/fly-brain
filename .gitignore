@@ -13,7 +13,6 @@ __pycache__/
 
 # demo site build output (site/build.sh)
 site/dist/
-node_modules/
 .vercel/
 
 # sync.sh output (cron)

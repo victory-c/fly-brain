@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # Assemble the static demo site into site/dist (Vercel runs this, see vercel.json).
 #   /            site/index.html
-#   /bar/        Fly Bar web app (fly_brain/app, built with vite)
-#   /classic     Fly Bar single-page version (fly_brain/ui/fly_bar.html)
 #   /dashboard/  Fly Brain Live (fly_brain/dashboard)
 #   /ride/       the fly learns to ride, attempt by attempt (fly_brain/results/attempts_page: index.html + data/)
 #   /ride/3d     16-rider 3D replay of the best decoder, and the other ride_*.html pages
@@ -13,10 +11,6 @@ rm -rf "$OUT"
 mkdir -p "$OUT/dashboard/data" "$OUT/ride"
 
 cp site/index.html "$OUT/"
-
-(cd fly_brain/app && npm ci --no-audit --no-fund && npx vite build --base /bar/ --outDir ../../$OUT/bar --emptyOutDir)
-
-cp fly_brain/ui/fly_bar.html "$OUT/classic.html"
 
 cp fly_brain/dashboard/index.html "$OUT/dashboard/"
 cp fly_brain/dashboard/data/*.json fly_brain/dashboard/data/*.png fly_brain/dashboard/data/*.js "$OUT/dashboard/data/"

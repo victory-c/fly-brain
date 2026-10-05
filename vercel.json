@@ -1,9 +1,30 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "echo 'npm ci runs inside site/build.sh'",
+  "installCommand": "echo 'nothing to install'",
   "buildCommand": "bash site/build.sh",
   "outputDirectory": "site/dist",
   "cleanUrls": true,
-  "redirects": [{ "source": "/dashboard", "destination": "/dashboard/", "permanent": true }]
+  "redirects": [
+    {
+      "source": "/dashboard",
+      "destination": "/dashboard/",
+      "permanent": true
+    },
+    {
+      "source": "/bar/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/bar",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/classic",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
 }

@@ -13,7 +13,7 @@ git add -u
 git ls-files --others --exclude-standard -z | while IFS= read -r -d '' f; do
   case "$f" in
     *.py|*.sh|*.sbatch|*.md|*.json|*.html|*.js|*.ts|*.tsx|*.css|*.txt|*.yml|*.yaml|*.toml|*.npz|*.csv) git add -- "$f" ;;
-    logs/*|fly_brain/results/*|fly_brain/dashboard/data/*|fly_brain/app/public/data/*) git add -- "$f" ;;
+    logs/*|fly_brain/results/*|fly_brain/dashboard/data/*) git add -- "$f" ;;
     *) echo "new file left local (not code or results): $f" ;;
   esac
 done
