@@ -1,4 +1,4 @@
-# Python environments and caches (rebuilt by flybar.sbatch / cuda-venv.sbatch)
+# Python environments and caches (venv-cuda is rebuilt by cuda-venv.sbatch)
 venv/
 venv-cuda/
 .pip-cache/

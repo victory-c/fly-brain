@@ -17,13 +17,7 @@ FIELDS = ["JobID", "JobName", "State", "Start", "Elapsed", "AllocTRES", "WorkDir
 
 NOTES = {
     "36053": "probe: node, GPU, python and torch on the cluster",
-    "36054": "build brain.npz from the connectome + tests.test_sim",
-    "36055": "pilot bar: 4 drinks, 5 trials",
-    "36056": "full bar + hunger + UI/web export -> results/bar.json, hunger_cocktails.json, app/public/data",
-    "36057": "custom drink served with serve.sh",
     "36059": "probe: CPU affinity and torch threads",
-    "36062": "custom drink served with serve.sh",
-    "36064": "Fly Brain Live dashboard data -> dashboard/data",
     "36073": "probe: GPU name and driver",
     "36074": "probe: CUDA version",
     "36075": "build venv-cuda (torch cu121) and check the GPU",
@@ -72,6 +66,8 @@ NOTES = {
     "36626": "rewrite: /ride/ page replays of the relearned decoder and hands-off, brains recorded",
     "36627": "rewrite: dashboard export, all tests on GPU, graph engine benchmark",
 }
+
+LEFT_OUT = {"36054", "36055", "36056", "36057", "36062", "36064"}  # Fly Bar jobs, not part of this repo
 
 
 def sacct(since):
@@ -126,7 +122,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--since", default="2026-09-26")
     a = ap.parse_args()
-    jobs = [j for j in sacct(a.since) if j["WorkDir"].startswith(str(ROOT))]
+    jobs = [j for j in sacct(a.since) if j["WorkDir"].startswith(str(ROOT)) and j["JobID"] not in LEFT_OUT]
     lines = [
         "# Jobs",
         "",

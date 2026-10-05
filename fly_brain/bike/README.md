@@ -214,7 +214,7 @@ exists (a sweep of Sketchfab, Objaverse, GitHub, print sites, marketplaces, game
 brand configurators found only paid ones, $20-95 on CGTrader, TurboSquid and 3DModels.org).
 
 It is Colnago's copyrighted marketing asset. The GLB itself is kept out of git (`assets/*.glb` is
-ignored), but the 3D replay pages embed it, and those pages are public on flybrain-play.vercel.app; if
+ignored), but the 3D replay pages embed it, and those pages are public on fly-brain.vercel.app; if
 that has to stop, rebuild them with `--bike none` (procedural bike). The page re-parents the model's parts onto
 pivots: fork, integrated bar/stem and front wheel steer about the head-tube axis (72 deg, which puts
 the front hub 48.6 mm, the fork rake, ahead of the axis through the headset cap); both wheels with
