@@ -1,0 +1,444 @@
+<meta charset="utf-8">
+<title>Fly Brain Live</title>
+<meta name="description" content="Replays of all 166,700 neurons in a male fly's nervous system while his taste or antennal neurons are driven, after Shiu et al. 2024">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f3f1ec; --panel:#ffffff; --panel2:#ebe8e1; --line:#d9d5cc; --ink:#1c1b18; --ink2:#5f5b53; --mute:#8b867c;
+  --accent:#d8501f; --hot:#ff6a2b; --warm:#f2a93b; --sweet:#d99a1d; --bitter:#6f5bd6; --water:#2f7fc5; --ok:#2b8a5b;
+  --stage:#0d1017; --focus:#2f7fc5;
+  --font:"Manrope","PingFang SC","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#15171c; --panel:#1d2027; --panel2:#262a33; --line:#333843; --ink:#eeeae2; --ink2:#b6b0a4; --mute:#7f7a70;
+    --accent:#e8602a; --hot:#e8602a; --warm:#e0a848; --sweet:#bf8a1c; --bitter:#8a78e0; --water:#4a8fd0; --ok:#4fbf83;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#15171c; --panel:#1d2027; --panel2:#262a33; --line:#333843; --ink:#eeeae2; --ink2:#b6b0a4; --mute:#7f7a70;
+  --accent:#e8602a; --hot:#e8602a; --warm:#e0a848; --sweet:#bf8a1c; --bitter:#8a78e0; --water:#4a8fd0; --ok:#4fbf83;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.45;padding-inline:16px;padding-block:12px 24px}
+h1{font-size:20px;margin:0;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:12px;margin:0 0 8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-bottom:12px}
+.top .sub{color:var(--ink2);font-size:13px}
+.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-left:auto}
+select,button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+button{cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--panel)}
+.lang button{border:0;border-radius:0;background:transparent;color:var(--ink2);padding:6px 11px;font-size:12px;font-weight:700;line-height:1.2}
+.lang button+button{border-left:1px solid var(--line)}
+.lang button.on{background:var(--ink);color:var(--bg)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:14px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.stage{position:relative;background:var(--stage);border-radius:10px;overflow:hidden;min-height:420px;aspect-ratio:4/3;max-width:100%}
+.stage canvas{display:block;width:100%;height:100%}
+.stage .hud{position:absolute;left:12px;top:10px;color:#dfe3ea;font-size:12px;pointer-events:none;text-shadow:0 1px 2px #000}
+.stage .hud b{font-family:var(--mono);font-weight:500}
+.stage .legend{position:absolute;right:12px;bottom:10px;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:3px 10px;max-width:calc(100% - 210px);color:#c9ced8;font-size:11px;pointer-events:none}
+.stage .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+.stage .hint{position:absolute;left:12px;bottom:10px;color:#8d94a3;font-size:11px;pointer-events:none}
+.stage .loading{position:absolute;inset:0;display:grid;place-items:center;color:#c9ced8;font-size:13px;background:rgba(13,16,23,.6)}
+.side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.fly{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center}
+.fly svg{width:120px;height:120px;display:block}
+.verdict{font-size:22px;font-weight:800;line-height:1.2}
+.verdict small{display:block;font-size:12px;font-weight:500;color:var(--ink2);margin-top:2px}
+.chip{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.03em}
+.chip.no{background:color-mix(in srgb,var(--bitter) 18%,transparent);color:var(--bitter)}
+.chip.maybe{background:color-mix(in srgb,var(--warm) 25%,transparent);color:var(--ink)}
+.chip.yes{background:color-mix(in srgb,var(--ok) 20%,transparent);color:var(--ok)}
+.chip.wait{background:var(--panel2);color:var(--ink2)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:12px;color:var(--ink2);margin-top:6px}
+.kv b{color:var(--ink);font-weight:600}
+.bars{display:grid;grid-template-columns:auto 1fr auto;gap:5px 8px;align-items:center;font-size:12px}
+.bars .lab{color:var(--ink2);white-space:nowrap}
+.bars .bar{height:8px;background:var(--panel2);border-radius:4px;overflow:hidden}
+.bars .bar i{display:block;height:100%;width:0;border-radius:4px;background:var(--hot);transition:width .08s linear}
+.bars .bar i.sweet{background:var(--sweet)} .bars .bar i.bitter{background:var(--bitter)} .bars .bar i.water{background:var(--water)}
+.bars .val{color:var(--ink2);text-align:right;min-width:52px}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart text{font-family:var(--mono);font-size:10px;fill:var(--ink2)}
+.chart .grid line{stroke:var(--line);stroke-width:1}
+.chart .axis{stroke:var(--line)}
+.chart .s1{fill:none;stroke:var(--hot);stroke-width:2;stroke-linejoin:round}
+.chart .s2{fill:none;stroke:var(--hot);stroke-width:2;stroke-dasharray:3 3;opacity:.7}
+.chart .s3{fill:none;stroke:var(--bitter);stroke-width:2}
+.chart .cursor{stroke:var(--ink);stroke-width:1;opacity:.6}
+.chart .fill{fill:var(--hot);opacity:.12}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--ink2);margin-top:4px}
+.legend i{display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:5px;background:var(--hot)}
+.legend i.dash{background:repeating-linear-gradient(90deg,var(--hot) 0 3px,transparent 3px 6px)}
+.legend i.bit{background:var(--bitter)}
+.timeline{display:flex;align-items:center;gap:10px;margin-top:12px}
+.timeline input[type=range]{flex:1;accent-color:var(--accent)}
+.timeline .t{min-width:110px;text-align:right}
+.tip{position:fixed;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-size:11px;color:var(--ink);box-shadow:0 4px 14px rgba(0,0,0,.15);display:none;z-index:9}
+.foot{margin-top:14px;color:var(--mute);font-size:11px;max-width:70ch}
+.foot a{color:var(--ink2)}
+@media (prefers-reduced-motion: reduce){.bars .bar i{transition:none}}
+</style>
+
+<div class="top">
+  <div>
+    <h1>Fly Brain Live</h1>
+    <div class="sub" data-i18n="sub"></div>
+  </div>
+  <div class="controls">
+    <label for="exp" class="sub" data-i18n="exp"></label>
+    <select id="exp"></select>
+    <button id="play" class="primary" aria-label="播放或暂停" data-i18n="pause" data-i18n-aria="playAria">⏸ 暂停</button>
+    <label class="sub" for="speed" data-i18n="slow">慢放</label>
+    <select id="speed"><option value="4">4×</option><option value="8" selected>8×</option><option value="16">16×</option></select>
+    <select id="colorMode" aria-label="点云着色" data-i18n-aria="colorMode"><option value="act" data-i18n="colAct">按活动着色</option><option value="region" data-i18n="colRegion">按脑区着色</option></select>
+    <div class="lang" id="langSwitch" role="group" aria-label="语言" data-i18n-aria="langGroup"><button type="button" data-lang="en" lang="en">EN</button><button type="button" data-lang="zh" lang="zh-CN">中文</button></div>
+  </div>
+</div>
+
+<div class="grid">
+  <div>
+    <div class="stage" id="stage">
+      <canvas id="gl"></canvas>
+      <div class="hud"><div id="hudName" data-i18n="loading">加载中</div><div>t = <b id="hudT">0 ms</b> · <span data-i18n="hudLit">活跃神经元</span> <b id="hudLit">0</b> · <span data-i18n="hudPop">全脑</span> <b id="hudPop">0</b> <span data-i18n="hudUnit">k spikes/s</span></div></div>
+      <div class="legend" id="stageLegend"></div>
+      <div class="hint" data-i18n="hint">拖动旋转 · 滚轮缩放</div>
+      <div class="loading" id="loading" data-i18n="loadCoords">正在加载神经元坐标…</div>
+    </div>
+    <div class="timeline">
+      <input type="range" id="scrub" min="0" max="1000" value="0" step="1" aria-label="时间" data-i18n-aria="time">
+      <div class="t num" id="tlabel">0 / 1000 ms</div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h2 data-i18n="tracesH">放电轨迹</h2>
+      <svg class="chart" id="traces" viewBox="0 0 640 170" role="img" aria-label="MN9 与食道下区 SEZ 的放电率随时间变化" data-i18n-aria="tracesAria"></svg>
+      <div class="legend"><span><i></i><span data-i18n="lgMn9L">MN9_L 伸口器运动神经元</span></span><span><i class="dash"></i>MN9_R</span><span><i class="bit"></i><span data-i18n="lgSez">食道下区 SEZ 平均</span></span></div>
+    </div>
+  </div>
+
+  <div class="side">
+    <div class="card">
+      <h2 data-i18n="flyH">果蝇在做什么</h2>
+      <div class="fly">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <g id="flyBody" transform="translate(60,54)">
+            <ellipse cx="0" cy="18" rx="16" ry="22" fill="#4a3b2c" stroke="#2c2218" stroke-width="1.5"/>
+            <path d="M-14 8 q-30 10 -34 42 q22 -14 36 -26z" fill="rgba(180,200,230,.35)" stroke="rgba(120,140,170,.7)" stroke-width="1"/>
+            <path d="M14 8 q30 10 34 42 q-22 -14 -36 -26z" fill="rgba(180,200,230,.35)" stroke="rgba(120,140,170,.7)" stroke-width="1"/>
+            <ellipse cx="0" cy="-4" rx="12" ry="11" fill="#5a4838" stroke="#2c2218" stroke-width="1.5"/>
+            <circle cx="-9" cy="-7" r="5.5" fill="#c8102e"/><circle cx="9" cy="-7" r="5.5" fill="#c8102e"/>
+            <circle cx="0" cy="-10" r="12" fill="none" stroke="var(--hot)" stroke-width="1.5" opacity="0" id="glow"/>
+            <g id="proboscis"><rect x="-2.5" y="4" width="5" height="4" rx="2" fill="#2c2218"/><ellipse cx="0" cy="8" rx="4" ry="2" fill="#2c2218"/></g>
+            <g id="legs" stroke="#2c2218" stroke-width="1.5" fill="none">
+              <path d="M-10 4 l-12 -6 l-6 6"/><path d="M10 4 l12 -6 l6 6"/>
+              <path d="M-14 18 l-14 0 l-4 8"/><path d="M14 18 l14 0 l4 8"/>
+              <path d="M-12 32 l-10 10 l-2 8"/><path d="M12 32 l10 10 l2 8"/>
+            </g>
+          </g>
+          <rect x="30" y="98" width="60" height="16" rx="3" fill="var(--panel2)"/>
+          <rect x="33" y="101" width="54" height="10" rx="2" id="stimFill" fill="var(--sweet)" opacity=".8"/>
+        </svg>
+        <div>
+          <div class="verdict" id="verdict">…<small id="verdictSub" data-i18n="waiting">等待数据</small></div>
+          <div style="margin-top:6px"><span class="chip wait" id="chip" data-i18n="ready">准备</span></div>
+          <div class="kv">
+            <span data-i18n="mn9Now">MN9_L 此刻</span><b class="num" id="mn9Now">0 Hz</b>
+            <span data-i18n="mn9Avg">MN9_L 全程</span><b class="num" id="mn9Avg">0 Hz</b>
+            <span data-i18n="nDriven"></span><b class="num" id="nDriven">0</b>
+          </div>
+          <div class="sub" id="finding" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="drivenH"></h2>
+      <div class="bars" id="drivenBars"></div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="regionH">各脑区此刻的平均放电</h2>
+      <div class="bars" id="regionBars"></div>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="topH">最活跃的神经元类型</h2>
+      <div id="topTypes" class="num" style="font-size:12px;color:var(--ink2);line-height:1.7"></div>
+    </div>
+  </div>
+</div>
+
+<div class="foot" data-i18n-html="foot"></div>
+<div class="tip" id="tip"></div>
+
+<script>
+// ---------- language: EN / 中文 (shared spec: ?lang= > localStorage 'flybrain.lang' > browser) ----------
+const I18N = {
+  en: {
+    title: 'Fly Brain Live',
+    desc: "Replays of all 166,700 neurons in a male fly's nervous system while his taste or antennal neurons are driven, after Shiu et al. 2024",
+    sub: "1-second replays of a male fly's whole central nervous system (MaleCNS v1.0, 166,700 neurons) while one group of sensory neurons is driven",
+    exp: 'Experiment', pause: '⏸ Pause', play: '▶ Play', playAria: 'Play or pause', slow: 'Slow-mo',
+    colorMode: 'Point cloud colouring', colAct: 'Colour by activity', colRegion: 'Colour by brain region', langGroup: 'Language',
+    loading: 'Loading', hudLit: 'active neurons', hudPop: 'whole brain', hudUnit: 'k spikes/s', hint: 'Drag to rotate · scroll to zoom',
+    loadCoords: 'Loading neuron coordinates…', loadFirst: 'Loading the first experiment…', loadExp: n => `Loading ${n}…`,
+    time: 'Time', tracesH: 'Firing rates', tracesAria: 'Firing rates of MN9 and the SEZ over time',
+    lgMn9L: 'MN9_L proboscis-extension motor neuron', lgSez: 'SEZ mean', hzAxis: 'Hz (SEZ ×4)', sezMean: 'SEZ mean',
+    flyH: 'What the fly is doing', waiting: 'Waiting for data', ready: 'Ready',
+    mn9Now: 'MN9_L now', mn9Avg: 'MN9_L average', nDriven: 'Neurons driven',
+    drivenH: 'Driven neurons, firing now', regionH: 'Mean firing per brain region, now', topH: 'Most active neuron types',
+    onlyDriven: '(only the driven neurons are firing)', shiu: f => `Shiu et al. 2024 (FlyWire): ${f}.`, here: v => `Here (male CNS): MN9_L ${v.toFixed(0)} Hz.`,
+    g_sugar: 'Sugar GRNs', g_water: 'Water GRNs', g_bitter: 'Bitter GRNs', g_ir94e: 'Ir94e GRNs', g_jo_ce: 'JO-CE (antenna)', g_jo_f: 'JO-F (antenna)', g_jo_dm: 'JO-D/m (antenna)',
+    v_touch: 'Stimulation starts', s_touch: 'The driven neurons fire and the signal spreads into the brain', c_touch: 'Starting',
+    v_drink: 'Proboscis out', s_drink: 'MN9 motor neurons fire steadily: the proboscis extends, as for feeding', c_drink: 'Feeding',
+    v_twitch: 'Proboscis twitches', s_twitch: 'MN9 fires now and then, not enough for a full extension', c_twitch: 'Weak',
+    v_refuse: 'Proboscis stays in', s_refuse: 'The aversive input holds the feeding pathway and MN9 down', c_refuse: 'Suppressed',
+    v_bored: 'Proboscis stays in', s_bored: 'This input does not reach MN9', c_bored: 'No feeding',
+    foot: 'Model: the leaky integrate-and-fire network of Shiu et al. 2024, re-implemented in PyTorch (checked spike for spike against their Brian2 code) and run on the MaleCNS v1.0 connectome released by Janelia / Google Research in 2026, with the synaptic weight scaled to reproduce their FlyWire feeding curve. Each experiment drives one or two of their neuron groups (taste or antennal neurons, carried over to the male CNS by cell type) with Poisson input; mean of 8 trials, 50 ms bins. The point cloud shows the 140,638 neurons that have soma coordinates, with brightness showing firing rate (capped at 40 Hz). Code: <a href="https://github.com/victory-c/flybrain-play">victory-c/flybrain-play</a>.'
+  },
+  zh: {
+    title: 'Fly Brain Live · 果蝇全脑实况',
+    desc: '驱动果蝇味觉或触角神经元时全脑 166,700 个神经元的活动回放（按 Shiu et al. 2024 的实验）',
+    sub: '雄性果蝇全中枢神经系统（MaleCNS v1.0，166,700 个神经元）在一组感觉神经元被驱动时的 1 秒回放',
+    exp: '实验', pause: '⏸ 暂停', play: '▶ 播放', playAria: '播放或暂停', slow: '慢放',
+    colorMode: '点云着色', colAct: '按活动着色', colRegion: '按脑区着色', langGroup: '语言',
+    loading: '加载中', hudLit: '活跃神经元', hudPop: '全脑', hudUnit: '千次放电/秒', hint: '拖动旋转 · 滚轮缩放',
+    loadCoords: '正在加载神经元坐标…', loadFirst: '正在加载第一个实验…', loadExp: n => `正在加载 ${n}…`,
+    time: '时间', tracesH: '放电轨迹', tracesAria: 'MN9 与食道下区 SEZ 的放电率随时间变化',
+    lgMn9L: 'MN9_L 伸口器运动神经元', lgSez: '食道下区 SEZ 平均', hzAxis: 'Hz（SEZ ×4）', sezMean: 'SEZ 平均',
+    flyH: '果蝇在做什么', waiting: '等待数据', ready: '准备',
+    mn9Now: 'MN9_L 此刻', mn9Avg: 'MN9_L 全程', nDriven: '被驱动的神经元',
+    drivenH: '被驱动的神经元此刻的放电', regionH: '各脑区此刻的平均放电', topH: '最活跃的神经元类型',
+    onlyDriven: '（只有被驱动的神经元在放电）', shiu: f => `Shiu et al. 2024（FlyWire）：${f}。`, here: v => `这里（雄性 CNS）：MN9_L ${v.toFixed(0)} Hz。`,
+    g_sugar: '糖味 GRN', g_water: '水 GRN', g_bitter: '苦味 GRN', g_ir94e: 'Ir94e GRN', g_jo_ce: 'JO-CE（触角）', g_jo_f: 'JO-F（触角）', g_jo_dm: 'JO-D/m（触角）',
+    v_touch: '刺激开始', s_touch: '被驱动的神经元开始放电，信号向脑内扩散', c_touch: '开始',
+    v_drink: '伸出口器', s_drink: 'MN9 运动神经元持续放电，口器像进食一样伸出', c_drink: '进食',
+    v_twitch: '口器抽动', s_twitch: 'MN9 零星放电，不足以完全伸出', c_twitch: '偏弱',
+    v_refuse: '口器缩着', s_refuse: '厌恶性输入压住了摄食通路，MN9 沉默', c_refuse: '被抑制',
+    v_bored: '口器缩着', s_bored: '这组输入到不了 MN9', c_bored: '不进食',
+    foot: '模型：Shiu et al. 2024 的漏积分放电网络，用 PyTorch 重新实现（与他们的 Brian2 代码逐个脉冲核对过），跑在 Janelia / Google Research 2026 年发布的 MaleCNS v1.0 接线图上，突触权重按能复现他们 FlyWire 摄食曲线的比例缩放。每个实验用泊松输入驱动他们定义的一到两组神经元（味觉或触角神经元，按细胞类型对应到雄性 CNS），8 次试验取平均，50 ms 分箱。点云是 140,638 个有胞体坐标的神经元，亮度是放电率（40 Hz 封顶）。代码：<a href="https://github.com/victory-c/flybrain-play">victory-c/flybrain-play</a>。'
+  }
+};
+// data files carry English names and findings; Chinese ones live here
+const REGION_ZH = {gustatory:'味觉神经元', sez:'食道下区（SEZ）', olfactory:'嗅觉系统', mushroom_body:'蘑菇体', central_complex:'中央复合体', visual:'视叶与视觉神经元', somatosensory:'躯体感觉神经元', descending:'下行神经元', vnc:'腹神经索', motor:'运动与传出神经元', other:'中央脑其他'};
+const EXP_ZH = {sugar:'糖味神经元', sugar_weak:'糖味，弱（40 Hz）', water:'水味神经元', sugar_water:'糖 + 水', bitter:'苦味神经元',
+  sugar_bitter:'糖 + 苦', ir94e:'Ir94e 味觉神经元', sugar_ir94e:'糖 + Ir94e', jo_ce:'触角：JO-CE 神经元', jo_f:'触角：JO-F 神经元'};
+const FINDING_ZH = {sugar:'只驱动糖味 GRN 就能让 MN9 放电，口器伸出', sugar_weak:'糖味输入低于约 50 Hz 时 MN9 几乎不反应',
+  water:'水味 GRN 也能驱动 MN9，走的部分是另一条通路', sugar_water:'两种促进进食的输入叠加', bitter:'只有苦味 GRN 时 MN9 不动',
+  sugar_bitter:'苦味输入压制糖引起的进食', ir94e:'只有 Ir94e GRN 时 MN9 不动', sugar_ir94e:'Ir94e 输入轻度压制进食',
+  jo_ce:'Johnston 器 C/E 神经元启动触角梳理', jo_f:'Johnston 器 F 神经元，也与梳理有关'};
+let LANG = (function(){
+  let l = null;
+  try { const q = new URLSearchParams(location.search).get('lang'); if (q==='en' || q==='zh') { l = q; try { localStorage.setItem('flybrain.lang', q); } catch(e){} } } catch(e){}
+  if (!l) { try { const v = localStorage.getItem('flybrain.lang'); if (v==='en' || v==='zh') l = v; } catch(e){} }
+  return l || (/^zh/i.test(navigator.language || '') ? 'zh' : 'en');
+})();
+const tr = (k, ...a) => { const v = I18N[LANG][k] ?? I18N.en[k] ?? k; return typeof v === 'function' ? v(...a) : v; };
+const langListeners = [];
+function applyLang(){
+  document.documentElement.lang = LANG==='zh' ? 'zh-CN' : 'en';
+  document.title = tr('title');
+  const md = document.querySelector('meta[name="description"]'); if (md) md.setAttribute('content', tr('desc'));
+  document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = tr(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-html]').forEach(el => el.innerHTML = tr(el.dataset.i18nHtml));
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label', tr(el.dataset.i18nAria)));
+  document.querySelectorAll('#langSwitch button').forEach(b => { const on = b.dataset.lang===LANG; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+  langListeners.forEach(f => f());
+}
+function setLang(l){
+  if (!I18N[l] || l===LANG) return;
+  LANG = l; try { localStorage.setItem('flybrain.lang', l); } catch(e){}
+  applyLang();
+}
+document.querySelectorAll('#langSwitch button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+applyLang();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="data/brain.js"></script>
+<script>
+(async function(){
+  const $ = s => document.querySelector(s);
+  const REGION_COLORS = { // point cloud region tint (dark stage only, so literal colours are fine)
+    gustatory:[1.0,.55,.2], sez:[1.0,.35,.25], olfactory:[.4,.85,.6], mushroom_body:[.85,.55,1.0], central_complex:[.4,.7,1.0],
+    visual:[.35,.45,.6], somatosensory:[.8,.8,.4], descending:[1.0,.8,.3], vnc:[.5,.75,.75], motor:[1.0,.3,.5], other:[.55,.6,.7]};
+  const REST=[0.07,0.09,0.15], HOT=[1.0,0.55,0.12], PEAK=[1.0,0.97,0.85];
+
+  // ---------- data ----------
+  const index = await (await fetch('data/index.json')).json();
+  const nP = index.points, nB = index.bins, binMs = index.binMs, T = nB*binMs;
+  const b64 = s => { const bin=atob(s), out=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) out[i]=bin.charCodeAt(i); return out; };
+  const xyz = new Float32Array(b64(window.FLY_XYZ).buffer);
+  const pReg = b64(window.FLY_REGION);
+  const PW = index.png.width, PH = index.png.rowsPerBin;
+  function loadActivity(file){ return new Promise((res, rej)=>{ const im=new Image(); im.onload=()=>{
+      const c=document.createElement('canvas'); c.width=PW; c.height=PH*nB; const g=c.getContext('2d',{willReadFrequently:true}); g.drawImage(im,0,0);
+      const px=g.getImageData(0,0,PW,PH*nB).data, act=new Uint8Array(nB*nP);
+      for(let b=0;b<nB;b++){ const src=b*PH*PW, dst=b*nP; for(let p=0;p<nP;p++) act[dst+p]=px[(src+p)*4]; }
+      res(act); }; im.onerror=rej; im.src='data/'+file; }); }
+  const regionIds = index.regions.map(r=>r.id);
+  const regionName = id => (LANG==='zh' && REGION_ZH[id]) || (index.regions.find(r=>r.id===id)||{}).label || id;
+  const expName = id => (LANG==='zh' && EXP_ZH[id]) || (index.experiments.find(d=>d.id===id)||{}).name || id;
+  const cache = {};
+  async function loadExp(id){
+    if (cache[id]) return cache[id];
+    const [meta, buf] = await Promise.all([
+      fetch(`data/${id}.json`).then(r=>r.json()),
+      loadActivity(index.experiments.find(d=>d.id===id).png)]);
+    return cache[id] = {meta, act:buf};
+  }
+
+  // ---------- three.js stage ----------
+  const stage=$('#stage'), canvas=$('#gl');
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:false, alpha:false});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0d1017);
+  const camera = new THREE.PerspectiveCamera(38, 4/3, 0.05, 20);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(xyz,3));
+  const colors = new Float32Array(nP*3); geo.setAttribute('color', new THREE.BufferAttribute(colors,3));
+  const mat = new THREE.PointsMaterial({size:0.009, vertexColors:true, transparent:true, opacity:0.85, blending:THREE.AdditiveBlending, depthWrite:false, sizeAttenuation:true});
+  const points = new THREE.Points(geo, mat); scene.add(points);
+  // orbit: the brain's long axis is x; look at it from front-ish
+  let rotY=0.6, rotX=0.25, dist=2.6, dragging=false, px=0, py=0;
+  function placeCamera(){
+    camera.position.set(dist*Math.sin(rotY)*Math.cos(rotX), dist*Math.sin(rotX), dist*Math.cos(rotY)*Math.cos(rotX));
+    camera.lookAt(0,0,0);
+  }
+  canvas.addEventListener('pointerdown', e=>{dragging=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture(e.pointerId)});
+  canvas.addEventListener('pointermove', e=>{ if(!dragging) return; rotY+=(e.clientX-px)*0.006; rotX=Math.max(-1.4,Math.min(1.4,rotX+(e.clientY-py)*0.006)); px=e.clientX;py=e.clientY; });
+  canvas.addEventListener('pointerup', ()=>dragging=false);
+  canvas.addEventListener('wheel', e=>{e.preventDefault(); dist=Math.max(1.2,Math.min(6,dist*(1+e.deltaY*0.001)));},{passive:false});
+  function resize(){ const w=stage.clientWidth, h=stage.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+  new ResizeObserver(resize).observe(stage); resize();
+  const renderLegend = ()=>{ $('#stageLegend').innerHTML = ['gustatory','sez','mushroom_body','central_complex','visual','vnc'].map(r=>{const c=REGION_COLORS[r];return `<span><i style="background:rgb(${c.map(v=>Math.round(v*255)).join(',')})"></i>${regionName(r)}</span>`}).join(''); };
+  let loadingKey=null, loadingArg=null;
+  const setLoading = (k,arg)=>{ loadingKey=k; loadingArg=arg; $('#loading').textContent=tr(k, expName(arg)); };
+  setLoading('loadFirst');
+
+  // ---------- ui bits ----------
+  const sel=$('#exp');
+  index.experiments.forEach(d=>{const o=document.createElement('option');o.value=d.id;o.textContent=expName(d.id);sel.appendChild(o)});
+  const GROUP_CLASS = {sugar:'sweet', bitter:'bitter', water:'water'};
+  const drivenBars=$('#drivenBars'), drivenMax=200; // Hz for a full bar
+  const regionBars=$('#regionBars'); regionBars.innerHTML = index.regions.filter(r=>r.id!=='gustatory').map(r=>`<span class="lab" id="rl_${r.id}"></span><div class="bar"><i id="rb_${r.id}"></i></div><span class="val num" id="rv_${r.id}"></span>`).join('');
+  const regionMax = 8; // Hz for a full bar
+
+  // ---------- traces chart ----------
+  const svg=$('#traces'), W=640, H=170, L=36, R=10, TP=16, BT=22;
+  const xOf = t => L + (W-L-R)*t/T;
+  function drawTraces(m){
+    const yMax = Math.max(20, ...m.mn9.L, ...m.mn9.R, ...m.regions.sez.map(v=>v*4))*1.1;
+    const yOf = v => TP + (H-TP-BT)*(1-v/yMax);
+    const path = (arr,scale=1)=>arr.map((v,i)=>`${i?'L':'M'}${xOf((i+.5)*binMs).toFixed(1)} ${yOf(v*scale).toFixed(1)}`).join(' ');
+    // y ticks: a round step with at most 4 intervals, never above yMax (so no label lands outside the plot)
+    const step=[5,10,20,25,50,100,200,500,1000].find(s=>yMax/s<=4)||Math.ceil(yMax/4), ticks=[0,250,500,750,1000], yt=[];
+    for(let v=0; v<=yMax; v+=step) yt.push(v);
+    svg.innerHTML = `<g class="grid">${yt.map(v=>`<line x1="${L}" x2="${W-R}" y1="${yOf(v)}" y2="${yOf(v)}"/>`).join('')}</g>
+      <line class="axis" x1="${L}" x2="${W-R}" y1="${yOf(0)}" y2="${yOf(0)}"/>
+      ${yt.map(v=>`<text x="${L-6}" y="${yOf(v)+3}" text-anchor="end">${v}</text>`).join('')}
+      ${ticks.map(t=>`<text x="${xOf(t)}" y="${H-6}" text-anchor="middle">${t} ms</text>`).join('')}
+      <text x="${L}" y="${TP-6}" font-size="9">${tr('hzAxis')}</text>
+      <path class="fill" d="${path(m.mn9.L)} L${xOf(T)} ${yOf(0)} L${xOf(0)} ${yOf(0)} Z"/>
+      <path class="s3" d="${path(m.regions.sez,4)}"/>
+      <path class="s2" d="${path(m.mn9.R)}"/>
+      <path class="s1" d="${path(m.mn9.L)}"/>
+      <line class="cursor" id="cursor" x1="${xOf(0)}" x2="${xOf(0)}" y1="${TP}" y2="${yOf(0)}"/>
+      <rect id="hit" x="${L}" y="0" width="${W-L-R}" height="${H}" fill="transparent"/>`;
+    const tip=$('#tip');
+    $('#hit').addEventListener('pointermove', e=>{
+      const r=svg.getBoundingClientRect(); const t=Math.max(0,Math.min(T-1,(e.clientX-r.left)/r.width*W)); const tt=(t-L)/(W-L-R)*T; if(tt<0) return;
+      const i=Math.min(nB-1,Math.floor(tt/binMs));
+      tip.style.display='block'; tip.style.left=(e.clientX+12)+'px'; tip.style.top=(e.clientY-10)+'px';
+      tip.innerHTML=`<b class="num">${i*binMs}–${(i+1)*binMs} ms</b><br>MN9_L <span class="num">${m.mn9.L[i]} Hz</span> · MN9_R <span class="num">${m.mn9.R[i]} Hz</span><br>${tr('sezMean')} <span class="num">${m.regions.sez[i]} Hz</span>`;
+    });
+    $('#hit').addEventListener('pointerleave', ()=>tip.style.display='none');
+    $('#hit').addEventListener('click', e=>{const r=svg.getBoundingClientRect(); const tt=((e.clientX-r.left)/r.width*W-L)/(W-L-R)*T; if(tt>=0){tNow=Math.min(T-1,tt); paint();}});
+  }
+
+  // ---------- playback ----------
+  let cur=null, tNow=0, playing=true, last=performance.now(), colorMode='act';
+  $('#play').addEventListener('click', ()=>{playing=!playing; $('#play').textContent=tr(playing?'pause':'play'); last=performance.now();});
+  $('#speed').addEventListener('change', ()=>last=performance.now());
+  $('#colorMode').addEventListener('change', e=>{colorMode=e.target.value});
+  $('#scrub').addEventListener('input', e=>{tNow=+e.target.value; paint();});
+  sel.addEventListener('change', async ()=>{ $('#loading').style.display='grid'; setLoading('loadExp', sel.value); cur=await loadExp(sel.value); tNow=0; setupExp(); $('#loading').style.display='none'; });
+
+  function setupExp(){
+    const m=cur.meta, groups=Object.keys(m.drive); $('#hudName').textContent=expName(m.id);
+    drivenBars.innerHTML = groups.map(g=>`<span class="lab">${tr('g_'+g)} · ${m.drive[g]} Hz</span><div class="bar"><i id="db_${g}" class="${GROUP_CLASS[g]||''}"></i></div><span class="val num" id="dv_${g}"></span>`).join('');
+    $('#nDriven').textContent=m.inputNeurons.toLocaleString();
+    $('#mn9Avg').textContent=m.mn9Hz.toFixed(1)+' Hz';
+    $('#finding').textContent=tr('shiu', (LANG==='zh' && FINDING_ZH[m.id]) || m.finding)+' '+tr('here', m.mn9Hz);
+    $('#topTypes').innerHTML = m.topTypes.length? m.topTypes.map(t=>`${t.type} <span style="color:var(--mute)">×${t.n}</span>`).join('<br>') : tr('onlyDriven');
+    $('#stimFill').setAttribute('fill', m.drive.bitter?'var(--bitter)':m.drive.sugar?'var(--sweet)':m.drive.water?'var(--water)':'var(--hot)');
+    drawTraces(m);
+    paint();
+  }
+
+  function lerpBin(arr, t){ const f=t/binMs-0.5; const i=Math.max(0,Math.min(nB-1,Math.floor(f))); const j=Math.min(nB-1,i+1); const a=Math.max(0,Math.min(1,f-i)); return arr[i]*(1-a)+arr[j]*a; }
+
+  function paint(){
+    if(!cur) return;
+    const m=cur.meta, act=cur.act;
+    const f=tNow/binMs-0.5, i=Math.max(0,Math.min(nB-1,Math.floor(f))), j=Math.min(nB-1,i+1), a=Math.max(0,Math.min(1,f-i));
+    const o1=i*nP, o2=j*nP;
+    for(let p=0,k=0;p<nP;p++,k+=3){
+      const v=(act[o1+p]*(1-a)+act[o2+p]*a)/255;
+      if(colorMode==='region'){ const c=REGION_COLORS[regionIds[pReg[p]]]; const b=0.12+0.88*v; colors[k]=c[0]*b; colors[k+1]=c[1]*b; colors[k+2]=c[2]*b; }
+      else { const g=v<0.5? v*2 : 1, h=v<0.5?0:(v-0.5)*2;
+        colors[k]=REST[0]+(HOT[0]-REST[0])*g+(PEAK[0]-HOT[0])*h; colors[k+1]=REST[1]+(HOT[1]-REST[1])*g+(PEAK[1]-HOT[1])*h; colors[k+2]=REST[2]+(HOT[2]-REST[2])*g+(PEAK[2]-HOT[2])*h; }
+    }
+    geo.attributes.color.needsUpdate=true;
+    // hud + side panels
+    const mn9=lerpBin(m.mn9.L,tNow), pop=lerpBin(m.pop,tNow);
+    let lit=0; for(const r of regionIds) lit+=lerpBin(m.activeCount[r],tNow);
+    $('#hudT').textContent=Math.round(tNow)+' ms'; $('#hudLit').textContent=Math.round(lit).toLocaleString(); $('#hudPop').textContent=pop.toFixed(1);
+    $('#tlabel').textContent=`${Math.round(tNow)} / ${T} ms`; $('#scrub').value=Math.round(tNow);
+    $('#mn9Now').textContent=mn9.toFixed(0)+' Hz';
+    for(const r of regionIds){ if(r==='gustatory') continue; const v=lerpBin(m.regions[r],tNow); $('#rb_'+r).style.width=Math.min(100,v/regionMax*100)+'%'; $('#rv_'+r).textContent=v.toFixed(1)+' Hz'; }
+    for(const g of Object.keys(m.groups)){ const v=lerpBin(m.groups[g],tNow); $('#db_'+g).style.width=Math.min(100,v/drivenMax*100)+'%'; $('#dv_'+g).textContent=v.toFixed(0)+' Hz'; }
+    // the fly
+    const ext=Math.min(1,mn9/60); const pro=$('#proboscis'); pro.setAttribute('transform',`translate(0,${(ext*22).toFixed(1)}) scale(1,${(1+ext*2.2).toFixed(2)})`);
+    $('#glow').setAttribute('opacity',(Math.min(1,pop/40)*0.9).toFixed(2));
+    const aversive=m.drive.sugar && (m.drive.bitter || m.drive.ir94e); const v=$('#verdict'), s=$('#verdictSub'), chip=$('#chip');
+    const state = tNow<60 ? ['touch','wait'] : mn9>=30 ? ['drink','yes'] : mn9>=5 ? ['twitch','maybe'] : aversive ? ['refuse','no'] : ['bored','no'];
+    v.firstChild.textContent=tr('v_'+state[0]); s.textContent=tr('s_'+state[0]); chip.className='chip '+state[1]; chip.textContent=tr('c_'+state[0]);
+    const cur_=$('#cursor'); if(cur_){cur_.setAttribute('x1',xOf(tNow)); cur_.setAttribute('x2',xOf(tNow));}
+  }
+
+  function frame(now){
+    const dt=now-last; last=now;
+    if(playing && cur){ tNow+= dt/(+$('#speed').value); if(tNow>=T) tNow=0; paint(); }
+    if(!dragging && playing) rotY+=0.0012*dt/16;
+    placeCamera(); renderer.render(scene,camera);
+    requestAnimationFrame(frame);
+  }
+  // language switch: relabel everything built in JS (static text is handled by applyLang)
+  function relabel(){
+    renderLegend();
+    [...sel.options].forEach(o=>o.textContent=expName(o.value));
+    index.regions.forEach(r=>{const e=$('#rl_'+r.id); if(e) e.textContent=regionName(r.id);});
+    $('#play').textContent=tr(playing?'pause':'play');
+    if(loadingKey) $('#loading').textContent=tr(loadingKey, expName(loadingArg));
+    if(cur) setupExp();
+  }
+  langListeners.push(relabel); relabel();
+
+  // initial paint of resting brain, then the first experiment
+  for(let k=0;k<nP*3;k+=3){colors[k]=REST[0];colors[k+1]=REST[1];colors[k+2]=REST[2];}
+  geo.attributes.color.needsUpdate=true;
+  requestAnimationFrame(frame);
+  const first = index.experiments.find(d=>d.id==='sugar') ? 'sugar' : index.experiments[0].id;
+  sel.value=first; cur=await loadExp(first); setupExp(); $('#loading').style.display='none';
+})();
+</script>

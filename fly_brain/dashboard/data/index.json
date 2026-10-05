@@ -1,0 +1,223 @@
+{
+ "binMs": 50.0,
+ "bins": 20,
+ "trials": 8,
+ "cloudHz": 40.0,
+ "points": 140638,
+ "neurons": 166700,
+ "wSyn": 0.12925,
+ "pointRegion": "point_region.bin",
+ "regions": [
+  {
+   "id": "visual",
+   "label": "Optic lobes & visual neurons",
+   "n": 105267
+  },
+  {
+   "id": "olfactory",
+   "label": "Olfactory system",
+   "n": 3783
+  },
+  {
+   "id": "gustatory",
+   "label": "Gustatory neurons",
+   "n": 1486
+  },
+  {
+   "id": "somatosensory",
+   "label": "Somatosensory neurons",
+   "n": 7702
+  },
+  {
+   "id": "sez",
+   "label": "Subesophageal zone (SEZ)",
+   "n": 1877
+  },
+  {
+   "id": "mushroom_body",
+   "label": "Mushroom body",
+   "n": 4501
+  },
+  {
+   "id": "central_complex",
+   "label": "Central complex",
+   "n": 2950
+  },
+  {
+   "id": "other",
+   "label": "Other central brain",
+   "n": 21836
+  },
+  {
+   "id": "descending",
+   "label": "Descending neurons",
+   "n": 1328
+  },
+  {
+   "id": "vnc",
+   "label": "Ventral nerve cord",
+   "n": 15045
+  },
+  {
+   "id": "motor",
+   "label": "Motor & efferent neurons",
+   "n": 925
+  }
+ ],
+ "groups": {
+  "sugar": {
+   "types": [
+    "LB3b",
+    "LB3c",
+    "LB3d",
+    "LB4b"
+   ],
+   "n": 68
+  },
+  "water": {
+   "types": [
+    "LB3a"
+   ],
+   "n": 17
+  },
+  "bitter": {
+   "types": [
+    "LB1a",
+    "LB1b",
+    "LB1c",
+    "LB1d"
+   ],
+   "n": 38
+  },
+  "ir94e": {
+   "types": [
+    "LB1e",
+    "LB2a",
+    "LB2b",
+    "LB2c"
+   ],
+   "n": 32
+  },
+  "jo_ce": {
+   "types": [
+    "JO-CA1",
+    "JO-CA2",
+    "JO-CL",
+    "JO-CM",
+    "JO-ED1",
+    "JO-ED2_a",
+    "JO-ED2_b",
+    "JO-ED2_c",
+    "JO-EV1",
+    "JO-EV2",
+    "JO-EV3",
+    "JO-EV4",
+    "JO-EV5",
+    "JO-EV6"
+   ],
+   "n": 335
+  },
+  "jo_f": {
+   "types": [
+    "JO-FD1",
+    "JO-FD2",
+    "JO-FV"
+   ],
+   "n": 78
+  },
+  "jo_dm": {
+   "types": [
+    "JO-DA",
+    "JO-DP",
+    "JO-mz"
+   ],
+   "n": 19
+  }
+ },
+ "experiments": [
+  {
+   "id": "sugar",
+   "name": "Sugar taste neurons",
+   "mn9Hz": 62.375,
+   "lit": 326,
+   "file": "sugar.bin",
+   "png": "sugar.png"
+  },
+  {
+   "id": "sugar_weak",
+   "name": "Sugar, weak (40 Hz)",
+   "mn9Hz": 0.0,
+   "lit": 58,
+   "file": "sugar_weak.bin",
+   "png": "sugar_weak.png"
+  },
+  {
+   "id": "water",
+   "name": "Water taste neurons",
+   "mn9Hz": 0.0,
+   "lit": 26,
+   "file": "water.bin",
+   "png": "water.png"
+  },
+  {
+   "id": "sugar_water",
+   "name": "Sugar + water",
+   "mn9Hz": 57.625,
+   "lit": 356,
+   "file": "sugar_water.bin",
+   "png": "sugar_water.png"
+  },
+  {
+   "id": "bitter",
+   "name": "Bitter taste neurons",
+   "mn9Hz": 0.0,
+   "lit": 264,
+   "file": "bitter.bin",
+   "png": "bitter.png"
+  },
+  {
+   "id": "sugar_bitter",
+   "name": "Sugar + bitter",
+   "mn9Hz": 0.0,
+   "lit": 347,
+   "file": "sugar_bitter.bin",
+   "png": "sugar_bitter.png"
+  },
+  {
+   "id": "ir94e",
+   "name": "Ir94e taste neurons",
+   "mn9Hz": 0.0,
+   "lit": 188,
+   "file": "ir94e.bin",
+   "png": "ir94e.png"
+  },
+  {
+   "id": "sugar_ir94e",
+   "name": "Sugar + Ir94e",
+   "mn9Hz": 0.0,
+   "lit": 320,
+   "file": "sugar_ir94e.bin",
+   "png": "sugar_ir94e.png"
+  },
+  {
+   "id": "jo_ce",
+   "name": "Antenna: JO-CE neurons",
+   "mn9Hz": 0.375,
+   "lit": 1471,
+   "file": "jo_ce.bin",
+   "png": "jo_ce.png"
+  },
+  {
+   "id": "jo_f",
+   "name": "Antenna: JO-F neurons",
+   "mn9Hz": 5.625,
+   "lit": 275,
+   "file": "jo_f.bin",
+   "png": "jo_f.png"
+  }
+ ],
+ "png": {
+  "width": 376,
+  "rowsPerBin": 375
+ }
+}

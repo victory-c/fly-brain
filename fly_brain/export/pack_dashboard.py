@@ -15,10 +15,10 @@ def png_gray(a):  # a: uint8 (H, W)
 idx = json.loads((D / "index.json").read_text(encoding="utf-8"))
 nP, nB = idx["points"], idx["bins"]
 H = -(-nP // W)  # rows per bin
-xyz = (D / "brain_xyz.bin").read_bytes(); reg = (D / "point_region.bin").read_bytes()
+xyz = (D / "points.f32").read_bytes(); reg = (D / "point_region.bin").read_bytes()
 (D / "brain.js").write_text("window.FLY_XYZ=" + json.dumps(base64.b64encode(xyz).decode()) + ";window.FLY_REGION=" + json.dumps(base64.b64encode(reg).decode()) + ";")
 idx["png"] = {"width": W, "rowsPerBin": H}
-for d in idx["drinks"]:
+for d in idx["experiments"]:
     a = np.fromfile(D / d["file"], dtype=np.uint8).reshape(nB, nP)
     img = np.zeros((nB, H * W), np.uint8); img[:, :nP] = a
     png = png_gray(img.reshape(nB * H, W))
