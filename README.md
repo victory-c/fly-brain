@@ -4,12 +4,12 @@ A fruit fly's whole central nervous system, 166,700 neurons and every synapse be
 a spiking network. We replay classic stimulation experiments on it, record every neuron, and put it in
 charge of a road bike.
 
-**Live demos: https://fly-brain.vercel.app**
+**Live demos: https://fly-brain-bike.vercel.app**
 
 | Demo | What you see |
 |---|---|
-| [The fly learns to ride](https://fly-brain.vercel.app/ride/) | From a blank decoder, the whole brain learns to ride a Colnago V4Rs down a 7 m road in side gusts by trial and error; every attempt of the search is replayable, one rider at a time (falls, off-road exits, records), with his brain firing in the side panel. Also: [3D replay of the best decoder, 16 riders](https://fly-brain.vercel.app/ride/3d), [charts](https://fly-brain.vercel.app/ride/charts), [PD rider without a brain](https://fly-brain.vercel.app/ride/oracle), [brain in the loop but not steering](https://fly-brain.vercel.app/ride/open-loop) |
-| [Fly Brain Live](https://fly-brain.vercel.app/dashboard/) | Brain activity in 50 ms frames (all 140,638 neurons with a known position) while his sugar, water, bitter or Ir94e taste neurons, or his antennal JO-CE / JO-F neurons, are driven as in Shiu et al. 2024; whether the feeding motor neuron MN9 fires, next to what Shiu found on FlyWire |
+| [The fly learns to ride](https://fly-brain-bike.vercel.app/ride/) | From a blank decoder, the whole brain learns to ride a Colnago V4Rs down a 7 m road in side gusts by trial and error; every attempt of the search is replayable, one rider at a time (falls, off-road exits, records), with his brain firing in the side panel. Also: [3D replay of the best decoder, 16 riders](https://fly-brain-bike.vercel.app/ride/3d), [charts](https://fly-brain-bike.vercel.app/ride/charts), [PD rider without a brain](https://fly-brain-bike.vercel.app/ride/oracle), [brain in the loop but not steering](https://fly-brain-bike.vercel.app/ride/open-loop) |
+| [Fly Brain Live](https://fly-brain-bike.vercel.app/dashboard/) | Brain activity in 50 ms frames (all 140,638 neurons with a known position) while his sugar, water, bitter or Ir94e taste neurons, or his antennal JO-CE / JO-F neurons, are driven as in Shiu et al. 2024; whether the feeding motor neuron MN9 fires, next to what Shiu found on FlyWire |
 
 ## The simulator
 
