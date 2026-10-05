@@ -1,0 +1,127 @@
+{
+ "source": [
+  "https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/main/figures.ipynb",
+  "https://raw.githubusercontent.com/flyconnectome/flywire_annotations/main/supplemental_files/Supplemental_file1_neuron_annotations.tsv"
+ ],
+ "groups": {
+  "sugar": {
+   "types": [
+    "LB3b",
+    "LB3c",
+    "LB3d",
+    "LB4b"
+   ],
+   "shiu_neurons": 21,
+   "flywire_types": {
+    "LB3c": 9,
+    "LB3d": 5,
+    "LB4b": 4,
+    "LB3b": 2
+   }
+  },
+  "water": {
+   "types": [
+    "LB3a"
+   ],
+   "shiu_neurons": 18,
+   "flywire_types": {
+    "LB3a": 11,
+    "LB3c": 7
+   }
+  },
+  "bitter": {
+   "types": [
+    "LB1a",
+    "LB1b",
+    "LB1c",
+    "LB1d"
+   ],
+   "shiu_neurons": 21,
+   "flywire_types": {
+    "LB1a": 8,
+    "LB1d": 5,
+    "LB1c": 4,
+    "LB1b": 3
+   }
+  },
+  "ir94e": {
+   "types": [
+    "LB1e",
+    "LB2a",
+    "LB2b",
+    "LB2c"
+   ],
+   "shiu_neurons": 18,
+   "flywire_types": {
+    "LB1e": 11,
+    "LB2c": 3,
+    "LB2b": 2,
+    "LB2a": 2
+   }
+  },
+  "jo_ce": {
+   "types": [
+    "JO-CA1",
+    "JO-CA2",
+    "JO-CL",
+    "JO-CM",
+    "JO-ED1",
+    "JO-ED2_a",
+    "JO-ED2_b",
+    "JO-ED2_c",
+    "JO-EV1",
+    "JO-EV2",
+    "JO-EV3",
+    "JO-EV4",
+    "JO-EV5",
+    "JO-EV6"
+   ],
+   "shiu_neurons": 70,
+   "flywire_types": {
+    "JO-EV1": 11,
+    "JO-EV3": 9,
+    "JO-ED2_a": 7,
+    "JO-ED2_b": 7,
+    "JO-EV2": 6,
+    "JO-ED1": 5,
+    "JO-CL": 5,
+    "JO-ED2_c": 4,
+    "JO-CM": 4,
+    "JO-EV5": 4,
+    "JO-EV4": 3,
+    "JO-CA1": 2,
+    "JO-EV6": 1,
+    "JO-CA2": 1
+   }
+  },
+  "jo_f": {
+   "types": [
+    "JO-FD1",
+    "JO-FD2",
+    "JO-FV"
+   ],
+   "shiu_neurons": 60,
+   "flywire_types": {
+    "JO-FV": 47,
+    "JO-FD2": 6,
+    "JO-FD1": 5,
+    "JO-unclear": 2
+   }
+  },
+  "jo_dm": {
+   "types": [
+    "JO-DA",
+    "JO-DP",
+    "JO-mz"
+   ],
+   "shiu_neurons": 16,
+   "flywire_types": {
+    "JO-DA": 6,
+    "JO-mz": 4,
+    "JO-DP": 3,
+    "JO-CM": 2,
+    "JO-EV1": 1
+   }
+  }
+ }
+}

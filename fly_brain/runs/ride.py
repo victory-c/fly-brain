@@ -27,23 +27,24 @@ from bike.readout import READOUTS, Decoder, Readout
 from bike.senses import Senses
 from bike.tarmac import eigen_speeds, tarmac_sl9, whipple_matrices
 from brain.loop import BrainLoop
-from brain.sim import W_SYN_MALE_CNS, Brain
+from brain.connectome import Brain
+from brain.engine import PARAMS, W_SYN
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class BrainRecorder:
     """Every rider's whole brain during a replay, for the brain map on the 3D page. Same point cloud and regions as
-    the drinks dashboard (export/export_dashboard.py): per bin, the rate of each of the 140,638 neurons with a 3D
+    the activity dashboard (brain/atlas.py): per bin, the rate of each of the 140,638 neurons with a 3D
     position as uint8 (255 = CLOUD_HZ), and each region's mean rate with the driven sensory neurons left out."""
 
     def __init__(self, meta, stim_idx, bin_ms, device):
-        from export.export_dashboard import CLOUD_HZ, REGIONS, region_of
-        meta = meta.sort_values("idx")
-        reg = np.array([region_of(t, c, s) for t, c, s in zip(meta["type"], meta["class"], meta["superclass"])])
+        from brain.atlas import CLOUD_HZ, REGIONS, point_cloud, regions
+        meta = meta.sort_values("row")
+        reg = regions(meta)
         self.reg_ids = [r for r, _ in REGIONS]
         self.reg_labels = [lab for _, lab in REGIONS]
-        point_idx = np.fromfile(ROOT / "web_data" / "brain_idx.bin", dtype=np.int32).astype(np.int64)
+        point_idx = point_cloud()[1]
         self.point_region = np.array([self.reg_ids.index(r) for r in reg[point_idx]], dtype=np.uint8)
         self.point_idx = torch.as_tensor(point_idx, device=device)
         driven = np.zeros(len(reg), bool)
@@ -208,7 +209,7 @@ class Ride:
             print("senses :", self.senses.describe())
             print("readout:", self.readout.describe(), flush=True)
             brain = Brain(ROOT / "brain.npz")
-            w = W_SYN_MALE_CNS if a.w_syn_scale is None else 0.275 * a.w_syn_scale
+            w = W_SYN if a.w_syn_scale is None else PARAMS["w_syn"] * a.w_syn_scale
             self.loop = BrainLoop(brain, a.riders, self.senses.idx, self.readout.idx,
                                   params={"w_syn": w}, device=self.dev, seed=a.seed)
             print(f"brain: {brain.n:,} neurons, {len(self.senses.idx)} driven, {len(self.readout.idx)} read out, "

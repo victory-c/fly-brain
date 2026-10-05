@@ -39,7 +39,7 @@ class Readout:
         groups, idx, offset = [], [], 0
         for t in self.types:
             for s in ("L", "R"):
-                ids = meta.loc[(ty == t) & (side == s), "idx"].to_numpy(dtype=np.int64)
+                ids = meta.loc[(ty == t) & (side == s), "row"].to_numpy(dtype=np.int64)
                 groups.append((t, s, offset, len(ids)))  # (type, side, offset into self.idx, size)
                 idx.append(ids)
                 offset += len(ids)

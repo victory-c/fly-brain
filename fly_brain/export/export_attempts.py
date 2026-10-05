@@ -1,6 +1,6 @@
 """Every attempt of the CEM run as a one-rider montage page: "Fly learns to ride" / "苍蝇学骑车".
 
-Reads results/attempts/attempts.json plus the gen*.npz the training job has finished writing (a file that
+Reads results/relearn/attempts/attempts.json plus the gen*.npz the training job has finished writing (a file that
 fails to load is skipped: the job is still writing it) and builds a static directory:
 
   index.html            the page (three.js r128 from the CDNs, the Colnago V4Rs GLB embedded base64 like export_ride3d,
@@ -31,15 +31,14 @@ from pathlib import Path
 
 import numpy as np
 
+from brain.atlas import point_cloud
+
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BIKE = ROOT / "assets" / "colnago_v4rs.glb"
 LIVERY_JS = (Path(__file__).with_name("bike_livery.js")).read_text(encoding="utf-8")  # paints, decals, tyres, rims; shared with export_ride3d
 NEURONS, SYNAPSES = 166_700, 124_177_616
-REG_EN = {"taste": "Gustatory neurons", "feeding": "Subesophageal zone (SEZ)", "smell": "Smell", "memory": "Mushroom body",
-          "nav": "Central complex", "vision": "Vision", "touch": "Somatosensory neurons",
-          "descending": "Descending neurons", "cord": "Ventral nerve cord", "motor": "Motor neurons", "other": "Other central brain"}
-REG_ZH = {"taste": "味觉神经元", "feeding": "食道下区（SEZ）", "smell": "嗅觉", "memory": "蘑菇体", "nav": "中央复合体", "vision": "视觉",
-          "touch": "躯体感觉神经元", "descending": "下行神经元", "cord": "腹神经索", "motor": "运动神经元", "other": "中央脑其他"}
+REG_EN = {"gustatory": "Gustatory neurons", "sez": "Subesophageal zone (SEZ)", "olfactory": "Olfactory system", "mushroom_body": "Mushroom body", "central_complex": "Central complex", "visual": "Optic lobes & visual neurons", "somatosensory": "Somatosensory neurons", "descending": "Descending neurons", "vnc": "Ventral nerve cord", "motor": "Motor & efferent neurons", "other": "Other central brain"}
+REG_ZH = {"gustatory": "味觉神经元", "sez": "食道下区（SEZ）", "olfactory": "嗅觉系统", "mushroom_body": "蘑菇体", "central_complex": "中央复合体", "visual": "视叶与视觉神经元", "somatosensory": "躯体感觉神经元", "descending": "下行神经元", "vnc": "腹神经索", "motor": "运动与传出神经元", "other": "中央脑其他"}
 
 HTML = r"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -828,7 +827,7 @@ def gen_rows(z, r, n):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("src", nargs="?", default="results/attempts")
+    ap.add_argument("src", nargs="?", default="results/relearn/attempts")
     ap.add_argument("out", nargs="?", default="results/attempts_page")
     ap.add_argument("--force", action="store_true", help="re-export generations whose json/bins already exist")
     ap.add_argument("--bike", default=str(DEFAULT_BIKE), help="GLB (Draco ok) to embed, or 'none' for the plain procedural bike")
@@ -839,9 +838,8 @@ def main():
     man = read_manifest(src / "attempts.json")
     R, secs, bin_ms = int(man["riders"]), float(man["seconds"]), float(man.get("bin_ms", 100.0))
     regions = [str(x) for x in man["regions"]]
-    zh_labels = {i: str(l) for i, l in zip(regions, man.get("labels", []))}
 
-    xyz = np.fromfile(ROOT / "web_data" / "brain_xyz.bin", dtype=np.float32).reshape(-1, 3)
+    xyz = point_cloud()[0]
     lo, hi = xyz.min(0), xyz.max(0)
     q = np.round((xyz - lo) / (hi - lo) * 65535).astype("<u2")
     n_points = len(xyz)
@@ -909,7 +907,7 @@ def main():
         if at["d"] > best:
             best, at["r"] = at["d"], 1
     index = {"neurons": NEURONS, "synapses": SYNAPSES, "riders": R, "seconds": secs, "binMs": bin_ms, "cloudHz": 40.0,
-             "generations": gens_done, "regions": [{"id": i, "en": REG_EN.get(i, i), "zh": zh_labels.get(i, REG_ZH.get(i, i))} for i in regions],
+             "generations": gens_done, "regions": [{"id": i, "en": REG_EN.get(i, i), "zh": REG_ZH.get(i, i)} for i in regions],
              "cloud": {"points": n_points, "lo": lo.round(6).tolist(), "hi": hi.round(6).tolist()},
              "built": time.strftime("%Y-%m-%dT%H:%M:%S"), "attempts": attempts}
     write_atomic(data / "index.json", json.dumps(index, separators=(",", ":")))

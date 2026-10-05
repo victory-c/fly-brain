@@ -20,7 +20,8 @@ import torch
 from bike.dynamics import Peloton
 from bike.senses import Senses
 from brain.loop import BrainLoop
-from brain.sim import W_SYN_MALE_CNS, Brain
+from brain.connectome import Brain
+from brain.engine import W_SYN
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -52,7 +53,7 @@ def main():
         iL, iR = senses.names.index(f"{pop}_L"), senses.names.index(f"{pop}_R")
         P[: B // 2, iL] += a.extra
         P[B // 2:, iR] += a.extra
-        loop = BrainLoop(brain, B, senses.idx, [], params={"w_syn": W_SYN_MALE_CNS}, device=dev, seed=1)
+        loop = BrainLoop(brain, B, senses.idx, [], params={"w_syn": W_SYN}, device=dev, seed=1)
         loop.set_rates(P @ senses.E)
         loop.run(a.warmup_ms)
         loop.take_counts()

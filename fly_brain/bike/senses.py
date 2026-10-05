@@ -16,15 +16,9 @@ Sides are the connectome's rootSide for neurons that enter through a nerve (halt
 antennae) and somaSide for the optic-lobe cells. Rates are Hz, clipped to [0, cap].
 """
 from collections import OrderedDict
-from pathlib import Path
 
 import numpy as np
-import pandas as pd
-import pyarrow.feather as ft
 import torch
-
-ROOT = Path(__file__).resolve().parents[1]
-ANNOTATIONS = ROOT / "data" / "body-annotations-male-cns-v1.0-minconf-0.5.feather"
 
 GAINS = {  # Hz per unit
     "base": 2.0, "cap": 200.0,
@@ -44,21 +38,15 @@ GAINS = {  # Hz per unit
 }
 
 
-def with_sides(meta):
-    """brain_meta plus rootSide / entryNerve from the raw annotation table."""
-    raw = ft.read_table(ANNOTATIONS, columns=["bodyId", "rootSide", "entryNerve"]).to_pandas()
-    return meta.merge(raw, on="bodyId", how="left")
-
-
 def sensory_populations(meta, goal="none", lane="none"):
     """OrderedDict name -> neuron indices (into brain.npz order)."""
-    m = with_sides(meta) if "rootSide" not in meta.columns else meta
+    m = meta
     ty, sub, cl = m["type"].astype(str), m["subclass"].astype(str), m["class"].astype(str)
     soma, root = m["somaSide"].astype(str), m["rootSide"].astype(str)
     pops = OrderedDict()
 
     def put(name, mask):
-        pops[name] = m.loc[mask, "idx"].to_numpy(dtype=np.int64)
+        pops[name] = m.loc[mask, "row"].to_numpy(dtype=np.int64)
 
     vs = ty.isin(["VS", "VSm", "VST1", "VST2"])
     hs = ty.isin(["HSN", "HSE", "HSS", "HST", "H2"])

@@ -21,7 +21,8 @@ from bike.readout import Readout
 from bike.senses import Senses
 from bike.tarmac import tarmac_sl9
 from brain.loop import BrainLoop
-from brain.sim import W_SYN_MALE_CNS, Brain
+from brain.connectome import Brain
+from brain.engine import PARAMS, W_SYN
 
 ROOT = Path(__file__).resolve().parents[1]
 VARS = ["phi", "phi_dot", "delta", "y", "psi_dot", "v", "psi"]
@@ -52,7 +53,7 @@ def main():
     readout = Readout(meta, device=dev)
     ro_idx = torch.as_tensor(readout.idx, device=dev)
     brain = Brain(ROOT / "brain.npz")
-    w = W_SYN_MALE_CNS if a.w_syn_scale is None else 0.275 * a.w_syn_scale
+    w = W_SYN if a.w_syn_scale is None else PARAMS["w_syn"] * a.w_syn_scale
     loop = BrainLoop(brain, a.riders, senses.idx, [], params={"w_syn": w}, device=dev, seed=a.seed)
     bikes = Peloton(a.riders, tarmac_sl9(), device=dev, seed=a.seed)
     bikes.reset(a.v0, a.phi0, a.gust, 1.0)
@@ -108,7 +109,7 @@ def main():
         corr = cov / np.sqrt(np.outer(vx, var_r))
     corr = np.nan_to_num(corr)
 
-    df = meta[["idx", "bodyId", "type", "instance", "superclass", "class", "subclass", "somaSide"]].copy()
+    df = meta[["row", "bodyId", "type", "instance", "superclass", "class", "subclass", "somaSide"]].copy()
     df["cruise_hz"] = warm.cpu().numpy()
     df["mean_hz"] = mean_r
     df["driven"] = False
@@ -118,7 +119,7 @@ def main():
     pd.set_option("display.width", 250); pd.set_option("display.max_rows", 200)
 
     print("\n== population by superclass (Hz mean per neuron, and total spikes/s per brain)")
-    g = df[~df.driven].groupby("superclass").agg(n=("idx", "size"), hz=("mean_hz", "mean"), total=("mean_hz", "sum")).sort_values("total", ascending=False)
+    g = df[~df.driven].groupby("superclass").agg(n=("row", "size"), hz=("mean_hz", "mean"), total=("mean_hz", "sum")).sort_values("total", ascending=False)
     print(g.round(1).head(15).to_string())
     print(f"\ndriven neurons total {df[df.driven].mean_hz.sum():,.0f} sp/s; rest of brain {df[~df.driven].mean_hz.sum():,.0f} sp/s; "
           f"{int((df.mean_hz > 1).sum()):,} neurons > 1 Hz, {int((df.mean_hz > 20).sum()):,} > 20 Hz")

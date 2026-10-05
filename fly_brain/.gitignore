@@ -1,0 +1,22 @@
+# input tables: the male-CNS v1.0 release and Shiu et al.'s FlyWire network (runs/calibrate_wsyn.py)
+/data
+
+# built from data/ by brain/connectome.py and brain/atlas.py
+brain.npz
+brain_meta.parquet
+web_data/
+
+# per-neuron tables and whole-brain recordings stay local; the JSON summaries are committed
+results/*.parquet
+results/*_brain.npz
+
+# dashboard: raw activity from export_dashboard.py; pack_dashboard.py turns it into the PNG/JS the page loads
+dashboard/data/*.bin
+dashboard/data/*.f32
+
+# third-party 3D models (copyrighted, private use only; see bike/README.md)
+/assets
+
+__pycache__/
+*.pyc
+.pytest_cache/

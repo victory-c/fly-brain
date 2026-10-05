@@ -6,7 +6,7 @@ The followed rider rides a real 3D model when one is available: by default asset
 comes from and why it must not be redistributed). Its wheels, crank, fork and bars are re-parented
 onto pivots so they spin and steer. Without a model, a procedural S-Works Tarmac SL9 is drawn.
 
-The left panel shows the followed rider's whole brain as the same point cloud and regions as the drinks
+The left panel shows the followed rider's whole brain as the same point cloud and regions as the activity
 dashboard (Fly Brain Live), from a recording made with `runs.ride --brain-out` (found next to the trace as
 <name>_brain.npz, or given with --brain). The map can be enlarged (corner button or B key, remembered in localStorage).
 
@@ -22,6 +22,8 @@ import zlib
 from pathlib import Path
 
 import numpy as np
+
+from brain.atlas import point_cloud
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_BIKE = ROOT / "assets" / "colnago_v4rs.glb"
@@ -278,13 +280,12 @@ function pose(bk,s,done,pop){const [x,y,psi,v,phi,delta]=s,F=FIT;bk.root.positio
 // frame paint: the Colnago's liveries (LIVERIES, bike_livery.js), plain colours on the procedural Tarmac; ?paint=, else remembered per browser
 let PAINT_LIST=LIVERIES;
 function setPaint(v){liveryApply(v,scene,PAINT_LIST)}
-// ---------- brain map: the followed rider's whole brain, drawn like the drinks dashboard (Fly Brain Live)
-const BR=D.brain||null,RC={taste:[1,.55,.2],feeding:[1,.35,.25],smell:[.4,.85,.6],memory:[.85,.55,1],nav:[.4,.7,1],vision:[.35,.45,.6],touch:[.8,.8,.4],descending:[1,.8,.3],cord:[.5,.75,.75],motor:[1,.3,.5],other:[.55,.6,.7]};
+// ---------- brain map: the followed rider's whole brain, drawn like the activity dashboard (Fly Brain Live)
+const BR=D.brain||null,RC={gustatory:[1,.55,.2],sez:[1,.35,.25],olfactory:[.4,.85,.6],mushroom_body:[.85,.55,1],central_complex:[.4,.7,1],visual:[.35,.45,.6],somatosensory:[.8,.8,.4],descending:[1,.8,.3],vnc:[.5,.75,.75],motor:[1,.3,.5],other:[.55,.6,.7]};
 const REST=[0.016,0.021,0.038],HOT=[1,0.55,0.12],PEAK=[1,0.97,0.85];let bm=null;  // dim rest: the small panel stacks many points per pixel
-const SHORT={memory:'蘑菇体',nav:'中央复合体',cord:'腹神经索',touch:'躯体感觉神经元'};
-const REG_EN={taste:'Gustatory neurons',feeding:'Subesophageal zone (SEZ)',smell:'Smell',memory:'Mushroom body',nav:'Central complex',vision:'Vision',
- touch:'Somatosensory neurons',descending:'Descending neurons',cord:'Ventral nerve cord',motor:'Motor neurons',other:'Other central brain'};
-const regLabel=x=>LANG==='en'?(REG_EN[x.id]||x.label):(SHORT[x.id]||x.label);
+const REG_ZH={gustatory:'味觉神经元',sez:'食道下区（SEZ）',olfactory:'嗅觉系统',mushroom_body:'蘑菇体',central_complex:'中央复合体',visual:'视叶与视觉神经元',somatosensory:'躯体感觉神经元',descending:'下行神经元',vnc:'腹神经索',motor:'运动与传出神经元',other:'中央脑其他'};
+const REG_EN={gustatory:'Gustatory neurons',sez:'Subesophageal zone (SEZ)',olfactory:'Olfactory system',mushroom_body:'Mushroom body',central_complex:'Central complex',visual:'Optic lobes & visual neurons',somatosensory:'Somatosensory neurons',descending:'Descending neurons',vnc:'Ventral nerve cord',motor:'Motor & efferent neurons',other:'Other central brain'};
+const regLabel=x=>(LANG==='en'?REG_EN:REG_ZH)[x.id]||x.label;
 // big brain map: a toggle in the map's corner (or the B key), remembered per browser
 let bigOK=false;
 function setBig(on){document.body.classList.toggle('bigbrain',on);const b=document.getElementById('bbig');b.textContent=on?'⤡':'⤢';b.dataset.i18nTitle=on?'bigOff':'bigOn';b.title=tt(b.dataset.i18nTitle);viewShift()}
@@ -308,7 +309,7 @@ async function initBrain(){const $=id=>document.getElementById(id);
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(xyz,3));const col=new Float32Array(nP*3);g.setAttribute('color',new THREE.BufferAttribute(col,3));
  sc.add(new THREE.Points(g,new THREE.PointsMaterial({size:0.016,vertexColors:true,transparent:true,opacity:0.85,blending:THREE.AdditiveBlending,depthWrite:false})));
  const ids=BR.regions.map(x=>x.id),rows=[];const regs=$('regs');
- BR.regions.forEach((x,j)=>{if(x.id==='taste')return;const d=document.createElement('div');d.className='reg';const cc=RC[x.id]||[.6,.6,.6];
+ BR.regions.forEach((x,j)=>{if(x.id==='gustatory')return;const d=document.createElement('div');d.className='reg';const cc=RC[x.id]||[.6,.6,.6];
   d.innerHTML='<s style="background:rgb('+cc.map(v=>Math.round(v*255)).join(',')+')"></s><span></span><i></i><b></b>';regs.appendChild(d);rows.push({j,x,s:d.querySelector('span'),i:d.querySelector('i'),b:d.querySelector('b')})});
  const relabel=()=>{let wmax=0;regs.style.setProperty('--regw','0px');for(const w of rows){w.s.textContent=w.s.title=regLabel(w.x);wmax=Math.max(wmax,w.s.scrollWidth)}  // label column fits the longest name
   if(wmax)regs.style.setProperty('--regw',Math.min(190,wmax+2)+'px')};relabel();LANG_HOOKS.push(relabel);
@@ -391,7 +392,7 @@ def brain_payload(npz, rider):
     """(meta for the page, embedded binaries) from a runs.ride --brain-out recording: the cloud's positions (uint16),
     each point's region, and `rider`'s per-neuron activity (uint8 per bin), zlib + base64; region means for every rider."""
     z = np.load(npz)
-    xyz = np.fromfile(ROOT / "web_data" / "brain_xyz.bin", dtype=np.float32).reshape(-1, 3)
+    xyz = point_cloud()[0]
     lo, hi = xyz.min(0), xyz.max(0)
     q = np.round((xyz - lo) / (hi - lo) * 65535).astype("<u2")
     pack = lambda arr: base64.b64encode(zlib.compress(np.ascontiguousarray(arr).tobytes(), 9)).decode()

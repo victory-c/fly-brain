@@ -4,7 +4,7 @@ import numpy as np
 from bike.tarmac import BENCHMARK_EXPECTED, benchmark, eigen_speeds, tarmac_sl9, whipple_matrices
 
 
-def main():
+def test_whipple_benchmark_and_tarmac():
     m = whipple_matrices(benchmark())
     for k in ("M", "C1", "K0", "K2"):
         err = np.abs(m[k] - np.array(BENCHMARK_EXPECTED[k])).max()
@@ -22,8 +22,3 @@ def main():
           f"self-stable {wv:.2f}..{cv:.2f} m/s = {wv * 3.6:.1f}..{cv * 3.6:.1f} km/h")
     assert 0.05 < t["c"] < 0.06
     assert wv is not None and 3.0 < wv < 8.0
-    print("all bike checks passed")
-
-
-if __name__ == "__main__":
-    main()
