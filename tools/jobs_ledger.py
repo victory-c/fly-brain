@@ -57,6 +57,20 @@ NOTES = {
     "36493": "lane keeping round 2 (lane-next.sbatch): batch centring + look-ahead/gain replays, operating-point CEM, held-out seed 59 -> results/lane/",
     "36494": "/ride/ page replays with the brain recorded: round-2 decoder and hands-off (ride-page.sbatch)",
     "36521": "learning to ride from a blank decoder, every attempt recorded (ride-attempts.sbatch) -> results/attempts/ (the attempts page)",
+    "36533": "rewrite: build brain.npz with brain/connectome.py (identical edges and weights to the old build)",
+    "36535": "rewrite: old engine vs new engine on sugar/bitter, same seed -> identical spikes (logs/rewrite/equiv.json)",
+    "36538": "rewrite: w_syn scale sweep vs Shiu's FlyWire feeding curve, first grid (superseded by 36539)",
+    "36539": "rewrite: w_syn scale sweep vs Shiu's FlyWire feeding curve -> results/calibrate_wsyn.json, scale 0.47",
+    "36540": "rewrite: replay of the 3D-page decoder (results/lane/cem_mu.json) on the new engine: 10.0 s upright (old 18.1 s)",
+    "36541": "rewrite: Fly Brain Live data, Shiu's 10 stimulation experiments (export_dashboard + pack_dashboard)",
+    "36542": "rewrite: same replay at scale 0.45: 12.1 s upright, so the Brian2 rule fixes, not the scale, break the old decoder",
+    "36543": "rewrite: the bike relearned on the new engine (ride-relearn.sbatch): 37 generations, 1,776 attempts -> results/relearn/ (the /ride/ page)",
+    "36546": "cancelled: wrong decoder path",
+    "36547": "rewrite: /ride/ page replays of the relearned decoder (results/relearn/cem_mu.json) and hands-off, brains recorded",
+    "36554": "rewrite: graph engine benchmark, stopped (buffers sized too large)",
+    "36555": "rewrite: the bike relearned again with the new display regions recorded (ride-relearn.sbatch, search only) -> results/relearn/",
+    "36626": "rewrite: /ride/ page replays of the relearned decoder and hands-off, brains recorded",
+    "36627": "rewrite: dashboard export, all tests on GPU, graph engine benchmark",
 }
 
 

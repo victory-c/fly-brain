@@ -1,0 +1,39 @@
+== Sugar taste neurons: sugar 68 neurons at 150 Hz
+   MN9_L 62.4 Hz, MN9_R 0.0 Hz, lit 326, 9.4s
+== Sugar, weak (40 Hz): sugar 68 neurons at 40 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 58, 8.7s
+== Water taste neurons: water 17 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 26, 8.6s
+== Sugar + water: sugar 68 neurons at 150 Hz, water 17 neurons at 150 Hz
+   MN9_L 57.6 Hz, MN9_R 0.0 Hz, lit 356, 9.0s
+== Bitter taste neurons: bitter 38 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 264, 9.0s
+== Sugar + bitter: sugar 68 neurons at 150 Hz, bitter 38 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 347, 9.0s
+== Ir94e taste neurons: ir94e 32 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 188, 9.0s
+== Sugar + Ir94e: sugar 68 neurons at 150 Hz, ir94e 32 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 320, 9.0s
+== Antenna: JO-CE neurons: jo_ce 335 neurons at 150 Hz
+   MN9_L 0.4 Hz, MN9_R 0.0 Hz, lit 1,471, 9.0s
+== Antenna: JO-F neurons: jo_f 78 neurons at 150 Hz
+   MN9_L 5.6 Hz, MN9_R 0.0 Hz, lit 275, 9.0s
+sugar 17 KB
+sugar_weak 5 KB
+water 4 KB
+sugar_water 18 KB
+bitter 13 KB
+sugar_bitter 16 KB
+ir94e 10 KB
+sugar_ir94e 15 KB
+jo_ce 56 KB
+jo_f 15 KB
+brain.js 2380 KB
+..............                                                           [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_brian2.py:15: could not import 'brian2': No module named 'brian2'
+14 passed, 1 skipped in 83.73s (0:01:23)
+torch 2.5.1+cu121  cpu threads 8  gpu NVIDIA RTX A6000
+cuda+graph trials    1       2.1 s     2.12 s per simulated second  MN9  66.0 Hz  gpu 0.32 GB
+cuda+graph trials  128      47.5 s     0.37 s per simulated second  MN9  60.4 Hz  gpu 1.18 GB
+cuda+graph trials 1024     365.1 s     0.36 s per simulated second  MN9  60.4 Hz  gpu 7.2 GB

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>flybrain-play</title>
-<meta name="description" content="A fruit fly's whole central nervous system (166,700 neurons, every synapse) tastes drinks and rides a road bike. Interactive replays.">
+<meta name="description" content="A fruit fly's whole central nervous system (166,700 neurons, every synapse) as a spiking network: replays of its taste and antennal circuits, and a road bike it learns to ride.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪰</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
 <style>
 :root{
   --bg:#f3f1ec; --panel:#fff; --line:#d9d5cc; --ink:#1c1b18; --ink2:#5f5b53; --mute:#8b867c;
-  --accent:#d8501f; --bar:#b8452a; --dash:#2f7fc5; --ride:#2b8a5b; --classic:#8a6d1f;
+  --accent:#d8501f; --dash:#2f7fc5; --ride:#2b8a5b;
   --font:"Manrope","PingFang SC","Noto Sans SC",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,"PingFang SC","Noto Sans SC",monospace;
 }
@@ -20,13 +20,13 @@
   :root:not([data-theme="light"]){
     color-scheme:dark;
     --bg:#15171c; --panel:#1d2027; --line:#333843; --ink:#eeeae2; --ink2:#b6b0a4; --mute:#7f7a70;
-    --accent:#e8602a; --bar:#e0714f; --dash:#5a9ad6; --ride:#4fbf83; --classic:#d0aa4a;
+    --accent:#e8602a; --dash:#5a9ad6; --ride:#4fbf83;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#15171c; --panel:#1d2027; --line:#333843; --ink:#eeeae2; --ink2:#b6b0a4; --mute:#7f7a70;
-  --accent:#e8602a; --bar:#e0714f; --dash:#5a9ad6; --ride:#4fbf83; --classic:#d0aa4a;
+  --accent:#e8602a; --dash:#5a9ad6; --ride:#4fbf83;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55}
@@ -74,7 +74,7 @@ footer a{color:var(--ink2)}
       <button type="button" data-lang="zh" lang="zh-CN" aria-pressed="false">中文</button>
     </div>
   </div>
-  <p class="lede" data-i18n="lede">We took the complete wiring diagram of a male fruit fly's central nervous system, ran current through it, and asked it to taste drinks and ride a road bike.</p>
+  <p class="lede" data-i18n="lede">We took the complete wiring diagram of a male fruit fly's central nervous system, ran current through it, replayed the taste experiments of Shiu et al. on it, and asked it to ride a road bike.</p>
   <ul class="stats">
     <li data-i18n="s1"><b>166,700</b> neurons</li>
     <li data-i18n="s2">every synapse from <b>male CNS v1.0</b></li>
@@ -87,26 +87,14 @@ footer a{color:var(--ink2)}
   <a class="card" href="/ride/" style="--c:var(--ride)">
     <div class="kicker" data-i18n="rideK">Learning, attempt by attempt · new</div>
     <h2 data-i18n="rideH">The fly learns to ride</h2>
-    <p data-i18n="rideP">Starting from a blank decoder that cannot steer, the fly's whole brain learns to ride a Colnago V4Rs down a 7&nbsp;m road at 20&nbsp;km/h in side gusts, by trial and error: 1,680 attempts in 35 generations of 48, every one recorded. In generation 0, 42 of 48 fall within a second; by the last, 29 of 48 ride the full 15 s. Watch him fall, drift into the grass and set new records one attempt at a time, with his brain firing in the side panel. The connectome never changes; only the 91 numbers between his descending neurons and the handlebars do.</p>
+    <p data-i18n="rideP">Starting from a blank decoder that cannot steer, the fly's whole brain learns to ride a Colnago V4Rs down a 7&nbsp;m road at 20&nbsp;km/h in side gusts, by trial and error: 1,776 attempts in 37 generations of 48, every one recorded. In generation 0, 36 of 48 are down within a second; by the last, 35 of 48 ride the full 15 s and none falls. Watch him fall, drift into the grass and set new records one attempt at a time, with his brain firing in the side panel. The connectome never changes; only the 90 numbers between his descending neurons and the handlebars do.</p>
     <span class="go" data-i18n="rideGo">Watch him learn →</span>
   </a>
   <a class="card" href="/dashboard/" style="--c:var(--dash)">
-    <div class="kicker" data-i18n="dashK">Live brain · 11 drinks</div>
+    <div class="kicker" data-i18n="dashK">Live brain · 10 experiments</div>
     <h2 data-i18n="dashH">Fly Brain Live</h2>
-    <p data-i18n="dashP">The firing of all 140,638 neurons with a known position, in 50&nbsp;ms frames, while the fly tastes orange juice, bubble tea, cola, espresso, lager and more. Watch whether the feeding motor neuron MN9 fires.</p>
+    <p data-i18n="dashP">The firing of all 140,638 neurons with a known position, in 50&nbsp;ms frames, while his sugar, water, bitter or Ir94e taste neurons, or his antennal Johnston's organ neurons, are driven as in Shiu et al. 2024. Watch whether the feeding motor neuron MN9 fires, and how bitter shuts it down.</p>
     <span class="go" data-i18n="dashGo">Open the dashboard →</span>
-  </a>
-  <a class="card" href="/bar/" style="--c:var(--bar)">
-    <div class="kicker" data-i18n="barK">3D web app · 9 cocktails</div>
-    <h2 data-i18n="barH">Fly Bar</h2>
-    <p data-i18n="barP">A fly walks into a bar. Each cocktail becomes a taste vector on his real gustatory neurons; the bar ranks what he likes, and the 3D brain lights up. Piña Colada wins.</p>
-    <span class="go" data-i18n="barGo">Enter the bar →</span>
-  </a>
-  <a class="card" href="/classic" style="--c:var(--classic)">
-    <div class="kicker" data-i18n="clsK">Single page</div>
-    <h2 data-i18n="clsH">Fly Bar, classic</h2>
-    <p data-i18n="clsP">The original one-file version of the bar: from tongue to proboscis, the taste channels and the circuit that ends at MN9, rebuilt from our run.</p>
-    <span class="go" data-i18n="clsGo">Open →</span>
   </a>
 </div>
 
@@ -124,7 +112,7 @@ footer a{color:var(--ink2)}
   </div>
   <div>
     <h3 data-i18n="realH">What is real</h3>
-    <p data-i18n="realP">Neurons, synapses and their signs come from the Janelia / Google male CNS v1.0 connectome; the neuron model follows Shiu et al., <i>Nature</i> 2024. How a drink or a bike's lean maps onto sensory neurons is modeled, and so is the bike decoder.</p>
+    <p data-i18n="realP">Neurons, synapses and their signs come from the Janelia / Google male CNS v1.0 connectome; the neuron model is Shiu et al., <i>Nature</i> 2024, re-implemented by us and checked spike for spike against their code. How a bike's lean maps onto sensory neurons is modeled, and so is the bike decoder.</p>
   </div>
   <div>
     <h3 data-i18n="ranH">Where it ran</h3>
@@ -133,7 +121,7 @@ footer a{color:var(--ink2)}
 </section>
 
 <footer>
-  <span data-i18n="built">Built on a third-party simulator · data <a href="https://male-cns.janelia.org/download">male-cns.janelia.org</a></span>
+  <span data-i18n="built">Model: <a href="https://github.com/philshiu/Drosophila_brain_model">Shiu et al. 2024</a> · data <a href="https://male-cns.janelia.org/download">male-cns.janelia.org</a></span>
   <a href="https://github.com/victory-c/flybrain-play" data-i18n="src">Source on GitHub</a>
 </footer>
 </main>
@@ -142,29 +130,21 @@ footer a{color:var(--ink2)}
 (function(){
   var ZH = {
     title: 'flybrain-play · 果蝇全脑模拟',
-    desc: '一只果蝇完整的中枢神经系统（166,700 个神经元，每一个突触）尝饮料、骑公路车。附交互式回放。',
+    desc: '一只果蝇完整的中枢神经系统（166,700 个神经元，每一个突触）作为脉冲神经网络：味觉与触角回路的回放，以及他学骑公路车。',
     lang: '语言',
-    lede: '我们拿来一只雄性果蝇中枢神经系统的完整接线图，给它通上电，让它尝饮料、骑公路车。',
+    lede: '我们拿来一只雄性果蝇中枢神经系统的完整接线图，给它通上电，在上面重做 Shiu 等人的味觉实验，再让它骑公路车。',
     s1: '<b>166,700</b> 个神经元',
     s2: '每个突触都来自 <b>male CNS v1.0</b>',
     s3: '漏积分放电模型，步长 <b>0.1&nbsp;ms</b>',
     s4: '连接组未经任何训练',
     rideK: '一次次尝试的学习过程 · 新',
     rideH: '果蝇学会骑车',
-    rideP: '从一个完全不会转向的空白解码器开始，果蝇的全脑靠试错学会骑 Colnago V4Rs：路宽 7&nbsp;m，车速 20&nbsp;km/h，还有阵阵侧风；35 代、每代 48 名骑手，共 1,680 次尝试，每一次都有记录。第 0 代 48 次里有 42 次一秒内摔倒，到最后一代有 29 次骑满 15 秒。一次一次地看他摔倒、骑进草地、刷新纪录，侧边面板同步显示他全脑的放电。连接组始终不变，变的只有下行神经元到车把之间的 91 个数字。',
+    rideP: '从一个完全不会转向的空白解码器开始，果蝇的全脑靠试错学会骑 Colnago V4Rs：路宽 7&nbsp;m，车速 20&nbsp;km/h，还有阵阵侧风；37 代、每代 48 名骑手，共 1,776 次尝试，每一次都有记录。第 0 代 48 次里有 36 次一秒内就倒下或出界，到最后一代有 35 次骑满 15 秒，没有一次摔倒。一次一次地看他摔倒、骑进草地、刷新纪录，侧边面板同步显示他全脑的放电。连接组始终不变，变的只有下行神经元到车把之间的 90 个数字。',
     rideGo: '看他学车 →',
-    dashK: '全脑实况 · 11 种饮料',
+    dashK: '全脑实况 · 10 个实验',
     dashH: 'Fly Brain Live',
-    dashP: '逐帧回放果蝇品尝橙汁、珍珠奶茶、可乐、浓缩咖啡、拉格啤酒等饮料时，全部 140,638 个有位置坐标的神经元的放电，每帧 50&nbsp;ms。看看摄食运动神经元 MN9 会不会被激活。',
+    dashP: '按 Shiu et al. 2024 的实验驱动他的糖、水、苦、Ir94e 味觉神经元或触角 Johnston 器神经元，逐帧回放全部 140,638 个有位置坐标的神经元的放电，每帧 50&nbsp;ms。看摄食运动神经元 MN9 会不会放电，苦味又怎样把它压下去。',
     dashGo: '打开仪表盘 →',
-    barK: '3D 网页应用 · 9 款鸡尾酒',
-    barH: '苍蝇酒吧',
-    barP: '一只果蝇走进酒吧。每款鸡尾酒都换算成作用在他真实味觉神经元上的味道向量；酒吧按他的喜好排名，3D 大脑随之亮起。椰林飘香（Piña Colada）夺冠。',
-    barGo: '走进酒吧 →',
-    clsK: '单页版',
-    clsH: '苍蝇酒吧 · 经典版',
-    clsP: '酒吧最初的单文件版本：从舌头到口器，味觉通道和终止于 MN9 的神经回路，都按我们的模拟结果重建。',
-    clsGo: '打开 →',
     moreH: '更多骑行回放',
     l0: '最佳解码器 · 16 名骑手 3D 回放（跟拍 / 苍蝇视角）',
     l1: '大脑骑手 · 图表',
@@ -173,10 +153,10 @@ footer a{color:var(--ink2)}
     l4: '大脑接入，不扶车把',
     l5: '开环 · 图表',
     realH: '哪些是真的',
-    realP: '神经元、突触以及突触的正负（兴奋或抑制）都来自 Janelia / Google 的 male CNS v1.0 连接组；神经元模型沿用 Shiu et al., <i>Nature</i> 2024。饮料和车身倾角怎样映射到感觉神经元，属于建模部分，自行车解码器也是。',
+    realP: '神经元、突触以及突触的正负（兴奋或抑制）都来自 Janelia / Google 的 male CNS v1.0 连接组；神经元模型是 Shiu et al., <i>Nature</i> 2024，由我们重新实现，并与他们的代码逐个脉冲核对过。车身倾角怎样映射到感觉神经元属于建模部分，自行车解码器也是。',
     ranH: '在哪里跑的',
     ranP: '在一台配有 RTX A6000 GPU 的 Slurm 节点上运行。单次全脑试验每模拟 1 秒约需 8 秒；在 GPU 上批量运行，128 次试验只要 35 秒。骑车闭环里同时模拟 48 名骑手，每 1 秒骑行时间约耗 20 秒实际时间。',
-    built: '基于第三方模拟器构建 · 数据来自 <a href="https://male-cns.janelia.org/download">male-cns.janelia.org</a>',
+    built: '模型：<a href="https://github.com/philshiu/Drosophila_brain_model">Shiu et al. 2024</a> · 数据来自 <a href="https://male-cns.janelia.org/download">male-cns.janelia.org</a>',
     src: 'GitHub 源代码'
   };
   var KEY = 'flybrain.lang';

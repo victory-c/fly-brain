@@ -1,0 +1,4 @@
+..............                                                           [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_brian2.py:15: could not import 'brian2': No module named 'brian2'
+14 passed, 1 skipped in 84.25s (0:01:24)

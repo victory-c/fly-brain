@@ -1,0 +1,31 @@
+== Sugar taste neurons: sugar 68 neurons at 150 Hz
+   MN9_L 62.4 Hz, MN9_R 0.0 Hz, lit 326, 9.2s
+== Sugar, weak (40 Hz): sugar 68 neurons at 40 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 58, 8.6s
+== Water taste neurons: water 17 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 26, 8.4s
+== Sugar + water: sugar 68 neurons at 150 Hz, water 17 neurons at 150 Hz
+   MN9_L 57.6 Hz, MN9_R 0.0 Hz, lit 356, 8.8s
+== Bitter taste neurons: bitter 38 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 264, 8.8s
+== Sugar + bitter: sugar 68 neurons at 150 Hz, bitter 38 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 347, 8.8s
+== Ir94e taste neurons: ir94e 32 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 188, 8.9s
+== Sugar + Ir94e: sugar 68 neurons at 150 Hz, ir94e 32 neurons at 150 Hz
+   MN9_L 0.0 Hz, MN9_R 0.0 Hz, lit 320, 8.9s
+== Antenna: JO-CE neurons: jo_ce 335 neurons at 150 Hz
+   MN9_L 0.4 Hz, MN9_R 0.0 Hz, lit 1,471, 8.9s
+== Antenna: JO-F neurons: jo_f 78 neurons at 150 Hz
+   MN9_L 5.6 Hz, MN9_R 0.0 Hz, lit 275, 8.9s
+sugar 17 KB
+sugar_weak 5 KB
+water 4 KB
+sugar_water 18 KB
+bitter 13 KB
+sugar_bitter 16 KB
+ir94e 10 KB
+sugar_ir94e 15 KB
+jo_ce 56 KB
+jo_f 15 KB
+brain.js 2380 KB
