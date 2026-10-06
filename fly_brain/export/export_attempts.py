@@ -44,7 +44,7 @@ HTML = r"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fly learns to ride</title>
 <style>
-:root{--pw:340px;--bh:44px;--bmh:230px;--mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Noto Sans Mono",monospace;--bg:#e8e9eb;--pbg:#111317;--bbg:#15171b;--fg:#dfe2e7;--dim:#7f858f;--acc:#f0a24a}
+:root{--pw:max(240px,48vw);--bh:44px;--bmh:max(90px,min(55vh,calc(100vh - 230px)));--mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Noto Sans Mono",monospace;--bg:#e8e9eb;--pbg:#111317;--bbg:#15171b;--fg:#dfe2e7;--dim:#7f858f;--acc:#f0a24a}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:12px/1.4 var(--mono);overflow:hidden}
 #app{display:grid;grid-template-columns:1fr var(--pw);grid-template-rows:1fr var(--bh);height:100%}
 #stage{grid-area:1/1/2/2;position:relative;overflow:hidden;min-width:0;min-height:0;background:var(--bg)}
@@ -85,7 +85,6 @@ button,select{font:11px var(--mono);background:#22252c;color:#d9dce1;border:1px 
 button:hover{border-color:#666}button.on{background:var(--acc);color:#111;border-color:var(--acc)}
 .lang{display:inline-flex;border:1px solid #30343c;border-radius:3px;overflow:hidden;height:24px}.lang button{border:0;border-radius:0;color:#8a8f98;padding:0 7px;height:22px}.lang button+button{border-left:1px solid #30343c}.lang button.on{color:#fff;background:#2c3038}
 @media(max-width:1250px){#app{grid-template-rows:1fr auto}#bar{flex-wrap:wrap;padding:6px 10px;row-gap:4px}#tl{flex:1 1 100%;order:3;height:24px}#credits{display:none}}
-@media(max-width:1100px){:root{--pw:300px}}
 @media(max-width:760px){#app{grid-template-columns:1fr;grid-template-rows:1fr auto 42vh}#stage{grid-area:1/1/2/2}#bar{grid-area:2/1/3/2;flex-wrap:wrap;height:auto;padding:6px 10px;gap:8px}#panel{grid-area:3/1/4/2;border-left:0;border-top:1px solid #000}#bmap{height:110px!important}#vsplit,#hsplit{display:none}#credits,#legend{display:none}#atitle{font-size:20px}}
 </style></head><body>
 <div id="app">
@@ -443,19 +442,19 @@ function setLang(l){if(l===LANG||!I18N[l])return;LANG=l;LS.set('flybrain.lang',l
 for(const b of document.querySelectorAll('#lang button'))b.onclick=()=>setLang(b.dataset.l);
 const COL=['#3fb950','#e5484d','#f0883e','#a371f7'];  // finished, fell, off the road, bailed
 __LIVERY__
-// frame paint: ?paint=orig|f2f2f2|rainbow|c8102e|16181c (LIVERIES, bike_livery.js), remembered per browser; applied once the bike is built
-let PAINT='orig';
+// frame paint: ?paint=orig|f2f2f2|rainbow|c8102e|16181c (LIVERIES, bike_livery.js), carbon black unless asked or remembered per browser; applied once the bike is built
+let PAINT='16181c';
 function setPaint(){liveryApply(PAINT,scene)}
 (function(){const sel=$('paint');for(const [v,k] of LIVERIES){const o=document.createElement('option');o.value=v;o.dataset.k=k;o.textContent=tt(k);sel.appendChild(o)}
- const q=Q.get('paint'),sv=LS.get('flybrain.paint');PAINT=LIVERIES.some(x=>x[0]===q)?q:LIVERIES.some(x=>x[0]===sv)?sv:'orig';sel.value=PAINT;
+ const q=Q.get('paint'),sv=LS.get('flybrain.paint');PAINT=LIVERIES.some(x=>x[0]===q)?q:LIVERIES.some(x=>x[0]===sv)?sv:'16181c';sel.value=PAINT;
  sel.onchange=()=>{PAINT=sel.value;LS.set('flybrain.paint',PAINT);setPaint()}})();
 // splitters: panel width (--pw) and brain-map height (--bmh), remembered per browser; the renderers follow via ResizeObserver
 (function(){const root=document.documentElement.style,panel=$('panel');
- const lim={pw:()=>[240,Math.max(240,Math.min(innerWidth*0.7,1000))],bmh:()=>[90,Math.max(90,panel.clientHeight-230)]};
+ const lim={pw:()=>[240,Math.max(240,innerWidth*0.7)],bmh:()=>[90,Math.max(90,panel.clientHeight-230)]};
  const setv=(k,v)=>{const [lo,hi]=lim[k]();v=Math.round(Math.max(lo,Math.min(hi,v)));root.setProperty('--'+k,v+'px');return v};
  if(innerWidth>760){const pw=+LS.get('flybrain.attempts.pw'),bmh=+LS.get('flybrain.attempts.bmh');if(pw)setv('pw',pw);if(bmh)setv('bmh',bmh)}
  function wire(id,k,cls,delta){const h=$(id);let x0=0,y0=0,v0=0;
-  h.addEventListener('pointerdown',e=>{if(e.button)return;e.preventDefault();x0=e.clientX;y0=e.clientY;v0=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--'+k))||0;
+  h.addEventListener('pointerdown',e=>{if(e.button)return;e.preventDefault();x0=e.clientX;y0=e.clientY;v0=k==='pw'?panel.offsetWidth:$('bmap').offsetHeight;
    h.classList.add('on');document.body.classList.add('dragging',cls);try{h.setPointerCapture(e.pointerId)}catch(err){}});
   h.addEventListener('pointermove',e=>{if(!h.classList.contains('on'))return;setv(k,v0+delta(e.clientX-x0,e.clientY-y0))});
   const end=e=>{if(!h.classList.contains('on'))return;h.classList.remove('on');document.body.classList.remove('dragging',cls);
