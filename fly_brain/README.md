@@ -45,24 +45,26 @@ in the script before the sweep.
 ## Layout
 
 ```
-brain/      connectome.py  engine.py  loop.py  graph_engine.py  stimuli.py  atlas.py  shiu_groups.json
+brain/      connectome.py  engine.py  loop.py  graph_engine.py  stimuli.py  atlas.py  select.py  fetch.py  shiu_groups.json
 runs/       calibrate_wsyn.py, bench_gpu.py, profile_step.py; the bike: screen.py, probe.py, ride.py
 bike/       bicycle dynamics (Whipple / Meijaard 2007), senses, readout; see bike/README.md
 export/     export_dashboard.py + pack_dashboard.py (Fly Brain Live), export_ride*.py, export_attempts.py (/ride/)
 dashboard/  Fly Brain Live page and its data
-tests/      test_engine.py, test_brian2.py (needs brian2), test_graph.py (needs a GPU), test_bike.py, test_ride.py
+tests/      test_engine.py, test_brian2.py (needs brian2), test_graph.py (needs a GPU), test_bike.py, test_ride.py,
+            test_select.py, test_fetch.py, test_notebook.py; synthetic_brain.py (a made-up brain in the real layout)
 results/    small JSON summaries of every run; the attempts page under results/attempts_page/
 ```
 
 ## Running
 
-Python 3.11+ with `numpy pandas pyarrow torch` (and `pytest`; `brian2` for the Brian2 check). Put the three
-male CNS v1.0 tables (minconf 0.5, ~1.1 GB, [male-cns.janelia.org/download](https://male-cns.janelia.org/download))
-in `data/`, then from this directory:
+Python 3.11+ with `../requirements.txt` (`bash ../make-venv.sh` sets it up; `brian2` for the Brian2 check).
+`python -m brain.fetch` downloads the built brain (brain.npz, brain_meta.parquet, web_data/atlas.npz) from this
+repository's GitHub release. To build it yourself, put the three male CNS v1.0 tables (minconf 0.5, ~1.1 GB,
+[male-cns.janelia.org/download](https://male-cns.janelia.org/download)) in `data/`, then from this directory:
 
 ```bash
 python -m brain.connectome                 # -> brain.npz, brain_meta.parquet (~30 s, ~20 GB RAM)
-python -m brain.atlas                      # -> web_data/atlas.npz (3D point cloud)
+python -m brain.atlas                      # -> web_data/atlas.npz (3D point cloud, soma positions in um)
 python -m pytest tests                     # engine, Brian2 and CUDA Graph checks, bike
 python -m runs.calibrate_wsyn              # the weight-scale sweep (GPU, ~30 min)
 python -m export.export_dashboard && python export/pack_dashboard.py   # Fly Brain Live data (GPU, ~5 min)
@@ -79,6 +81,14 @@ brain = Brain()
 r = experiment(brain, stimuli.group("sugar"), 150.0, flies=16,
                params={"w_syn": W_SYN}, device="cuda")
 print(r["mean_hz"][stimuli.mn9()])         # MN9 left, right in Hz
+```
+
+Neurons by name instead of by row (`brain/select.py`):
+
+```python
+dns = brain.select(superclass="descending_neuron", side="L")
+near = brain.select(near=("MN9_L", 20.0))  # somata within 20 um of MN9_L's
+brain.meta.loc[dns, ["bodyId", "type", "instance"]]
 ```
 
 The bike experiments are described in [bike/README.md](bike/README.md).

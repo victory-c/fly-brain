@@ -13,7 +13,7 @@
 # $2 = lane filter from runs.probe (default results/probe.json).
 set -euo pipefail
 cd "$SLURM_SUBMIT_DIR/fly_brain"  # submit from the repo root
-PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python
+PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
 DEC=${1:-results/lane/cem_mu.json}; PROBE=${2:-results/probe.json}
 COMMON="--tau-lane-ms 300 --lane-filter $PROBE --readout lane --lane hs --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --riders 16 --seconds 20 --seed 7 --center-batch"
 echo "== $(date +%T) replay $DEC"

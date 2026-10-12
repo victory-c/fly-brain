@@ -2,7 +2,8 @@
 
 The map shows each neuron at its cell body: the annotated soma position, or for neurons whose soma lies outside
 the imaged volume the point where the neurite leaves it (tosomaLocation). Neurons with neither are not drawn.
-Positions are shifted so the bounding box is centred on 0 and scaled by one factor so its longest side spans 2.
+Positions are shifted so the bounding box is centred on 0 and scaled by one factor so its longest side spans 2
+(`xyz`, for the pages); `xyz_um` keeps them in micrometres (the dataset's 8 nm voxels) for brain.select(near=...).
 Built once into web_data/atlas.npz:
 
     python -m brain.atlas
@@ -17,9 +18,9 @@ neuropils (gnathal ganglia, prow), else as "other".
 import numpy as np
 import pandas as pd
 
-from .connectome import ANNOTATIONS, META, ROOT
+from .connectome import ANNOTATIONS, ATLAS, META
 
-ATLAS = ROOT / "web_data" / "atlas.npz"
+VOXEL_UM = 0.008  # male-CNS coordinates are 8 nm voxels (male-cns.janelia.org/download)
 CLOUD_HZ = 40.0  # firing rate drawn at full brightness on the maps
 
 REGIONS = [  # (id, label) in display order: sensory, central brain, output
@@ -95,8 +96,10 @@ def build():
     centre = (xyz.max(axis=0) + xyz.min(axis=0)) / 2
     scale = 2 / np.ptp(xyz, axis=0).max()
     ATLAS.parent.mkdir(exist_ok=True)
-    np.savez(ATLAS, xyz=((xyz - centre) * scale).astype(np.float32), row=meta["row"].to_numpy(np.int64)[drawn])
-    print(f"{drawn.sum():,} of {len(meta):,} neurons drawn -> {ATLAS}")
+    np.savez(ATLAS, xyz=((xyz - centre) * scale).astype(np.float32), row=meta["row"].to_numpy(np.int64)[drawn],
+             xyz_um=(xyz * VOXEL_UM).astype(np.float32))
+    box = " x ".join(f"{side:.0f}" for side in np.ptp(xyz, axis=0) * VOXEL_UM)
+    print(f"{drawn.sum():,} of {len(meta):,} neurons drawn, bounding box {box} um -> {ATLAS}")
 
 
 if __name__ == "__main__":

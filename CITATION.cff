@@ -1,0 +1,53 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it, the male CNS connectome it runs on, and the model it implements."
+title: "fly-brain: the whole male fruit-fly CNS as a spiking network"
+type: software
+authors:
+  - family-names: Chun
+    given-names: Victor
+repository-code: "https://github.com/victory-c/fly-brain"
+url: "https://fly-brain-bike.vercel.app"
+license: MIT
+references:
+  - type: article
+    title: "Sexual dimorphism in the complete Drosophila male central nervous system connectome"
+    authors:
+      - family-names: Berg
+        given-names: Stuart
+      - family-names: Beckett
+        given-names: Isabella R.
+      - family-names: Costa
+        given-names: Marta
+      - family-names: Schlegel
+        given-names: Philipp
+      - family-names: Januszewski
+        given-names: Michał
+      - name: "et al."
+    journal: Cell
+    volume: 189
+    issue: 18
+    start: 5504
+    end: "5526.e15"
+    year: 2026
+    doi: 10.1016/j.cell.2026.08.015
+  - type: data
+    title: "Male CNS v1.0 connectome"
+    authors:
+      - name: "HHMI Janelia FlyEM Project Team, Cambridge Connectomics Group and Google Research"
+    url: "https://male-cns.janelia.org"
+    license: CC-BY-4.0
+  - type: article
+    title: "A Drosophila computational brain model reveals sensorimotor processing"
+    authors:
+      - family-names: Shiu
+        given-names: Philip K.
+      - family-names: Sterne
+        given-names: Gabriella R.
+      - name: "et al."
+    journal: Nature
+    volume: 634
+    issue: 8032
+    start: 210
+    end: 219
+    year: 2024
+    doi: 10.1038/s41586-024-07763-9

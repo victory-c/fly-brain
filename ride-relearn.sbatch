@@ -18,7 +18,7 @@
 set -euo pipefail
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-8}
 cd "$SLURM_SUBMIT_DIR/fly_brain"
-PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python
+PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
 OUT=${1:-results/relearn}; MIN=${2:-165}
 mkdir -p $OUT/attempts
 [ -s $OUT/attempts/init_blank.json ] || cp results/relearn/attempts/init_blank.json $OUT/attempts/  # blank decoder

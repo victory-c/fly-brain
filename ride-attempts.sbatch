@@ -6,8 +6,8 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --time=03:05:00
-#SBATCH --output=/home/s/st/stevejobs/flybrain/logs/flyattempt-%j.out
-#SBATCH --error=/home/s/st/stevejobs/flybrain/logs/flyattempt-%j.err
+#SBATCH --output=logs/flyattempt-%j.out
+#SBATCH --error=logs/flyattempt-%j.err
 # Learning to ride from a blank decoder, every attempt recorded (the /ride/ attempts page).
 # Blank = no steering weights, pedal ~80 W, brake off (results/attempts/init_blank.json); cross-entropy search over the
 # 91 decoder numbers at road speed (5.5 m/s, 5 Nm gusts, leaving the 7 m road ends the run), with the round-2 fixes
@@ -16,8 +16,8 @@
 # the population mean, the record and the earliest/longest failure of each generation -> results/attempts/gen*.npz.
 set -euo pipefail
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-8}
-cd /home/s/st/stevejobs/flybrain/fly_brain
-PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python
+cd "$SLURM_SUBMIT_DIR/fly_brain"  # submit from the repo root
+PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
 OUT=${1:-results/attempts}; MIN=${2:-170}
 echo "== $(date) attempts -> $OUT"
 $PY -m runs.ride --init-theta $OUT/init_blank.json --sigma-new 0.1 --sigma0 0.3 --sigma-lane-filter 1.0 --sigma-min 0.03 --sigma-pedal 0 \

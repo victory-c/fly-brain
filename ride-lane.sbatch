@@ -6,13 +6,13 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=48G
 #SBATCH --time=03:00:00
-#SBATCH --output=/home/s/st/stevejobs/flybrain/logs/flylane-%j.out
-#SBATCH --error=/home/s/st/stevejobs/flybrain/logs/flylane-%j.err
+#SBATCH --output=logs/flylane-%j.out
+#SBATCH --error=logs/flylane-%j.err
 # Lane-keeping pipeline: passenger screen with the HS lane cue -> teacher-initialised CEM -> replay of the best.
 set -euo pipefail
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-cd /home/s/st/stevejobs/flybrain/fly_brain
-PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python
+cd "$SLURM_SUBMIT_DIR/fly_brain"  # submit from the repo root
+PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
 echo "== $(date) screen"
 $PY -m runs.screen --riders 16 --seconds 8 --lane hs --out results/screen_lane.json
 echo "== $(date) train"

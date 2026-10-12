@@ -6,8 +6,8 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=48G
 #SBATCH --time=03:20:00
-#SBATCH --output=/home/s/st/stevejobs/flybrain/logs/flylane-%j.out
-#SBATCH --error=/home/s/st/stevejobs/flybrain/logs/flylane-%j.err
+#SBATCH --output=logs/flylane-%j.out
+#SBATCH --error=logs/flylane-%j.err
 # Lane keeping, next round (~3 GPU h, one job, sequential):
 #  1) four 48 x 15 s replays on seed 31 of the sweep decoder (gen-12 mean, results/sweep/gain_-0.29.json: 8.40 s on the
 #     road), paired rider by rider with results/sweep/*.trace.json: batch-mean centring, then three cue/gain variants;
@@ -17,8 +17,8 @@
 #     the new one). Adopt the new decoder only if it beats the old by >= 1.5 s on the road (about 2 paired SE).
 set -euo pipefail
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-8}
-cd /home/s/st/stevejobs/flybrain/fly_brain
-PY=${PY:-/home/s/st/stevejobs/flybrain/venv-cuda/bin/python}
+cd "$SLURM_SUBMIT_DIR/fly_brain"  # submit from the repo root
+PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
 D=${OUTDIR:-results/lane}; BUDGET_MIN=${BUDGET_MIN:-178}; T0=$(date +%s)
 mkdir -p $D
 BASE="--tau-lane-ms 300 --lane-filter results/probe.json --readout lane --lane hs --v0 5.5 --gust 5 --offroad 3.5"

@@ -11,4 +11,4 @@
 set -euo pipefail
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 cd "$SLURM_SUBMIT_DIR/fly_brain"
-/home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m runs.calibrate_wsyn "$@"
+"${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}" -m runs.calibrate_wsyn "$@"
