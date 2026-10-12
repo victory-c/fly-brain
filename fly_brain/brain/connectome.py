@@ -36,6 +36,7 @@ ANNOTATIONS = DATA / "body-annotations-male-cns-v1.0-minconf-0.5.feather"
 TRANSMITTERS = DATA / "body-neurotransmitters-male-cns-v1.0.feather"
 WEIGHTS = DATA / "connectome-weights-male-cns-v1.0-minconf-0.5.feather"
 NPZ, META = ROOT / "brain.npz", ROOT / "brain_meta.parquet"
+ATLAS = ROOT / "web_data" / "atlas.npz"  # written by brain/atlas.py
 
 CHLORIDE_TRANSMITTERS = {"gaba", "glutamate", "histamine"}
 CALLS_BY_TRUST = ["consensus_nt", "celltype_predicted_nt", "predicted_nt"]
@@ -43,9 +44,16 @@ FIELDS = ["type", "instance", "superclass", "class", "subclass", "somaSide", "ro
 
 
 class Brain:
-    """A built wiring diagram, ready to simulate: `n` neurons and the CSR arrays (as torch tensors)."""
+    """A built wiring diagram, ready to simulate: `n` neurons and the CSR arrays (as torch tensors).
 
-    def __init__(self, path=NPZ):
+    `meta` and `atlas` are only read when a method needs them (Brain.meta, Brain.select): the per-neuron table
+    of brain_meta.parquet and the soma positions of web_data/atlas.npz. A rewired brain with the same neurons
+    can share both."""
+
+    def __init__(self, path=NPZ, meta=META, atlas=ATLAS):
+        if not Path(path).exists():
+            raise SystemExit(f"{path} not found: download it with `python -m brain.fetch`, "
+                             "or build it with `python -m brain.connectome`")
         with np.load(path, allow_pickle=False) as stored:
             if "ptr" not in stored.files:
                 raise SystemExit(f"{path} has an older layout; rebuild it with `python -m brain.connectome`")
@@ -54,8 +62,40 @@ class Brain:
         self.ptr, self.post = (torch.as_tensor(arrays[k], dtype=torch.int64) for k in ("ptr", "post"))
         self.syn = torch.as_tensor(arrays["syn"], dtype=torch.float32)
         self.n, self.n_edges = self.ptr.numel() - 1, self.post.numel()
+        self.meta_path, self.atlas_path = Path(meta), Path(atlas)
         self._per_device = {}
         self._sorted = None
+        self._meta = None
+        self._positions = None
+
+    @property
+    def meta(self):
+        """One row per neuron, indexed by simulator row: bodyId, type, instance, superclass, class, side,
+        transmitter, synapse counts, ... (brain_meta.parquet; `side` is somaSide, else the side the root enters).
+        Look selected neurons up with brain.meta.loc[rows]."""
+        if self._meta is None:
+            meta = pd.read_parquet(self.meta_path)
+            if (len(meta) != self.n or not np.array_equal(meta["row"].to_numpy(), np.arange(self.n))
+                    or not np.array_equal(meta["bodyId"].to_numpy(), self.body_ids)):
+                raise SystemExit(f"{self.meta_path} does not describe this brain's {self.n:,} neurons in row order")
+            meta["side"] = meta["somaSide"].where(meta["somaSide"].isin(["L", "R"]), meta["rootSide"])
+            self._meta = meta
+        return self._meta
+
+    @property
+    def positions(self):
+        """(n, 3) soma positions in micrometres, NaN for neurons without one (see brain/select.py)."""
+        if self._positions is None:
+            from .select import load_positions
+            self._positions = load_positions(self.atlas_path, self.n)
+        return self._positions
+
+    def select(self, type=None, *, instance=None, side=None, superclass=None, class_=None, transmitter=None,
+               region=None, near=None):
+        """Sorted simulator rows of the neurons that pass every filter given; see brain/select.py."""
+        from .select import select
+        return select(self, type=type, instance=instance, side=side, superclass=superclass, class_=class_,
+                      transmitter=transmitter, region=region, near=near)
 
     def on(self, device):
         """(ptr, post, syn) on `device`, copied there once."""
