@@ -1,4 +1,6 @@
 #!/bin/bash
+# Build venv-cuda/ (make-venv.sh cuda: torch for CUDA 12.1) on the GPU node and check the GPU works.
+# Submit from the repo root: sbatch cuda-venv.sbatch
 #SBATCH --job-name=cudavenv
 #SBATCH --partition=ocf-hpc
 #SBATCH --nodelist=corruption
@@ -6,19 +8,12 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --time=01:00:00
-#SBATCH --output=/home/s/st/stevejobs/flybrain/logs/cudavenv-%j.out
-#SBATCH --error=/home/s/st/stevejobs/flybrain/logs/cudavenv-%j.err
+#SBATCH --output=logs/cudavenv-%j.out
+#SBATCH --error=logs/cudavenv-%j.err
 set -euo pipefail
-ROOT=/home/s/st/stevejobs/flybrain
-VENV=$ROOT/venv-cuda
-export PIP_CACHE_DIR=$ROOT/.pip-cache
-if [ ! -x "$VENV/bin/python" ]; then
-  python3 -m venv "$VENV"
-  "$VENV/bin/pip" install -q --upgrade pip
-  "$VENV/bin/pip" install -q numpy pandas pyarrow
-  "$VENV/bin/pip" install -q torch --index-url https://download.pytorch.org/whl/cu121
-fi
-"$VENV/bin/python" - <<'PY'
+cd "$SLURM_SUBMIT_DIR"
+bash make-venv.sh cuda
+venv-cuda/bin/python - <<'PY'
 import torch
 print("torch", torch.__version__, "cuda build", torch.version.cuda, "available", torch.cuda.is_available())
 if torch.cuda.is_available():

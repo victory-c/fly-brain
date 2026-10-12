@@ -1,0 +1,9 @@
+# What the simulator, the bike, the tests and the quickstart notebook need, on Python 3.11+.
+# make-venv.sh installs torch from the PyTorch index that fits the machine (CPU, or CUDA 12.1 on the GPU node)
+# before the rest. Optional: brian2, only for tests/test_brian2.py (the spike-for-spike check against Brian2).
+numpy>=1.26
+pandas>=2.2
+pyarrow>=15
+torch>=2.5
+matplotlib>=3.8
+pytest>=8
