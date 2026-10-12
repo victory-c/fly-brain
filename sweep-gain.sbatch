@@ -6,13 +6,13 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=48G
 #SBATCH --time=02:00:00
-#SBATCH --output=/home/s/st/stevejobs/flybrain/logs/flysweep-%j.out
-#SBATCH --error=/home/s/st/stevejobs/flybrain/logs/flysweep-%j.err
+#SBATCH --output=logs/flysweep-%j.out
+#SBATCH --error=logs/flysweep-%j.err
 # Lane-gain sweep: the slow-lane decoder with only the lane-filter gain changed, 48 riders x 15 s, same gusts,
 # leaving the road ends a run. "upright" in each summary = time upright AND on the road.
 set -euo pipefail
-cd /home/s/st/stevejobs/flybrain/fly_brain
-PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python
+cd "$SLURM_SUBMIT_DIR/fly_brain"  # submit from the repo root
+PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
 COMMON="--tau-lane-ms 300 --lane-filter results/probe.json --readout lane --lane hs --gains hs_heading=150,hs_lane=50 --v0 5.5 --gust 5 --offroad 3.5 --riders 48 --seconds 15 --seed 31"
 for f in "$@"; do
   echo "== $(date +%T) $f"

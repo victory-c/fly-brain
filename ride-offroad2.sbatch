@@ -6,13 +6,13 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=48G
 #SBATCH --time=02:30:00
-#SBATCH --output=/home/s/st/stevejobs/flybrain/logs/flyroad2-%j.out
-#SBATCH --error=/home/s/st/stevejobs/flybrain/logs/flyroad2-%j.err
+#SBATCH --output=logs/flyroad2-%j.out
+#SBATCH --error=logs/flyroad2-%j.err
 # CEM with "leaving the road ends the run": seeded from a decoder given as $1 (default: the lane CEM result).
 set -euo pipefail
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-cd /home/s/st/stevejobs/flybrain/fly_brain
-PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python
+cd "$SLURM_SUBMIT_DIR/fly_brain"  # submit from the repo root
+PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
 SEED_THETA=${1:-results/ride_lane.json}
 OUT=${2:-results/ride_road2.json}
 echo "== $(date) cem-offroad from $SEED_THETA -> $OUT"

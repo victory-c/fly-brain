@@ -5,9 +5,9 @@
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=64G
 #SBATCH --time=03:00:00
-#SBATCH --output=/home/s/st/stevejobs/flybrain/logs/flydash-%j.out
-#SBATCH --error=/home/s/st/stevejobs/flybrain/logs/flydash-%j.err
+#SBATCH --output=logs/flydash-%j.out
+#SBATCH --error=logs/flydash-%j.err
 set -euo pipefail
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-cd /home/s/st/stevejobs/flybrain/fly_brain
-/home/s/st/stevejobs/flybrain/venv/bin/python -m export.export_dashboard "$@"
+cd "$SLURM_SUBMIT_DIR/fly_brain"  # submit from the repo root
+"${PY:-$SLURM_SUBMIT_DIR/venv/bin/python}" -m export.export_dashboard "$@"

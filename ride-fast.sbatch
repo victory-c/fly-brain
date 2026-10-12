@@ -6,14 +6,14 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=48G
 #SBATCH --time=03:00:00
-#SBATCH --output=/home/s/st/stevejobs/flybrain/logs/flyfast-%j.out
-#SBATCH --error=/home/s/st/stevejobs/flybrain/logs/flyfast-%j.err
+#SBATCH --output=logs/flyfast-%j.out
+#SBATCH --error=logs/flyfast-%j.err
 # Off-road CEM with the HS-driven "lane" descending neurons added to the readout (runs/probe.py found them),
 # seeded from the balance-good decoder (results/ride_lane.json). $1 = sensory gain overrides ('' = default), $2 = out.
 set -euo pipefail
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-cd /home/s/st/stevejobs/flybrain/fly_brain
-PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python
+cd "$SLURM_SUBMIT_DIR/fly_brain"  # submit from the repo root
+PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
 GAINS=${1:-}
 OUT=${2:-results/ride_lanedn.json}
 echo "== $(date) cem lane-readout gains='$GAINS' -> $OUT"

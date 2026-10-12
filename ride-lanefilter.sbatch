@@ -6,14 +6,14 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=48G
 #SBATCH --time=03:00:00
-#SBATCH --output=/home/s/st/stevejobs/flybrain/logs/flyfilter-%j.out
-#SBATCH --error=/home/s/st/stevejobs/flybrain/logs/flyfilter-%j.err
+#SBATCH --output=logs/flyfilter-%j.out
+#SBATCH --error=logs/flyfilter-%j.err
 # Off-road CEM where the lane channel enters as ONE matched-filter signal (runs/probe.py HS response pattern)
 # with one learned gain; individual lane-DN weights are held near zero. Seeded from the balance-good decoder.
 set -euo pipefail
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-cd /home/s/st/stevejobs/flybrain/fly_brain
-PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python
+cd "$SLURM_SUBMIT_DIR/fly_brain"  # submit from the repo root
+PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
 GAINS=${1:-hs_heading=150,hs_lane=50}
 OUT=${2:-results/ride_filter.json}
 echo "== $(date) cem lane-filter gains='$GAINS' -> $OUT"
