@@ -52,7 +52,10 @@ activity), so this run replaced them on the /ride/ pages; see the bike README's 
 fly-brain/
 ├── fly_brain/        brain/ (simulator), runs/, bike/, export/, dashboard/, tests/, results/
 ├── site/             landing page and build script for the Vercel site
-├── tools/            jobs_ledger.py (JOBS.md from sacct), derive_shiu_groups.py
+├── notebooks/        00_quickstart.ipynb (runs on Colab)
+├── docs/             ONBOARDING.md, GLOSSARY.md, CURRENT_NUMBERS.md
+├── tools/            jobs_ledger.py (JOBS.md from sacct), derive_shiu_groups.py, publish_brain.sh
+├── make-venv.sh      the Python environment from requirements.txt (CPU, or CUDA on the GPU node)
 ├── *.sbatch          Slurm jobs (calibrate-wsyn, ride-*, bench, cuda-venv, dashboard)
 ├── sync.sh           commit + push everything that changed (code, results, logs, JOBS.md)
 ├── JOBS.md           every Slurm job (sbatch and srun) with its exact command line and outputs
@@ -63,12 +66,20 @@ fly-brain/
 
 The web demos need nothing but a browser; `bash site/build.sh` collects them into `site/dist`.
 
-To run the simulations you need Python 3.11+ with `numpy pandas pyarrow torch` and the male CNS v1.0 files
-(~1.1 GB, [male-cns.janelia.org/download](https://male-cns.janelia.org/download)) in `fly_brain/data/`; then,
-from `fly_brain/`, `python -m brain.connectome` builds `brain.npz` (~30 s) and `python -m pytest tests` checks
-the engine. The sbatch scripts are written for the OCF `corruption` node (partition `ocf-hpc`); the newer ones
-(`calibrate-wsyn`, `ride-relearn`) are submitted from the repo root, the older ones use absolute
-`/home/s/st/stevejobs/flybrain` paths.
+To run the simulations, start with [docs/ONBOARDING.md](docs/ONBOARDING.md) (Colab, laptop or the GPU node) or
+the [quickstart notebook](notebooks/00_quickstart.ipynb). In short, with Python 3.11+:
+
+```bash
+bash make-venv.sh && source venv/bin/activate   # CPU; `bash make-venv.sh cuda` on the GPU node
+cd fly_brain
+python -m brain.fetch                           # the prebuilt brain from this repo's release (~220 MB)
+python -m pytest tests                          # engine, selection, bike and notebook checks
+```
+
+To build the brain yourself instead, put the male CNS v1.0 files (~1.1 GB,
+[male-cns.janelia.org/download](https://male-cns.janelia.org/download)) in `fly_brain/data/` and run
+`python -m brain.connectome` (~30 s, ~20 GB RAM) and `python -m brain.atlas`. The sbatch scripts are written
+for the OCF `corruption` node (partition `ocf-hpc`) and are submitted from the repo root.
 
 Not committed (too large, or rebuildable): the connectome download, `brain.npz`, virtualenvs, raw per-bin
 arrays (`*.parquet`, `dashboard/data/*.bin`, `results/*_brain.npz`).
@@ -83,7 +94,12 @@ Cloned next to our work for reference and not copied here:
 | [solomonsealed/flybrain](https://github.com/solomonsealed/flybrain) | FlyWire brain driving flies in a 3D garden, in a Web Worker (MIT) |
 | [eonsystemspbc/fly-brain](https://github.com/eonsystemspbc/fly-brain) | Shiu et al. FlyWire LIF model: activate / silence neurons (GPL-2.0) |
 
-## Credits
+## Licence and credits
+
+The code is MIT-licensed ([LICENSE](LICENSE)). The connectome data, including the prebuilt files that
+`brain.fetch` downloads, is derived from the male CNS v1.0 and licensed CC-BY 4.0; cite Berg et al., *Cell* 2026
+([doi:10.1016/j.cell.2026.08.015](https://doi.org/10.1016/j.cell.2026.08.015)). [CITATION.cff](CITATION.cff)
+has the references.
 
 Connectome: male CNS v1.0, HHMI Janelia FlyEM and Google Research. Neuron model and stimulus sets: Shiu et al.,
 *Nature* 2024. FlyWire cell types: Schlegel et al. / Dorkenwald et al., *Nature* 2024. Bicycle model: Meijaard
