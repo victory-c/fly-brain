@@ -125,9 +125,9 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37488 | None | CANCELLED | 00:00:00 | 1 gpu |  | `sbatch ride-gate.sbatch 4.0 202` |  |
 | 37489 | None | CANCELLED | 00:00:00 | 1 gpu |  | `sbatch ride-gate.sbatch 4.5 201` |  |
 | 37490 | None | CANCELLED | 00:00:00 | 1 gpu |  | `sbatch ride-gate.sbatch 4.5 202` |  |
-| 37491 | 2026-10-17 23:04 | RUNNING | 01:55:33 | 8 cpu, 16G |  | `sbatch --parsable ride-gate.sbatch 4.0 201` | [ride-gate-37491.out](logs/ride-gate-37491.out) |
-| 37492 | 2026-10-17 23:49 | RUNNING | 01:10:51 | 8 cpu, 16G |  | `sbatch --parsable ride-gate.sbatch 4.5 201` | [ride-gate-37492.out](logs/ride-gate-37492.out) |
-| 37493 | 2026-10-17 23:49 | RUNNING | 01:10:51 | 8 cpu, 16G |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.0 202` | [ride-gate-37493.out](logs/ride-gate-37493.out) |
+| 37491 | 2026-10-17 23:04 | RUNNING | 02:25:34 | 8 cpu, 16G |  | `sbatch --parsable ride-gate.sbatch 4.0 201` | [ride-gate-37491.out](logs/ride-gate-37491.out) |
+| 37492 | 2026-10-17 23:49 | RUNNING | 01:40:52 | 8 cpu, 16G |  | `sbatch --parsable ride-gate.sbatch 4.5 201` | [ride-gate-37492.out](logs/ride-gate-37492.out) |
+| 37493 | 2026-10-17 23:49 | RUNNING | 01:40:52 | 8 cpu, 16G |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.0 202` | [ride-gate-37493.out](logs/ride-gate-37493.out) |
 | 37494 | Unknown | PENDING | 00:00:00 |  |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.5 202` |  |
 
 ## Full command lines
