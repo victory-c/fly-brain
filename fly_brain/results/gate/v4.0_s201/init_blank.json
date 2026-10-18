@@ -1,0 +1,2 @@
+{"best_theta": [0.0, 1.0, -0.75, 1.0, -6.0], "decoder_names": ["steer:bias", "pedal:gain", "pedal:bias", "brake:gain", "brake:bias"],
+ "note": "a blank decoder: no steering, pedal ~80 W (holds 5.5 m/s), brake off"}
