@@ -70,3 +70,8 @@ gen 51  fit best  16.17 mean  12.21  upright 11.65 s (max 15.00,  46% finish)  d
 gen 52  fit best  16.19 mean  11.44  upright 10.87 s (max 15.00,  33% finish)  dist  47.6 m  |y| 2.65 m  v 4.50  bailed 0  pop 35,845 sp/s  342s
 gen 53  fit best  16.27 mean  11.60  upright 11.03 s (max 15.00,  42% finish)  dist  48.4 m  |y| 2.58 m  v 4.50  bailed 0  pop 34,721 sp/s  342s
 gen 54  fit best  16.23 mean  12.86  upright 12.21 s (max 15.00,  58% finish)  dist  53.8 m  |y| 2.06 m  v 4.50  bailed 0  pop 36,478 sp/s  341s
+gen 55  fit best  16.25 mean  11.45  upright 10.89 s (max 15.00,  44% finish)  dist  47.8 m  |y| 2.40 m  v 4.50  bailed 0  pop 36,035 sp/s  341s
+gen 56  fit best  16.27 mean  12.57  upright 11.89 s (max 15.00,  52% finish)  dist  51.9 m  |y| 2.26 m  v 4.50  bailed 0  pop 38,101 sp/s  341s
+stopping before gen 57: --max-minutes 300
+done: best fitness 16.27, results -> results/gate/v4.5_s202/cem.json  (296.3 min)
+== done Sun Oct 18 09:09:10 AM PDT 2026
