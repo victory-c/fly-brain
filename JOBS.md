@@ -128,7 +128,7 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37491 | 2026-10-17 23:04 | COMPLETED | 05:03:25 | 8 cpu, 16G |  | `sbatch --parsable ride-gate.sbatch 4.0 201` | [ride-gate-37491.out](logs/ride-gate-37491.out) |
 | 37492 | 2026-10-17 23:49 | COMPLETED | 05:02:33 | 8 cpu, 16G |  | `sbatch --parsable ride-gate.sbatch 4.5 201` | [ride-gate-37492.out](logs/ride-gate-37492.out) |
 | 37493 | 2026-10-17 23:49 | COMPLETED | 05:04:38 | 8 cpu, 16G |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.0 202` | [ride-gate-37493.out](logs/ride-gate-37493.out) |
-| 37494 | 2026-10-18 04:07 | RUNNING | 03:22:07 | 8 cpu, 16G |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.5 202` | [ride-gate-37494.out](logs/ride-gate-37494.out) |
+| 37494 | 2026-10-18 04:07 | RUNNING | 03:52:07 | 8 cpu, 16G |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.5 202` | [ride-gate-37494.out](logs/ride-gate-37494.out) |
 
 ## Full command lines
 
