@@ -1,14 +1,14 @@
 # fly-brain
 
-A fruit fly's whole central nervous system, 166,700 neurons and every synapse between them, run as
-a spiking network. We replay classic stimulation experiments on it, record every neuron, and put it in
+A fruit fly's whole central nervous system, 166,700 neurons and the chemical synapses between them as mapped by
+electron microscopy (the map has no gap junctions), run as a spiking network. We replay classic stimulation experiments on it, record every neuron, and put it in
 charge of a road bike.
 
 **Live demos: https://fly-brain-bike.vercel.app**
 
 | Demo | What you see |
 |---|---|
-| [The fly learns to ride](https://fly-brain-bike.vercel.app/ride/) | From a blank decoder, the whole brain learns to ride a Colnago V4Rs down a 7 m road in side gusts by trial and error; every attempt of the search is replayable, one rider at a time (falls, off-road exits, records), with his brain firing in the side panel. Also: [3D replay of the best decoder, 16 riders](https://fly-brain-bike.vercel.app/ride/3d), [charts](https://fly-brain-bike.vercel.app/ride/charts), [PD rider without a brain](https://fly-brain-bike.vercel.app/ride/oracle), [brain in the loop but not steering](https://fly-brain-bike.vercel.app/ride/open-loop) |
+| [The fly learns to ride](https://fly-brain-bike.vercel.app/ride/) | From blank weights, a small decoder (86 learned numbers) reading the fixed brain learns to ride a Colnago V4Rs down a 7 m road in side gusts by trial and error; every attempt of the search is replayable, one rider at a time (falls, off-road exits, records), with his brain firing in the side panel. Also: [3D replay of the best decoder, 16 riders](https://fly-brain-bike.vercel.app/ride/3d), [charts](https://fly-brain-bike.vercel.app/ride/charts), [PD rider without a brain](https://fly-brain-bike.vercel.app/ride/oracle), [brain in the loop but not steering](https://fly-brain-bike.vercel.app/ride/open-loop) |
 | [Fly Brain Live](https://fly-brain-bike.vercel.app/dashboard/) | Brain activity in 50 ms frames (all 140,638 neurons with a known position) while his sugar, water, bitter or Ir94e taste neurons, or his antennal JO-CE / JO-F neurons, are driven as in Shiu et al. 2024; whether the feeding motor neuron MN9 fires, next to what Shiu found on FlyWire |
 
 ## The simulator
@@ -36,16 +36,22 @@ Details and commands: [fly_brain/README.md](fly_brain/README.md).
 ## The bike
 
 `fly_brain/bike/`, `brain/loop.py`, `runs/screen.py`, `runs/ride.py`; details in
-[fly_brain/bike/README.md](fly_brain/bike/README.md). Bike state becomes firing of real balance, wind,
-optic-flow and leg sensory neurons; descending-neuron firing is decoded into steering torque, pedalling and
-braking; the connectome is never changed, only the decoder is learned. The walking command neurons of the
-literature do not track the lean, but flight-steering descending neurons (DNp20, DNg46, DNp22, ...) track roll
-rate with opposite sign left and right, so the fly steers the bike with its flight-stabilisation reflex.
+[fly_brain/bike/README.md](fly_brain/bike/README.md). Bike state becomes firing of identified balance (haltere), wind (Johnston's
+organ), optic-flow (VS/HS) and leg sensory neurons (the mapping from bike state to their rates is modeled);
+the firing of 42 descending and wing/neck motor neuron types is decoded into steering torque, with pedal power
+and braking held fixed in the current runs; the connectome is never changed, only the decoder is learned. In a
+screen on the earlier simulator (not yet re-run on the current engine), the walking command neurons of the
+literature did not track the lean, but flight-steering descending neurons (DNp20, DNg46, DNp22, ...) tracked
+roll rate with opposite sign left and right, which suggests the decoder reads the fly's flight-stabilisation
+pathway.
 
-On the rewritten simulator the fly learns to ride from a blank decoder in 37 generations of 48 riders (1,776
+On the rewritten simulator a blank decoder learns to ride in 37 generations of 48 riders (1,776
 attempts, `ride-relearn.sbatch`): in the last generation 35 of 48 ride the full 15 s on a 7 m road in side gusts
 and none falls. The final decoder, replayed for 20 s, keeps all 16 riders upright and on the road 19.2 s on
-average. The decoders learned on the earlier simulator do not carry over (the two Brian2 rules lower the brain's
+average. Caveat: these runs start at 5.5 m/s and pedal ~80 W, inside the bike's self-stable range (4.7-7.7 m/s),
+where the bike largely balances itself and hands-off riders stay upright too, so what the decoder adds there is
+mostly staying on the road. Runs with the speed held below that range (4.0 and 4.5 m/s, `ride-gate.sbatch`) are
+in progress. The decoders learned on the earlier simulator do not carry over (the two Brian2 rules lower the brain's
 activity), so this run replaced them on the /ride/ pages; see the bike README's "Simulator change".
 
 ```
@@ -72,7 +78,7 @@ the [quickstart notebook](notebooks/00_quickstart.ipynb). In short, with Python 
 ```bash
 bash make-venv.sh && source venv/bin/activate   # CPU; `bash make-venv.sh cuda` on the GPU node
 cd fly_brain
-python -m brain.fetch                           # the prebuilt brain from this repo's release (~220 MB)
+python -m brain.fetch                           # the prebuilt brain from this repo's release (~215 MB)
 python -m pytest tests                          # engine, selection, bike and notebook checks
 ```
 

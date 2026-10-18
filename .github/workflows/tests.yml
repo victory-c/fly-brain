@@ -1,5 +1,6 @@
 # CPU tests on every pull request and push to main: the engine on hand-made networks, select/fetch on the
-# synthetic brain, the bike, and the quickstart notebook. GPU and Brian2 tests skip. Sparse checkout: the
+# synthetic brain, the bike, the quickstart notebook, and the spike-for-spike check against Shiu's Brian2
+# code (tests/test_brian2.py). GPU tests skip. Sparse checkout: the
 # 1.9 GB of fly_brain/results/ is not needed.
 name: tests
 on:
@@ -28,7 +29,7 @@ jobs:
       - name: Install
         run: |
           pip install torch --index-url https://download.pytorch.org/whl/cpu
-          pip install -r requirements.txt nbclient nbformat ipykernel
+          pip install -r requirements.txt nbclient nbformat ipykernel brian2
       - name: Test
         working-directory: fly_brain
         run: python -m pytest tests -q
