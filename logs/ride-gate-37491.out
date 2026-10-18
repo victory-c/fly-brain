@@ -1,0 +1,24 @@
+init_hold: 23.1 W holds 4.0 m/s
+== 23:04:30 gate v0=4.0 seed=201, max 300 min
+== 23:04:30 2) ride_slow_mu trace at v0=4.0
+replay of results/ride_slow_mu.json: upright  7.93 s (max 20.00,   6% finish)  dist  31.3 m  |y| 5.53 m  v 4.85  bailed 0  pop 60,240 sp/s  259s
+== 23:08:56 3) zbar
+zbar: 8899 on-road samples, |z| uncentred 4.49, lane signal +0.312
+== 23:09:00 4) CEM from a blank decoder at v0=4.0
+Tarmac SL9 + 70 kg: 78.2 kg, self-stable 4.70..7.74 m/s; start at 4.0 m/s, gusts 5 Nm, 48 riders on cuda
+sensory gain overrides: {'hs_heading': 150.0, 'hs_lane': 50.0}
+lane filter from results/gate/v4.0_s201/probe.json: 14 features: DNb06_L +3.0, DNg41_L +10.9, DNg41_R -12.6, DNp18_L +3.6, DNa02_R -2.6, DNa16_L +3.8, DNb03_L +6.2, DNa06_L +7.1, DNge107_L +2.0, DNge107_R +3.2, DNge086_R -3.9, DNge033_L +5.8, GNG283_L +10.6, GNG283_R -10.1
+senses : VS_L 16, HS_L 5, HALT_L 104, JO_L 228, LEG1_L 45, VS_R 18, HS_R 5, HALT_R 101, JO_R 247, LEG1_R 20  (789 neurons)
+readout: DNp20_L 1, DNp20_R 1, DNp22_L 1, DNp22_R 1, DNg46_L 1, DNg46_R 1, DNge043_L 1, DNge043_R 1, DNb06_L 1, DNb06_R 1, DNp17_L 6, DNp17_R 6, DNpe013_L 1, DNpe013_R 1, DNge097_L 1, DNge097_R 1, DNg94_L 1, DNg94_R 1, DNg90_L 1, DNg90_R 1, DNge088_L 1, DNge088_R 1, DNp33_L 1, DNp33_R 1, DNge091_L 7, DNge091_R 7, DNg29_L 1, DNg29_R 1, DNg41_L 1, DNg41_R 1, DNp18_L 1, DNp18_R 1, DNp73_L 1, DNp73_R 1, DNb04_L 1, DNb04_R 1, b1 MN_L 1, b1 MN_R 1, b2 MN_L 1, b2 MN_R 1, b3 MN_L 1, b3 MN_R 1, hg1 MN_L 1, hg1 MN_R 1, hi2 MN_L 2, hi2 MN_R 2, i2 MN_L 1, i2 MN_R 1, DNa01_L 1, DNa01_R 1, DNa02_L 1, DNa02_R 1, DNa03_L 1, DNa03_R 1, DNb01_L 1, DNb01_R 1, DNp09_L 1, DNp09_R 1, DNg100_L 1, DNg100_R 1, DNg97_L 1, DNg97_R 1, MDN_L 2, MDN_R 2, DNp01_L 1, DNp01_R 1, DNa16_L 1, DNa16_R 1, DNb03_L 2, DNb03_R 2, DNa06_L 1, DNa06_R 1, DNp15_L 1, DNp15_R 1, DNge107_L 1, DNge107_R 1, DNge086_L 1, DNge086_R 1, DNge031_L 1, DNge031_R 1, DNge033_L 1, DNge033_R 1, GNG283_L 1, GNG283_R 1
+brain: 166,700 neurons, 789 driven, 112 read out, w_syn 0.1293 mV
+CEM starts from best_theta of results/gate/v4.0_s201/init_hold.json; 85 new decoder weights start at 0 with width 0.1
+lane-filter gain starts at 0.00 with width 1.0
+  after warm-up, DN rates (Hz): DNp20_L 37, DNp20_R 21, DNp22_R 1, DNg46_L 1, DNg46_R 1, DNge043_L 7, DNge043_R 11, DNb06_L 28, DNpe013_L 4, DNpe013_R 5, DNg90_R 1, DNp33_L 20, DNp33_R 6, DNge091_L 1, DNg29_L 43, DNg29_R 27, DNg41_L 18, DNg41_R 22, DNp18_L 37, DNp18_R 41, DNp73_L 51, DNp73_R 9, b2 MN_L 7, b2 MN_R 1, hg1 MN_L 17, hg1 MN_R 10, DNa02_R 1, DNa03_R 5, DNa16_L 3, DNa16_R 7, DNb03_L 4, DNb03_R 4, DNa06_L 8, DNa06_R 12, DNp15_L 4, DNp15_R 25, DNge107_L 1, DNge107_R 11, DNge086_R 4, DNge031_L 16, DNge031_R 17, DNge033_L 6, DNge033_R 10, GNG283_L 3, GNG283_R 15
+  population 10,788 spikes/s per brain
+gen  0  fit best   3.41 mean   0.80  upright  0.75 s (max  3.16,   0% finish)  dist   2.9 m  |y| 0.39 m  v 4.00  bailed 0  pop 63,422 sp/s  69s
+gen  1  fit best   3.79 mean   1.18  upright  1.11 s (max  3.71,   0% finish)  dist   4.2 m  |y| 0.71 m  v 4.00  bailed 0  pop 61,156 sp/s  79s
+gen  2  fit best   7.50 mean   2.18  upright  2.06 s (max  7.18,   0% finish)  dist   7.6 m  |y| 1.50 m  v 4.00  bailed 0  pop 58,470 sp/s  148s
+gen  3  fit best   7.96 mean   2.79  upright  2.65 s (max  7.54,   0% finish)  dist   9.8 m  |y| 1.64 m  v 4.00  bailed 0  pop 57,280 sp/s  155s
+gen  4  fit best  10.54 mean   4.83  upright  4.65 s (max 10.36,   0% finish)  dist  17.1 m  |y| 2.75 m  v 4.00  bailed 0  pop 51,318 sp/s  212s
+gen  5  fit best  12.49 mean   4.90  upright  4.73 s (max 11.95,   0% finish)  dist  17.3 m  |y| 3.14 m  v 4.00  bailed 0  pop 44,267 sp/s  242s
+gen  6  fit best  11.41 mean   5.44  upright  5.25 s (max 10.83,   0% finish)  dist  19.2 m  |y| 2.78 m  v 4.00  bailed 0  pop 47,277 sp/s  221s

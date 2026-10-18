@@ -121,10 +121,14 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 36636 | 2026-10-04 20:07 | COMPLETED | 00:00:21 | 8 cpu, 48G |  | `srun -p ocf-hpc -w corruption -c 8 --mem=48G -t 30 bash -c /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m export.export_ride3d results/ride_road_trace.json results/ride_3d.html && /home/s/st/stevejobs/flybrain/...` (in `./.claude/worktrees/commit-dc73073-investigation-a94327/fly_brain`) |  |
 | 36637 | 2026-10-04 20:08 | COMPLETED | 00:01:25 | 8 cpu, 64G, 1 gpu |  | `sbatch --parsable -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=64G -t 30 -J flytests -o logs/rewrite/tests3-%j.out --wrap cd fly_brain && /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m pytest -q -rs tests` (in `./.claude/worktrees/commit-dc73073-investigation-a94327`) |  |
 | 37486 | 2026-10-17 22:26 | COMPLETED | 00:00:06 | 4 cpu, 24G |  | `srun -p ocf-hpc --cpus-per-task=4 --mem=24G --time=00:25:00 --job-name=publish-brain bash tools/publish_brain.sh brain-v1` |  |
-| 37487 | 2026-10-17 22:29 | RUNNING | 00:30:15 | 8 cpu, 16G, 1 gpu |  | `sbatch ride-gate.sbatch 4.0 201` | [ride-gate-37487.out](logs/ride-gate-37487.out) |
-| 37488 | Unknown | PENDING | 00:00:00 | 1 gpu |  | `sbatch ride-gate.sbatch 4.0 202` |  |
-| 37489 | Unknown | PENDING | 00:00:00 | 1 gpu |  | `sbatch ride-gate.sbatch 4.5 201` |  |
-| 37490 | Unknown | PENDING | 00:00:00 | 1 gpu |  | `sbatch ride-gate.sbatch 4.5 202` |  |
+| 37487 | 2026-10-17 22:29 | CANCELLED | 00:34:03 | 8 cpu, 16G, 1 gpu |  | `sbatch ride-gate.sbatch 4.0 201` |  |
+| 37488 | None | CANCELLED | 00:00:00 | 1 gpu |  | `sbatch ride-gate.sbatch 4.0 202` |  |
+| 37489 | None | CANCELLED | 00:00:00 | 1 gpu |  | `sbatch ride-gate.sbatch 4.5 201` |  |
+| 37490 | None | CANCELLED | 00:00:00 | 1 gpu |  | `sbatch ride-gate.sbatch 4.5 202` |  |
+| 37491 | 2026-10-17 23:04 | RUNNING | 00:25:33 | 8 cpu, 16G |  | `sbatch --parsable ride-gate.sbatch 4.0 201` | [ride-gate-37491.out](logs/ride-gate-37491.out) |
+| 37492 | Unknown | PENDING | 00:00:00 |  |  | `sbatch --parsable ride-gate.sbatch 4.5 201` |  |
+| 37493 | Unknown | PENDING | 00:00:00 |  |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.0 202` |  |
+| 37494 | Unknown | PENDING | 00:00:00 |  |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.5 202` |  |
 
 ## Full command lines
 
