@@ -129,6 +129,7 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37492 | 2026-10-17 23:49 | COMPLETED | 05:02:33 | 8 cpu, 16G |  | `sbatch --parsable ride-gate.sbatch 4.5 201` | [ride-gate-37492.out](logs/ride-gate-37492.out) |
 | 37493 | 2026-10-17 23:49 | COMPLETED | 05:04:38 | 8 cpu, 16G |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.0 202` | [ride-gate-37493.out](logs/ride-gate-37493.out) |
 | 37494 | 2026-10-18 04:07 | COMPLETED | 05:01:16 | 8 cpu, 16G |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.5 202` | [ride-gate-37494.out](logs/ride-gate-37494.out) |
+| 37519 | 2026-10-19 01:51 | FAILED | 00:00:01 | 2 cpu, 4G |  | `srun -p ocf-hpc -w corruption -c 2 --mem=4G -t 5 bash -c which chromium google-chrome ffmpeg; chromium --version; nproc; ls /usr/lib/x86_64-linux-gnu/libEGL_nvidia* 2>/dev/null ¦ head -2; nvidia-smi --query-gpu=name,u...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 
 ## Full command lines
 
@@ -365,4 +366,10 @@ sbatch --parsable -p ocf-hpc -w corruption -c 8 --gres=gpu:1 --mem=64G -t 30 -J 
 
 ```bash
 srun -p ocf-hpc -w corruption -c 8 --mem=48G -t 30 bash -c /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m export.export_ride3d results/ride_road_trace.json results/ride_3d.html && /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m export.export_ride results/ride_road_trace.json results/ride_view.html && /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m export.export_ride3d results/ride_pilot_road_trace.json results/ride_pilot_3d.html && /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m export.export_ride results/ride_pilot_road_trace.json results/ride_pilot_view.html && /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m export.export_ride3d results/ride_oracle_trace.json results/ride_oracle_3d.html && /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m export.export_ride results/ride_oracle_trace.json results/ride_oracle_view.html
+```
+
+**37519** (bash)
+
+```bash
+srun -p ocf-hpc -w corruption -c 2 --mem=4G -t 5 bash -c which chromium google-chrome ffmpeg; chromium --version; nproc; ls /usr/lib/x86_64-linux-gnu/libEGL_nvidia* 2>/dev/null | head -2; nvidia-smi --query-gpu=name,utilization.gpu,memory.used --format=csv
 ```
