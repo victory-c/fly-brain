@@ -136,6 +136,10 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37523 | 2026-10-19 02:01 | COMPLETED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 2 -t 5 bash -c export LD_LIBRARY_PATH=$HOME/opt/chromium/lib; ldd ~/opt/chromium/chromium ~/opt/chromium/lib/* ¦ grep "not found"; ~/opt/chromium/chromium --version` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37525 | 2026-10-19 02:11 | COMPLETED | 00:02:29 | 4 cpu, 8G |  | `srun -p ocf-hpc -w corruption -c 4 --mem 8G -t 15 bash /home/s/st/stevejobs/tour-de-fly/scratch/film_test/node1.sh` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37526 | 2026-10-19 02:14 | COMPLETED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 2 -t 2 bash -c lscpu ¦ grep -E "Model name¦Thread¦Core¦Socket¦MHz¦NUMA node"; cat /sys/fs/cgroup/$(cat /proc/self/cgroup ¦ cut -d: -f3)/cpuset.cpus.effective 2>/dev/null; taskset -cp $$` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37546 | 2026-10-19 03:24 | COMPLETED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 1 -t 2 bash -c ls -d --time-style=+%H:%M -l /tmp/tdf-film-* ¦ awk "{print \$6}" ¦ sort ¦ uniq -c; ls /tmp/tdf-film-yys_udt3` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37547 | 2026-10-19 03:24 | COMPLETED | 00:00:01 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 1 -t 2 bash -c echo node TMPDIR=$TMPDIR; df -h /tmp ¦ tail -1; mount ¦ grep " /tmp "` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37548 | 2026-10-19 03:25 | COMPLETED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -n 1 -c 1 -t 2 bash -c echo "node $(hostname): $(ls -d /tmp/tdf-film-* 2>/dev/null ¦ wc -l)"` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37550 | 2026-10-19 03:27 | COMPLETED | 00:00:01 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -n 1 -c 1 -t 2 bash -c rm -rf /tmp/tdf-film-* /tmp/tdf-bench-* /tmp/tdf-sb-*; echo "node left: $(ls -d /tmp/tdf-film-* /tmp/tdf-bench-* /tmp/tdf-sb-* 2>/dev/null ¦ wc -l)"` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 
 ## Full command lines
 
