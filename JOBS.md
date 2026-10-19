@@ -143,6 +143,9 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37558 | 2026-10-19 03:42 | COMPLETED | 00:00:01 | 2 cpu, 1G |  | `srun -p ocf-hpc -w corruption -c 1 --mem=1G -t 00:02:00 -J tdfD-ls bash -c ls -la --time-style=full-iso /tmp/ ¦ grep -i "tdf\¦det-\¦w0" ; for d in /tmp/tdf-film-run-*; do echo "== $d"; find $d -maxdepth 3 ¦ head -30; ...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37562 | 2026-10-19 03:53 | COMPLETED | 00:00:00 | 2 cpu, 1G |  | `srun -p ocf-hpc -w corruption -c 1 --mem=1G -t 00:01:00 -J tdfD-chk bash -c which setpriv; setpriv --help ¦ grep -i pdeath` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37566 | 2026-10-19 04:44 | COMPLETED | 00:00:00 | 2 cpu, 2G |  | `srun -p ocf-hpc -w corruption -c 2 --mem=2G -t 3 bash -c fc-list ¦ grep -c -i "Droid Sans Fallback"; fc-list ¦ grep -c -i "DejaVu Sans"` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37607 | 2026-10-19 10:47 | COMPLETED | 00:00:09 | 8 cpu, 8000M |  | `srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratch/sg/shot.sh /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/lab1.png scratch/sg/lab.html?views=1540,0,3,1980,0,25,12;1930,40,10,1980,0,2...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37608 | 2026-10-19 10:48 | COMPLETED | 00:01:00 | 8 cpu, 8000M |  | `srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratch/sg/shot.sh /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/film1.png film.html?w=1600&h=900&sheet=114,117,128,130,96.5,98.5,99.3,101,10...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37609 | 2026-10-19 10:48 | COMPLETED | 00:00:12 | 8 cpu, 8000M |  | `srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratch/sg/shot.sh /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/lab_chk.png scratch/sg/lab.html?fin=checker&views=1520,0.8,2.6,1470,0,0.6,15...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 
 ## Full command lines
 
@@ -397,4 +400,22 @@ srun -p ocf-hpc -w corruption -c 2 -t 5 bash -c hostname; which chromium ffmpeg;
 
 ```bash
 srun -p ocf-hpc -w corruption -c 1 --mem=1G -t 00:02:00 -J tdfD-ls bash -c ls -la --time-style=full-iso /tmp/ | grep -i "tdf\|det-\|w0" ; for d in /tmp/tdf-film-run-*; do echo "== $d"; find $d -maxdepth 3 | head -30; du -sh $d; done; pgrep -a -u $USER chromium | head
+```
+
+**37607** (shot.sh)
+
+```bash
+srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratch/sg/shot.sh /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/lab1.png scratch/sg/lab.html?views=1540,0,3,1980,0,25,12;1930,40,10,1980,0,25,50;1975,0,2,1990,0,30,70;1980,70,20,1980,0,25,45;2040,-50,30,1980,0,20,50;1900,0,1.7,1980,0,25,60;1520,0.8,2.6,1470,0,0.6,15;1500,-7.3,1.15,1500,0,0.5,30;1497,-1,20,1490,0,0,20 --size 1600x900 --timeout 300 --root /home/s/st/stevejobs/tour-de-fly
+```
+
+**37608** (shot.sh)
+
+```bash
+srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratch/sg/shot.sh /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/film1.png film.html?w=1600&h=900&sheet=114,117,128,130,96.5,98.5,99.3,101,102.5 --size 1600x900 --timeout 600
+```
+
+**37609** (shot.sh)
+
+```bash
+srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratch/sg/shot.sh /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/lab_chk.png scratch/sg/lab.html?fin=checker&views=1520,0.8,2.6,1470,0,0.6,15;1500,-7.3,1.15,1500,0,0.5,30;1497,-1,20,1490,0,0,20;1440,0.5,1.6,1530,0,1,40 /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/lab_line.png scratch/sg/lab.html?fin=line&views=1520,0.8,2.6,1470,0,0.6,15;1500,-7.3,1.15,1500,0,0.5,30;1497,-1,20,1490,0,0,20;1440,0.5,1.6,1530,0,1,40 --size 1600x900 --timeout 300 --root /home/s/st/stevejobs/tour-de-fly
 ```
