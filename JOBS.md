@@ -142,6 +142,7 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37550 | 2026-10-19 03:27 | COMPLETED | 00:00:01 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -n 1 -c 1 -t 2 bash -c rm -rf /tmp/tdf-film-* /tmp/tdf-bench-* /tmp/tdf-sb-*; echo "node left: $(ls -d /tmp/tdf-film-* /tmp/tdf-bench-* /tmp/tdf-sb-* 2>/dev/null ¦ wc -l)"` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37558 | 2026-10-19 03:42 | COMPLETED | 00:00:01 | 2 cpu, 1G |  | `srun -p ocf-hpc -w corruption -c 1 --mem=1G -t 00:02:00 -J tdfD-ls bash -c ls -la --time-style=full-iso /tmp/ ¦ grep -i "tdf\¦det-\¦w0" ; for d in /tmp/tdf-film-run-*; do echo "== $d"; find $d -maxdepth 3 ¦ head -30; ...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37562 | 2026-10-19 03:53 | COMPLETED | 00:00:00 | 2 cpu, 1G |  | `srun -p ocf-hpc -w corruption -c 1 --mem=1G -t 00:01:00 -J tdfD-chk bash -c which setpriv; setpriv --help ¦ grep -i pdeath` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37566 | 2026-10-19 04:44 | COMPLETED | 00:00:00 | 2 cpu, 2G |  | `srun -p ocf-hpc -w corruption -c 2 --mem=2G -t 3 bash -c fc-list ¦ grep -c -i "Droid Sans Fallback"; fc-list ¦ grep -c -i "DejaVu Sans"` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 
 ## Full command lines
 
