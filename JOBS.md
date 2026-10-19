@@ -130,6 +130,12 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37493 | 2026-10-17 23:49 | COMPLETED | 05:04:38 | 8 cpu, 16G |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.0 202` | [ride-gate-37493.out](logs/ride-gate-37493.out) |
 | 37494 | 2026-10-18 04:07 | COMPLETED | 05:01:16 | 8 cpu, 16G |  | `sbatch --parsable --nice=100 ride-gate.sbatch 4.5 202` | [ride-gate-37494.out](logs/ride-gate-37494.out) |
 | 37519 | 2026-10-19 01:51 | FAILED | 00:00:01 | 2 cpu, 4G |  | `srun -p ocf-hpc -w corruption -c 2 --mem=4G -t 5 bash -c which chromium google-chrome ffmpeg; chromium --version; nproc; ls /usr/lib/x86_64-linux-gnu/libEGL_nvidia* 2>/dev/null ¦ head -2; nvidia-smi --query-gpu=name,u...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37520 | 2026-10-19 02:01 | COMPLETED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 2 -t 5 bash -c hostname; which chromium ffmpeg; cat /etc/os-release ¦ head -3; curl -sS -m 10 -o /dev/null -w "gfonts %{http_code}\n" "https://fonts.googleapis.com/css2?family=Anton"; ...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37521 | 2026-10-19 02:01 | FAILED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 2 -t 5 bash -c ldd ~/opt/chromium/chromium ¦ grep "not found"; ldd ~/opt/chromium/libGLESv2.so ~/opt/chromium/libvk_swiftshader.so ~/opt/chromium/libEGL.so ¦ grep "not found"` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37522 | 2026-10-19 02:01 | FAILED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 2 -t 5 bash -c export LD_LIBRARY_PATH=$HOME/opt/chromium/lib; ldd ~/opt/chromium/chromium ~/opt/chromium/lib/* ¦ grep "not found"; ~/opt/chromium/chromium --version` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37523 | 2026-10-19 02:01 | COMPLETED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 2 -t 5 bash -c export LD_LIBRARY_PATH=$HOME/opt/chromium/lib; ldd ~/opt/chromium/chromium ~/opt/chromium/lib/* ¦ grep "not found"; ~/opt/chromium/chromium --version` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37525 | 2026-10-19 02:11 | COMPLETED | 00:02:29 | 4 cpu, 8G |  | `srun -p ocf-hpc -w corruption -c 4 --mem 8G -t 15 bash /home/s/st/stevejobs/tour-de-fly/scratch/film_test/node1.sh` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37526 | 2026-10-19 02:14 | COMPLETED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 2 -t 2 bash -c lscpu ¦ grep -E "Model name¦Thread¦Core¦Socket¦MHz¦NUMA node"; cat /sys/fs/cgroup/$(cat /proc/self/cgroup ¦ cut -d: -f3)/cpuset.cpus.effective 2>/dev/null; taskset -cp $$` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 
 ## Full command lines
 
@@ -372,4 +378,10 @@ srun -p ocf-hpc -w corruption -c 8 --mem=48G -t 30 bash -c /home/s/st/stevejobs/
 
 ```bash
 srun -p ocf-hpc -w corruption -c 2 --mem=4G -t 5 bash -c which chromium google-chrome ffmpeg; chromium --version; nproc; ls /usr/lib/x86_64-linux-gnu/libEGL_nvidia* 2>/dev/null | head -2; nvidia-smi --query-gpu=name,utilization.gpu,memory.used --format=csv
+```
+
+**37520** (bash)
+
+```bash
+srun -p ocf-hpc -w corruption -c 2 -t 5 bash -c hostname; which chromium ffmpeg; cat /etc/os-release | head -3; curl -sS -m 10 -o /dev/null -w "gfonts %{http_code}\n" "https://fonts.googleapis.com/css2?family=Anton"; curl -sS -m 10 -o /dev/null -w "cdnjs %{http_code}\n" https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js; ldd /usr/lib/chromium/chromium 2>&1 | grep -i "not found"; fc-list | wc -l; fc-match sans; ls /usr/lib/x86_64-linux-gnu | wc -l
 ```
