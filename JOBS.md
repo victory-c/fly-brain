@@ -147,6 +147,7 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37608 | 2026-10-19 10:48 | COMPLETED | 00:01:00 | 8 cpu, 8000M |  | `srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratch/sg/shot.sh /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/film1.png film.html?w=1600&h=900&sheet=114,117,128,130,96.5,98.5,99.3,101,10...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37609 | 2026-10-19 10:48 | COMPLETED | 00:00:12 | 8 cpu, 8000M |  | `srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratch/sg/shot.sh /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/lab_chk.png scratch/sg/lab.html?fin=checker&views=1520,0.8,2.6,1470,0,0.6,15...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37710 | 2026-10-22 23:41 | COMPLETED | 00:00:01 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 2 -t 2 bash -c hostname; nproc; ~/flybrain/venv/bin/python -c "import numpy, scipy; print(numpy.__version__)"; ~/tour-de-fly/film/.venv-tts/bin/python -c "import piper; print(\"piper o...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37753 | 2026-10-23 02:36 | COMPLETED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 1 -t 2 bash -c hostname; which ffmpeg ¦¦ echo no-ffmpeg; ls ~/opt 2>/dev/null ¦ head` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 
 ## Full command lines
 
