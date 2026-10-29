@@ -148,6 +148,9 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37609 | 2026-10-19 10:48 | COMPLETED | 00:00:12 | 8 cpu, 8000M |  | `srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratch/sg/shot.sh /home/s/st/stevejobs/tour-de-fly/scratch/sg/out/lab_chk.png scratch/sg/lab.html?fin=checker&views=1520,0.8,2.6,1470,0,0.6,15...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37710 | 2026-10-22 23:41 | COMPLETED | 00:00:01 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 2 -t 2 bash -c hostname; nproc; ~/flybrain/venv/bin/python -c "import numpy, scipy; print(numpy.__version__)"; ~/tour-de-fly/film/.venv-tts/bin/python -c "import piper; print(\"piper o...` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
 | 37753 | 2026-10-23 02:36 | COMPLETED | 00:00:00 | 2 cpu, 2000M |  | `srun -p ocf-hpc -w corruption -c 1 -t 2 bash -c hostname; which ffmpeg ¦¦ echo no-ffmpeg; ls ~/opt 2>/dev/null ¦ head` (in `./.claude/worktrees/tour-de-fly-dce498`) |  |
+| 37853 | None | CANCELLED | 00:00:00 |  |  | `srun -p ocf-hpc -w corruption -c 8 --mem=24G -t 20 --quiet --chdir=/home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain bash -c /home/s/st/stevejobs/flybrain/venv/bin/python -m bra...` (in `./.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain`) |  |
+| 37854 | None | CANCELLED | 00:00:00 |  |  | `sbatch --parsable handsoff-gate.sbatch` (in `./.claude/worktrees/foresight-ai-science-rfp-b3f525`) |  |
+| 37855 | None | CANCELLED | 00:00:00 |  |  | `srun -p ocf-hpc -w corruption -c 8 --mem=16G -t 30 --quiet --chdir=/home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain bash -c T=/tmp/claude-93015/-home-s-st-stevejobs-flybrain--c...` (in `./.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain`) |  |
 
 ## Full command lines
 
@@ -426,4 +429,16 @@ srun -p ocf-hpc -w corruption -c 8 -t 30 /home/s/st/stevejobs/tour-de-fly/scratc
 
 ```bash
 srun -p ocf-hpc -w corruption -c 2 -t 2 bash -c hostname; nproc; ~/flybrain/venv/bin/python -c "import numpy, scipy; print(numpy.__version__)"; ~/tour-de-fly/film/.venv-tts/bin/python -c "import piper; print(\"piper ok\")"; which ffmpeg; ffmpeg -version | head -1
+```
+
+**37853** (bash)
+
+```bash
+srun -p ocf-hpc -w corruption -c 8 --mem=24G -t 20 --quiet --chdir=/home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain bash -c /home/s/st/stevejobs/flybrain/venv/bin/python -m brain.variants r4 --seed 1 && /home/s/st/stevejobs/flybrain/venv/bin/python -m brain.variants r5 --seed 1
+```
+
+**37855** (bash)
+
+```bash
+srun -p ocf-hpc -w corruption -c 8 --mem=16G -t 30 --quiet --chdir=/home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain bash -c T=/tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-foresight-ai-science-rfp-b3f525/7da3d3dc-7a0e-4830-8813-3da350058c6f/scratchpad/b2; /home/s/st/stevejobs/flybrain/venv/bin/pip install -q --target $T brian2 2>&1 | tail -2; PYTHONPATH=$T /home/s/st/stevejobs/flybrain/venv/bin/python -m pytest tests/test_brian2.py -v -rs 2>&1 | tail -15
 ```
