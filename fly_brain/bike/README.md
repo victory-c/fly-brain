@@ -193,6 +193,16 @@ cut-off), keeps all 16 riders upright for the full 20 s and on the road for 19.2
 time (the round-2 decoder on the earlier simulator: 11.6 s, 4 of 16). Hands-off, the same brains keep the bike
 upright at 5.4 m/s, but it leaves the road after 5.1 s on average.
 
+Below the self-stable range the bike does not balance itself (`ride-gate.sbatch`, jobs 37491-37494). The speed
+is held at 4.0 or 4.5 m/s by fixed pedalling, with the brake off and two seeds per speed; everything else is as
+above. In generation 0 riders lasted 0.75-1.0 s on average before falling or leaving the road. After 57-63
+generations (the 5 h cap) they lasted 11.8 / 9.6 s at 4.0 m/s and 13.7 / 11.9 s at 4.5 m/s, and 42 / 23% and
+77 / 52% rode the full 15 s. With no steering at all (the same held pedalling, 16 riders, seed 201, on CPU)
+riders last 3.5 s at 4.0 m/s (13 of 16 fall) and 5.7 s at 4.5 m/s (13 of 16 drift off the road first), and none
+finishes. Generation 0 is worse than that because
+random steering weights upset the bike. Per-run numbers:
+`docs/CURRENT_NUMBERS.md`.
+
 The same run on the earlier simulator (job 36521, `ride-attempts.sbatch`): 35 generations, 1,680 attempts, 29 of 48
 finishing in the last generation, 580 finished overall; its recordings are not kept.
 

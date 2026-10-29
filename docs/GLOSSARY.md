@@ -206,8 +206,8 @@ Sections: 1 The neuron model and the simulator · 2 The wiring diagram and its f
 
 ## 7. Scrambled Brains
 
-Terms from the Scrambled Brains project plan (DeepBrain at Berkeley, fall 2026). None of this is in the repo
-yet, and the details may change; the rung generators are planned for `brain/variants.py`.
+Terms from the Scrambled Brains project plan (DeepBrain at Berkeley, fall 2026). Details may change. R4 and R5
+are in `brain/variants.py`, and `runs/pretest.py` runs the transmission gate; the other rungs are planned.
 
 - **Wiring ladder, R0-R5.** Perturbed connectomes graded from most to least detailed: **R0** the real wiring;
   **R1** transmitter-sign errors at measured rates (Eckstein et al. 2024 confusion rates); **R2** synapse-count
@@ -217,7 +217,9 @@ yet, and the details may change; the rung generators are planned for `brain/vari
 - **Transmission gate.** The test a rung must pass before it gets CEM time: left-vs-right drive to the VS, HS and
   haltere inputs must produce a significant lateralized DN response (30 flies) at a baseline rate within 2x of the
   real brain's, at some `W_SYN_SCALE` between 0.35 and 0.60. Rungs that stay silent or run away are reported as
-  outcomes.
+  outcomes. The first pilot (`docs/CURRENT_NUMBERS.md`) found R4 and R5 near silent at the scales tested in that
+  range (0.47, 0.60). R4 came within about 2x of the real brain's activity only at scale 1.5, so the range needs
+  widening.
 - **Sensory bypass, hands-off floor.** The two reference lines for riding: a decoder that reads the sensory
   neurons directly, skipping the brain (the expected ceiling), and the bike with no steering (the floor).
 - **Top-k and random-k DN.** Each brain gets its own passenger screen, and the decoder reads the k DN-class neurons

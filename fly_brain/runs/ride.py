@@ -171,7 +171,8 @@ def parse():
     ap.add_argument("--sigma-pedal", type=float, default=None, help="CEM width for the 4 pedal/brake terms; 0 freezes them")
     ap.add_argument("--zbar", default=None, help=".npy (D,): mean input of each decoder weight while riding (0 for bias, pedal, brake); CEM then searches steer:bias at that operating point")
     ap.add_argument("--max-minutes", type=float, default=0.0, help="CEM: stop before a generation that would end past this wall time")
-    ap.add_argument("--w-syn-scale", type=float, default=None, help="override synapse scale (default 0.45)")
+    ap.add_argument("--w-syn-scale", type=float, default=None, help="override the calibrated synapse scale (W_SYN_SCALE, 0.47)")
+    ap.add_argument("--brain", default=None, help="connectome npz (default brain.npz); e.g. a rewired one from brain/variants.py")
     ap.add_argument("--device", default="auto")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default="results/ride.json")
@@ -208,11 +209,11 @@ class Ride:
             self.decoder = Decoder(self.readout, lane_filter=lf, center_all=a.center_all)
             print("senses :", self.senses.describe())
             print("readout:", self.readout.describe(), flush=True)
-            brain = Brain(ROOT / "brain.npz")
+            brain = Brain(a.brain or ROOT / "brain.npz")
             w = W_SYN if a.w_syn_scale is None else PARAMS["w_syn"] * a.w_syn_scale
             self.loop = BrainLoop(brain, a.riders, self.senses.idx, self.readout.idx,
                                   params={"w_syn": w}, device=self.dev, seed=a.seed)
-            print(f"brain: {brain.n:,} neurons, {len(self.senses.idx)} driven, {len(self.readout.idx)} read out, "
+            print(f"brain: {a.brain or 'brain.npz'}, {brain.n:,} neurons, {len(self.senses.idx)} driven, {len(self.readout.idx)} read out, "
                   f"w_syn {w:.4f} mV", flush=True)
 
     @torch.no_grad()

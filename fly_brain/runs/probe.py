@@ -21,7 +21,7 @@ from bike.dynamics import Peloton
 from bike.senses import Senses
 from brain.loop import BrainLoop
 from brain.connectome import Brain
-from brain.engine import W_SYN
+from brain.engine import PARAMS, W_SYN
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -36,12 +36,14 @@ def main():
     ap.add_argument("--v", type=float, default=4.5)
     ap.add_argument("--lane", default="hs")
     ap.add_argument("--device", default="auto")
+    ap.add_argument("--brain", default=None, help="connectome npz (default brain.npz); e.g. from brain/variants.py")
+    ap.add_argument("--w-syn-scale", type=float, default=None, help="override the calibrated synapse scale (0.47)")
     ap.add_argument("--out", default="results/probe.json")
     a = ap.parse_args()
     dev = ("cuda" if torch.cuda.is_available() else "cpu") if a.device == "auto" else a.device
     meta = pd.read_parquet(ROOT / "brain_meta.parquet")
     senses = Senses(meta, device=dev, lane=a.lane)
-    brain = Brain(ROOT / "brain.npz")
+    brain = Brain(a.brain or ROOT / "brain.npz")
     B = a.brains - a.brains % 2
     bikes = Peloton(B, device=dev)
     bikes.reset(a.v, 0.0)
@@ -53,7 +55,8 @@ def main():
         iL, iR = senses.names.index(f"{pop}_L"), senses.names.index(f"{pop}_R")
         P[: B // 2, iL] += a.extra
         P[B // 2:, iR] += a.extra
-        loop = BrainLoop(brain, B, senses.idx, [], params={"w_syn": W_SYN}, device=dev, seed=1)
+        w = W_SYN if a.w_syn_scale is None else PARAMS["w_syn"] * a.w_syn_scale
+        loop = BrainLoop(brain, B, senses.idx, [], params={"w_syn": w}, device=dev, seed=1)
         loop.set_rates(P @ senses.E)
         loop.run(a.warmup_ms)
         loop.take_counts()
