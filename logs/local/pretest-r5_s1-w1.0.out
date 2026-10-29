@@ -1,0 +1,3 @@
+r5_s1 VS scale 1.00: 16,414 spikes/s, 1,345 outside the driven neurons (694 of them fire), outputs |z|>3: 0 (null mean 0.0, max 0), max |z| 1.0 (null 2.1) (71.2 s)
+r5_s1 HALT scale 1.00: 18,850 spikes/s, 1,259 outside the driven neurons (718 of them fire), outputs |z|>3: 0 (null mean 0.0, max 0), max |z| 1.0 (null 2.1) (86.2 s)
+-> /home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain/results/rungs/pretest_r5_s1_w1.json

@@ -1,0 +1,3 @@
+r0 VS scale 1.00: 698,588 spikes/s, 683,554 outside the driven neurons (19,217 of them fire), outputs |z|>3: 33 (null mean 29.4, max 505), max |z| 32.0 (null 155.5) (120.2 s)
+r0 HALT scale 1.00: 590,247 spikes/s, 572,680 outside the driven neurons (19,254 of them fire), outputs |z|>3: 25 (null mean 19.9, max 127), max |z| 8.0 (null 7.1) (105.9 s)
+-> /home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain/results/rungs/pretest_r0_w1.json

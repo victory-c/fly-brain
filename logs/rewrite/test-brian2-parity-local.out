@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.2, pytest-9.2.0, pluggy-1.7.0 -- /home/s/st/stevejobs/flybrain/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain
+collecting ... collected 1 item
+
+tests/test_brian2.py::test_engine_reproduces_brian2 PASSED               [100%]
+
+=============================== warnings summary ===============================
+tests/test_brian2.py::test_engine_reproduces_brian2
+tests/test_brian2.py::test_engine_reproduces_brian2
+  /tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-foresight-ai-science-rfp-b3f525/7da3d3dc-7a0e-4830-8813-3da350058c6f/scratchpad/b2np/brian2/equations/equations.py:387: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+    parsed = EQUATIONS.parseString(eqns, parseAll=True)
+
+tests/test_brian2.py: 22 warnings
+  /tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-foresight-ai-science-rfp-b3f525/7da3d3dc-7a0e-4830-8813-3da350058c6f/scratchpad/b2np/pyparsing/util.py:466: PyparsingDeprecationWarning: 'parseAll' argument is deprecated, use 'parse_all'
+    return fn(self, *args, **kwargs)
+
+tests/test_brian2.py::test_engine_reproduces_brian2
+tests/test_brian2.py::test_engine_reproduces_brian2
+tests/test_brian2.py::test_engine_reproduces_brian2
+tests/test_brian2.py::test_engine_reproduces_brian2
+  /tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-foresight-ai-science-rfp-b3f525/7da3d3dc-7a0e-4830-8813-3da350058c6f/scratchpad/b2np/brian2/equations/equations.py:161: PyparsingDeprecationWarning: 'scanString' deprecated - use 'scan_string'
+    parse_result = list(IDENTIFIER.scanString(identifier))
+
+tests/test_brian2.py::test_engine_reproduces_brian2
+  /tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-foresight-ai-science-rfp-b3f525/7da3d3dc-7a0e-4830-8813-3da350058c6f/scratchpad/b2np/brian2/groups/neurongroup.py:67: PyparsingDeprecationWarning: 'scanString' deprecated - use 'scan_string'
+    parse_result = list(IDENTIFIER.scanString(event_name))
+
+tests/test_brian2.py: 20 warnings
+  /tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-foresight-ai-science-rfp-b3f525/7da3d3dc-7a0e-4830-8813-3da350058c6f/scratchpad/b2np/brian2/parsing/statements.py:51: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+    parsed = STATEMENT.parseString(code, parseAll=True)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 1 passed, 49 warnings in 3.71s ========================

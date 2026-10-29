@@ -50,8 +50,11 @@ attempts, `ride-relearn.sbatch`): in the last generation 35 of 48 ride the full 
 and none falls. The final decoder, replayed for 20 s, keeps all 16 riders upright and on the road 19.2 s on
 average. Caveat: these runs start at 5.5 m/s and pedal ~80 W, inside the bike's self-stable range (4.7-7.7 m/s),
 where the bike largely balances itself and hands-off riders stay upright too, so what the decoder adds there is
-mostly staying on the road. Runs with the speed held below that range (4.0 and 4.5 m/s, `ride-gate.sbatch`) are
-in progress. The decoders learned on the earlier simulator do not carry over (the two Brian2 rules lower the brain's
+mostly staying on the road. Below that range the bike does not balance itself (with no steering, riders fall or
+drift off the road within 3.5 s at 4.0 m/s and 5.7 s at 4.5 m/s on average, CPU replay), and the decoder has to do it. With
+the speed held at 4.0 and 4.5 m/s by fixed pedalling (`ride-gate.sbatch`, jobs 37491-37494, two seeds per speed,
+5 h and 57-63 generations each), riders in generation 0 lasted 0.75-1.0 s on average before falling or leaving
+the road, and 9.6-13.7 s in the last generation, with 23-77% riding the full 15 s. The decoders learned on the earlier simulator do not carry over (the two Brian2 rules lower the brain's
 activity), so this run replaced them on the /ride/ pages; see the bike README's "Simulator change".
 
 ```
