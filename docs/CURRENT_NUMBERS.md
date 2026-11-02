@@ -126,6 +126,25 @@ At 4.0 m/s the hands-off bike mostly falls; at 4.5 m/s it mostly drifts off the 
 partly a lane-keeping floor. Generation 0 of the search (0.75-1.0 s) did worse than hands-off, because small random steering weights
 destabilise the bike. Compare learned decoders against these floors, not against generation 0.
 
+## The wiring ladder: what each generated rung changes
+
+`brain/variants.py` now writes every rung (R1, R2, R3, R3.5, R4, R5; `docs/GLOSSARY.md` section 7). Seed 1 of
+each, generated on the login VM on 2026-11-02 (no job id; about 30-50 s and 3.2 GB each), from the 25,582,938
+connections carrying 124,177,616 synapses of the real wiring:
+
+| Rung | Connections after merging duplicates | Original connections kept | Synapses | What else the run reports |
+|---|---|---|---|---|
+| R1 transmitter errors | unchanged | 100% | unchanged | 9,907 neurons relabelled (5.9%), 8,584 change sign (5.1%); inhibitory share of synapses 38.4% -> 40.2% |
+| R2 count jitter | unchanged | 100% | 127,344,656 (+2.6%: a lognormal with median 1 has mean exp(sigma^2/2)) | factors median 1.000, 16-84% range 0.80-1.25 |
+| R3 type-preserving | 24,008,062 (-6.2%) | 39.4% | unchanged | 25,267 (type, side) groups, 13,611 of one neuron; 8.2% of neurons keep their inputs |
+| R3.5 strength-preserving | 25,489,803 (-0.4%) | 0.6% | unchanged | 1,358 (sign, count) strata, every connection could move |
+| R4 degree-preserving | -0.34% | 0.58% | unchanged | see the pre-test below |
+| R5 random | -0.13% | 0.27% | unchanged | see the pre-test below |
+
+R3 keeps 39% of the real connections because many (type, side) groups are small: a target drawn from a group of
+two or three often lands on the original neuron. The pre-test and the balance gate have not yet run on R1-R3.5
+(the GPU node is drained); the tables below are R0, R4 and R5 only.
+
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
 `brain/variants.py` rewires the connectome. R4 shuffles every connection's target, which keeps each neuron's

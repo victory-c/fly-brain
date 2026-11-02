@@ -206,14 +206,30 @@ Sections: 1 The neuron model and the simulator · 2 The wiring diagram and its f
 
 ## 7. Scrambled Brains
 
-Terms from the Scrambled Brains project plan (DeepBrain at Berkeley, fall 2026). Details may change. R4 and R5
-are in `brain/variants.py`, and `runs/pretest.py` runs the transmission gate; the other rungs are planned.
+Terms from the Scrambled Brains project plan (DeepBrain at Berkeley, fall 2026). Details may change. Every rung's
+generator is in `brain/variants.py` (`python -m brain.variants r3 --seed 1`), with `tests/test_variants.py`
+checking what each keeps; `runs/pretest.py` runs the transmission gate on the result.
 
-- **Wiring ladder, R0-R5.** Perturbed connectomes graded from most to least detailed: **R0** the real wiring;
-  **R1** transmitter-sign errors at measured rates (Eckstein et al. 2024 confusion rates); **R2** synapse-count
-  jitter (plus or minus 25%, flybench's definition); **R3** a type-preserving shuffle, so only cell-type-level
-  wiring survives; **R4** a degree-preserving shuffle, so each neuron keeps only its number of inputs and outputs;
-  **R5** random wiring. Each rung is scored on riding, on decoder-free predictions and on decodability.
+- **Wiring ladder, R0-R5.** Perturbed connectomes graded from most to least detailed. Every rung keeps the
+  neurons and each connection's presynaptic neuron, so out-degrees and transmitter signs stay with the sender.
+  - **R0** the real wiring.
+  - **R1** transmitter errors: 6% of neurons get another transmitter (Eckstein et al. 2024 assign 94% of
+    FlyWire neurons correctly by majority vote; the new label is drawn by how common the others are). Only the
+    neurons whose class changes (chloride vs. the rest) flip the sign of their outputs, so GABA-glutamate
+    confusions, Eckstein's most common, do nothing. Per-transmitter rates can be passed as JSON (`--rates`) once
+    Track B has extracted the confusion matrix; until then 6% is a proxy.
+  - **R2** synapse-count jitter: each count times a lognormal factor with median 1 and one-sigma factor 1.25
+    (flybench's "jittered +/-25% (lognormal)"). Wiring unchanged.
+  - **R3** type-preserving shuffle: each target is replaced by a random neuron of the same cell type on the same
+    side, so the synapse matrix between (type, side) groups is exact and only cell-type-level wiring survives.
+    Neurons that are the only one of their type and side (most descending neurons) keep their inputs.
+  - **R3.5** (`r35`) strength-preserving shuffle, added after the pilot: targets are permuted among connections
+    with the same sign and synapse count, so every neuron keeps its in-degree, incoming synapse total and
+    excitatory/inhibitory input mix, but who connects to whom is random. Sits between R3 and R4 to separate "the
+    right amount of input" from "the right partners".
+  - **R4** degree-preserving shuffle: each neuron keeps only its number of inputs and outputs.
+  - **R5** random wiring.
+  Each rung is scored on riding, on decoder-free predictions and on decodability.
 - **Transmission gate.** The test a rung must pass before it gets CEM time: left-vs-right drive to the VS, HS and
   haltere inputs must produce a significant lateralized DN response (30 flies) at a baseline rate within 2x of the
   real brain's, at some `W_SYN_SCALE` between 0.35 and 0.60. Rungs that stay silent or run away are reported as

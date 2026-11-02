@@ -98,6 +98,7 @@ House rules on the cluster:
 | `fly_brain/brain/loop.py` | The brain inside a body, read out in windows |
 | `fly_brain/brain/atlas.py` | Soma positions and display regions |
 | `fly_brain/brain/fetch.py` | Downloads the prebuilt brain from the GitHub release |
+| `fly_brain/brain/variants.py` | The wiring ladder: `python -m brain.variants r1|r2|r3|r35|r4|r5 --seed N` writes a perturbed brain to `results/variants/`; `runs/pretest.py` is its transmission gate (GLOSSARY section 7) |
 | `fly_brain/bike/` | Bicycle dynamics (Whipple / Meijaard 2007), senses, readout; see `bike/README.md` |
 | `fly_brain/runs/` | Experiments: weight calibration, sensory screen, probe, closed-loop learning (`ride.py`) |
 | `fly_brain/tests/` | Tests; `synthetic_brain.py` is the made-up brain |
