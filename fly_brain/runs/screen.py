@@ -45,6 +45,7 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--tau-ms", type=float, default=40.0, help="readout smoothing, as in runs/ride.py")
     ap.add_argument("--out", default="results/screen.json")
+    ap.add_argument("--brain", default=None, help="connectome npz (default brain.npz); a rewired rung gets its own screen")
     a = ap.parse_args()
     dev = ("cuda" if torch.cuda.is_available() else "cpu") if a.device == "auto" else a.device
 
@@ -52,7 +53,7 @@ def main():
     senses = Senses(meta, goal=a.goal, device=dev, lane=a.lane, polarity=a.polarity)
     readout = Readout(meta, device=dev)
     ro_idx = torch.as_tensor(readout.idx, device=dev)
-    brain = Brain(ROOT / "brain.npz")
+    brain = Brain(ROOT / (a.brain or "brain.npz"))
     w = W_SYN if a.w_syn_scale is None else PARAMS["w_syn"] * a.w_syn_scale
     loop = BrainLoop(brain, a.riders, senses.idx, [], params={"w_syn": w}, device=dev, seed=a.seed)
     bikes = Peloton(a.riders, tarmac_sl9(), device=dev, seed=a.seed)

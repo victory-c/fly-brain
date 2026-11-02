@@ -14,6 +14,7 @@ is never changed. Steering is a linear readout squashed by tanh; pedalling and b
 the forward and backward drives.
 """
 import numpy as np
+import pandas as pd
 import torch
 
 # Found by runs/screen.py (a PD rider steers, the brain watches): left and right members of these types
@@ -31,21 +32,64 @@ READOUTS = {"base": DN_TYPES, "lane": DN_TYPES + LANE_DNS}
 FORWARD = ["DNg100", "DNp09", "DNg97"]
 
 
+OUTPUT_SUPERCLASSES = ("descending_neuron",)  # the "DN class" that per-brain top-k / random-k readouts draw from
+
+
+def screen_pool(screen, meta, superclasses=OUTPUT_SUPERCLASSES, min_hz=0.5):
+    """Candidate readout neurons from a runs/screen.py parquet (one row per neuron, r_* correlations): the
+    superclasses asked for, not driven by the senses, firing at least `min_hz` during the screen."""
+    df = screen if hasattr(screen, "columns") else pd.read_parquet(screen)
+    if "row" not in df.columns and "idx" in df.columns:  # screens from before brain_meta had a `row` column
+        df = df.rename(columns={"idx": "row"})
+    if len(df) == len(meta) and not np.array_equal(df["row"].to_numpy(), meta["row"].to_numpy()):
+        raise ValueError("the screen does not describe this brain's neurons in row order")
+    return df[df["superclass"].isin(superclasses) & ~df["driven"].astype(bool) & (df["mean_hz"] >= min_hz)]
+
+
+def topk_groups(screen, meta, k, by="phi_dot", random=False, seed=0, superclasses=OUTPUT_SUPERCLASSES):
+    """One readout group per neuron: the k pool neurons that this brain's own screen ranks highest by |r_<by>|
+    (top-k), or k drawn at random from the same pool (random-k, the control). Returns [(name, side, rows)]."""
+    pool = screen_pool(screen, meta, superclasses)
+    if random:
+        pick = pool.sample(n=min(k, len(pool)), random_state=seed)
+    else:
+        pick = pool.reindex(pool[f"r_{by}"].abs().sort_values(ascending=False).index).head(k)
+    groups = []
+    for _, n in pick.iterrows():  # the instance name already carries the side (e.g. DNp20_R)
+        label = n["instance"] if isinstance(n.get("instance"), str) else (n["type"] if isinstance(n.get("type"), str) else "neuron")
+        groups.append((f"{label}#{int(n['bodyId'])}", "", np.array([int(n["row"])], dtype=np.int64)))
+    return groups
+
+
+def bypass_groups(senses):
+    """The sensory bypass: read the driven sensory neurons themselves, one feature per sense population, so the
+    decoder sees what the brain is told and the brain's wiring does no work (the expected ceiling)."""
+    return [(name, "", np.asarray(senses.pops[name], dtype=np.int64)) for name in senses.names]
+
+
 class Readout:
-    def __init__(self, meta, types=DN_TYPES, device="cpu"):
+    def __init__(self, meta, types=DN_TYPES, device="cpu", groups=None):
+        """Features are (type, side) mean rates of `types`, or, with `groups` = [(name, side, rows)], one feature
+        per group (per-brain top-k / random-k neurons from topk_groups, or the sensory bypass)."""
         self.dev = torch.device(device)
-        ty, side = meta["type"].astype(str), meta["somaSide"].astype(str)
-        self.types = [t for t in types if (ty == t).any()]
+        spec = []
+        if groups is None:
+            ty, side = meta["type"].astype(str), meta["somaSide"].astype(str)
+            self.types = [t for t in types if (ty == t).any()]
+            for t in self.types:
+                for s in ("L", "R"):
+                    spec.append((t, s, meta.loc[(ty == t) & (side == s), "row"].to_numpy(dtype=np.int64)))
+        else:
+            self.types = sorted({g[0] for g in groups})
+            spec = [(name, side, np.asarray(rows, dtype=np.int64)) for name, side, rows in groups]
         groups, idx, offset = [], [], 0
-        for t in self.types:
-            for s in ("L", "R"):
-                ids = meta.loc[(ty == t) & (side == s), "row"].to_numpy(dtype=np.int64)
-                groups.append((t, s, offset, len(ids)))  # (type, side, offset into self.idx, size)
-                idx.append(ids)
-                offset += len(ids)
-        self.idx = np.concatenate(idx)
+        for t, s, ids in spec:
+            groups.append((t, s, offset, len(ids)))  # (type or name, side, offset into self.idx, size)
+            idx.append(ids)
+            offset += len(ids)
+        self.idx = np.concatenate(idx) if idx else np.zeros(0, dtype=np.int64)
         self.groups = groups
-        self.names = [f"{t}_{s}" for t, s, _, _ in groups]
+        self.names = [f"{t}_{s}" if s else t for t, s, _, _ in groups]
         F = len(groups)
         W = torch.zeros(len(self.idx), F, device=self.dev)
         for j, (_, _, o, n) in enumerate(groups):
@@ -61,7 +105,7 @@ class Readout:
         return len(self.groups)
 
     def describe(self):
-        return ", ".join(f"{t}_{s} {n}" for t, s, _, n in self.groups)
+        return ", ".join(f"{name} {n}" for name, (_, _, _, n) in zip(self.names, self.groups))
 
     def features(self, counts, ms):
         """spike counts (B, R) in a window of `ms` -> mean rate per (type, side) in Hz (B, F)."""

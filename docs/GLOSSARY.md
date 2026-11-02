@@ -238,8 +238,12 @@ checking what each keeps; `runs/pretest.py` runs the transmission gate on the re
   widening.
 - **Sensory bypass, hands-off floor.** The two reference lines for riding: a decoder that reads the sensory
   neurons directly, skipping the brain (the expected ceiling), and the bike with no steering (the floor).
-- **Top-k and random-k DN.** Each brain gets its own passenger screen, and the decoder reads the k DN-class neurons
-  that screen ranks highest (k = 8 and 32); random-k picks k at random as a control.
+- **Top-k and random-k DN.** Each brain gets its own passenger screen (`runs/screen.py --brain <rung>.npz`), and
+  the decoder reads the k descending neurons that screen ranks highest by roll-rate correlation (k = 8 and 32;
+  `runs/ride.py --readout topk --screen <its parquet> --k 8`); random-k (`--readout randk --readout-seed N`) draws k
+  from the same pool (descending neurons that fire and are not driven) as a control. Each neuron is one feature.
+  `--readout bypass` is the sensory-bypass ceiling: the decoder reads the driven sensory neurons themselves, one
+  feature per sense population, so the wiring does no work. `bike/readout.py`, `tests/test_readout.py`.
 - **N90.** The number of recorded neurons needed to reach 90% of the roll-rate R^2 that all DNs give together,
   measured at a brain DN site and at a VNC site (Track C).
 - **Balance gate.** The first experiment of the semester: learning from a blank decoder at 4.0 and 4.5 m/s, below
