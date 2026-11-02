@@ -142,8 +142,35 @@ connections carrying 124,177,616 synapses of the real wiring:
 | R5 random | -0.13% | 0.27% | unchanged | see the pre-test below |
 
 R3 keeps 39% of the real connections because many (type, side) groups are small: a target drawn from a group of
-two or three often lands on the original neuron. The pre-test and the balance gate have not yet run on R1-R3.5
-(the GPU node is drained); the tables below are R0, R4 and R5 only.
+two or three often lands on the original neuron.
+
+### Pre-test on the new rungs at the calibrated scale (2026-11-02, login VM CPU, 8 brains, draw 1)
+
+Same protocol as the pilot below (`runs/pretest.py --pop VS HALT`, scale 0.47; `logs/local/pretest-r{1,2,3,35}_s1-w0.47.out`,
+`results/rungs/pretest_r*_s1_w0.47.json`). Cells as in the pilot table: network spikes/s (network neurons
+firing); lateralised outputs VS / haltere (largest null mean); largest |z| VS / haltere (largest null).
+
+| Rung at 0.47 | Network | Lateralised outputs | Largest abs z |
+|---|---|---|---|
+| R0 real wiring (pilot) | 21,500 (1,550) | 28 / 18 (0.9) | 37 / 16 (5) |
+| R1 transmitter errors | 13,700 (1,180) | 15 / 16 (1.8; VS null max 24) | 25 / 23 (12) |
+| R2 count jitter | 25,300 (1,670) | 23 / 28 (1.3) | 34 / 23 (5) |
+| R3 type-preserving | 15,900 (1,220) | 25 / 20 (0.6) | 31 / 16 (4) |
+| R3.5 strength-preserving | 890 (430) | 0 / 0 (0.0) | 2.5 / 1.8 (2.6) |
+| R4 degree-preserving (pilot) | 262 (80) | 1 / 1 (0.0) | 5 / 4 (2) |
+| R5 random (pilot) | 251 (79) | 0 / 0 (0.0) | 0 / 0 (2) |
+
+What it shows, with one draw and 8 brains per cell:
+- R2 is indistinguishable from the real wiring. R3 keeps the left/right channel (25 and 20 lateralised outputs)
+  at 74% of the real network rate: cell-type-level wiring is enough to carry the bike's roll signal.
+- R3.5 is as silent as R4 and R5: 4% of the real network activity and no lateralised output, even though every
+  neuron keeps its in-degree, its incoming synapse total and its excitatory/inhibitory input mix. The right amount
+  of input from the wrong partners does not transmit. The transition therefore lies between R3 and R3.5, as the
+  preregistration predicts, and it is a matter of partner identity rather than input statistics.
+- R1 (5% of neurons with flipped sign) halves the network rate and keeps the haltere channel (16 outputs, null
+  max 2); its VS channel is noisier (15 outputs against a null max of 24, one balanced split), so R1 needs the
+  30-brain confirmatory run before it is called passed.
+The balance gate has not yet run on R1-R3.5 (the GPU node is drained); the tables below are R0, R4 and R5 only.
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
