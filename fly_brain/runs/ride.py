@@ -23,7 +23,7 @@ import pandas as pd
 import torch
 
 from bike.dynamics import STATE, Peloton
-from bike.readout import READOUTS, Decoder, Readout
+from bike.readout import READOUTS, Decoder, Readout, bypass_groups, topk_groups
 from bike.senses import Senses
 from bike.tarmac import eigen_speeds, tarmac_sl9, whipple_matrices
 from brain.loop import BrainLoop
@@ -154,7 +154,13 @@ def parse():
     ap.add_argument("--offroad", type=float, default=0.0, help="if > 0: leaving the road (|y| > this, m) ends a rider's run like a fall")
     ap.add_argument("--gains", default="", help="sensory gain overrides for bike/senses.py GAINS, e.g. 'hs_heading=200,hs_lane=60'")
     ap.add_argument("--polarity", default="legacy", choices=["legacy", "physio"], help="which eye's VS/HS cells a rotation drives (bike/senses.py)")
-    ap.add_argument("--readout", default="base", choices=["base", "lane"], help="readout neuron set (bike/readout.py READOUTS)")
+    ap.add_argument("--readout", default="base", choices=["base", "lane", "topk", "randk", "bypass"],
+                    help="readout: a fixed type list (base, lane: bike/readout.py READOUTS); this brain's own top-k DNs by the "
+                         "screen's roll-rate correlation (topk, needs --screen); k random DNs from the same pool (randk); "
+                         "or the driven sensory neurons themselves (bypass: the brain does no work)")
+    ap.add_argument("--screen", default=None, help="topk/randk: this brain's runs/screen.py parquet (its own passenger screen)")
+    ap.add_argument("--k", type=int, default=8, help="topk/randk: how many neurons the decoder reads")
+    ap.add_argument("--readout-seed", type=int, default=0, help="randk: which random draw")
     ap.add_argument("--sigma-new", type=float, default=0.8, help="CEM width for decoder weights absent from --init-theta")
     ap.add_argument("--lane-filter", default=None, help="runs/probe.py json: add one matched-filter lane signal (HS) with one gain")
     ap.add_argument("--sigma-lane-filter", type=float, default=2.0, help="CEM width for the lane-filter gain")
@@ -204,7 +210,15 @@ class Ride:
             self.senses = Senses(meta, goal=a.goal, device=self.dev, lane=a.lane, gains=gains, polarity=a.polarity)
             if gains:
                 print("sensory gain overrides:", gains, flush=True)
-            self.readout = Readout(meta, types=READOUTS[a.readout], device=self.dev)
+            if a.readout in ("topk", "randk"):
+                if not a.screen:
+                    raise SystemExit(f"--readout {a.readout} needs --screen (this brain's runs/screen.py parquet)")
+                groups = topk_groups(ROOT / a.screen, meta, a.k, random=(a.readout == "randk"), seed=a.readout_seed)
+                self.readout = Readout(meta, device=self.dev, groups=groups)
+            elif a.readout == "bypass":
+                self.readout = Readout(meta, device=self.dev, groups=bypass_groups(self.senses))
+            else:
+                self.readout = Readout(meta, types=READOUTS[a.readout], device=self.dev)
             lf = lane_filter_from_probe(a.lane_filter, self.readout) if a.lane_filter else None
             self.decoder = Decoder(self.readout, lane_filter=lf, center_all=a.center_all)
             print("senses :", self.senses.describe())
