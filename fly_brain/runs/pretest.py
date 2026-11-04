@@ -12,6 +12,7 @@ differently to left and right (|z| > 3), plus the largest |z|.
 import argparse
 import itertools
 import json
+import math
 import time
 from pathlib import Path
 
@@ -37,16 +38,32 @@ def zscores(hz, group, ms):
     return (A.mean(0) - C.mean(0)) / se
 
 
-def balanced_splits(B):
-    """Group masks with half of the first B/2 brains and half of the last B/2, each split counted once."""
+def balanced_splits(B, max_splits=None, seed=0):
+    """Group masks with half of the first B/2 brains and half of the last B/2, each split counted once (brain 0 is
+    always in the group). All C(h-1, h/2-1) * C(h, h/2) splits when that is at most max_splits (18 for 8 brains),
+    otherwise max_splits distinct splits drawn at random (19.3 million exist for 30 brains)."""
     h = B // 2
+    q = h // 2
+    total = math.comb(h - 1, q - 1) * math.comb(h, q)
     out = []
-    for a in itertools.combinations(range(h), h // 2):
-        for b in itertools.combinations(range(h, B), h // 2):
-            m = np.zeros(B, bool)
-            m[list(a) + list(b)] = True
-            if m[0]:
+    if max_splits is None or total <= max_splits:
+        for a in itertools.combinations(range(1, h), q - 1):
+            for b in itertools.combinations(range(h, B), q):
+                m = np.zeros(B, bool)
+                m[[0, *a, *b]] = True
                 out.append(m)
+        return out
+    rng = np.random.default_rng(seed)
+    seen = set()
+    while len(out) < max_splits:
+        a = tuple(sorted(rng.choice(np.arange(1, h), q - 1, replace=False)))
+        b = tuple(sorted(rng.choice(np.arange(h, B), q, replace=False)))
+        if (a, b) in seen:
+            continue
+        seen.add((a, b))
+        m = np.zeros(B, bool)
+        m[[0, *a, *b]] = True
+        out.append(m)
     return out
 
 
@@ -63,6 +80,8 @@ def main():
     ap.add_argument("--w-syn-scale", type=float, default=None, help="default: the calibrated W_SYN (scale 0.47)")
     ap.add_argument("--device", default="auto")
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--null-splits", type=int, default=1000,
+                    help="cap on the balanced relabellings in the null (all of them when fewer exist)")
     ap.add_argument("--out", default=None, help="default results/rungs/pretest_<tag>.json")
     a = ap.parse_args()
     dev = ("cuda" if torch.cuda.is_available() else "cpu") if a.device == "auto" else a.device
@@ -91,7 +110,7 @@ def main():
         zo = np.abs(zscores(hz, left, a.ms)[out_mask])
         # null: every relabelling that puts half of the left-probed and half of the right-probed brains in each group,
         # so the probe side cancels and only brain-to-brain noise is left
-        null = [np.abs(zscores(hz, s, a.ms)[out_mask]) for s in balanced_splits(B)]
+        null = [np.abs(zscores(hz, s, a.ms)[out_mask]) for s in balanced_splits(B, a.null_splits, a.seed)]
         null_counts = np.array([(n > 3).sum() for n in null])
         net = np.ones(brain.n, bool)
         net[senses.idx.cpu().numpy() if torch.is_tensor(senses.idx) else senses.idx] = False
@@ -101,6 +120,7 @@ def main():
                "max_abs_z": float(zo.max()), "out_mean_hz": float(hz[:, out_mask].mean()),
                "outputs_active": int((hz[:, out_mask].mean(0) > 0).sum()),
                "null_outputs_z3_mean": float(null_counts.mean()), "null_outputs_z3_max": int(null_counts.max()),
+               "null_outputs_z3_p95": float(np.percentile(null_counts, 95)),
                "null_max_abs_z": float(max(n.max() for n in null)), "null_splits": len(null),
                "wall_s": round(time.time() - clock, 1)}
         report["pops"][pop] = row
