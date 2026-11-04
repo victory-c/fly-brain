@@ -154,6 +154,7 @@ firing); lateralised outputs VS / haltere (largest null mean); largest |z| VS / 
 |---|---|---|---|
 | R0 real wiring (pilot) | 21,500 (1,550) | 28 / 18 (0.9) | 37 / 16 (5) |
 | R1 transmitter errors | 13,700 (1,180) | 15 / 16 (1.8; VS null max 24) | 25 / 23 (12) |
+| R1 transmitter errors, 30 brains (confirmatory, 2026-11-03) | 13,000 (1,380) | 35 / 31 (0.1; null max 4 / 13, p95 1) | 43 / 29 (4.5) |
 | R2 count jitter | 25,300 (1,670) | 23 / 28 (1.3) | 34 / 23 (5) |
 | R3 type-preserving | 15,900 (1,220) | 25 / 20 (0.6) | 31 / 16 (4) |
 | R3.5 strength-preserving | 890 (430) | 0 / 0 (0.0) | 2.5 / 1.8 (2.6) |
@@ -167,9 +168,11 @@ What it shows, with one draw and 8 brains per cell:
   neuron keeps its in-degree, its incoming synapse total and its excitatory/inhibitory input mix. The right amount
   of input from the wrong partners does not transmit. The transition therefore lies between R3 and R3.5, as the
   preregistration predicts, and it is a matter of partner identity rather than input statistics.
-- R1 (5% of neurons with flipped sign) halves the network rate and keeps the haltere channel (16 outputs, null
-  max 2); its VS channel is noisier (15 outputs against a null max of 24, one balanced split), so R1 needs the
-  30-brain confirmatory run before it is called passed.
+- R1 (5% of neurons with flipped sign) halves the network rate. With 8 brains its VS channel was noisy (15 outputs
+  against a null max of 24 from one balanced split); the 30-brain confirmatory run (2026-11-03, login VM CPU,
+  `logs/local/pretest-r1_s1-b30-w0.47.out`, `results/rungs/pretest_r1_s1_b30_w0.47.json`, 1,000 random balanced
+  relabellings) gives 35 and 31 lateralised outputs against null maxima of 4 and 13 (95th percentile 1), at
+  13,000-14,300 network spikes/s. R1 passes the transmission gate at 0.47.
 The balance gate has not yet run on R1-R3.5 (the GPU node is drained); the tables below are R0, R4 and R5 only.
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
@@ -185,8 +188,10 @@ to the left VS or haltere input in 4 brains and to the right in 4 others: 300 ms
 - "Network" counts only neurons outside the 789 driven sensory neurons.
 - "Lateralised outputs" counts descending and motor neurons (2,129) whose left-vs-right difference has |z| > 3.
   z uses a Welch SE with ddof=1 and a floor of 1 spike per window.
-- "Null" repeats the count over the 18 relabellings that put two left-probed and two right-probed brains in
-  each group, so the probe side cancels.
+- "Null" repeats the count over the balanced relabellings that put half of the left-probed and half of the
+  right-probed brains in each group, so the probe side cancels: all 18 of them with 8 brains; with 30 brains
+  19.3 million exist, so `--null-splits` (default 1,000) random ones are used and the 95th percentile is stored
+  alongside the max.
 
 Runs were on CPU on 2026-10-29 with no job id (`logs/local/pretest-*-w*.out`, `results/rungs/pretest_*_w*.json`).
 This is one rewiring seed and 8 brains per cell; treat it as a pilot.
