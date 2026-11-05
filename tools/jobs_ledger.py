@@ -81,6 +81,7 @@ NOTES = {
     "37945": "pilot ride on R4 at scale 1.2 (balance gate unchanged, 4.5 m/s, seed 201) on CPU, 40 threads -> results/rungs/r4_s1_w1.2_cpu/",
     "37946": "continuation of 37938 (runs/ride.py --resume)",
     "37947": "30-brain pre-test of R4 at 1.2, 1.3 and the rest of the ladder (CPU)",
+    "37948": "pilot ride on R3, second CEM seed (202), on CPU, 32 threads -> results/rungs/r3_s1_cpu/v4.5_s202/",
 }
 
 LEFT_OUT = {"36054", "36055", "36056", "36057", "36062", "36064"}  # Fly Bar jobs, not part of this repo
