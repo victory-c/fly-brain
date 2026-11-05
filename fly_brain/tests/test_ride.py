@@ -50,3 +50,18 @@ def test_loop_keeps_riders_apart_and_carries_state_over(tmp_path):
     assert hz[0, 1] > 20 and hz[0, 2] > 5                          # the relay carries it two synapses on
     assert hz[1, 2] < hz[0, 2] / 3                                 # inhibition on the last stage
     assert hz[2].sum() == 0                                        # an undriven rider stays silent
+
+
+def test_resume_state_restores_the_search_and_refuses_another_decoder():
+    import pytest
+    from runs.ride import resume_state
+    names = ["steer:a", "steer:b", "steer:bias", "pedal:gain", "pedal:bias", "brake:gain", "brake:bias"]
+    prev = {"decoder_names": names, "mu": [0.1, -0.2, 0.0, 0.0, -2.0, 0.0, -12.0], "sigma": [0.05, 0.04, 0.03, 0, 0, 0, 0],
+            "history": [{"gen": 0, "upright_mean": 1.0}, {"gen": 1, "upright_mean": 2.5}], "best_fitness": 4.2,
+            "best_theta": [0.2, -0.1, 0.0, 0.0, -2.0, 0.0, -12.0]}
+    mu, sigma, history, best_fit, best_theta = resume_state(prev, names)
+    assert mu.dtype == np.float32 and np.allclose(mu, prev["mu"]) and np.allclose(sigma, prev["sigma"])
+    assert (sigma[3:] == 0).all()  # pedal and brake stay frozen
+    assert len(history) == 2 and best_fit == 4.2 and np.allclose(best_theta, prev["best_theta"])
+    with pytest.raises(SystemExit):
+        resume_state(prev, names[:-1] + ["brake:other"])
