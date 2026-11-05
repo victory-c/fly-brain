@@ -5,3 +5,4 @@ r35_s1 HALT scale 0.47: 19,208 spikes/s, 1,591 outside the driven neurons (1,337
 -> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r35_s1_b30_w0.47.json
 /home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
   return torch._C._cuda_getDeviceCount() > 0
+slurmstepd-corruption: error: *** JOB 37927 ON corruption CANCELLED AT 2026-11-05T05:30:04 ***
