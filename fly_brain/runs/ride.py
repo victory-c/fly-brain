@@ -177,7 +177,7 @@ def parse():
     ap.add_argument("--sigma-pedal", type=float, default=None, help="CEM width for the 4 pedal/brake terms; 0 freezes them")
     ap.add_argument("--zbar", default=None, help=".npy (D,): mean input of each decoder weight while riding (0 for bias, pedal, brake); CEM then searches steer:bias at that operating point")
     ap.add_argument("--max-minutes", type=float, default=0.0, help="CEM: stop before a generation that would end past this wall time")
-    ap.add_argument("--resume", default=None, help="CEM: continue the search stored in this results json (its mu, sigma, history and best), e.g. after a job hit its time limit; --generations is the total")
+    ap.add_argument("--resume", default=None, help="CEM: continue the search stored in this results json (its mu, sigma, history and best), e.g. after a job hit its time limit; --generations is the total. The gust and start-lean draws restart from a seed of their own, and --log-attempts keeps only the new generations")
     ap.add_argument("--w-syn-scale", type=float, default=None, help="override the calibrated synapse scale (W_SYN_SCALE, 0.47)")
     ap.add_argument("--brain", default=None, help="connectome npz (default brain.npz); e.g. a rewired one from brain/variants.py")
     ap.add_argument("--device", default="auto")
@@ -409,6 +409,9 @@ def main():
         prev = json.loads((ROOT / a.resume).read_text())
         mu, sigma, prev_history, prev_best_fit, prev_best_theta = resume_state(prev, dec_names(dec))
         rng = np.random.default_rng([a.seed, len(prev_history)])
+        # the bikes' start leans and gusts come from one stream per process: without this a resumed job would replay
+        # the draws of generation 0
+        ride.bikes.gen.manual_seed(a.seed + 1_000_003 * len(prev_history))
         print(f"resuming {a.resume} at generation {len(prev_history)} (riding time so far {prev_history[-1]['upright_mean']:.2f} s)", flush=True)
     frozen = sigma == 0
     # CEM samples u, where u[F] = steer:bias + theta . zbar is the standing steering argument while riding: weight noise
@@ -425,11 +428,11 @@ def main():
     mu = to_u(mu)
     n_elite = max(2, int(round(a.elite * a.riders)))
     history, best_theta, best_fit = [], to_theta(mu), -np.inf
-    resumed, t_prev, brain_prev = [], 0.0, 0.0
+    resumed, t_prev, brain_total = [], 0.0, 0.0
     if prev is not None:
         history, best_fit, best_theta = prev_history, prev_best_fit, prev_best_theta
         resumed = prev.get("resumed", []) + [{"gen": len(history), "device": ride.dev}]
-        t_prev, brain_prev = prev.get("wall_seconds", 0.0), prev.get("brain_seconds", 0.0)
+        t_prev, brain_total = prev.get("wall_seconds", 0.0), prev.get("brain_seconds", 0.0)
     gen0 = len(history)
     rec, best_dist, attempts = None, 0.0, []
     if a.log_attempts:
@@ -447,6 +450,7 @@ def main():
         if rec is not None:
             rec.start()
         r = ride.episode(theta, seed=a.seed + 1000 * (gen + 1), verbose=(gen == gen0), brain=rec, attempts=rec)
+        brain_total += ride.loop.seconds  # the engine's clock restarts at every episode
         fit = r["fitness"]
         order = np.argsort(-fit)
         if rec is not None:
@@ -468,12 +472,14 @@ def main():
                "bailed": int(r["bailed"].sum()), "pop_hz": r["pop_hz"], "wall_s": r["wall"], "sigma_mean": float(sigma.mean())}
         history.append(row)
         print(f"gen {gen:2d}  fit best {row['best']:6.2f} mean {row['mean']:6.2f}  " + ride.summary(r), flush=True)
-        (ROOT / a.out).write_text(json.dumps({
+        tmp = (ROOT / a.out).with_suffix(".json.tmp")  # the search resumes from this file: never leave it half written
+        tmp.write_text(json.dumps({
             "config": vars(a), "device": ride.dev, "stable_speeds": ride.stable, "decoder_names": dec_names(dec),
             "dn_names": ride.readout.names, "sense_names": ride.senses.names, "history": history,
             "best_fitness": best_fit, "best_theta": best_theta.tolist(), "mu": to_theta(mu).tolist(), "sigma": sigma.tolist(),
-            "brain_seconds": brain_prev + ride.loop.seconds, "wall_seconds": t_prev + time.time() - t_all,
+            "brain_seconds": brain_total, "wall_seconds": t_prev + time.time() - t_all,
             **({"resumed": resumed} if resumed else {})}, indent=1))
+        tmp.replace(ROOT / a.out)
     print(f"done: best fitness {best_fit:.2f}, results -> {a.out}  ({(time.time() - t_all) / 60:.1f} min)")
 
 
