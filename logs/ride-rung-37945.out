@@ -24,3 +24,6 @@ lane-filter gain starts at 0.00 with width 1.0
 gen  0  fit best   8.47 mean   0.80  upright  0.76 s (max  8.00,   0% finish)  dist   3.2 m  |y| 0.49 m  v 4.50  bailed 0  pop 208,641 sp/s  1978s
 gen  1  fit best   1.06 mean   0.58  upright  0.56 s (max  0.99,   0% finish)  dist   2.3 m  |y| 0.37 m  v 4.50  bailed 0  pop 173,419 sp/s  266s
 gen  2  fit best   1.38 mean   0.68  upright  0.65 s (max  1.28,   0% finish)  dist   2.7 m  |y| 0.39 m  v 4.50  bailed 0  pop 201,049 sp/s  349s
+gen  3  fit best   1.75 mean   0.70  upright  0.68 s (max  1.62,   0% finish)  dist   2.8 m  |y| 0.43 m  v 4.50  bailed 0  pop 211,862 sp/s  438s
+gen  4  fit best   1.43 mean   0.71  upright  0.68 s (max  1.32,   0% finish)  dist   2.8 m  |y| 0.43 m  v 4.50  bailed 0  pop 199,817 sp/s  361s
+gen  5  fit best   1.81 mean   0.76  upright  0.74 s (max  1.67,   0% finish)  dist   3.0 m  |y| 0.44 m  v 4.50  bailed 0  pop 203,009 sp/s  506s
