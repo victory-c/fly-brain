@@ -151,6 +151,16 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37853 | None | CANCELLED | 00:00:00 |  |  | `srun -p ocf-hpc -w corruption -c 8 --mem=24G -t 20 --quiet --chdir=/home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain bash -c /home/s/st/stevejobs/flybrain/venv/bin/python -m bra...` (in `./.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain`) |  |
 | 37854 | None | CANCELLED | 00:00:00 |  |  | `sbatch --parsable handsoff-gate.sbatch` (in `./.claude/worktrees/foresight-ai-science-rfp-b3f525`) |  |
 | 37855 | None | CANCELLED | 00:00:00 |  |  | `srun -p ocf-hpc -w corruption -c 8 --mem=16G -t 30 --quiet --chdir=/home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain bash -c T=/tmp/claude-93015/-home-s-st-stevejobs-flybrain--c...` (in `./.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain`) |  |
+| 37923 | 2026-11-05 05:07 | FAILED | 00:00:00 | 4 cpu, 8G, 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 4 --mem=8G -t 5 --quiet bash -c cat /etc/os-release ¦ head -1; uname -r; nvidia-smi --query-gpu=index,name,memory.used,memory.total,utilization.gpu --format=csv,noheader; ...` (in `./fly_brain`) |  |
+| 37924 | 2026-11-05 05:07 | FAILED | 00:00:00 | 4 cpu, 8G, 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 4 --mem=8G -t 5 --quiet bash -c ls -la /usr/bin/python3.11 && /usr/bin/python3.11 -V && dpkg -l ¦ grep -E "^ii +(python3\.11¦libpython3\.11)" ¦ awk "{print \$2, \$3}"; /us...` (in `./fly_brain`) |  |
+| 37925 | 2026-11-05 05:08 | COMPLETED | 00:00:06 | 2 cpu, 2G |  | `srun -p ocf-hpc -w corruption -c 2 --mem=2G -t 3 --quiet bash -c ls /opt/conda/bin/python 2>&1; /opt/conda/bin/python -V 2>&1; ldd --version ¦ head -1; curl -sI -m 5 https://conda.anaconda.org ¦ head -1` (in `./fly_brain`) |  |
+| 37926 | 2026-11-05 05:09 | TIMEOUT | 00:15:09 | 8 cpu, 16G, 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 8 --mem=16G -t 15 --quiet -J env-check env OMP_NUM_THREADS=8 ../venv-cuda/bin/python -m runs.ride --init-theta results/gate/v4.5_s201/init_hold.json --sigma-new 0.1 --sigm...` (in `./fly_brain`) | `/home/s/st/stevejobs/.cache/flybrain-smoke/gate_v4.5_s201_gen0.json` |
+| 37927 | 2026-11-05 05:14 | RUNNING | 00:15:35 | 8 cpu, 24G |  | `sbatch --parsable pretest-rungs.sbatch r35_s1 r4_s1 r5_s1 0.47 0.6 0.8 1 1.5 2` | [pretest-37927.out](logs/pretest-37927.out) |
+| 37928 | 2026-11-05 05:14 | RUNNING | 00:15:35 | 8 cpu, 24G |  | `sbatch --parsable pretest-rungs.sbatch r0 r2_s1 r3_s1 0.47` | [pretest-37928.out](logs/pretest-37928.out) |
+| 37929 | 2026-11-05 05:25 | CANCELLED | 00:03:10 | 8 cpu, 40G |  | `sbatch --parsable screen-rungs.sbatch r0 r1_s1 r2_s1 r3_s1` | [screen-rungs-37929.out](logs/screen-rungs-37929.out) |
+| 37933 | None | CANCELLED | 00:00:00 | 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c echo CVD=$CUDA_VISIBLE_DEVICES; ls -la /dev/nvidia* 2>&1 ¦ head -12; echo; lsmod ¦ grep -i nvidia; echo; cat /proc/driver/nvidia/version 2>...` (in `./fly_brain`) |  |
+| 37934 | 2026-11-05 05:28 | COMPLETED | 00:00:02 | 2 cpu, 4G, 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c echo CVD=$CUDA_VISIBLE_DEVICES; ls -la /dev/nvidia* 2>&1 ¦ head -12; echo; lsmod ¦ grep -i nvidia; echo; cat /proc/driver/nvidia/version 2>...` (in `./fly_brain`) |  |
+| 37935 | 2026-11-05 05:28 | COMPLETED | 00:00:02 | 2 cpu, 4G, 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c /sbin/modinfo nvidia-uvm 2>&1 ¦ head -3; /sbin/modinfo nvidia-current-uvm 2>&1 ¦ head -3; find /lib/modules/$(uname -r) -name "*uvm*" 2>/de...` (in `./fly_brain`) |  |
 
 ## Full command lines
 
@@ -441,4 +451,62 @@ srun -p ocf-hpc -w corruption -c 8 --mem=24G -t 20 --quiet --chdir=/home/s/st/st
 
 ```bash
 srun -p ocf-hpc -w corruption -c 8 --mem=16G -t 30 --quiet --chdir=/home/s/st/stevejobs/flybrain/.claude/worktrees/foresight-ai-science-rfp-b3f525/fly_brain bash -c T=/tmp/claude-93015/-home-s-st-stevejobs-flybrain--claude-worktrees-foresight-ai-science-rfp-b3f525/7da3d3dc-7a0e-4830-8813-3da350058c6f/scratchpad/b2; /home/s/st/stevejobs/flybrain/venv/bin/pip install -q --target $T brian2 2>&1 | tail -2; PYTHONPATH=$T /home/s/st/stevejobs/flybrain/venv/bin/python -m pytest tests/test_brian2.py -v -rs 2>&1 | tail -15
+```
+
+**37923** (bash)
+
+```bash
+srun -p ocf-hpc -w corruption --gres=gpu:1 -c 4 --mem=8G -t 5 --quiet bash -c cat /etc/os-release | head -1; uname -r; nvidia-smi --query-gpu=index,name,memory.used,memory.total,utilization.gpu --format=csv,noheader; nvidia-smi | grep -i "driver version"; python3 -V; ../venv-cuda/bin/python -c "
+import torch, sys; print(sys.version.split()[0], torch.__version__, torch.cuda.is_available(), torch.cuda.get_device_name(0) if torch.cuda.is_available() else None)
+x=torch.randn(4000,4000,device=\"cuda\"); print(float((x@x).abs().mean()))"
+```
+
+**37924** (bash)
+
+```bash
+srun -p ocf-hpc -w corruption --gres=gpu:1 -c 4 --mem=8G -t 5 --quiet bash -c ls -la /usr/bin/python3.11 && /usr/bin/python3.11 -V && dpkg -l | grep -E "^ii +(python3\.11|libpython3\.11)" | awk "{print \$2, \$3}"; /usr/bin/python3.11 -c "
+import sys; sys.path.insert(0, \"/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages\")
+import torch, numpy, pandas; print(torch.__version__, numpy.__version__, pandas.__version__, torch.cuda.is_available(), torch.cuda.get_device_name(0))
+x=torch.randn(4000,4000,device=\"cuda\"); print(\"matmul ok\", float((x@x).abs().mean())>0)"
+```
+
+**37926** (env-check)
+
+```bash
+srun -p ocf-hpc -w corruption --gres=gpu:1 -c 8 --mem=16G -t 15 --quiet -J env-check env OMP_NUM_THREADS=8 ../venv-cuda/bin/python -m runs.ride --init-theta results/gate/v4.5_s201/init_hold.json --sigma-new 0.1 --sigma0 0.3 --sigma-lane-filter 1.0 --sigma-min 0.03 --sigma-pedal 0 --center-batch --zbar results/gate/v4.5_s201/zbar_mu.npy --readout lane --lane hs --lane-filter results/gate/v4.5_s201/probe.json --tau-lane-ms 300 --gains hs_heading=150,hs_lane=50 --v0 4.5 --gust 5 --offroad 3.5 --lane-penalty 0.02 --riders 48 --seconds 15 --generations 1 --seed 201 --out /home/s/st/stevejobs/.cache/flybrain-smoke/gate_v4.5_s201_gen0.json
+```
+
+**37933** (bash)
+
+```bash
+srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c echo CVD=$CUDA_VISIBLE_DEVICES; ls -la /dev/nvidia* 2>&1 | head -12; echo; lsmod | grep -i nvidia; echo; cat /proc/driver/nvidia/version 2>&1 | head -2; ls /dev/nvidia-caps 2>&1 | head -3; ../venv-cuda/bin/python -c "
+import torch, ctypes
+print(torch.__version__, torch.version.cuda)
+try:
+    torch.cuda.init(); print(\"init ok\", torch.cuda.device_count())
+except Exception as e: print(\"init error:\", repr(e)[:300])
+lib = ctypes.CDLL(\"libcuda.so.1\"); print(\"cuInit ->\", lib.cuInit(0))
+" 2>&1 | grep -v Warning; ls -la /usr/bin/nvidia-modprobe 2>&1; dmesg 2>/dev/null | grep -i -E "nvidia|uvm" | tail -5
+```
+
+**37934** (bash)
+
+```bash
+srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c echo CVD=$CUDA_VISIBLE_DEVICES; ls -la /dev/nvidia* 2>&1 | head -12; echo; lsmod | grep -i nvidia; echo; cat /proc/driver/nvidia/version 2>&1 | head -2; ../venv-cuda/bin/python -c "
+import torch, ctypes
+print(torch.__version__, torch.version.cuda)
+try:
+    torch.cuda.init(); print(\"init ok\", torch.cuda.device_count())
+except Exception as e: print(\"init error:\", repr(e)[:300])
+lib = ctypes.CDLL(\"libcuda.so.1\"); print(\"cuInit ->\", lib.cuInit(0))
+" 2>&1 | grep -v Warning; ls -la /usr/bin/nvidia-modprobe 2>&1
+```
+
+**37935** (bash)
+
+```bash
+srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c /sbin/modinfo nvidia-uvm 2>&1 | head -3; /sbin/modinfo nvidia-current-uvm 2>&1 | head -3; find /lib/modules/$(uname -r) -name "*uvm*" 2>/dev/null | head; echo "--- nvidia-modprobe -u -c=0"; /usr/bin/nvidia-modprobe -u -c=0; echo "rc=$?"; ls -la /dev/nvidia-uvm* 2>&1; lsmod | grep uvm; ../venv-cuda/bin/python -c "
+import torch
+print(torch.cuda.is_available(), torch.cuda.device_count())
+x=torch.randn(4000,4000,device=\"cuda\"); print(\"matmul ok\", float((x@x).abs().mean())>0, torch.cuda.get_device_name(0))" 2>&1 | grep -v "Warning\|return torch" | tail -4
 ```
