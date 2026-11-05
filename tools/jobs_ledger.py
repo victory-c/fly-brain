@@ -65,6 +65,22 @@ NOTES = {
     "36555": "rewrite: the bike relearned again with the new display regions recorded (ride-relearn.sbatch, search only) -> results/relearn/",
     "36626": "rewrite: /ride/ page replays of the relearned decoder and hands-off, brains recorded",
     "36627": "rewrite: dashboard export, all tests on GPU, graph engine benchmark",
+    "37926": "after the Debian 13 upgrade: re-run of balance-gate generation 0; ran on CPU because CUDA does not initialise (nvidia_uvm not loaded), timed out",
+    "37927": "30-brain pre-test ladder for R3.5/R4/R5, on CPU with a GPU allocated; cancelled and resubmitted per rung without the GPU",
+    "37928": "30-brain pre-test of R0, R2, R3 at 0.47 (CPU) -> results/rungs/pretest_*_b30_w0.47.json",
+    "37929": "per-brain passenger screens; cancelled, wait for the GPU",
+    "37936": "30-brain pre-test of R4 at 1.5 and 2.0 (CPU); cancelled during the 2.0 haltere probe (8 million spikes/s)",
+    "37937": "30-brain pre-test of R3.5 at 0.6 to 2.0 (CPU)",
+    "37938": "pilot ride on R3 (balance gate unchanged, 4.5 m/s, seed 201) on CPU, 48 threads -> results/rungs/r3_s1_cpu/",
+    "37939": "per-brain passenger screens on CPU; held, then cancelled to leave the cores to the rides",
+    "37940": "30-brain pre-test of R5 at 0.47 to 2.0 (CPU): passes at 2.0",
+    "37941": "fine scan of R4 above 1.5 (CPU): runaway at 1.6; 1.7 and 1.8 cancelled",
+    "37942": "fine scan of R3.5 between 0.47 and 0.6 (CPU): no signal where the rate matches the real brain's",
+    "37943": "pilot ride on R4 at scale 1.5; cancelled, the network runs away within 0.4 s of riding (4 million spikes/s per brain)",
+    "37944": "R4 closed-loop stability: the reference replay at scales 1.0 to 1.4 -> riding rate matches the real brain's at 1.2",
+    "37945": "pilot ride on R4 at scale 1.2 (balance gate unchanged, 4.5 m/s, seed 201) on CPU, 40 threads -> results/rungs/r4_s1_w1.2_cpu/",
+    "37946": "continuation of 37938 (runs/ride.py --resume)",
+    "37947": "30-brain pre-test of R4 at 1.2, 1.3 and the rest of the ladder (CPU)",
 }
 
 LEFT_OUT = {"36054", "36055", "36056", "36057", "36062", "36064"}  # Fly Bar jobs, not part of this repo
