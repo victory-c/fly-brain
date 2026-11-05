@@ -1,0 +1,43 @@
+{
+ "brain": "results/variants/r5_s1.npz",
+ "w_syn": 0.165,
+ "brains": 30,
+ "ms": 1000.0,
+ "extra_hz": 30.0,
+ "pops": {
+  "VS": {
+   "spikes_per_s": 15531.599609375,
+   "network_spikes_per_s": 450.73333740234375,
+   "network_active": 273,
+   "active_frac": 0.006370725854829034,
+   "max_neuron_hz": 41.16666793823242,
+   "outputs_z3": 0,
+   "max_abs_z": 0.4852980077266693,
+   "out_mean_hz": 0.0013934554299339652,
+   "outputs_active": 2,
+   "null_outputs_z3_mean": 0.0,
+   "null_outputs_z3_max": 0,
+   "null_outputs_z3_p95": 0.0,
+   "null_max_abs_z": 2.6239492893218994,
+   "null_splits": 1000,
+   "wall_s": 310.5
+  },
+  "HALT": {
+   "spikes_per_s": 18030.93359375,
+   "network_spikes_per_s": 403.79998779296875,
+   "network_active": 256,
+   "active_frac": 0.00626874625074985,
+   "max_neuron_hz": 31.33333396911621,
+   "outputs_z3": 0,
+   "max_abs_z": 0.4852980077266693,
+   "out_mean_hz": 0.0013934554299339652,
+   "outputs_active": 2,
+   "null_outputs_z3_mean": 0.0,
+   "null_outputs_z3_max": 0,
+   "null_outputs_z3_p95": 0.0,
+   "null_max_abs_z": 2.6239492893218994,
+   "null_splits": 1000,
+   "wall_s": 342.3
+  }
+ }
+}

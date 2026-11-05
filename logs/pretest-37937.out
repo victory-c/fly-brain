@@ -20,3 +20,7 @@ r35_s1 HALT scale 1.50: 1,005,200 spikes/s, 983,973 outside the driven neurons (
 -> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r35_s1_b30_w1.5.json
 /home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
   return torch._C._cuda_getDeviceCount() > 0
+r35_s1 VS scale 2.00: 1,651,872 spikes/s, 1,630,943 outside the driven neurons (35,530 of them fire), outputs |z|>3: 6 (null mean 2.2, max 9), max |z| 4.4 (null 6.7) (853.3 s)
+r35_s1 HALT scale 2.00: 1,662,439 spikes/s, 1,638,750 outside the driven neurons (35,615 of them fire), outputs |z|>3: 9 (null mean 2.1, max 9), max |z| 5.3 (null 5.6) (815.0 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r35_s1_b30_w2.json
+== done Thu Nov  5 06:55:15 AM PST 2026
