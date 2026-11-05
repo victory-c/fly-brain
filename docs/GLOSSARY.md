@@ -230,12 +230,21 @@ checking what each keeps; `runs/pretest.py` runs the transmission gate on the re
   - **R4** degree-preserving shuffle: each neuron keeps only its number of inputs and outputs.
   - **R5** random wiring.
   Each rung is scored on riding, on decoder-free predictions and on decodability.
-- **Transmission gate.** The test a rung must pass before it gets CEM time: left-vs-right drive to the VS, HS and
-  haltere inputs must produce a significant lateralized DN response (30 flies) at a baseline rate within 2x of the
-  real brain's, at some `W_SYN_SCALE` between 0.35 and 0.60. Rungs that stay silent or run away are reported as
-  outcomes. The first pilot (`docs/CURRENT_NUMBERS.md`) found R4 and R5 near silent at the scales tested in that
-  range (0.47, 0.60). R4 came within about 2x of the real brain's activity only at scale 1.5, so the range needs
-  widening.
+- **Transmission gate.** The test a rung must pass before it gets CEM time (`runs/pretest.py`,
+  `pretest-rungs.sbatch`, `tools/pretest_table.py`): with the bike held upright, left-vs-right drive to the VS and
+  haltere inputs must give more lateralised descending and motor neurons (|z| > 3, 30 brains) than any of 1,000
+  balanced relabellings, on both probes, at a network rate within 2x of the real brain's (10,750 to 43,000
+  spikes/s), at one of the synapse scales 0.47, 0.6, 0.8, 1.0, 1.5, 2.0. Rungs that stay silent or run away are
+  reported as outcomes. With 30 brains (`docs/CURRENT_NUMBERS.md`): R0 to R3 pass at 0.47, R3.5 at no scale, R4
+  at no scale (signal but too quiet up to 1.5, runaway from 1.6), R5 weakly at 2.0.
+- **Closed-loop rate check.** The gate is measured upright, and riding drives the network harder: R4 at 1.5 looks
+  quiet upright and reaches 4 million spikes/s per brain within a second of riding. `tools/replay_rate.py` compares
+  a rung with the real wiring over the first 0.6 s of the reference replay, while nearly every rider is still up
+  (the replay's own average includes fallen riders and grows with its length). A rung's scale for riding should
+  pass this check as well; it is proposed for the preregistration, not yet part of it.
+- **Resumed search.** A CPU balance-gate generation takes 30 to 75 min and a job at most a day, so a search runs
+  over several jobs: `runs/ride.py --resume cem.json` restores the CEM state, and resubmitting the same
+  `ride-rung.sbatch` command continues it (`GENS` caps the total generations).
 - **Sensory bypass, hands-off floor.** The two reference lines for riding: a decoder that reads the sensory
   neurons directly, skipping the brain (the expected ceiling), and the bike with no steering (the floor).
 - **Top-k and random-k DN.** Each brain gets its own passenger screen (`runs/screen.py --brain <rung>.npz`), and
