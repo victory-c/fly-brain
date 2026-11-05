@@ -44,7 +44,7 @@ HTML = r"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fly learns to ride</title>
 <style>
-:root{--pw:max(240px,48vw);--bh:44px;--bmh:max(90px,min(55vh,calc(100vh - 230px)));--mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Noto Sans Mono",monospace;--bg:#e8e9eb;--pbg:#111317;--bbg:#15171b;--fg:#dfe2e7;--dim:#7f858f;--acc:#f0a24a}
+:root{--pw:max(260px,min(48vw,100vw - 620px));--bh:44px;--bmh:max(90px,min(55vh,calc(100vh - var(--bh) - 300px)));--mono:ui-monospace,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Noto Sans Mono",monospace;--bg:#e8e9eb;--pbg:#111317;--bbg:#15171b;--fg:#dfe2e7;--dim:#7f858f;--acc:#f0a24a}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:12px/1.4 var(--mono);overflow:hidden}
 #app{display:grid;grid-template-columns:1fr var(--pw);grid-template-rows:1fr var(--bh);height:100%}
 #stage{grid-area:1/1/2/2;position:relative;overflow:hidden;min-width:0;min-height:0;background:var(--bg)}
@@ -52,7 +52,7 @@ html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:12px/1.
 #chips{position:absolute;top:10px;left:14px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#6f747c;pointer-events:none}
 #hint{position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#5d626a;background:rgba(255,255,255,.65);padding:3px 8px;border-radius:3px;pointer-events:none}
 .hide{display:none!important}
-#panel{grid-area:1/2/3/3;position:relative;background:var(--pbg);display:flex;flex-direction:column;min-height:0;overflow:hidden;border-left:1px solid #000}
+#panel{grid-area:1/2/2/3;position:relative;background:var(--pbg);display:flex;flex-direction:column;min-height:0;overflow:hidden;border-left:1px solid #000}
 /* splitters: drag the grip to change the split, double-click to reset */
 #vsplit{position:absolute;left:-5px;top:0;bottom:0;width:10px;cursor:col-resize;z-index:5;touch-action:none}
 #hsplit{position:relative;height:8px;flex:none;cursor:row-resize;z-index:5;touch-action:none;background:#0d1017}
@@ -75,7 +75,7 @@ body.dragging,body.dragging *{user-select:none!important}body.dragv,body.dragv *
 #status{font-size:18px;font-weight:600;margin:5px 0 10px;color:#fff}
 #log{flex:1;min-height:0;overflow:hidden;-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
 .ev{margin-bottom:7px}.ev .ts{font-size:9px;color:var(--dim);letter-spacing:.06em;font-variant-numeric:tabular-nums}.ev .tx{font-size:12px;color:#b9bec6}.ev:first-child .tx{color:#fff}
-#bar{grid-area:2/1/3/2;background:var(--bbg);display:flex;align-items:center;gap:12px;padding:0 12px;min-width:0;border-top:1px solid #000}
+#bar{grid-area:2/1/3/3;background:var(--bbg);display:flex;align-items:center;gap:12px;padding:0 12px;min-width:0;border-top:1px solid #000}
 #credits{font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:#6f747c;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 1 auto;min-width:0;max-width:28%}
 #legend{display:flex;flex-wrap:wrap;gap:3px 9px;font-size:8.5px;color:#8a8f98;white-space:nowrap;flex:none;padding:6px 16px 8px;border-top:1px solid #1b1e24}#byline{flex:none;padding:0 16px 9px;font-size:9.5px;color:#6b7280;line-height:1.45}#byline a{color:#c3c8d0;text-decoration:none;white-space:nowrap}#byline a:hover{color:var(--acc)}#byline svg{vertical-align:-1px;margin-right:4px}#byline .h{color:#e0526b}
 #legend i{display:inline-block;width:7px;height:7px;border-radius:1px;margin-right:3px;vertical-align:-1px}
@@ -455,7 +455,7 @@ function setPaint(){liveryApply(PAINT,scene)}
  sel.onchange=()=>{PAINT=sel.value;LS.set('flybrain.paint',PAINT);setPaint()}})();
 // splitters: panel width (--pw) and brain-map height (--bmh), remembered per browser; the renderers follow via ResizeObserver
 (function(){const root=document.documentElement.style,panel=$('panel');
- const lim={pw:()=>[240,Math.max(240,innerWidth*0.7)],bmh:()=>[90,Math.max(90,panel.clientHeight-230)]};
+ const lim={pw:()=>[240,Math.max(240,innerWidth*0.7)],bmh:()=>[90,Math.max(90,panel.clientHeight-300)]};
  const setv=(k,v)=>{const [lo,hi]=lim[k]();v=Math.round(Math.max(lo,Math.min(hi,v)));root.setProperty('--'+k,v+'px');return v};
  if(innerWidth>760){const pw=+LS.get('flybrain.attempts.pw'),bmh=+LS.get('flybrain.attempts.bmh');if(pw)setv('pw',pw);if(bmh)setv('bmh',bmh)}
  function wire(id,k,cls,delta){const h=$(id);let x0=0,y0=0,v0=0;
@@ -498,6 +498,8 @@ const renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.setPixe
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputEncoding=THREE.sRGBEncoding;
 const BG=0xe8e9eb,scene=new THREE.Scene();scene.background=new THREE.Color(BG);scene.fog=new THREE.Fog(BG,26,90);
 const camera=new THREE.PerspectiveCamera(38,1,0.1,300);
+// vertical fov f0 down to aspect a0; narrower than that, widen it so the horizontal field stays what it was at a0
+function fitCam(cam,a,f0,a0){cam.aspect=a;cam.fov=a>=a0?f0:Math.min(80,2*Math.atan(Math.tan(f0*Math.PI/360)*a0/a)*180/Math.PI);cam.updateProjectionMatrix()}
 scene.add(new THREE.HemisphereLight(0xffffff,0xd6d7da,0.62));
 const sun=new THREE.DirectionalLight(0xffffff,0.46);sun.position.set(-6,16,8);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.bias=-0.0006;sun.shadow.radius=4;
 Object.assign(sun.shadow.camera,{left:-9,right:9,top:9,bottom:-9,near:1,far:60});scene.add(sun);scene.add(sun.target);
@@ -639,7 +641,7 @@ async function initBrain(){const c=$('bc');if(typeof DecompressionStream==='unde
  c.addEventListener('pointerdown',e=>{bm.drag=true;bm.px=e.clientX;bm.py=e.clientY;c.setPointerCapture(e.pointerId)});
  c.addEventListener('pointermove',e=>{if(!bm.drag)return;bm.rotY+=(e.clientX-bm.px)*0.008;bm.rotX=Math.max(-1.4,Math.min(1.4,bm.rotX+(e.clientY-bm.py)*0.008));bm.px=e.clientX;bm.py=e.clientY});
  c.addEventListener('pointerup',()=>bm.drag=false);
- const rs=()=>{const w=c.clientWidth,h=c.clientHeight;if(!w||!h)return;rr.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};new ResizeObserver(rs).observe(c);rs()}
+ const rs=()=>{const w=c.clientWidth,h=c.clientHeight;if(!w||!h)return;rr.setSize(w,h,false);fitCam(cam,w/h,30,1.5)};new ResizeObserver(rs).observe(c);rs()}
 function paintBrain(t){if(!bm)return;const a=ST.att,act=ST.act,has=!!(a&&act&&ST.actId===a.id);let key='none',i=0,j=0,al=0,nB=0;
  if(has){nB=act.length/bm.nP|0;const f=t*1000/META.binMs-0.5;i=Math.max(0,Math.min(nB-1,Math.floor(f)));j=Math.min(nB-1,i+1);al=Math.max(0,Math.min(1,f-i));key=a.id+':'+i+':'+al.toFixed(2)}
  if(key!==bm.key){bm.key=key;const col=bm.col,nP=bm.nP;
@@ -766,7 +768,7 @@ addEventListener('keydown',e=>{if(e.target&&/^(SELECT|INPUT|TEXTAREA)$/.test(e.t
 LANG_HOOKS.push(()=>{setPlaying(ST.playing);setSig(ST.sig);setCam(ST.cam);logKey='';hintKey='';if(ST.att)refreshPanel()});
 applyLang();
 if(Q.get('speed'))setSpeed(parseFloat(Q.get('speed'))||1);
-function resize(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);fitCam(camera,w/h,38,1.45)}
 new ResizeObserver(resize).observe(stage);resize();
 // ---------- debug / integration hooks
 window.FB={ST,RP,get ATT(){return ATT},get SIG(){return SIG},goTo,advance,pickAt,setView(ox,oy,oz,tx,ty,tz){ST.view=ox===undefined?null:{off:V(ox,oy,oz),tgt:V(tx,ty,tz)};ST.snap=true},seek:t=>{if(ST.rows){ST.phase='ride';ST.tA=Math.min(t,ST.att.t);ST.camFrozen=false}},play:setPlaying,setSpeed,setSig,setCam,
