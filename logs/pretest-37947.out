@@ -6,3 +6,17 @@ r4_s1 HALT scale 1.20: 21,139 spikes/s, 3,508 outside the driven neurons (3,347 
 /home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
   return torch._C._cuda_getDeviceCount() > 0
 r4_s1 VS scale 1.30: 19,168 spikes/s, 4,088 outside the driven neurons (3,745 of them fire), outputs |z|>3: 11 (null mean 0.0, max 1), max |z| 23.7 (null 3.4) (360.1 s)
+r4_s1 HALT scale 1.30: 22,659 spikes/s, 5,026 outside the driven neurons (5,009 of them fire), outputs |z|>3: 19 (null mean 0.0, max 1), max |z| 18.6 (null 4.4) (352.4 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r4_s1_b30_w1.3.json
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+r4_s1 VS scale 1.00: 16,643 spikes/s, 1,569 outside the driven neurons (1,439 of them fire), outputs |z|>3: 9 (null mean 0.0, max 1), max |z| 23.2 (null 3.5) (347.3 s)
+r4_s1 HALT scale 1.00: 19,331 spikes/s, 1,702 outside the driven neurons (1,731 of them fire), outputs |z|>3: 11 (null mean 0.0, max 1), max |z| 17.5 (null 3.6) (344.2 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r4_s1_b30_w1.json
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+r4_s1 VS scale 0.80: 15,895 spikes/s, 824 outside the driven neurons (626 of them fire), outputs |z|>3: 7 (null mean 0.0, max 0), max |z| 19.2 (null 2.9) (335.6 s)
+r4_s1 HALT scale 0.80: 18,439 spikes/s, 812 outside the driven neurons (703 of them fire), outputs |z|>3: 6 (null mean 0.0, max 1), max |z| 13.1 (null 3.1) (341.9 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r4_s1_b30_w0.8.json
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
