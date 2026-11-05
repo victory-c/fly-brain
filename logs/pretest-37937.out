@@ -11,3 +11,12 @@ r35_s1 HALT scale 0.80: 281,014 spikes/s, 262,441 outside the driven neurons (8,
 /home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
   return torch._C._cuda_getDeviceCount() > 0
 r35_s1 VS scale 1.00: 441,516 spikes/s, 425,010 outside the driven neurons (12,475 of them fire), outputs |z|>3: 11 (null mean 1.2, max 7), max |z| 10.1 (null 5.4) (502.6 s)
+r35_s1 HALT scale 1.00: 445,605 spikes/s, 426,448 outside the driven neurons (12,612 of them fire), outputs |z|>3: 15 (null mean 1.2, max 5), max |z| 12.4 (null 6.0) (458.3 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r35_s1_b30_w1.json
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+r35_s1 VS scale 1.50: 999,523 spikes/s, 981,006 outside the driven neurons (25,076 of them fire), outputs |z|>3: 7 (null mean 1.9, max 10), max |z| 4.5 (null 5.6) (670.3 s)
+r35_s1 HALT scale 1.50: 1,005,200 spikes/s, 983,973 outside the driven neurons (25,180 of them fire), outputs |z|>3: 17 (null mean 1.7, max 8), max |z| 7.7 (null 5.6) (628.0 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r35_s1_b30_w1.5.json
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0

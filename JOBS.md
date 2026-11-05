@@ -161,10 +161,14 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37933 | None | CANCELLED | 00:00:00 | 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c echo CVD=$CUDA_VISIBLE_DEVICES; ls -la /dev/nvidia* 2>&1 ¦ head -12; echo; lsmod ¦ grep -i nvidia; echo; cat /proc/driver/nvidia/version 2>...` (in `./fly_brain`) |  |
 | 37934 | 2026-11-05 05:28 | COMPLETED | 00:00:02 | 2 cpu, 4G, 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c echo CVD=$CUDA_VISIBLE_DEVICES; ls -la /dev/nvidia* 2>&1 ¦ head -12; echo; lsmod ¦ grep -i nvidia; echo; cat /proc/driver/nvidia/version 2>...` (in `./fly_brain`) |  |
 | 37935 | 2026-11-05 05:28 | COMPLETED | 00:00:02 | 2 cpu, 4G, 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c /sbin/modinfo nvidia-uvm 2>&1 ¦ head -3; /sbin/modinfo nvidia-current-uvm 2>&1 ¦ head -3; find /lib/modules/$(uname -r) -name "*uvm*" 2>/de...` (in `./fly_brain`) |  |
-| 37936 | 2026-11-05 05:30 | RUNNING | 00:29:55 | 16 cpu, 24G |  | `sbatch --parsable --gres=none -c 16 --time=12:00:00 -J pretest-r4 pretest-rungs.sbatch r4_s1 1.5 2 1 0.8 0.6 0.47` | [pretest-37936.out](logs/pretest-37936.out) |
-| 37937 | 2026-11-05 05:30 | RUNNING | 00:29:55 | 12 cpu, 24G |  | `sbatch --parsable --gres=none -c 12 --time=12:00:00 -J pretest-r35 pretest-rungs.sbatch r35_s1 0.6 0.8 1 1.5 2` | [pretest-37937.out](logs/pretest-37937.out) |
-| 37938 | 2026-11-05 05:30 | RUNNING | 00:29:55 | 48 cpu, 32G |  | `sbatch --parsable --gres=none -c 48 --mem=32G --time=1-00:00:00 -J ride-r3-cpu ride-rung.sbatch 4.5 201 results/variants/r3_s1.npz r3_s1_cpu 1320` | [ride-rung-37938.out](logs/ride-rung-37938.out) |
-| 37940 | 2026-11-05 05:51 | RUNNING | 00:08:34 | 8 cpu, 24G |  | `sbatch --parsable --gres=none -c 8 --time=16:00:00 -J pretest-r5 pretest-rungs.sbatch r5_s1 2 1.5 1 0.8 0.6 0.47` | [pretest-37940.out](logs/pretest-37940.out) |
+| 37936 | 2026-11-05 05:30 | CANCELLED | 00:32:28 | 16 cpu, 24G |  | `sbatch --parsable --gres=none -c 16 --time=12:00:00 -J pretest-r4 pretest-rungs.sbatch r4_s1 1.5 2 1 0.8 0.6 0.47` | [pretest-37936.out](logs/pretest-37936.out) |
+| 37937 | 2026-11-05 05:30 | RUNNING | 00:59:55 | 12 cpu, 24G |  | `sbatch --parsable --gres=none -c 12 --time=12:00:00 -J pretest-r35 pretest-rungs.sbatch r35_s1 0.6 0.8 1 1.5 2` | [pretest-37937.out](logs/pretest-37937.out) |
+| 37938 | 2026-11-05 05:30 | RUNNING | 00:59:55 | 48 cpu, 32G |  | `sbatch --parsable --gres=none -c 48 --mem=32G --time=1-00:00:00 -J ride-r3-cpu ride-rung.sbatch 4.5 201 results/variants/r3_s1.npz r3_s1_cpu 1320` | [ride-rung-37938.out](logs/ride-rung-37938.out) |
+| 37940 | 2026-11-05 05:51 | RUNNING | 00:38:34 | 8 cpu, 24G |  | `sbatch --parsable --gres=none -c 8 --time=16:00:00 -J pretest-r5 pretest-rungs.sbatch r5_s1 2 1.5 1 0.8 0.6 0.47` | [pretest-37940.out](logs/pretest-37940.out) |
+| 37941 | 2026-11-05 06:02 | CANCELLED | 00:13:29 | 16 cpu, 24G |  | `sbatch --parsable --gres=none -c 16 --time=06:00:00 -J pretest-r4-fine pretest-rungs.sbatch r4_s1 1.6 1.7 1.8` | [pretest-37941.out](logs/pretest-37941.out) |
+| 37942 | 2026-11-05 06:02 | RUNNING | 00:27:25 | 8 cpu, 24G |  | `sbatch --parsable --gres=none -c 8 --time=06:00:00 -J pretest-r35-fine pretest-rungs.sbatch r35_s1 0.5 0.53 0.56` | [pretest-37942.out](logs/pretest-37942.out) |
+| 37943 | 2026-11-05 06:16 | CANCELLED | 00:11:14 | 40 cpu, 32G |  | `sbatch --parsable --gres=none -c 40 --mem=32G --time=1-00:00:00 -J ride-r4-cpu ride-rung.sbatch 4.5 201 results/variants/r4_s1.npz r4_s1_w1.5_cpu 1320 1.5` | [ride-rung-37943.out](logs/ride-rung-37943.out) |
+| 37944 | 2026-11-05 06:27 | RUNNING | 00:02:39 | 16 cpu, 24G |  | `sbatch --parsable --gres=none -p ocf-hpc -w corruption -c 16 --mem=24G --time=04:00:00 -J r4-stability -o logs/r4-stability-%j.out --wrap set -e; cd fly_brain; export OMP_NUM_THREADS=16; mkdir -p $HOME/.cache/flybrain...` | `$HOME/.cache/flybrain-smoke/r4_w${S}_trace.json`, [r4-stability-37944.out](logs/r4-stability-37944.out) |
 
 ## Full command lines
 
@@ -513,4 +517,10 @@ srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c /s
 import torch
 print(torch.cuda.is_available(), torch.cuda.device_count())
 x=torch.randn(4000,4000,device=\"cuda\"); print(\"matmul ok\", float((x@x).abs().mean())>0, torch.cuda.get_device_name(0))" 2>&1 | grep -v "Warning\|return torch" | tail -4
+```
+
+**37944** (r4-stability)
+
+```bash
+sbatch --parsable --gres=none -p ocf-hpc -w corruption -c 16 --mem=24G --time=04:00:00 -J r4-stability -o logs/r4-stability-%j.out --wrap set -e; cd fly_brain; export OMP_NUM_THREADS=16; mkdir -p $HOME/.cache/flybrain-smoke; for S in 1.0 1.2 1.3 1.4; do echo "== $(date +%T) R4 closed-loop stability, scale $S"; ../venv-cuda/bin/python -m runs.ride --replay results/ride_slow_mu.json --tau-lane-ms 300 --lane-filter results/rungs/r4_s1_w1.5_cpu/v4.5_s201/probe.json --brain results/variants/r4_s1.npz --w-syn-scale $S --readout lane --lane hs --gains hs_heading=150,hs_lane=50 --v0 4.5 --gust 5 --riders 16 --seconds 20 --seed 7 --trace $HOME/.cache/flybrain-smoke/r4_w${S}_trace.json 2>&1 | grep -E "^replay|population|Error"; done; echo "== done $(date)"
 ```

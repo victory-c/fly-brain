@@ -1,0 +1,12 @@
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+r35_s1 VS scale 0.50: 30,388 spikes/s, 15,320 outside the driven neurons (2,400 of them fire), outputs |z|>3: 1 (null mean 0.9, max 162), max |z| 3.1 (null 4.2) (328.4 s)
+r35_s1 HALT scale 0.50: 33,937 spikes/s, 16,301 outside the driven neurons (2,412 of them fire), outputs |z|>3: 1 (null mean 1.5, max 158), max |z| 3.3 (null 4.7) (330.7 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r35_s1_b30_w0.5.json
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+r35_s1 VS scale 0.53: 62,722 spikes/s, 47,583 outside the driven neurons (3,130 of them fire), outputs |z|>3: 3 (null mean 0.8, max 198), max |z| 5.3 (null 6.0) (361.6 s)
+r35_s1 HALT scale 0.53: 66,876 spikes/s, 49,147 outside the driven neurons (3,175 of them fire), outputs |z|>3: 4 (null mean 0.8, max 155), max |z| 6.1 (null 4.5) (398.2 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r35_s1_b30_w0.53.json
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0

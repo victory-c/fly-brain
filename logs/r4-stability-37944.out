@@ -1,0 +1,4 @@
+== 06:27:22 R4 closed-loop stability, scale 1.0
+  population 1,207 spikes/s per brain
+replay of results/ride_slow_mu.json: upright  0.66 s (max  0.72,   0% finish)  dist   3.0 m  |y| 0.33 m  v 4.58  bailed 0  pop 16,289 sp/s  79s
+== 06:28:45 R4 closed-loop stability, scale 1.2

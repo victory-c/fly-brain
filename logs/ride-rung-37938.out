@@ -21,3 +21,4 @@ CEM starts from best_theta of results/rungs/r3_s1_cpu/v4.5_s201/init_hold.json; 
 lane-filter gain starts at 0.00 with width 1.0
   after warm-up, DN rates (Hz): DNp20_L 37, DNp20_R 24, DNp22_R 1, DNg46_L 1, DNg46_R 1, DNge043_L 6, DNge043_R 10, DNb06_L 26, DNpe013_L 3, DNpe013_R 4, DNg90_R 1, DNp33_L 22, DNp33_R 7, DNge091_L 2, DNg29_L 41, DNg29_R 27, DNg41_L 19, DNg41_R 24, DNp18_L 34, DNp18_R 46, DNp73_L 52, DNp73_R 7, b2 MN_L 7, b2 MN_R 2, hg1 MN_L 20, hg1 MN_R 11, DNa02_R 1, DNa03_L 1, DNa03_R 3, DNa16_L 3, DNa16_R 8, DNb03_L 5, DNb03_R 7, DNa06_L 7, DNa06_R 10, DNp15_L 7, DNp15_R 29, DNge107_L 1, DNge107_R 12, DNge086_R 4, DNge031_L 19, DNge031_R 22, DNge033_L 5, DNge033_R 9, GNG283_L 4, GNG283_R 15
   population 9,663 spikes/s per brain
+gen  0  fit best   8.47 mean   1.04  upright  0.97 s (max  8.00,   0% finish)  dist   4.2 m  |y| 0.45 m  v 4.50  bailed 0  pop 65,455 sp/s  2003s
