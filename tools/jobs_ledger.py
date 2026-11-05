@@ -82,6 +82,11 @@ NOTES = {
     "37946": "continuation of 37938 (runs/ride.py --resume)",
     "37947": "30-brain pre-test of R4 at 1.2, 1.3 and the rest of the ladder (CPU)",
     "37948": "pilot ride on R3, second CEM seed (202), on CPU, 32 threads -> results/rungs/r3_s1_cpu/v4.5_s202/",
+    "37949": "second continuation of the R3 pilot ride, seed 201 (stops at 60 generations)",
+    "37950": "continuation of the R4 pilot ride at scale 1.2 (stops at 60 generations)",
+    "37951": "second continuation of the R4 pilot ride at scale 1.2",
+    "37952": "continuation of the R3 pilot ride, seed 202 (stops at 60 generations)",
+    "37953": "second continuation of the R3 pilot ride, seed 202",
 }
 
 LEFT_OUT = {"36054", "36055", "36056", "36057", "36062", "36064"}  # Fly Bar jobs, not part of this repo
