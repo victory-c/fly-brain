@@ -1,0 +1,82 @@
+{
+ "R0 real wiring, 0.47": {
+  "window_s": 0.6,
+  "rate_window": 23387.8125,
+  "rate_whole_replay": 59098.03125,
+  "replay_s": 20.0,
+  "riders": 16,
+  "first_fall_s": 2.26,
+  "fallen_in_window": 0,
+  "relative": 1.0
+ },
+ "R3, 0.47": {
+  "window_s": 0.6,
+  "rate_window": 17251.979166666668,
+  "rate_whole_replay": 61004.06756756757,
+  "replay_s": 18.5,
+  "riders": 16,
+  "first_fall_s": 1.75,
+  "fallen_in_window": 0,
+  "relative": 0.7376482587530009
+ },
+ "R4, 1.0": {
+  "window_s": 0.6,
+  "rate_window": 12719.895833333334,
+  "rate_whole_replay": 16288.802083333334,
+  "replay_s": 0.72,
+  "riders": 16,
+  "first_fall_s": 0.6,
+  "fallen_in_window": 2,
+  "relative": 0.5438685568961755
+ },
+ "R4, 1.2": {
+  "window_s": 0.6,
+  "rate_window": 39396.354166666664,
+  "rate_whole_replay": 48093.57142857143,
+  "replay_s": 0.7,
+  "riders": 16,
+  "first_fall_s": 0.54,
+  "fallen_in_window": 7,
+  "relative": 1.6844822134035264
+ },
+ "R4, 1.2 (ride job 37945)": {
+  "window_s": 0.6,
+  "rate_window": 38722.604166666664,
+  "rate_whole_replay": 90758.55263157895,
+  "replay_s": 1.14,
+  "riders": 16,
+  "first_fall_s": 0.48,
+  "fallen_in_window": 4,
+  "relative": 1.655674474330024
+ },
+ "R4, 1.3": {
+  "window_s": 0.6,
+  "rate_window": 79613.4375,
+  "rate_whole_replay": 167441.66666666666,
+  "replay_s": 1.02,
+  "riders": 16,
+  "first_fall_s": 0.55,
+  "fallen_in_window": 5,
+  "relative": 3.404056599991983
+ },
+ "R4, 1.4": {
+  "window_s": 0.6,
+  "rate_window": 326774.5833333333,
+  "rate_whole_replay": 1609072.4370503598,
+  "replay_s": 1.39,
+  "riders": 16,
+  "first_fall_s": 0.75,
+  "fallen_in_window": 0,
+  "relative": 13.972002868303024
+ },
+ "R4, 1.5 (ride job 37943)": {
+  "window_s": 0.6,
+  "rate_window": 1233955.4166666667,
+  "rate_whole_replay": 2487026.8092105263,
+  "replay_s": 1.14,
+  "riders": 16,
+  "first_fall_s": 0.72,
+  "fallen_in_window": 0,
+  "relative": 52.7606169523835
+ }
+}
