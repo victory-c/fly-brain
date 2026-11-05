@@ -46,3 +46,4 @@ gen 21  fit best   3.78 mean   1.72  upright  1.60 s (max  3.60,   0% finish)  d
 gen 22  fit best   8.10 mean   1.98  upright  1.84 s (max  7.44,   0% finish)  dist   8.0 m  |y| 0.85 m  v 4.50  bailed 0  pop 112,442 sp/s  1707s
 gen 23  fit best   6.69 mean   1.75  upright  1.62 s (max  6.44,   0% finish)  dist   7.1 m  |y| 0.76 m  v 4.50  bailed 0  pop 116,597 sp/s  1487s
 gen 24  fit best   4.49 mean   1.82  upright  1.69 s (max  4.26,   0% finish)  dist   7.3 m  |y| 0.93 m  v 4.50  bailed 0  pop 90,007 sp/s  1005s
+slurmstepd-corruption: error: *** JOB 37945 ON corruption CANCELLED AT 2026-11-05T14:07:36 ***
