@@ -32,3 +32,4 @@ gen  7  fit best   2.46 mean   1.07  upright  1.00 s (max  2.26,   0% finish)  d
 gen  8  fit best   3.33 mean   1.45  upright  1.35 s (max  3.27,   0% finish)  dist   5.8 m  |y| 0.74 m  v 4.50  bailed 0  pop 125,239 sp/s  771s
 gen  9  fit best   3.47 mean   1.38  upright  1.27 s (max  3.26,   0% finish)  dist   5.5 m  |y| 0.67 m  v 4.50  bailed 0  pop 103,793 sp/s  744s
 gen 10  fit best   4.59 mean   1.57  upright  1.45 s (max  4.37,   0% finish)  dist   6.3 m  |y| 0.87 m  v 4.50  bailed 0  pop 111,773 sp/s  1018s
+gen 11  fit best   8.13 mean   1.77  upright  1.64 s (max  7.48,   0% finish)  dist   7.1 m  |y| 0.88 m  v 4.50  bailed 0  pop 115,283 sp/s  1818s
