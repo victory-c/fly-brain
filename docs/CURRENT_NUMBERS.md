@@ -214,6 +214,7 @@ probes: lateralised outputs above the largest null count, and a network rate of 
 | R3.5 strength-preserving | 1 | 425,010 / 426,448 | 11 / 15 | 7 / 5 | 10 / 12 (6.0) | fail: runaway |
 | R3.5 strength-preserving | 1.5 | 981,006 / 983,973 | 7 / 17 | 10 / 8 | 4 / 8 (5.6) | fail: no signal, runaway |
 | R3.5 strength-preserving | 2 | 1,630,943 / 1,638,750 | 6 / 9 | 9 / 9 | 4 / 5 (6.7) | fail: no signal, runaway |
+| R4 degree-preserving | 0.47 | 277 / 231 | 1 / 2 | 0 / 0 | 9 / 8 (1.9) | fail: too quiet |
 | R4 degree-preserving | 0.6 | 462 / 419 | 3 / 3 | 1 / 0 | 13 / 10 (3.1) | fail: too quiet |
 | R4 degree-preserving | 0.8 | 824 / 812 | 7 / 6 | 0 / 1 | 19 / 13 (3.1) | fail: too quiet |
 | R4 degree-preserving | 1 | 1,569 / 1,702 | 9 / 11 | 1 / 1 | 23 / 17 (3.6) | fail: too quiet |
@@ -278,6 +279,52 @@ summary is `results/rungs/closed_loop_rates.json`, made by `tools/replay_rate.py
   0 and 1 (`results/gate/v4.5_s201/cem.json`), about 3 times, because most of an early generation is spent on
   bikes that have already fallen and whose senses are saturated. No scale has been shown to match the real
   brain's rate throughout a generation.
+
+### Pilot rides on rewired brains (CPU, in progress; table as of 2026-11-05 10:30)
+
+The balance gate unchanged (`ride-rung.sbatch`: the hand-picked `lane` readout, CEM from a blank decoder, 48 riders
+x 15 s, 4.5 m/s, 5 N·m gusts) on rewiring draw 1. R3 at scale 0.47 with CEM seeds 201 (jobs 37938, 37946, 37949)
+and 202 (jobs 37948, 37952, 37953); R4 at scale 1.2 with seed 201 (jobs 37945, 37950, 37951). They run on CPU at
+30 to 60 min per generation, each job stops after 22 h and the next one continues the search (`--resume`), up to
+60 generations. `python3 tools/ride_table.py` prints the table; mean riding time in seconds:
+
+| Generation | R0 seed 201 | R0 seed 202 | r3_s1_cpu seed 201 | r3_s1_cpu seed 202 | r4_s1_w1.2_cpu seed 201 |
+|---|---|---|---|---|---|
+| 0 | 1.01 | 0.87 | 0.97 | 0.95 | 0.76 |
+| 1 | 1.45 | 1.14 | 1.32 | 1.46 | 0.56 |
+| 2 | 3.18 | 1.82 | 2.18 |  | 0.65 |
+| 3 | 5.42 | 3.11 | 3.24 |  | 0.68 |
+| 5 | 6.83 | 4.93 | 4.46 |  | 0.74 |
+| 6 | 7.48 | 6.99 | 5.08 |  | 0.79 |
+| 8 | 8.94 | 7.30 |  |  | 1.35 |
+| 10 | 9.03 | 10.07 |  |  | 1.45 |
+| 14 | 10.11 | 9.99 |  |  | 1.55 |
+| 15 | 10.95 | 9.22 |  |  |  |
+| 20 | 10.98 | 9.39 |  |  |  |
+| 25 | 10.75 | 10.87 |  |  |  |
+| 30 | 11.77 | 12.23 |  |  |  |
+| 35 | 11.83 | 10.97 |  |  |  |
+| 40 | 10.99 | 12.53 |  |  |  |
+| 45 | 13.35 | 11.69 |  |  |  |
+| 50 | 13.68 | 12.37 |  |  |  |
+| 55 | 12.55 | 10.89 |  |  |  |
+| 56 | 13.15 | 11.89 |  |  |  |
+| 57 | 13.71 |  |  |  |  |
+| generations done | 58 | 57 | 7 | 2 | 15 |
+| finishing 15 s, last generation | 77% | 52% | 0% | 0% | 0% |
+| spikes/s per brain, last generation | 35,727 | 38,101 | 48,270 | 59,166 | 113,766 |
+| device | cuda | cuda | cpu | cpu | cpu |
+
+Reading so far, one rewiring draw and early generations only:
+- R3 learns. Both blank decoders start at the real wiring's level (0.95 to 0.97 s) and the first seed is at 5.1 s
+  after 7 generations, where the real wiring's two seeds were at 7.5 and 7.0 s. Its curve follows the slower of the
+  real wiring's two seeds from below. The hands-off bike manages 5.7 s.
+- R4 at 1.2 barely learns: 0.76 s at generation 0, 0.56 s at generation 1, 1.55 s at generation 14, where the
+  real wiring was at about 10 s. Its riders fall before the first second in most attempts, and its network runs
+  at 98,000 to 212,000 spikes/s per brain (the real wiring: 36,000 to 69,000).
+- These are pilots: they started before the preregistration was tagged, with the hand-picked readout, on one
+  rewiring draw. A CPU run does not repeat a GPU run (see "GPU runs do not repeat exactly"), so the comparison with
+  the real wiring's GPU runs is between samples, not between identical noise.
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
