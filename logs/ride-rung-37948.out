@@ -23,3 +23,4 @@ lane-filter gain starts at 0.00 with width 1.0
   population 10,100 spikes/s per brain
 gen  0  fit best   7.86 mean   1.02  upright  0.95 s (max  7.57,   0% finish)  dist   4.1 m  |y| 0.56 m  v 4.50  bailed 0  pop 64,001 sp/s  3481s
 gen  1  fit best   8.35 mean   1.56  upright  1.46 s (max  7.90,   0% finish)  dist   6.3 m  |y| 0.84 m  v 4.50  bailed 0  pop 59,166 sp/s  3149s
+gen  2  fit best   8.12 mean   2.25  upright  2.12 s (max  7.61,   0% finish)  dist   8.9 m  |y| 1.40 m  v 4.50  bailed 0  pop 58,227 sp/s  3101s
