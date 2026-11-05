@@ -63,6 +63,21 @@ paths are relative to `fly_brain/` unless they start with `logs/`, `site/` or `J
 | Landing page: "~8 s per simulated second; 128 trials take 35 s" | | `site/index.html` | old simulator (matches `results/bench_gpu.json`); current values are 7.5 s and 34 s |
 | Bike loop: 48 riders at ~20 s wall per bike second; 15-generation search ~51 min; 16-rider replay ~13.4 s per bike second | | `fly_brain/bike/README.md:245-247` (jobs 36091, 36092); `site/index.html` | old simulator. The current search took about 275 s per 15 s generation (job 36555), roughly 18 s per bike second |
 
+### The node after the upgrade (2026-11-05): no CUDA, CPU speeds
+
+The Slurm node came back from its Debian 13 upgrade with `nvidia-smi` working but CUDA unable to initialise: the
+`nvidia_uvm` kernel module is not loaded and `/dev/nvidia-uvm` is missing, so `cuInit` returns 999 and torch falls
+back to the CPU without failing (the log says "48 riders on cpu"). Loading the module needs root. Until that is
+fixed every job is a CPU job (`sbatch --gres=none -c N` overrides a script's GPU request). Python 3.11 also left
+the node; `venv` and `venv-cuda` now point at a conda-forge Python 3.11.18 in the home directory, with the packages
+untouched (torch 2.5.1+cu121, numpy 2.4.6, pandas 3.0.6).
+
+| Claim | Value | Source |
+|---|---|---|
+| Pre-test cell, 30 brains x 1.3 s, CPU | about 290 s per probe at 8 threads on the real wiring (36,000 spikes/s per brain); 1,224 s at 8 million spikes/s | `logs/pretest-37928.out`, `logs/pretest-37936.out` |
+| Balance-gate generation on CPU, 48 threads, node shared with other jobs | 2,003 s for generation 0 and 1,695 s for generation 1 of R3, against 167 s and 134 s for the real wiring on the GPU | `logs/ride-rung-37938.out`, `results/gate/v4.5_s201/cem.json` |
+| One job | at most 24 h (partition limit), so a CPU search continues with `runs/ride.py --resume` | `ride-rung.sbatch` |
+
 ## Fly Brain Live (`/dashboard/`)
 
 | Claim | Value | Source | Status |
@@ -174,6 +189,72 @@ What it shows, with one draw and 8 brains per cell:
   relabellings) gives 35 and 31 lateralised outputs against null maxima of 4 and 13 (95th percentile 1), at
   13,000-14,300 network spikes/s. R1 passes the transmission gate at 0.47.
 The balance gate has not yet run on R1-R3.5 (the GPU node is drained); the tables below are R0, R4 and R5 only.
+
+### The ladder with 30 brains per cell, and where each rung stops transmitting (2026-11-05)
+
+`pretest-rungs.sbatch` (jobs 37928, 37936, 37937, 37940-37942, 37947; `logs/pretest-*.out`,
+`results/rungs/pretest_*_b30_w*.json`): VS and haltere probes, 30 brains, null = 1,000 random balanced relabellings.
+All of it ran on CPU, because CUDA does not initialise on the node since its Debian 13 upgrade (see "The node after
+the upgrade" below). The table is `python3 tools/pretest_table.py`; "Gate" applies the transmission gate to both
+probes: lateralised outputs above the largest null count, and a network rate of 10,750 to 43,000 spikes/s (within
+2x of the real wiring's 21,500).
+
+| Rung | Scale | Network spikes/s, VS / haltere probe | Lateralised outputs VS / haltere | Null max | Largest abs z (null) | Gate |
+|---|---|---|---|---|---|---|
+| R0 real wiring | 0.47 | 21,345 / 21,641 | 38 / 39 | 11 / 5 | 37 / 29 (5.9) | pass |
+| R1 transmitter errors | 0.47 | 12,985 / 14,326 | 35 / 31 | 4 / 13 | 43 / 29 (4.5) | pass |
+| R2 count jitter | 0.47 | 24,674 / 25,806 | 50 / 38 | 8 / 6 | 37 / 31 (4.8) | pass |
+| R3 type-preserving | 0.47 | 15,665 / 16,171 | 37 / 39 | 5 / 4 | 41 / 36 (4.8) | pass |
+| R3.5 strength-preserving | 0.47 | 2,777 / 1,591 | 0 / 3 | 1 / 1 | 3 / 4 (3.7) | fail: no signal, too quiet |
+| R3.5 strength-preserving | 0.5 | 15,320 / 16,301 | 1 / 1 | 162 / 158 | 3 / 3 (4.7) | fail: no signal |
+| R3.5 strength-preserving | 0.53 | 47,583 / 49,147 | 3 / 4 | 198 / 155 | 5 / 6 (6.0) | fail: no signal, runaway |
+| R3.5 strength-preserving | 0.56 | 83,082 / 81,049 | 7 / 9 | 91 / 8 | 10 / 8 (4.6) | fail: no signal, runaway |
+| R3.5 strength-preserving | 0.6 | 116,998 / 117,282 | 11 / 24 | 5 / 4 | 13 / 13 (4.9) | fail: runaway |
+| R3.5 strength-preserving | 0.8 | 261,194 / 262,441 | 13 / 16 | 5 / 5 | 11 / 11 (5.2) | fail: runaway |
+| R3.5 strength-preserving | 1 | 425,010 / 426,448 | 11 / 15 | 7 / 5 | 10 / 12 (6.0) | fail: runaway |
+| R3.5 strength-preserving | 1.5 | 981,006 / 983,973 | 7 / 17 | 10 / 8 | 4 / 8 (5.6) | fail: no signal, runaway |
+| R3.5 strength-preserving | 2 | 1,630,943 / 1,638,750 | 6 / 9 | 9 / 9 | 4 / 5 (6.7) | fail: no signal, runaway |
+| R4 degree-preserving | 1.2 | 2,995 / 3,508 | 11 / 14 | 1 / 1 | 23 / 17 (3.7) | fail: too quiet |
+| R4 degree-preserving | 1.5 | 9,275 / 14,342 | 21 / 35 | 2 / 8 | 24 / 18 (4.2) | fail: too quiet |
+| R4 degree-preserving | 1.6 | 233,977 / 2,125,070 | 2 / 7 | 2 / 1395 | 13 / 7 (5.0) | fail: no signal, runaway |
+| R5 random | 0.47 | 265 / 227 | 0 / 0 | 0 / 0 | 1 / 1 (2.0) | fail: no signal, too quiet |
+| R5 random | 0.6 | 451 / 404 | 0 / 0 | 0 / 0 | 0 / 0 (2.6) | fail: no signal, too quiet |
+| R5 random | 0.8 | 781 / 707 | 0 / 0 | 1 / 1 | 1 / 1 (3.0) | fail: no signal, too quiet |
+| R5 random | 1 | 1,347 / 1,262 | 0 / 0 | 1 / 1 | 2 / 1 (3.7) | fail: no signal, too quiet |
+| R5 random | 1.5 | 4,279 / 4,116 | 2 / 2 | 1 / 1 | 11 / 4 (4.1) | fail: too quiet |
+| R5 random | 2 | 11,998 / 11,209 | 7 / 8 | 4 / 4 | 15 / 15 (3.9) | pass |
+
+What it shows:
+- R0, R1, R2 and R3 pass at 0.47 with 30 brains (35 to 50 lateralised outputs against null maxima of 4 to 13).
+- R3.5 fails at every scale, and not for lack of calibration. A fine scan finds the scale where its network rate
+  equals the real brain's (0.50: 15,300 and 16,300 spikes/s) and there it carries no left/right signal: 1 output,
+  while the null reaches 160 because single brains burst. A signal above the null appears only from 0.6, at 5.4
+  times the real rate. Between 0.47 and 0.6 the rate goes from 2,800 to 117,000.
+- R4 carries a clear signal at 1.2 and 1.5 (11 to 35 outputs, null at most 8) but stays below the rate window on
+  the VS probe (9,300 at 1.5), and at 1.6 it runs away (234,000 and 2.1 million spikes/s, no signal). No scale
+  puts it inside the window on both probes.
+- R5 (random targets) passes at 2.0: 12,000 and 11,200 spikes/s, 7 and 8 lateralised outputs against a null
+  maximum of 4. The signal is weak (the real wiring has 38 and 39), but it contradicts the draft preregistration's
+  prediction that R5 fails at every scale.
+
+### R4 in closed loop: the upright pre-test under-drives the network
+
+`ride-rung.sbatch` at scale 1.5 (job 37943, cancelled) replays the reference decoder before the search. Within
+0.4 s of riding every R4 brain went from 10,000 to 4 million spikes/s, before any bike fell
+(`results/rungs/r4_s1_w1.5_cpu/v4.5_s201/ride_slow_mu_trace.json`). A scan of the same replay (16 riders, job
+37944, `logs/r4-stability-37944.out`):
+
+| R4 scale | Upright warm-up, spikes/s per brain | While riding, spikes/s per brain |
+|---|---|---|
+| 1.0 | 1,207 | 16,289 |
+| 1.2 | 2,543 | 48,094 |
+| 1.3 | 3,644 | 167,442 |
+| 1.4 | 5,354 | 1,609,072 |
+| 1.5 | 8,980 | 2,487,027 |
+
+The real wiring goes from 11,600 at warm-up to 61,000 while riding (5 times); R4 goes up 13 to 19 times at the
+stable scales and runs away above 1.3. So the scale at which R4's activity while riding matches the real brain's
+is 1.2 (79% of 61,000), not the 1.5 the upright pre-test suggested. The R4 pilot ride uses 1.2.
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
