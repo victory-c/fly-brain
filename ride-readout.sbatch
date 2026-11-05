@@ -11,6 +11,7 @@
 # Submit from the repo root:
 #   sbatch ride-readout.sbatch V0 SEED RUNG READOUT [K=8] [MINUTES=300] [W_SYN_SCALE] [READOUT_SEED=0]
 #   e.g. sbatch ride-readout.sbatch 4.5 201 r0 topk 8        sbatch ride-readout.sbatch 4.5 201 r0 bypass
+# Resubmitting the same command continues the search from $OUT/cem.json (runs/ride.py --resume).
 #SBATCH --job-name=ride-readout
 #SBATCH --partition=ocf-hpc
 #SBATCH --nodelist=corruption
@@ -50,5 +51,5 @@ PYEOF
 echo "== $(date +%T) CEM from a blank decoder: $TAG, $NAME, v0=$V0, seed $SEED, max $MIN min"
 $PY -m runs.ride $BARG $WARG $RARG --init-theta $OUT/init_hold.json --sigma-new 0.1 --sigma0 0.3 --sigma-min 0.03 --sigma-pedal 0 \
   --center-all --center-batch --lane hs --gains hs_heading=150,hs_lane=50 --v0 $V0 --gust 5 --offroad 3.5 --lane-penalty 0.02 \
-  --riders 48 --seconds 15 --generations 80 --max-minutes $MIN --seed $SEED --out $OUT/cem.json
+  --riders 48 --seconds 15 --generations 80 --max-minutes $MIN --seed $SEED --out $OUT/cem.json --resume $OUT/cem.json
 echo "== done $(date)"

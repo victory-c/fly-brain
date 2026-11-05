@@ -6,6 +6,8 @@
 # Make BRAIN first with brain/variants.py (e.g. results/variants/r4_s1.npz). Submit from the repo root:
 #   sbatch ride-rung.sbatch V0 SEED BRAIN TAG [MINUTES=300] [W_SYN_SCALE]
 #   e.g. sbatch ride-rung.sbatch 4.5 201 results/variants/r4_s1.npz r4_s1_w1.5 300 1.5   (R4 needs ~1.5, see runs/pretest.py)
+# Resubmitting the same command continues the search from $OUT/cem.json (runs/ride.py --resume). Without a GPU:
+#   sbatch --gres=none -c 48 --time=1-00:00:00 ride-rung.sbatch 4.5 201 results/variants/r3_s1.npz r3_s1_cpu 1320
 #SBATCH --job-name=ride-rung
 #SBATCH --partition=ocf-hpc
 #SBATCH --nodelist=corruption
@@ -74,5 +76,5 @@ echo "== $(date +%T) 4) CEM from a blank decoder at v0=$V0"
 $PY -m runs.ride --brain $BRAIN $WARG --init-theta $OUT/init_hold.json --sigma-new 0.1 --sigma0 0.3 --sigma-lane-filter 1.0 --sigma-min 0.03 --sigma-pedal 0 \
   --center-batch --zbar $OUT/zbar_mu.npy --readout lane --lane hs --lane-filter $OUT/probe.json --tau-lane-ms 300 \
   --gains hs_heading=150,hs_lane=50 --v0 $V0 --gust 5 --offroad 3.5 --lane-penalty 0.02 \
-  --riders 48 --seconds 15 --generations 80 --max-minutes $MIN --seed $SEED --out $OUT/cem.json
+  --riders 48 --seconds 15 --generations 80 --max-minutes $MIN --seed $SEED --out $OUT/cem.json --resume $OUT/cem.json
 echo "== done $(date)"

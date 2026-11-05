@@ -177,6 +177,7 @@ def parse():
     ap.add_argument("--sigma-pedal", type=float, default=None, help="CEM width for the 4 pedal/brake terms; 0 freezes them")
     ap.add_argument("--zbar", default=None, help=".npy (D,): mean input of each decoder weight while riding (0 for bias, pedal, brake); CEM then searches steer:bias at that operating point")
     ap.add_argument("--max-minutes", type=float, default=0.0, help="CEM: stop before a generation that would end past this wall time")
+    ap.add_argument("--resume", default=None, help="CEM: continue the search stored in this results json (its mu, sigma, history and best), e.g. after a job hit its time limit; --generations is the total")
     ap.add_argument("--w-syn-scale", type=float, default=None, help="override the calibrated synapse scale (W_SYN_SCALE, 0.47)")
     ap.add_argument("--brain", default=None, help="connectome npz (default brain.npz); e.g. a rewired one from brain/variants.py")
     ap.add_argument("--device", default="auto")
@@ -327,6 +328,17 @@ class Ride:
                 f"  bailed {int(r['bailed'].sum())}  pop {r['pop_hz']:,.0f} sp/s  {r['wall']:.0f}s")
 
 
+def resume_state(prev, names):
+    """The CEM state stored in a results json: (mu in theta space, sigma, history, best_fit, best_theta).
+    The decoder must be the same one, weight for weight."""
+    if prev.get("decoder_names") != list(names):
+        raise SystemExit("--resume: the stored search used a different decoder (decoder_names differ)")
+    mu = np.array(prev["mu"], dtype=np.float32)
+    sigma = np.array(prev["sigma"], dtype=np.float32)
+    assert mu.shape == sigma.shape == (len(names),)
+    return mu, sigma, list(prev["history"]), float(prev["best_fitness"]), np.array(prev["best_theta"], dtype=np.float32)
+
+
 def main():
     a = parse()
     ride = Ride(a)
@@ -392,6 +404,12 @@ def main():
         print(f"lane-filter gain starts at {mu[-1]:.2f} with width {a.sigma_lane_filter}", flush=True)
     if a.sigma_pedal is not None:
         sigma[dec.F + 1:dec.F + 5] = a.sigma_pedal
+    prev = None
+    if a.resume and (ROOT / a.resume).exists():
+        prev = json.loads((ROOT / a.resume).read_text())
+        mu, sigma, prev_history, prev_best_fit, prev_best_theta = resume_state(prev, dec_names(dec))
+        rng = np.random.default_rng([a.seed, len(prev_history)])
+        print(f"resuming {a.resume} at generation {len(prev_history)} (riding time so far {prev_history[-1]['upright_mean']:.2f} s)", flush=True)
     frozen = sigma == 0
     # CEM samples u, where u[F] = steer:bias + theta . zbar is the standing steering argument while riding: weight noise
     # on the uncentred features (~30 Hz each) then no longer gives every candidate its own standing torque
@@ -407,13 +425,19 @@ def main():
     mu = to_u(mu)
     n_elite = max(2, int(round(a.elite * a.riders)))
     history, best_theta, best_fit = [], to_theta(mu), -np.inf
+    resumed, t_prev, brain_prev = [], 0.0, 0.0
+    if prev is not None:
+        history, best_fit, best_theta = prev_history, prev_best_fit, prev_best_theta
+        resumed = prev.get("resumed", []) + [{"gen": len(history), "device": ride.dev}]
+        t_prev, brain_prev = prev.get("wall_seconds", 0.0), prev.get("brain_seconds", 0.0)
+    gen0 = len(history)
     rec, best_dist, attempts = None, 0.0, []
     if a.log_attempts:
         (ROOT / a.log_attempts).mkdir(parents=True, exist_ok=True)
         rec = AttemptRecorder(ride.meta, ride.senses.idx, a.brain_bin_ms, ride.dev, ctrl_ms=a.ctrl_ms)
     t_all = time.time()
-    for gen in range(a.generations):
-        if a.max_minutes and history and (time.time() - t_all + history[-1]["wall_s"]) / 60 > a.max_minutes:
+    for gen in range(gen0, a.generations):
+        if a.max_minutes and gen > gen0 and (time.time() - t_all + history[-1]["wall_s"]) / 60 > a.max_minutes:
             print(f"stopping before gen {gen}: --max-minutes {a.max_minutes:g}", flush=True)
             break
         u_np = mu[None, :] + sigma[None, :] * rng.standard_normal((a.riders, D)).astype(np.float32)
@@ -422,7 +446,7 @@ def main():
         theta = torch.tensor(theta_np, device=ride.dev)
         if rec is not None:
             rec.start()
-        r = ride.episode(theta, seed=a.seed + 1000 * (gen + 1), verbose=(gen == 0), brain=rec, attempts=rec)
+        r = ride.episode(theta, seed=a.seed + 1000 * (gen + 1), verbose=(gen == gen0), brain=rec, attempts=rec)
         fit = r["fitness"]
         order = np.argsort(-fit)
         if rec is not None:
@@ -448,7 +472,8 @@ def main():
             "config": vars(a), "device": ride.dev, "stable_speeds": ride.stable, "decoder_names": dec_names(dec),
             "dn_names": ride.readout.names, "sense_names": ride.senses.names, "history": history,
             "best_fitness": best_fit, "best_theta": best_theta.tolist(), "mu": to_theta(mu).tolist(), "sigma": sigma.tolist(),
-            "brain_seconds": ride.loop.seconds, "wall_seconds": time.time() - t_all}, indent=1))
+            "brain_seconds": brain_prev + ride.loop.seconds, "wall_seconds": t_prev + time.time() - t_all,
+            **({"resumed": resumed} if resumed else {})}, indent=1))
     print(f"done: best fitness {best_fit:.2f}, results -> {a.out}  ({(time.time() - t_all) / 60:.1f} min)")
 
 
