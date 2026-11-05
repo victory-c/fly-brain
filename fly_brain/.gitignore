@@ -24,3 +24,7 @@ __pycache__/
 # tools/publish_brain.sh staging (checksums and release notes)
 /release/
 results/variants/
+
+# per-brain passenger screens: the JSON summary is committed, the per-neuron table and the samples stay local
+results/rungs/screens/*.parquet
+results/rungs/screens/*_samples.npz
