@@ -12,3 +12,9 @@ CEM starts from best_theta of results/rungs/r0/rand8_r0/v4.5_s201/init_hold.json
   population 11,628 spikes/s per brain
 gen  0  fit best   8.47 mean   1.19  upright  1.11 s (max  8.00,   0% finish)  dist   4.8 m  |y| 0.75 m  v 4.50  bailed 0  pop 63,507 sp/s  256s
 gen  1  fit best   8.84 mean   2.79  upright  2.64 s (max  8.91,   0% finish)  dist  11.1 m  |y| 2.27 m  v 4.50  bailed 0  pop 53,985 sp/s  342s
+gen  2  fit best   7.95 mean   3.28  upright  3.09 s (max  7.35,   0% finish)  dist  13.0 m  |y| 2.52 m  v 4.50  bailed 0  pop 45,607 sp/s  268s
+gen  3  fit best  10.84 mean   3.79  upright  3.57 s (max 10.53,   0% finish)  dist  15.4 m  |y| 2.05 m  v 4.50  bailed 0  pop 47,671 sp/s  386s
+gen  4  fit best   8.56 mean   3.91  upright  3.70 s (max  8.09,   0% finish)  dist  15.7 m  |y| 2.53 m  v 4.50  bailed 0  pop 45,510 sp/s  270s
+gen  5  fit best   7.78 mean   3.66  upright  3.46 s (max  7.46,   0% finish)  dist  14.5 m  |y| 2.67 m  v 4.50  bailed 0  pop 45,088 sp/s  230s
+gen  6  fit best   9.79 mean   4.14  upright  3.91 s (max  9.37,   0% finish)  dist  16.4 m  |y| 3.18 m  v 4.50  bailed 0  pop 43,547 sp/s  357s
+gen  7  fit best   9.79 mean   3.84  upright  3.63 s (max  9.05,   0% finish)  dist  15.3 m  |y| 3.00 m  v 4.50  bailed 0  pop 44,553 sp/s  322s
