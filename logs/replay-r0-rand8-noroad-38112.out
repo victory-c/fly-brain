@@ -7,3 +7,5 @@ readout: DNp19_R#564864 1, DNg41_L#13568 1, DNge046_R#83661 1, DNb02_R#13922 1, 
 brain: brain.npz, 166,700 neurons, 789 driven, 8 read out, w_syn 0.1293 mV
   after warm-up, DN rates (Hz): DNg41_L#13568 19, DNb02_R#13922 1, DNg05_a_R#14357 4, DNg105_L#10124 15, DNg49(hb1405978277)_R#514489 9
   population 11,452 spikes/s per brain
+replay of /home/s/st/stevejobs/.cache/sb-replay/rand8_mu.json: upright  7.82 s (max 12.47,   0% finish)  dist  30.8 m  |y| 7.47 m  v 4.50  bailed 0  pop 48,343 sp/s  750s
+trace -> /home/s/st/stevejobs/.cache/sb-replay/rand8_mu_noroad_trace.json
