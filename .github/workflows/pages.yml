@@ -1,0 +1,58 @@
+# Publishes the demo site (site/build.sh -> site/dist) to GitHub Pages at https://victory-c.github.io/fly-brain/.
+# Runs only when something build.sh copies has changed, so cron's log-and-results pushes cost nothing.
+# A new build input goes into build.sh, into `paths` and into `sparse-checkout` below.
+# Repository setting: Settings > Pages > Source = GitHub Actions.
+name: pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/pages.yml"
+      - "site/**"
+      - "fly_brain/dashboard/index.html"
+      - "fly_brain/dashboard/data/**"
+      - "fly_brain/results/attempts_page/**"
+      - "fly_brain/results/ride_3d.html"
+      - "fly_brain/results/ride_view.html"
+      - "fly_brain/results/ride_oracle_3d.html"
+      - "fly_brain/results/ride_oracle_view.html"
+      - "fly_brain/results/ride_pilot_3d.html"
+      - "fly_brain/results/ride_pilot_view.html"
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /site/
+            /fly_brain/dashboard/index.html
+            /fly_brain/dashboard/data/
+            /fly_brain/results/attempts_page/
+            /fly_brain/results/ride_3d.html
+            /fly_brain/results/ride_view.html
+            /fly_brain/results/ride_oracle_3d.html
+            /fly_brain/results/ride_oracle_view.html
+            /fly_brain/results/ride_pilot_3d.html
+            /fly_brain/results/ride_pilot_view.html
+      - name: Build
+        run: bash site/build.sh
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
