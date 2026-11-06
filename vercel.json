@@ -3,6 +3,7 @@
   "framework": null,
   "installCommand": "echo 'nothing to install'",
   "buildCommand": "bash site/build.sh",
+  "ignoreCommand": "bash site/vercel-ignore.sh",
   "outputDirectory": "site/dist",
   "cleanUrls": true,
   "redirects": [
