@@ -8,3 +8,6 @@ senses : VS_L 16, HS_L 5, HALT_L 104, JO_L 228, LEG1_L 45, VS_R 18, HS_R 5, HALT
 readout: VS_L 16, HS_L 5, HALT_L 104, JO_L 228, LEG1_L 45, VS_R 18, HS_R 5, HALT_R 101, JO_R 247, LEG1_R 20
 brain: brain.npz, 166,700 neurons, 789 driven, 789 read out, w_syn 0.0000 mV
 CEM starts from best_theta of results/rungs/r0_w0/bypass/v4.5_s201/init_hold.json; 10 new decoder weights start at 0 with width 0.1
+  after warm-up, DN rates (Hz): 
+  population 0 spikes/s per brain
+slurmstepd-corruption: error: *** JOB 38085 ON corruption CANCELLED AT 2026-11-06T09:30:50 ***

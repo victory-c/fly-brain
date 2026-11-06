@@ -1,0 +1,18 @@
+init_hold: 29.6 W holds 4.5 m/s
+== 09:31:53 CEM from a blank decoder: r0, bypass_nosyn, v0=4.5, seed 201, max 1320 min
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+Tarmac SL9 + 70 kg: 78.2 kg, self-stable 4.70..7.74 m/s; start at 4.5 m/s, gusts 5 Nm, 48 riders on cpu
+sensory gain overrides: {'hs_heading': 150.0, 'hs_lane': 50.0}
+senses : VS_L 16, HS_L 5, HALT_L 104, JO_L 228, LEG1_L 45, VS_R 18, HS_R 5, HALT_R 101, JO_R 247, LEG1_R 20  (789 neurons)
+readout: VS_L 16, HS_L 5, HALT_L 104, JO_L 228, LEG1_L 45, VS_R 18, HS_R 5, HALT_R 101, JO_R 247, LEG1_R 20
+brain: brain.npz, 166,700 neurons, 789 driven, 789 read out, w_syn 0.1293 mV, synapses off
+CEM starts from best_theta of results/rungs/r0/bypass_nosyn/v4.5_s201/init_hold.json; 10 new decoder weights start at 0 with width 0.1
+  after warm-up, DN rates (Hz): VS_L 4, HS_L 21, HALT_L 4, JO_L 30, LEG1_L 2, VS_R 3, HS_R 20, HALT_R 3, JO_R 31, LEG1_R 2
+  population 0 spikes/s per brain
+gen  0  fit best   8.47 mean   1.39  upright  1.29 s (max  8.00,   0% finish)  dist   5.6 m  |y| 0.80 m  v 4.50  bailed 0  pop 0 sp/s  340s
+gen  1  fit best   5.73 mean   1.86  upright  1.73 s (max  5.36,   0% finish)  dist   7.5 m  |y| 1.20 m  v 4.50  bailed 0  pop 0 sp/s  230s
+gen  2  fit best   7.90 mean   2.91  upright  2.73 s (max  7.51,   0% finish)  dist  11.7 m  |y| 2.00 m  v 4.50  bailed 0  pop 0 sp/s  238s
+gen  3  fit best   9.86 mean   4.19  upright  3.96 s (max  9.25,   0% finish)  dist  16.9 m  |y| 2.86 m  v 4.50  bailed 0  pop 0 sp/s  202s
+gen  4  fit best  10.26 mean   4.53  upright  4.28 s (max  9.66,   0% finish)  dist  18.5 m  |y| 2.51 m  v 4.50  bailed 0  pop 0 sp/s  213s
+gen  5  fit best  14.15 mean   5.78  upright  5.48 s (max 13.48,   0% finish)  dist  23.8 m  |y| 3.19 m  v 4.50  bailed 0  pop 0 sp/s  296s
