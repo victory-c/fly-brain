@@ -40,7 +40,9 @@ def _build():
         fd, tmp = tempfile.mkstemp(dir=cache, suffix=".so")  # build aside, then rename: jobs may start together
         os.close(fd)
         try:
-            subprocess.run(["gcc", *FLAGS, "-o", tmp, str(SRC)], check=True, capture_output=True, timeout=120)
+            # compile the bytes that were hashed (stdin), not whatever the file holds a moment later
+            subprocess.run(["gcc", *FLAGS, "-x", "c", "-o", tmp, "-"], input=source, check=True, capture_output=True,
+                           timeout=120)
             os.replace(tmp, so)
         finally:
             if os.path.exists(tmp):
