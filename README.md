@@ -4,12 +4,12 @@ A fruit fly's whole central nervous system, 166,700 neurons and the chemical syn
 electron microscopy (the map has no gap junctions), run as a spiking network. We replay classic stimulation experiments on it, record every neuron, and put it in
 charge of a road bike.
 
-**Live demos: https://fly-brain-bike.vercel.app**
+**Live demos: https://victory-c.github.io/fly-brain**
 
 | Demo | What you see |
 |---|---|
-| [The fly learns to ride](https://fly-brain-bike.vercel.app/ride/) | From blank weights, a small decoder (86 learned numbers) reading the fixed brain learns to ride a Colnago V4Rs down a 7 m road in side gusts by trial and error; every attempt of the search is replayable, one rider at a time (falls, off-road exits, records), with his brain firing in the side panel. Also: [3D replay of the best decoder, 16 riders](https://fly-brain-bike.vercel.app/ride/3d), [charts](https://fly-brain-bike.vercel.app/ride/charts), [PD rider without a brain](https://fly-brain-bike.vercel.app/ride/oracle), [brain in the loop but not steering](https://fly-brain-bike.vercel.app/ride/open-loop) |
-| [Fly Brain Live](https://fly-brain-bike.vercel.app/dashboard/) | Brain activity in 50 ms frames (all 140,638 neurons with a known position) while his sugar, water, bitter or Ir94e taste neurons, or his antennal JO-CE / JO-F neurons, are driven as in Shiu et al. 2024; whether the feeding motor neuron MN9 fires, next to what Shiu found on FlyWire |
+| [The fly learns to ride](https://victory-c.github.io/fly-brain/ride/) | From blank weights, a small decoder (86 learned numbers) reading the fixed brain learns to ride a Colnago V4Rs down a 7 m road in side gusts by trial and error; every attempt of the search is replayable, one rider at a time (falls, off-road exits, records), with his brain firing in the side panel. Also: [3D replay of the best decoder, 16 riders](https://victory-c.github.io/fly-brain/ride/3d), [charts](https://victory-c.github.io/fly-brain/ride/charts), [PD rider without a brain](https://victory-c.github.io/fly-brain/ride/oracle), [brain in the loop but not steering](https://victory-c.github.io/fly-brain/ride/open-loop) |
+| [Fly Brain Live](https://victory-c.github.io/fly-brain/dashboard/) | Brain activity in 50 ms frames (all 140,638 neurons with a known position) while his sugar, water, bitter or Ir94e taste neurons, or his antennal JO-CE / JO-F neurons, are driven as in Shiu et al. 2024; whether the feeding motor neuron MN9 fires, next to what Shiu found on FlyWire |
 
 ## The simulator
 
@@ -60,7 +60,7 @@ activity), so this run replaced them on the /ride/ pages; see the bike README's 
 ```
 fly-brain/
 ├── fly_brain/        brain/ (simulator), runs/, bike/, export/, dashboard/, tests/, results/
-├── site/             landing page and build script for the Vercel site
+├── site/             landing page and build script for the demo site (GitHub Pages)
 ├── notebooks/        00_quickstart.ipynb (runs on Colab)
 ├── docs/             ONBOARDING.md, GLOSSARY.md, CURRENT_NUMBERS.md
 ├── tools/            jobs_ledger.py (JOBS.md from sacct), derive_shiu_groups.py, publish_brain.sh

@@ -2,15 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "echo 'nothing to install'",
-  "buildCommand": "bash site/build.sh",
-  "ignoreCommand": "bash site/vercel-ignore.sh",
+  "buildCommand": "mkdir -p site/dist && cp site/index.html site/dist/",
   "outputDirectory": "site/dist",
-  "cleanUrls": true,
   "redirects": [
     {
-      "source": "/dashboard",
-      "destination": "/dashboard/",
-      "permanent": true
+      "source": "/(.*)",
+      "destination": "https://victory-c.github.io/fly-brain/$1",
+      "permanent": false
     }
   ]
 }

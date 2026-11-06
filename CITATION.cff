@@ -6,7 +6,7 @@ authors:
   - family-names: Chun
     given-names: Victor
 repository-code: "https://github.com/victory-c/fly-brain"
-url: "https://fly-brain-bike.vercel.app"
+url: "https://victory-c.github.io/fly-brain"
 license: MIT
 references:
   - type: article
