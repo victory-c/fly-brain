@@ -163,7 +163,7 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37935 | 2026-11-05 05:28 | COMPLETED | 00:00:02 | 2 cpu, 4G, 1 gpu |  | `srun -p ocf-hpc -w corruption --gres=gpu:1 -c 2 --mem=4G -t 4 --quiet bash -c /sbin/modinfo nvidia-uvm 2>&1 ¦ head -3; /sbin/modinfo nvidia-current-uvm 2>&1 ¦ head -3; find /lib/modules/$(uname -r) -name "*uvm*" 2>/de...` (in `./fly_brain`) |  |
 | 37936 | 2026-11-05 05:30 | CANCELLED | 00:32:28 | 16 cpu, 24G | 30-brain pre-test of R4 at 1.5 and 2.0 (CPU); cancelled during the 2.0 haltere probe (8 million spikes/s) | `sbatch --parsable --gres=none -c 16 --time=12:00:00 -J pretest-r4 pretest-rungs.sbatch r4_s1 1.5 2 1 0.8 0.6 0.47` | [pretest-37936.out](logs/pretest-37936.out) |
 | 37937 | 2026-11-05 05:30 | COMPLETED | 01:25:10 | 12 cpu, 24G | 30-brain pre-test of R3.5 at 0.6 to 2.0 (CPU) | `sbatch --parsable --gres=none -c 12 --time=12:00:00 -J pretest-r35 pretest-rungs.sbatch r35_s1 0.6 0.8 1 1.5 2` | [pretest-37937.out](logs/pretest-37937.out) |
-| 37938 | 2026-11-05 05:30 | RUNNING | 11:59:55 | 48 cpu, 32G | pilot ride on R3 (balance gate unchanged, 4.5 m/s, seed 201) on CPU, 48 threads -> results/rungs/r3_s1_cpu/ | `sbatch --parsable --gres=none -c 48 --mem=32G --time=1-00:00:00 -J ride-r3-cpu ride-rung.sbatch 4.5 201 results/variants/r3_s1.npz r3_s1_cpu 1320` | [ride-rung-37938.out](logs/ride-rung-37938.out) |
+| 37938 | 2026-11-05 05:30 | RUNNING | 12:29:55 | 48 cpu, 32G | pilot ride on R3 (balance gate unchanged, 4.5 m/s, seed 201) on CPU, 48 threads -> results/rungs/r3_s1_cpu/ | `sbatch --parsable --gres=none -c 48 --mem=32G --time=1-00:00:00 -J ride-r3-cpu ride-rung.sbatch 4.5 201 results/variants/r3_s1.npz r3_s1_cpu 1320` | [ride-rung-37938.out](logs/ride-rung-37938.out) |
 | 37940 | 2026-11-05 05:51 | COMPLETED | 01:05:30 | 8 cpu, 24G | 30-brain pre-test of R5 at 0.47 to 2.0 (CPU): passes at 2.0 | `sbatch --parsable --gres=none -c 8 --time=16:00:00 -J pretest-r5 pretest-rungs.sbatch r5_s1 2 1.5 1 0.8 0.6 0.47` | [pretest-37940.out](logs/pretest-37940.out) |
 | 37941 | 2026-11-05 06:02 | CANCELLED | 00:13:29 | 16 cpu, 24G | fine scan of R4 above 1.5 (CPU): runaway at 1.6; 1.7 and 1.8 cancelled | `sbatch --parsable --gres=none -c 16 --time=06:00:00 -J pretest-r4-fine pretest-rungs.sbatch r4_s1 1.6 1.7 1.8` | [pretest-37941.out](logs/pretest-37941.out) |
 | 37942 | 2026-11-05 06:02 | COMPLETED | 00:36:22 | 8 cpu, 24G | fine scan of R3.5 between 0.47 and 0.6 (CPU): no signal where the rate matches the real brain's | `sbatch --parsable --gres=none -c 8 --time=06:00:00 -J pretest-r35-fine pretest-rungs.sbatch r35_s1 0.5 0.53 0.56` | [pretest-37942.out](logs/pretest-37942.out) |
@@ -171,11 +171,14 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 37944 | 2026-11-05 06:27 | COMPLETED | 00:10:32 | 16 cpu, 24G | R4 closed-loop stability: the reference replay at scales 1.0 to 1.4 -> riding rate matches the real brain's at 1.2 | `sbatch --parsable --gres=none -p ocf-hpc -w corruption -c 16 --mem=24G --time=04:00:00 -J r4-stability -o logs/r4-stability-%j.out --wrap set -e; cd fly_brain; export OMP_NUM_THREADS=16; mkdir -p $HOME/.cache/flybrain...` | `$HOME/.cache/flybrain-smoke/r4_w${S}_trace.json`, [r4-stability-37944.out](logs/r4-stability-37944.out) |
 | 37945 | 2026-11-05 06:38 | CANCELLED | 07:29:23 | 40 cpu, 32G | pilot ride on R4 at scale 1.2 (balance gate unchanged, 4.5 m/s, seed 201) on CPU, 40 threads -> results/rungs/r4_s1_w1.2_cpu/ | `sbatch --parsable --gres=none -c 40 --mem=32G --time=1-00:00:00 -J ride-r4-cpu ride-rung.sbatch 4.5 201 results/variants/r4_s1.npz r4_s1_w1.2_cpu 1320 1.2` | [ride-rung-37945.out](logs/ride-rung-37945.out) |
 | 37947 | 2026-11-05 06:38 | COMPLETED | 01:08:40 | 8 cpu, 24G | 30-brain pre-test of R4 at 1.2, 1.3 and the rest of the ladder (CPU) | `sbatch --parsable --gres=none -c 8 --time=08:00:00 -J pretest-r4 pretest-rungs.sbatch r4_s1 1.2 1.3 1 0.8 0.6 0.47` | [pretest-37947.out](logs/pretest-37947.out) |
-| 37948 | 2026-11-05 07:40 | RUNNING | 09:49:23 | 32 cpu, 32G | pilot ride on R3, second CEM seed (202), on CPU, 32 threads -> results/rungs/r3_s1_cpu/v4.5_s202/ | `sbatch --parsable --gres=none -c 32 --mem=32G --time=1-00:00:00 -J ride-r3-s202 ride-rung.sbatch 4.5 202 results/variants/r3_s1.npz r3_s1_cpu 1320` | [ride-rung-37948.out](logs/ride-rung-37948.out) |
+| 37948 | 2026-11-05 07:40 | RUNNING | 10:19:23 | 32 cpu, 32G | pilot ride on R3, second CEM seed (202), on CPU, 32 threads -> results/rungs/r3_s1_cpu/v4.5_s202/ | `sbatch --parsable --gres=none -c 32 --mem=32G --time=1-00:00:00 -J ride-r3-s202 ride-rung.sbatch 4.5 202 results/variants/r3_s1.npz r3_s1_cpu 1320` | [ride-rung-37948.out](logs/ride-rung-37948.out) |
 | 38024 | 2026-11-05 17:16 | FAILED | 00:00:01 | 2 cpu, 2000M, 1 gpu |  | `srun -p ocf-hpc --gres=gpu:1 -c 1 --time=3 bash -c  ⏎ echo "== modules"; grep -i nvidia /proc/modules ⏎ echo "== dev"; ls -l /dev/nvidia* 2>&1 ⏎ echo "== driver"; cat /proc/driver/nvidia/version 2>&1 ¦ head -3 ⏎ echo ...` (in `./.claude/worktrees/project-pending-items-5ff0c7`) |  |
 | 38025 | 2026-11-05 17:16 | COMPLETED | 00:00:00 | 2 cpu, 2000M, 1 gpu |  | `srun -p ocf-hpc --gres=gpu:1 -n 1 -c 1 --time=2 bash -c  ⏎ echo "== /etc/modprobe.d/nvidia.conf"; cat /etc/modprobe.d/nvidia.conf ⏎ echo "== /etc/nvidia/nvidia-modprobe.conf"; cat /etc/nvidia/nvidia-modprobe.conf 2>&1...` (in `./.claude/worktrees/project-pending-items-5ff0c7`) |  |
 | 38026 | 2026-11-05 17:23 | FAILED | 00:00:00 | 16 cpu, 24G |  | `srun -p ocf-hpc --gres=none -c 16 --mem=24G --time=12 bash -c  ⏎ set -e; cd fly_brain; export OMP_NUM_THREADS=16 ⏎ lscpu ¦ grep -E 'Model name¦^CPU\(s\)¦NUMA node\(s\)¦Thread'; gcc --version ¦ head -1 ⏎ gcc -O3 -march...` |  |
-| 38027 | 2026-11-05 17:23 | RUNNING | 00:06:26 | 16 cpu, 24G |  | `srun -p ocf-hpc --gres=none -c 16 --mem=24G --time=12 bash -c  ⏎ set -e; cd fly_brain; export OMP_NUM_THREADS=16 ⏎ gcc -O3 -march=native -fopenmp -ffp-contract=off -fPIC -shared -o /home/s/st/stevejobs/flybrain/.claud...` |  |
+| 38027 | 2026-11-05 17:23 | COMPLETED | 00:07:16 | 16 cpu, 24G |  | `srun -p ocf-hpc --gres=none -c 16 --mem=24G --time=12 bash -c  ⏎ set -e; cd fly_brain; export OMP_NUM_THREADS=16 ⏎ gcc -O3 -march=native -fopenmp -ffp-contract=off -fPIC -shared -o /home/s/st/stevejobs/flybrain/.claud...` |  |
+| 38028 | 2026-11-05 17:31 | COMPLETED | 00:04:29 | 16 cpu, 24G |  | `srun -p ocf-hpc --gres=none -c 16 --mem=24G --time=12 bash -c  ⏎ set -e; cd fly_brain; export OMP_NUM_THREADS=16 ⏎ for cfg in '300 20' '600 30' '1000 40'; do PYTHONPATH=. ../venv/bin/python /home/s/st/stevejobs/flybra...` |  |
+| 38029 | 2026-11-05 17:39 | COMPLETED | 00:00:08 | 16 cpu, 32G |  | `srun -p ocf-hpc --gres=none -c 16 --mem=32G --time=12 bash -c  ⏎ set -e; cd /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/fly_brain; export OMP_NUM_THREADS=16 ⏎ for cfg in '300 20' '450 ...` |  |
+| 38030 | 2026-11-05 17:39 | COMPLETED | 00:09:06 | 16 cpu, 32G |  | `srun -p ocf-hpc --gres=none -c 16 --mem=32G --time=12 bash -c  ⏎ set -e; cd /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/fly_brain; export OMP_NUM_THREADS=16 ⏎ for cfg in '300 20' '450 ...` |  |
 
 ## Full command lines
 
@@ -577,4 +580,28 @@ srun -p ocf-hpc --gres=none -c 16 --mem=24G --time=12 bash -c
 set -e; cd fly_brain; export OMP_NUM_THREADS=16
 gcc -O3 -march=native -fopenmp -ffp-contract=off -fPIC -shared -o /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/notes/kern/lif_dense.so /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/notes/kern/lif_dense.c
 PYTHONPATH=. ../venv/bin/python /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/notes/kern/bench_cpu.py /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/notes/kern/lif_dense.so 48 60
+```
+
+**38028** (bash)
+
+```bash
+srun -p ocf-hpc --gres=none -c 16 --mem=24G --time=12 bash -c 
+set -e; cd fly_brain; export OMP_NUM_THREADS=16
+for cfg in '300 20' '600 30' '1000 40'; do PYTHONPATH=. ../venv/bin/python /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/notes/kern/bench2.py /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/notes/kern/lif_dense.so 48 $cfg; done
+```
+
+**38029** (bash)
+
+```bash
+srun -p ocf-hpc --gres=none -c 16 --mem=32G --time=12 bash -c 
+set -e; cd /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/fly_brain; export OMP_NUM_THREADS=16
+for cfg in '300 20' '450 25' '500 25'; do PYTHONPATH=. ~/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/notes/kern/bench3.py $cfg /home/s/st/stevejobs/flybrain/fly_brain/results/brain.npz 2>&1 | tail -4; done; ls ~/.cache/fly_brain/
+```
+
+**38030** (bash)
+
+```bash
+srun -p ocf-hpc --gres=none -c 16 --mem=32G --time=12 bash -c 
+set -e; cd /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/fly_brain; export OMP_NUM_THREADS=16
+for cfg in '300 20' '450 25' '500 25'; do PYTHONPATH=. ~/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/.claude/worktrees/project-pending-items-5ff0c7/notes/kern/bench3.py $cfg /home/s/st/stevejobs/flybrain/fly_brain/brain.npz 2>&1 | tail -4; done; ls ~/.cache/fly_brain/
 ```
