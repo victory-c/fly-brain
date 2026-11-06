@@ -421,7 +421,7 @@ Only 0.47 and 0.60 were tested in that range.
 | Learn-from-blank on the earlier simulator | 35 generations, 1,680 attempts, 29 of 48 finishing at the end, 580 finished overall | `fly_brain/bike/README.md:196-197` (job 36521) | old simulator, not re-run (recordings not kept) |
 | `ride.json`, `ride_b.json`, `ride_lane.json`, `ride_road*.json`, `ride_easy*.json`, `ride_slow*.json`, `ride_fast.json`, `ride_filter.json`, `ride_lanedn*.json`, `ride_dagger.json`, `ride_pilot_trace.json`, `zero_theta.json`, `dagger_smoke.json` and their traces | | jobs 36085-36129 and 36487 (2026-09-27 to 10-03) | old simulator, not re-run. `JOBS.md` still calls `ride_b.json` "the best decoder" and "the /ride/ demo" |
 
-Pages on fly-brain-bike.vercel.app (`site/build.sh`): `/ride/`, `/ride/3d`, `/ride/charts`, `/ride/open-loop` and
+Pages on victory-c.github.io/fly-brain (`site/build.sh`; fly-brain-bike.vercel.app redirects there since 2026-11-05): `/ride/`, `/ride/3d`, `/ride/charts`, `/ride/open-loop` and
 `/dashboard/` show current runs; `/ride/oracle` has no brain. The landing page's ride numbers are current and its
 speed line is from the earlier simulator.
 

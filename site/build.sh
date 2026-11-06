@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Assemble the static demo site into site/dist (Vercel runs this, see vercel.json).
+# Assemble the static demo site into site/dist (.github/workflows/pages.yml runs this and publishes it on GitHub Pages).
 #   /            site/index.html
 #   /dashboard/  Fly Brain Live (fly_brain/dashboard)
 #   /ride/       the fly learns to ride, attempt by attempt (fly_brain/results/attempts_page: index.html + data/)
