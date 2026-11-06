@@ -29,3 +29,5 @@ gen  4  fit best  11.71 mean   4.42  upright  4.24 s (max 11.32,   0% finish)  d
 gen  5  fit best  15.80 mean   6.16  upright  5.88 s (max 15.00,   4% finish)  dist  25.1 m  |y| 2.60 m  v 4.50  bailed 0  pop 52,749 sp/s  4256s
 gen  6  fit best  15.62 mean   6.61  upright  6.35 s (max 15.00,   4% finish)  dist  27.4 m  |y| 3.21 m  v 4.50  bailed 0  pop 43,380 sp/s  4151s
 gen  7  fit best  15.97 mean   7.59  upright  7.34 s (max 15.00,  15% finish)  dist  31.8 m  |y| 2.82 m  v 4.50  bailed 0  pop 45,040 sp/s  4203s
+gen  8  fit best  16.06 mean   9.43  upright  9.08 s (max 15.00,  25% finish)  dist  39.4 m  |y| 2.58 m  v 4.50  bailed 0  pop 45,633 sp/s  4303s
+slurmstepd-corruption: error: *** JOB 37948 ON corruption CANCELLED AT 2026-11-05T18:11:46 ***
