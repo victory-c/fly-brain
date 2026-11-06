@@ -431,9 +431,9 @@ Reading on 2026-11-06, one rewiring draw:
   generation (4.5 SDs) and 4.82 s below over the last five (3.4 SDs). The pilot goes against the prediction as
   drafted. The prediction is written for the per-brain top-k readouts over 3 draws and 5 seeds; this is the
   hand-picked readout on one draw and one CEM seed, on CPU against the real wiring's GPU runs.
-- Two more R1 pilots are queued to tell the rewiring draw from the search seed, same script and settings: draw 2
-  with CEM seed 201 (job 38107, after the random-8 pilot; `results/rungs/r1_s2_cpu/`) and draw 1 with CEM seed
-  202 (job 38108, after the R2 ride; `results/rungs/r1_s1_cpu/v4.5_s202`). Draw 2 (`results/variants/r1_s2.npz`,
+- Two more R1 pilots tell the rewiring draw from the search seed, same script and settings: draw 2 with CEM
+  seed 201 (job 38107, started 2026-11-06 14:23 when the random-8 pilot ended; `results/rungs/r1_s2_cpu/`) and
+  draw 1 with CEM seed 202 (job 38108, queued after the R2 ride; `results/rungs/r1_s1_cpu/v4.5_s202`). Draw 2 (`results/variants/r1_s2.npz`,
   `results/rungs/r1_s2_cpu/sign_flips.json`) changes the sign of 8,697 neurons (5.2%), among them 3 of the 34 VS
   cells, none of the 10 HS cells and 1 of the 112 readout neurons; it has not been through the pre-test.
 - R4 at 1.2 did not learn in 25 generations: 0.76 s at generation 0, 0.56 s at generation 1, then 1.25 to 1.84 s
@@ -505,9 +505,9 @@ Reading, one seed:
   road; that takes (c) out of the list. This run does not separate (a) from (b); top-32 tests only whether more
   roll-rate-ranked neurons are enough.
 - Since then: the top-32 readout (job 38078) and the bypass with every synapse off (job 38086) have finished,
-  see the two sections below. Still running: 8 neurons drawn at random from the screen's pool (`randk`, job
-  38079, started 2026-11-06 11:48 when the R1 ride ended) and the R2 pilot ride (job 38039, started 12:12 when
-  top-32 ended).
+  see the two sections below. The random-8 control (`randk`, job 38079) finished at 14:23, see its section below.
+  Still running: the R2 pilot ride (job 38039, started 12:12 when top-32 ended) and the R1 draw-2 pilot ride (job
+  38107, started 14:23 when random-8 ended).
 
 ### Readout pilot on the real wiring: the top-32 screened neurons (CPU, 2026-11-06)
 
@@ -566,6 +566,58 @@ Reading, one seed:
   right. So ranking the same screen by lateral offset is not an obvious source of a lane signal. The hand-picked
   readout takes its lane neurons from another measurement, the HS probe (`runs/probe.py`), which every
   `ride-rung.sbatch` run already makes on its own brain.
+
+### Readout pilot on the real wiring: 8 neurons drawn at random (CPU, 2026-11-06)
+
+`ride-readout.sbatch 4.5 201 r0 randk 8` (job 38079; 30 generations in 2.57 h of search, 230 to 522 s each): the
+top-8 search above, but the decoder reads 8 descending neurons drawn at random from the same screen's pool
+(readout seed 0) in place of the 8 highest-ranked. The 8 are DNp19 right, DNg41 left, DNge046 right, DNb02 right,
+DNg05_a right, DNge019 left, DNg105 left and DNg49 right. This is one draw; section 5 of the preregistration
+draft asks for three. Mean riding time in seconds
+(`results/rungs/r0/rand8_r0/v4.5_s201/cem.json`):
+
+| Generation | random-8, seed 201 | riding all 15 s | top-8, seed 201 | riding all 15 s |
+|---|---|---|---|---|
+| 0 | 1.11 | 0% | 1.33 | 0% |
+| 1 | 2.64 | 0% | 2.26 | 2% |
+| 3 | 3.57 | 0% | 5.16 | 2% |
+| 5 | 3.46 | 0% | 5.23 | 0% |
+| 10 | 4.05 | 0% | 7.11 | 6% |
+| 15 | 4.17 | 0% | 7.01 | 10% |
+| 20 | 4.07 | 0% | 7.62 | 6% |
+| 25 | 4.00 | 0% | 6.44 | 4% |
+| 27 | 4.59 | 2% | 7.92 | 4% |
+| 29 | 4.06 | 0% | 7.21 | 6% |
+
+Reading, one seed and one draw of the 8 neurons:
+- The search never reaches the hands-off level (5.4 to 5.7 s). From generation 3 on it stays between 3.46 and
+  4.59 s, and the last generation rides 4.06 s. Generations 25 to 29 average 4.18 s; over the same five
+  generations top-8 averages 7.15 s and top-32 6.19 s. One ride in the whole search lasted the full 15 s
+  (generation 27).
+- The final mean decoder is close to blank: its eight steering weights are between -0.039 and +0.038 and the
+  bias is +0.023, with the sampling width on or within 0.003 of its floor (0.03) on all nine. A search generation
+  rides below the hands-off bike (4.06 s in generation 29), while the replay of the mean in the next bullet
+  rides level with it (5.51 s). In a search generation one rider carries the mean and the other 47 carry weights
+  sampled around it, with a spread (0.030 to 0.032 per weight) about as large as the weights themselves. That
+  spread is the likely cause of the gap, not a shown one: the generation also used the mean from before the last
+  update and had its own gust, start-lean and brain-noise draws.
+- Replays of the mean decoder (48 riders x 15 s, seed 201, the same options; jobs 38111 and 38112,
+  `replay_mu_summary.json` and `replay_mu_noroad_summary.json` next to the search). With the off-road rule: 5.51 s upright, none rides all 15 s, 38 leave the road, 10 fall. The hands-off bike
+  replayed the same way rides 5.38 s; 41 leave the road and 7 fall. Without the rule all 48 fall, between 4.2
+  and 12.5 s (median 7.5 s; 7.82 s on average). The hands-off bike without the rule rides 8.65 s on average and
+  46 of 48 fall. The top-8 and top-32 decoders without the rule keep all 48 upright for the full 15 s.
+- The draw is not a silent one. After warm-up, with the bike upright, five of the 8 fire at 0.5 Hz or more (DNg41
+  left 20 Hz, DNg105 left 16, DNg49 right 8, DNg05_a right 4, DNb02 right 1; DNp19, DNge046 and DNge019 are
+  below 0.5 Hz), against six of 8 for top-8 (38, 29, 22, 7, 1 and 1 Hz; the two DNp22 are below 0.5 Hz;
+  `logs/ride-readout-38079.out`, `logs/ride-readout-38036.out`). These are rates before the ride starts, not
+  riding rates, and they do not say whether a neuron follows the roll. The pool holds only descending neurons
+  that are not driven by the senses and fired at least 0.5 Hz in the screen (`screen_pool` in
+  `bike/readout.py`), so every draw comes from neurons that were active in the screen.
+- So these 8 random neurons give the search nothing to balance with, and the screen's ranking does: the top-8
+  and top-32 decoders balance every replayed rider. The control separates from top-k on balance; neither holds
+  the lane. For prediction 3's second clause (R4 rides no better than random-k on R0), the random-k level on R0
+  is below the hands-off bike in the search (4.06 s in generation 29 against 5.4 to 5.7 s) and level with it in
+  the replay of the mean decoder (5.51 s against 5.38 s).
 
 ### Readout pilot on the real wiring: the sensory bypass (CPU, 2026-11-06)
 
@@ -672,6 +724,8 @@ weights and bias 0, pedal held):
 | bypass, search mean | 3.5 m | 15.00 s | 48 of 48 | 0 | 0 | 38081, `results/rungs/r0/bypass/v4.5_s201/replay_mu_summary.json` |
 | top-32, search mean | 3.5 m | 8.88 s | 2 of 48 | 46 | 0 | 38104, `results/rungs/r0/top32/v4.5_s201/replay_mu_summary.json` |
 | top-32, search mean | none | 15.00 s | 48 of 48 | | 0 | 38105, `results/rungs/r0/top32/v4.5_s201/replay_mu_noroad_summary.json` |
+| random-8, search mean | 3.5 m | 5.51 s | 0 of 48 | 38 | 10 | 38111, `results/rungs/r0/rand8_r0/v4.5_s201/replay_mu_summary.json` |
+| random-8, search mean | none | 7.82 s | 0 of 48 | | 48 | 38112, `results/rungs/r0/rand8_r0/v4.5_s201/replay_mu_noroad_summary.json` |
 
 - Hands-off with the rule: 5.38 s here against 5.69 s in the gate's hands-off replay (16 riders, on the login VM,
   `results/gate/v4.5_s201/handsoff_trace.json`, 3 fell and 13 left the road). The two are different samples of the
