@@ -88,7 +88,7 @@ NOTES = {
     "37952": "continuation of the R3 pilot ride, seed 202 (stops at 60 generations)",
     "37953": "second continuation of the R3 pilot ride, seed 202",
     "38035": "per-brain passenger screens of R0, R1, R2, R3 on CPU with the C kernel -> results/rungs/screens/",
-    "38043": "continuation of the R3 pilot ride, seed 201, on 32 threads (stops at 60 generations)",
+    "38043": "last continuation of the R3 pilot ride, seed 201, on 32 threads: generations 18 to 59 at 436 to 504 s each; the search ends at 60 generations with 11.48 s upright and 42% finishing in the last one",
     "38036": "pilot of the Track A readout on the real wiring: top-8 screened descending neurons, 4.5 m/s, seed 201, 30 generations (CPU, 32 threads)",
     "38037": "pilot of the sensory-bypass readout on the real wiring, 4.5 m/s, seed 201, 30 generations (CPU)",
     "38038": "pilot ride on R1 (balance gate unchanged, 4.5 m/s, seed 201, 60 generations) on CPU -> results/rungs/r1_s1_cpu/",
