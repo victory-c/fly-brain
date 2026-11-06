@@ -17,3 +17,9 @@ screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, o
 driven neurons total 45,326 sp/s; rest of brain 46,709 sp/s; 3,401 neurons > 1 Hz, 1,555 > 20 Hz
 == descending neurons above 0.5 Hz (271 of 1314)
 == 18:57:56 screen r3_s1 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cpu
+  t=10.0s  alive 48/48  mean|phi|  4.6 deg  pop 81,779 sp/s  wall 473s
+  t=15.0s  alive 48/48  mean|phi|  4.8 deg  pop 79,044 sp/s  wall 773s
+driven neurons total 45,326 sp/s; rest of brain 47,733 sp/s; 3,240 neurons > 1 Hz, 1,614 > 20 Hz
+== descending neurons above 0.5 Hz (258 of 1314)
+== done Thu Nov  5 07:11:01 PM PST 2026

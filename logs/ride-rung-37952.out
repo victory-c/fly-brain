@@ -20,3 +20,5 @@ resuming results/rungs/r3_s1_cpu/v4.5_s202/cem.json at generation 9 (riding time
 gen  9  fit best  15.90 mean   8.29  upright  8.05 s (max 15.00,  23% finish)  dist  35.0 m  |y| 2.87 m  v 4.50  bailed 0  pop 43,148 sp/s  1502s
 gen 10  fit best  16.14 mean  10.09  upright  9.80 s (max 15.00,  27% finish)  dist  42.6 m  |y| 2.71 m  v 4.50  bailed 0  pop 46,625 sp/s  568s
 gen 11  fit best  15.94 mean   8.73  upright  8.43 s (max 15.00,  25% finish)  dist  36.7 m  |y| 2.72 m  v 4.50  bailed 0  pop 43,329 sp/s  659s
+gen 12  fit best  16.10 mean  11.47  upright 11.07 s (max 15.00,  38% finish)  dist  48.4 m  |y| 2.52 m  v 4.50  bailed 0  pop 42,417 sp/s  659s
+gen 13  fit best  16.09 mean   9.30  upright  8.99 s (max 15.00,  25% finish)  dist  39.1 m  |y| 2.70 m  v 4.50  bailed 0  pop 45,432 sp/s  716s

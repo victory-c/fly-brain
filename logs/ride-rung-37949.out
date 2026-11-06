@@ -17,3 +17,6 @@ lane-filter gain starts at 0.00 with width 1.0
 resuming results/rungs/r3_s1_cpu/v4.5_s201/cem.json at generation 16 (riding time so far 6.89 s)
   after warm-up, DN rates (Hz): DNp20_L 37, DNp20_R 22, DNp22_R 1, DNg46_L 1, DNg46_R 1, DNge043_L 5, DNge043_R 10, DNb06_L 27, DNpe013_L 2, DNpe013_R 4, DNg90_R 1, DNp33_L 23, DNp33_R 9, DNge091_L 2, DNg29_L 43, DNg29_R 28, DNg41_L 17, DNg41_R 24, DNp18_L 36, DNp18_R 44, DNp73_L 55, DNp73_R 8, b2 MN_L 7, b2 MN_R 1, hg1 MN_L 21, hg1 MN_R 11, DNa02_R 1, DNa03_R 3, DNa16_L 2, DNa16_R 7, DNb03_L 3, DNb03_R 7, DNa06_L 5, DNa06_R 9, DNp15_L 5, DNp15_R 28, DNge107_L 1, DNge107_R 12, DNge086_R 4, DNge031_L 20, DNge031_R 21, DNge033_L 3, DNge033_R 8, GNG283_L 2, GNG283_R 15
   population 9,908 spikes/s per brain
+gen 16  fit best  16.21 mean   8.54  upright  8.15 s (max 15.00,   4% finish)  dist  35.0 m  |y| 2.93 m  v 4.50  bailed 0  pop 43,709 sp/s  2802s
+gen 17  fit best  15.93 mean   7.25  upright  6.93 s (max 15.00,   4% finish)  dist  29.6 m  |y| 2.76 m  v 4.50  bailed 0  pop 47,565 sp/s  1064s
+slurmstepd-corruption: error: *** JOB 37949 ON corruption CANCELLED AT 2026-11-05T19:29:07 ***
