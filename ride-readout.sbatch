@@ -6,6 +6,8 @@
 #   READOUT topk   the K descending neurons the screen ranks highest by roll-rate correlation
 #           randk  K drawn at random from the same pool (READOUT_SEED picks the draw)
 #           bypass the 10 sensory populations themselves (ceiling; needs no screen)
+#           bypass0 the same with every synapse switched off (--no-synapses): the driven neurons fire from their
+#                  drive alone, so nothing the brain does can reach the decoder -> .../bypass_nosyn/
 # RUNG is r0 (the real wiring) or results/variants/<RUNG>.npz; its screen is results/rungs/screens/<RUNG>[_w<SCALE>].parquet
 # (screen-rungs.sbatch). Results: results/rungs/<RUNG>[_w<SCALE>]/<readout>/v<V0>_s<SEED>/cem.json.
 # Submit from the repo root:
@@ -24,14 +26,15 @@ set -euo pipefail
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-8}
 cd "$SLURM_SUBMIT_DIR/fly_brain"
 PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
-V0=${1:?speed m/s}; SEED=${2:?seed}; RUNG=${3:?r0 or a rung}; RO=${4:?topk|randk|bypass}; K=${5:-8}; MIN=${6:-300}; WS=${7:-}; RSEED=${8:-0}
+V0=${1:?speed m/s}; SEED=${2:?seed}; RUNG=${3:?r0 or a rung}; RO=${4:?topk|randk|bypass|bypass0}; K=${5:-8}; MIN=${6:-300}; WS=${7:-}; RSEED=${8:-0}
 WARG=${WS:+--w-syn-scale $WS}; TAG=${RUNG}${WS:+_w$WS}
 if [ "$RUNG" = r0 ]; then BARG=""; else BARG="--brain results/variants/$RUNG.npz"; fi
 case $RO in
   topk)   NAME=top$K;            RARG="--readout topk --screen results/rungs/screens/$TAG.parquet --k $K" ;;
   randk)  NAME=rand${K}_r$RSEED; RARG="--readout randk --screen results/rungs/screens/$TAG.parquet --k $K --readout-seed $RSEED" ;;
   bypass) NAME=bypass;           RARG="--readout bypass" ;;
-  *) echo "READOUT must be topk, randk or bypass" >&2; exit 2 ;;
+  bypass0) NAME=bypass_nosyn;    RARG="--readout bypass --no-synapses" ;;  # the driven neurons with every synapse off
+  *) echo "READOUT must be topk, randk, bypass or bypass0" >&2; exit 2 ;;
 esac
 OUT=results/rungs/$TAG/$NAME/v${V0}_s${SEED}
 mkdir -p $OUT

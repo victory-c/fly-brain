@@ -180,6 +180,9 @@ def parse():
     ap.add_argument("--resume", default=None, help="CEM: continue the search stored in this results json (its mu, sigma, history and best), e.g. after a job hit its time limit; --generations is the total. The gust and start-lean draws restart from a seed of their own, and --log-attempts keeps only the new generations")
     ap.add_argument("--w-syn-scale", type=float, default=None, help="override the calibrated synapse scale (W_SYN_SCALE, 0.47)")
     ap.add_argument("--brain", default=None, help="connectome npz (default brain.npz); e.g. a rewired one from brain/variants.py")
+    ap.add_argument("--no-synapses", action="store_true",
+                    help="deliver no synaptic input while the Poisson drive keeps its size: only the driven neurons fire, "
+                         "from their drive alone. With --readout bypass this is the bypass with no brain at all")
     ap.add_argument("--device", default="auto")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default="results/ride.json")
@@ -228,8 +231,10 @@ class Ride:
             w = W_SYN if a.w_syn_scale is None else PARAMS["w_syn"] * a.w_syn_scale
             self.loop = BrainLoop(brain, a.riders, self.senses.idx, self.readout.idx,
                                   params={"w_syn": w}, device=self.dev, seed=a.seed)
+            if a.no_synapses:  # after the engine has sized the Poisson kick from w
+                self.loop.engine.w_syn = 0.0
             print(f"brain: {a.brain or 'brain.npz'}, {brain.n:,} neurons, {len(self.senses.idx)} driven, {len(self.readout.idx)} read out, "
-                  f"w_syn {w:.4f} mV", flush=True)
+                  f"w_syn {w:.4f} mV" + (", synapses off" if a.no_synapses else ""), flush=True)
 
     @torch.no_grad()
     def episode(self, theta=None, oracle=False, seed=0, log=None, verbose=False, collect=None, beta=0.0, brain=None, attempts=None):
