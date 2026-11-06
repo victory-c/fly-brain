@@ -7,3 +7,5 @@ readout: DNp20_R#10059 1, DNg46_R#810937 1, DNg46_L#15442 1, DNp22(hb1560471374)
 brain: brain.npz, 166,700 neurons, 789 driven, 8 read out, w_syn 0.1293 mV
   after warm-up, DN rates (Hz): DNp20_R#10059 22, DNg46_R#810937 1, DNg46_L#15442 1, DNp22(hb1560471374)_R#11872 1, DNp20_L#10162 39, DNge043(hb1499778528)_L#11458 6, DNb06_L#10888 30
   population 11,452 spikes/s per brain
+replay of /home/s/st/stevejobs/.cache/sb-replay/handsoff.json: upright  8.65 s (max 15.00,   4% finish)  dist  34.1 m  |y| 10.02 m  v 4.50  bailed 0  pop 53,045 sp/s  790s
+trace -> /home/s/st/stevejobs/.cache/sb-replay/handsoff_noroad_trace.json

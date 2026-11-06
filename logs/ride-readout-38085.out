@@ -1,0 +1,10 @@
+init_hold: 29.6 W holds 4.5 m/s
+== 09:29:53 CEM from a blank decoder: r0_w0, bypass, v0=4.5, seed 201, max 1320 min
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+Tarmac SL9 + 70 kg: 78.2 kg, self-stable 4.70..7.74 m/s; start at 4.5 m/s, gusts 5 Nm, 48 riders on cpu
+sensory gain overrides: {'hs_heading': 150.0, 'hs_lane': 50.0}
+senses : VS_L 16, HS_L 5, HALT_L 104, JO_L 228, LEG1_L 45, VS_R 18, HS_R 5, HALT_R 101, JO_R 247, LEG1_R 20  (789 neurons)
+readout: VS_L 16, HS_L 5, HALT_L 104, JO_L 228, LEG1_L 45, VS_R 18, HS_R 5, HALT_R 101, JO_R 247, LEG1_R 20
+brain: brain.npz, 166,700 neurons, 789 driven, 789 read out, w_syn 0.0000 mV
+CEM starts from best_theta of results/rungs/r0_w0/bypass/v4.5_s201/init_hold.json; 10 new decoder weights start at 0 with width 0.1

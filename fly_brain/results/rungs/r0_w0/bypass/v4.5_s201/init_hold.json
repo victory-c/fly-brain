@@ -1,0 +1,1 @@
+{"best_theta": [0.0, 0.0, -2.008978972744245, 0.0, -12.0], "decoder_names": ["steer:bias", "pedal:gain", "pedal:bias", "brake:gain", "brake:bias"], "note": "blank steering, pedal frozen at 29.6 W (holds 4.5 m/s), brake off"}
