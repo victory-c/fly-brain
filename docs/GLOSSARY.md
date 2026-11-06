@@ -211,7 +211,8 @@ generator is in `brain/variants.py` (`python -m brain.variants r3 --seed 1`), wi
 checking what each keeps; `runs/pretest.py` runs the transmission gate on the result.
 
 - **Wiring ladder, R0-R5.** Perturbed connectomes graded from most to least detailed. Every rung keeps the
-  neurons and each connection's presynaptic neuron, so out-degrees and transmitter signs stay with the sender.
+  neurons and each connection's presynaptic neuron, so out-degrees stay with the sender, and so do transmitter
+  signs on every rung but R1.
   - **R0** the real wiring.
   - **R1** transmitter errors: 6% of neurons get another transmitter (Eckstein et al. 2024 assign 94% of
     FlyWire neurons correctly by majority vote; the new label is drawn by how common the others are). Only the
