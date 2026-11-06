@@ -40,3 +40,7 @@ gen 37  fit best  16.17 mean  10.95  upright 10.44 s (max 15.00,  29% finish)  d
 gen 38  fit best  16.14 mean  11.24  upright 10.70 s (max 15.00,  33% finish)  dist  46.8 m  |y| 2.46 m  v 4.50  bailed 0  pop 39,523 sp/s  464s
 gen 39  fit best  16.19 mean  11.68  upright 11.16 s (max 15.00,  29% finish)  dist  48.7 m  |y| 2.50 m  v 4.50  bailed 0  pop 40,976 sp/s  453s
 gen 40  fit best  16.18 mean  10.44  upright  9.97 s (max 15.00,  25% finish)  dist  43.3 m  |y| 2.53 m  v 4.50  bailed 0  pop 41,675 sp/s  452s
+gen 41  fit best  16.18 mean   9.80  upright  9.36 s (max 15.00,  21% finish)  dist  40.7 m  |y| 2.85 m  v 4.50  bailed 0  pop 41,679 sp/s  458s
+gen 42  fit best  16.17 mean  11.15  upright 10.66 s (max 15.00,  40% finish)  dist  46.5 m  |y| 2.38 m  v 4.50  bailed 0  pop 42,707 sp/s  460s
+gen 43  fit best  16.15 mean  11.47  upright 10.95 s (max 15.00,  33% finish)  dist  47.6 m  |y| 2.56 m  v 4.50  bailed 0  pop 42,205 sp/s  465s
+gen 44  fit best  16.18 mean  11.66  upright 11.13 s (max 15.00,  44% finish)  dist  48.5 m  |y| 2.00 m  v 4.50  bailed 0  pop 42,275 sp/s  459s
