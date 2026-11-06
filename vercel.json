@@ -10,5 +10,8 @@
       "destination": "https://victory-c.github.io/fly-brain/$1",
       "permanent": false
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": false
+  }
 }
