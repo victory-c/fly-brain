@@ -5,14 +5,18 @@ The simulator was rewritten on 2026-10-04. The new engine (`fly_brain/brain/engi
 refractory period, and input that reaches a refractory neuron is dropped. The synaptic weight scale also moved
 from 0.45 to 0.47. The two rules lower the brain's activity (the higher scale wins part of it back), so decoders
 fitted on the earlier simulator do not carry over. The learning-from-blank run was repeated on the new simulator;
-the passenger screen and the two lane-keeping rounds were not (`fly_brain/bike/README.md`, "Simulator change").
+the two lane-keeping rounds were not, and the original passenger screen (`results/screen.json`, job 36089: 16
+riders x 8 s) was not repeated with its settings (`fly_brain/bike/README.md`, "Simulator change"). A new, larger
+screen on the current simulator was run for the Scrambled Brains readouts on 2026-11-05 (job 38035,
+`results/rungs/screens/r0.json`: 48 riders x 15 s at 4.0 m/s, 25 N·m gusts, seed 1); see "Readout pilot on the
+real wiring".
 
 ## Rule of thumb for quoting numbers
 
 - A bike result that involves the brain is current only if it comes from the learn-from-blank run (job 36555,
   `results/relearn/`) or its replays (job 36626: `results/ride_road_trace.json`,
   `results/ride_pilot_road_trace.json`).
-  The passenger screen, the "flight-stabilisation reflex" finding, both lane-keeping rounds, the gain sweep and
+  The original passenger screen (`results/screen.json`), the "flight-stabilisation reflex" finding, both lane-keeping rounds, the gain sweep and
   DAgger come from the earlier simulator. Say so when you quote them, or leave them out.
 - Bike physics and connectome counts do not depend on the simulator: the self-stable speed range, the Whipple
   check, neuron and synapse counts, and the PD rider without a brain.
@@ -80,7 +84,7 @@ untouched (torch 2.5.1+cu121, numpy 2.4.6, pandas 3.0.6).
 | Balance-gate generation on CPU, 48 threads, node shared with other jobs | 2,003 s, 1,695 s and 1,373 s for generations 0 to 2 of R3 (riders up 1 to 2 s on average), against 167 s and 134 s for generations 0 and 1 of the real wiring on the GPU | `logs/ride-rung-37938.out`, `results/gate/v4.5_s201/cem.json` |
 | One job | at most 24 h (partition limit), so a CPU search continues with `runs/ride.py --resume` | `ride-rung.sbatch` |
 | CPU step with the C kernel (`brain/lif_kernel.c`, from 2026-11-05 18:00), full brain, 48 flies, 16 threads | 5.5, 10.1 and 6.9 ms per step against 34.7, 66.3 and 40.2 ms with the torch ops, at 1,600, 81,000 and 280 undriven spikes/s per brain; the same spikes and the same `v`, `g`, `free_at`, `count` after 2,500 steps in all three | `notes/kern/bench3.py` run by hand on corruption (not in the repo); `tests/test_engine.py::test_c_kernel_and_torch_ops_agree_bit_for_bit` on the small network |
-| Balance-gate generation on CPU with the C kernel | 458 to 942 s on 32 threads (R3 seed 202, generations 10 to 14; seed 201, generation 18) and 681 s and 705 s on 48 threads (seed 201, generations 14 and 15), against 3,590 to 4,303 s with the torch ops (riders up 7 to 11 s in all). The step is bound by memory traffic, so 48 threads are no faster than 32 and the time depends on what else the node runs: seed 201 took 2,802 s for generation 16 while a 16-thread screen shared its socket, and seed 202 took 1,502 s for generation 9 | `logs/ride-rung-37946.out`, `-37949.out`, `-37952.out`, `-38043.out`, `-37938.out`, `-37948.out` |
+| Balance-gate generation on CPU with the C kernel | On 32 threads, 436 to 504 s for R3 seed 201 (generations 18 to 59, job 38043) and 507 to 1,127 s for R3 seed 202 (generations 10 to 59, job 37952; generation 36 took 1,127 s), and 681 s and 705 s on 48 threads (seed 201, generations 14 and 15), against 3,590 to 4,303 s with the torch ops (riders up 7 to 13 s in the C-kernel generations, 4 to 9 s in the torch ones). The step is bound by memory traffic, so 48 threads are no faster than 32 and the time depends on what else the node runs (seed 202 shared it with one to three other 16- to 48-thread jobs throughout): seed 201 took 2,802 s for generation 16 while a 16-thread screen shared its socket and 1,064 s for generation 17, and seed 202 took 1,502 s for generation 9 | `logs/ride-rung-37946.out`, `-37949.out`, `-37952.out`, `-38043.out`, `-37938.out`, `-37948.out` |
 | Passenger screen on CPU with the C kernel, 48 riders x 15 s, 16 threads | about 12 min a rung (R0, R1, R2, R3) | `logs/screen-rungs-38035.out` |
 
 ## Fly Brain Live (`/dashboard/`)
@@ -120,8 +124,8 @@ All from one CEM run, job 36555 (`ride-relearn.sbatch`, seed 101), 48 riders x 1
 changes: the speed is held at V0 by fixed pedalling (23.1 W at 4.0 m/s, 29.6 W at 4.5) and the brake is off. Each
 run is 48 riders x 15 s per generation with 5 Nm gusts, and leaving the road ends a run. Every run stopped at its
 5 h cap. "Riding time" is time until a fall or leaving the road (`upright_mean` in `cem.json` "history").
-Generation 0 is the blank decoder plus the search's first random spread. It is not a hands-off replay; no
-hands-off replay at these speeds is committed.
+Generation 0 is the blank decoder plus the search's first random spread. It is not a hands-off replay; the
+hands-off replays at these speeds are in the table below (`results/gate/v4.*_s201/handsoff_trace.json`).
 
 | Run | Generations | Gen 0 mean riding time | Last gen mean riding time | Last gen riding all 15 s | Source | Status |
 |---|---|---|---|---|---|---|
@@ -194,7 +198,8 @@ What it shows, with one draw and 8 brains per cell:
   relabellings) gives 35 and 31 lateralised outputs against null maxima of 4 and 13 (95th percentile 1), at
   13,000-14,300 network spikes/s. R1 passes the transmission gate at 0.47.
 When this pre-test ran, the balance gate had not run on R1-R3.5; the tables below are R0, R4 and R5 only. R3 has
-since been ridden on CPU ("Pilot rides on rewired brains" below); R1 and R2 are queued (jobs 38038, 38039).
+since been ridden on CPU ("Pilot rides on rewired brains" below); the R1 ride started on 2026-11-06 04:20 (job
+38038) and the R2 ride (job 38039) follows the readout pilots.
 
 ### The ladder with 30 brains per cell, and where each rung stops transmitting (2026-11-05)
 
@@ -286,16 +291,17 @@ summary is `results/rungs/closed_loop_rates.json`, made by `tools/replay_rate.py
   bikes that have already fallen and whose senses are saturated. No scale has been shown to match the real
   brain's rate throughout a generation.
 
-### Pilot rides on rewired brains (CPU; R3 seed 201 finished, seed 202 in progress; table as of 2026-11-06 01:10)
+### Pilot rides on rewired brains (CPU; both R3 seeds finished; table as of 2026-11-06 04:50)
 
 The balance gate unchanged (`ride-rung.sbatch`: the hand-picked `lane` readout, CEM from a blank decoder, 48 riders
 x 15 s, 4.5 m/s, 5 N·m gusts) on rewiring draw 1. R3 at scale 0.47 with CEM seeds 201 (jobs 37938, 37946, 37949,
-38043; 60 generations in 19.0 h of search) and 202 (jobs 37948, 37952, 37953); R4 at scale 1.2 with seed 201 (job
+38043; 60 generations in 19.0 h of search) and 202 (jobs 37948, 37952, 37953; 60 generations in 20.4 h); R4 at scale 1.2 with seed 201 (job
 37945). They run on CPU: R3 took 23 to 83 min per generation at first and 7 to 19 min with the C kernel (except
 generation 9 of seed 202, 1,502 s, and generation 16 of seed 201, 2,802 s, right after the switch; see the timing
 rows above); R4, whose riders fall early, took 4 to 33 min per generation, all before the C kernel. Each job stops
 after 22 h and the next one continues the search (`--resume`), up to 60 generations. `python3 tools/ride_table.py`
-prints the table (it now also lists the readout pilots under `results/rungs/r0/`, left out here); mean riding time
+prints the table (it also lists the readout pilots under `results/rungs/r0/` and the R1 ride that started on
+2026-11-06, left out here); mean riding time
 in seconds:
 
 | Generation | R0 seed 201 | R0 seed 202 | r3_s1_cpu seed 201 | r3_s1_cpu seed 202 | r4_s1_w1.2_cpu seed 201 |
@@ -305,25 +311,26 @@ in seconds:
 | 2 | 3.18 | 1.82 | 2.18 | 2.12 | 0.65 |
 | 3 | 5.42 | 3.11 | 3.24 | 3.50 | 0.68 |
 | 5 | 6.83 | 4.93 | 4.46 | 5.88 | 0.74 |
+| 6 | 7.48 | 6.99 | 5.08 | 6.35 | 0.79 |
 | 8 | 8.94 | 7.30 | 6.23 | 9.08 | 1.35 |
 | 10 | 9.03 | 10.07 | 7.04 | 9.80 | 1.45 |
 | 15 | 10.95 | 9.22 | 6.89 | 8.27 | 1.58 |
 | 20 | 10.98 | 9.39 | 8.16 | 10.73 | 1.73 |
 | 24 | 10.46 | 11.74 | 8.94 | 10.90 | 1.69 |
 | 25 | 10.75 | 10.87 | 8.78 | 11.57 |  |
+| 29 | 9.50 | 10.77 | 9.49 | 12.15 |  |
 | 30 | 11.77 | 12.23 | 8.69 | 12.30 |  |
 | 35 | 11.83 | 10.97 | 10.76 | 12.08 |  |
 | 40 | 10.99 | 12.53 | 9.97 | 10.41 |  |
-| 41 | 11.21 | 12.19 | 9.36 | 10.74 |  |
-| 45 | 13.35 | 11.69 | 10.49 |  |  |
-| 50 | 13.68 | 12.37 | 11.26 |  |  |
-| 55 | 12.55 | 10.89 | 11.22 |  |  |
-| 56 | 13.15 | 11.89 | 12.39 |  |  |
-| 57 | 13.71 |  | 10.29 |  |  |
-| 59 |  |  | 11.48 |  |  |
-| generations done | 58 | 57 | 60 | 42 | 25 |
-| finishing 15 s, last generation | 77% | 52% | 42% | 40% | 0% |
-| spikes/s per brain, last generation | 35,727 | 38,101 | 36,050 | 42,900 | 90,007 |
+| 45 | 13.35 | 11.69 | 10.49 | 11.63 |  |
+| 50 | 13.68 | 12.37 | 11.26 | 11.63 |  |
+| 55 | 12.55 | 10.89 | 11.22 | 11.66 |  |
+| 56 | 13.15 | 11.89 | 12.39 | 12.18 |  |
+| 57 | 13.71 |  | 10.29 | 12.28 |  |
+| 59 |  |  | 11.48 | 11.14 |  |
+| generations done | 58 | 57 | 60 | 60 | 25 |
+| finishing 15 s, last generation | 77% | 52% | 42% | 52% | 0% |
+| spikes/s per brain, last generation | 35,727 | 38,101 | 36,050 | 43,228 | 90,007 |
 | device | cuda | cuda | cpu | cpu | cpu |
 
 Reading on 2026-11-06, one rewiring draw:
@@ -336,10 +343,19 @@ Reading on 2026-11-06, one rewiring draw:
   the real wiring's mean (12.80 s) and 16% below the same CEM seed. Averaged over each search's last five
   generations: R3 11.31 s, the real wiring 13.37 and 11.38 s. The real wiring's two seeds differ by 1.82 s in the
   last generation, more than R3 differs from their mean (1.32 s).
-- R3 seed 202 has 42 of 60 generations. From generation 30 to 40 it rode 10.4 to 12.4 s, where the real wiring's
-  two seeds rode 11.0 to 12.7 s.
-- Against the draft prediction (R3 loses under 30% of R0's riding time): the one finished seed loses 10 to 16%.
-  One draw, one finished seed, hand-picked readout; not the confirmatory test.
+- R3 seed 202 finished on 2026-11-06 04:48 (job 37952; job 37953 found the 60 generations done and stopped):
+  11.14 s in its last generation with 52% of riders finishing, against 11.89 s (52%) for the real wiring's seed
+  202 in its last generation (56), 6% below it and 13% below the real wiring's mean. The sign of that 6% is not
+  robust: at generation 56 R3's seed 202 rode 12.18 s, and over each search's last five generations it is 4%
+  above the real wiring's seed 202 (11.79 against 11.38 s). It reached the hands-off
+  level in generation 5 (5.88 s) and from generation 30 to 40 rode 10.4 to 12.4 s, where the real wiring's two
+  seeds rode 11.0 to 12.7 s. Averaged over its last five generations: 11.79 s.
+- The two R3 seeds together: 11.31 s in the last generation (11.48 and 11.14 s), 12% below the real wiring's
+  12.80 s (13.71 and 11.89 s); over each search's last five generations, 11.55 s against 12.38 s, 7% below. The
+  real wiring's two seeds differ by 1.82 s in the last generation, more than the two means differ (1.49 s).
+- Against the draft prediction (R3 loses under 30% of R0's riding time): in the last generation R3 loses 16% and
+  6% seed by seed and 12% on the means; over the last five generations seed 201 is 15% below and seed 202 4%
+  above. One rewiring draw, two CEM seeds, hand-picked readout; not the confirmatory test.
 - R4 at 1.2 did not learn in 25 generations: 0.76 s at generation 0, 0.56 s at generation 1, then 1.25 to 1.84 s
   from generation 8 on (1.69 s at generation 24), where the real wiring was at about 10 s. No rider rode the full
   15 s; the longest single ride was 8.2 s. That is below the hands-off bike: with this readout a searched decoder
@@ -350,6 +366,64 @@ Reading on 2026-11-06, one rewiring draw:
 - These are pilots: they started before the preregistration was tagged, with the hand-picked readout, on one
   rewiring draw. A CPU run does not repeat a GPU run (see "GPU runs do not repeat exactly"), so the comparison with
   the real wiring's GPU runs is between samples, not between identical noise.
+
+### Readout pilot on the real wiring: the top-8 screened neurons (CPU, 2026-11-06)
+
+`ride-readout.sbatch 4.5 201 r0 topk 8` (job 38036; 30 generations in 3.45 h of search, 213 to 480 s each): the
+balance gate's search on the real wiring at 4.5 m/s, CEM seed 201, but the decoder reads the 8 descending neurons
+that R0's passenger screen (`results/rungs/screens/r0.parquet`, job 38035) ranks highest by roll-rate correlation:
+DNp20 right and left, DNg46 right and left, DNp22 right and left, DNge043 left, DNb06 left. Each is read as its
+deviation from the batch-mean warm-up rate, and there is no lane filter. Mean riding time in seconds
+(`results/rungs/r0/top8/v4.5_s201/cem.json`), next to the gate's two searches with the hand-picked readout:
+
+| Generation | top-8, seed 201 | riding all 15 s | hand-picked, seed 201 | hand-picked, seed 202 |
+|---|---|---|---|---|
+| 0 | 1.33 | 0% | 1.01 | 0.87 |
+| 3 | 5.16 | 2% | 5.42 | 3.11 |
+| 5 | 5.23 | 0% | 6.83 | 4.93 |
+| 7 | 5.75 | 2% | 8.60 | 6.92 |
+| 9 | 7.12 | 13% | 9.59 | 9.63 |
+| 10 | 7.11 | 6% | 9.03 | 10.07 |
+| 15 | 7.01 | 10% | 10.95 | 9.22 |
+| 20 | 7.62 | 6% | 10.98 | 9.39 |
+| 25 | 6.44 | 4% | 10.75 | 10.87 |
+| 27 | 7.92 | 4% | 10.30 | 9.81 |
+| 29 | 7.21 | 6% | 9.50 | 10.77 |
+
+Reading, one seed:
+- The search reached the hands-off level in generation 7 (5.75 s against 5.69 s) and then stayed between 5.79 and
+  7.92 s (generations 19 and 27). The last generation rode 7.21 s with 3 of 48 riders finishing; no generation
+  had more than 6 of 48 (generation 9). Averaged over generations 25 to 29: 7.15 s, against 9.95 and 10.64 s for
+  the hand-picked readout in the same generations, about 30% below their mean (10.29 s).
+- What ends the rides is the road. From generation 2 on, the riders' mean distance from the center line at the end
+  of the ride is 3.2 to 3.5 m, and the off-road rule ends a ride at 3.5 m (`logs/ride-readout-38036.out`). That
+  figure is the mean over all 48 riders, finishers included, so it mostly follows how many finish: the gate's
+  seed 201 is at 2.7 to 3.2 m in generations 25 to 29 with 19 to 38% of its riders finishing
+  (`logs/ride-gate-37492.out`), against 2 to 6% here. The gate's numbers are consistent with its failed rides
+  also ending at the road edge (in generation 26, 9 of 48 finish and the mean is 3.19 m, so the other 39 average
+  at least 3.1 m), but the search logs keep no per-rider outcomes, so its split between falls and road exits is
+  not known. What the two readouts are shown to differ in is how many riders stay on the road for 15 s: 6%
+  against 23% in generation 29.
+- Replay of the search's final mean decoder (the CEM mean after generation 29, without the sampled spread, about
+  0.03 to 0.045 per weight at the end of the search, that 47 of the 48 riders of a search generation carry; job 38077, 48 riders x 15 s, seed 201, the
+  same options): 9.04 s upright, 7 of 48 ride all 15 s, 41 leave the road, none falls
+  (`results/rungs/r0/top8/v4.5_s201/replay_mu_summary.json`, `logs/replay-r0-top8-38077.out`). The hands-off replay
+  above lost 3 of 16 riders to a fall and 13 to the road. The gate's decoders were not replayed this way, so the
+  9.04 s has no hand-picked counterpart; compare the generation means.
+- That decoder's steering weights: DNp20 right +0.218, DNp20 left -0.253, the other six between -0.056 and +0.017.
+  The DNp20 pair holds 67% of the summed absolute weight.
+- So eight neurons picked for roll rate are enough to keep the bike upright, and the readout does not hold the
+  lane. The hand-picked readout differs in at least three ways: (a) 42 cell types pooled per side against 8 single
+  neurons, and 9 of the 42 (`LANE_DNS`) were picked by the HS lane probe, not by roll rate; (b) a matched-filter
+  lane signal, with the lane channel smoothed over 300 ms (`--tau-lane-ms 300`; here 40 ms throughout); (c) the
+  search setup: the gate searches around a riding operating point (`--zbar`) with the roll features uncentred,
+  while this run centres every feature on its warm-up rate (`--center-all`), which riding exceeds by 4 to 16 Hz
+  per neuron in the replay. The replay's 41 off-road riders leave on both sides (21 and 20), so (c) is not shown
+  to matter. This run does not separate these; top-32 tests only whether more roll-rate-ranked neurons are
+  enough.
+- Next: the sensory bypass (job 38037, started 2026-11-06 04:48) and the top-32 readout (job 38078, queued on
+  2026-11-06 04:23 behind the bypass; the R2 pilot ride, job 38039, now waits for it), and 8 neurons drawn at
+  random from the screen's pool (`randk`, job 38079, queued on 2026-11-06 05:12 behind the R1 ride).
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
@@ -413,7 +487,7 @@ Only 0.47 and 0.60 were tested in that range.
 | Claim | Value | Source | Status |
 |---|---|---|---|
 | Walking command DNs stay silent; MDN fires without following the lean | MDN 5-19 Hz, abs(r) < 0.02 | `results/screen.json` (job 36089); `fly_brain/bike/README.md:55-56` | old simulator, not re-run |
-| Flight-steering DNs track roll rate, opposite sign left and right ("the fly steers the bike with its flight-stabilisation reflex") | abs(r) up to 0.78 (DNp20_R 0.783) | `results/screen.json`; `fly_brain/bike/README.md:57-61`; `README.md:41-43` | old simulator, not re-run. The top-level `README.md` states it without this caveat |
+| Flight-steering DNs track roll rate, opposite sign left and right ("the fly steers the bike with its flight-stabilisation reflex") | abs(r) up to 0.78 (DNp20_R 0.783) | `results/screen.json`; `fly_brain/bike/README.md:57-61`; `README.md:41-43` | old simulator for the 0.78, not re-run with the same settings. The current-simulator screen of job 38035 (48 riders x 15 s, seed 1, `results/rungs/screens/r0.json`; the original was 16 riders x 8 s, seed 0) again puts DNp20_R first among descending neurons by roll-rate correlation, with opposite signs left and right, at lower values: DNp20_R +0.65, DNp20_L -0.58; DNg46_R +0.62, DNg46_L -0.62; DNp22_R +0.60, DNp22_L -0.58. The top-level `README.md` states it without this caveat |
 | Neuron lists the current decoder reads (`ROLL_RATE_DNS`, `LEAN_DNS`, `LANE_DNS`) | 42 types | `bike/readout.py:19-29` | old simulator, not re-run: chosen by the old screen and probe, still read by the current decoder. Only the lane-filter weights were remade (`results/relearn/probe.json`, job 36543) |
 | Odor goal saturates the brain | APL 436 Hz, ~500,000 spikes/s; ~35,000 spikes/s without the odor | `fly_brain/bike/README.md:62-64`; `logs/inline/36088.py` (job 36088) | old simulator, not re-run |
 | Balance neurons carry no heading | r_psi about -0.85 r_phi_dot | `results/screen_lane_psi.json`, `results/screen_physio.json` (jobs 36110, 36111) | old simulator, not re-run |
