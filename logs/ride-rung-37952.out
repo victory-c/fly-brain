@@ -17,3 +17,6 @@ lane-filter gain starts at 0.00 with width 1.0
 resuming results/rungs/r3_s1_cpu/v4.5_s202/cem.json at generation 9 (riding time so far 9.08 s)
   after warm-up, DN rates (Hz): DNp20_L 38, DNp20_R 23, DNp22_R 1, DNg46_L 1, DNg46_R 1, DNge043_L 6, DNge043_R 10, DNb06_L 27, DNpe013_L 3, DNpe013_R 4, DNg90_R 1, DNp33_L 22, DNp33_R 8, DNge091_L 2, DNg29_L 43, DNg29_R 28, DNg41_L 19, DNg41_R 22, DNp18_L 35, DNp18_R 45, DNp73_L 55, DNp73_R 8, b2 MN_L 7, b2 MN_R 2, hg1 MN_L 20, hg1 MN_R 11, DNa02_R 1, DNa03_R 4, DNa16_L 3, DNa16_R 7, DNb03_L 4, DNb03_R 7, DNa06_L 7, DNa06_R 11, DNp15_L 5, DNp15_R 28, DNge107_L 1, DNge107_R 12, DNge086_R 4, DNge031_L 19, DNge031_R 22, DNge033_L 5, DNge033_R 9, GNG283_L 3, GNG283_R 16
   population 10,305 spikes/s per brain
+gen  9  fit best  15.90 mean   8.29  upright  8.05 s (max 15.00,  23% finish)  dist  35.0 m  |y| 2.87 m  v 4.50  bailed 0  pop 43,148 sp/s  1502s
+gen 10  fit best  16.14 mean  10.09  upright  9.80 s (max 15.00,  27% finish)  dist  42.6 m  |y| 2.71 m  v 4.50  bailed 0  pop 46,625 sp/s  568s
+gen 11  fit best  15.94 mean   8.73  upright  8.43 s (max 15.00,  25% finish)  dist  36.7 m  |y| 2.72 m  v 4.50  bailed 0  pop 43,329 sp/s  659s
