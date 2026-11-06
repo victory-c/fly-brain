@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Vercel's Ignored Build Step (vercel.json "ignoreCommand"): exit 0 skips the build, exit 1 builds.
+# A skipped build saves the build but still counts as one of the account's deployments for the day.
 # cron pushes logs and results every 30 min; the site only needs rebuilding when something build.sh copies
 # has changed since the commit Vercel last deployed. Any doubt (no previous deployment, commit not
 # fetchable) builds.
@@ -13,7 +14,10 @@ INPUTS=(
 )
 PREV=${VERCEL_GIT_PREVIOUS_SHA:-}
 [ -n "$PREV" ] || { echo "no previous deployment: build"; exit 1; }
-git cat-file -e "$PREV^{commit}" 2>/dev/null || git fetch -q --depth=1 origin "$PREV" 2>/dev/null \
+# Vercel's clone is 10 commits deep and a skipped build does not move PREV, so PREV soon falls outside it:
+# fetch that one commit by URL (public repo; the clone may have no usable "origin")
+REPO_URL="https://github.com/${VERCEL_GIT_REPO_OWNER:-victory-c}/${VERCEL_GIT_REPO_SLUG:-fly-brain}.git"
+git cat-file -e "$PREV^{commit}" 2>/dev/null || git fetch -q --depth=1 "$REPO_URL" "$PREV" 2>/dev/null \
   || { echo "cannot reach $PREV: build"; exit 1; }
 if git diff --quiet "$PREV" HEAD -- "${INPUTS[@]}"; then
   echo "nothing the site is built from changed since ${PREV:0:7}: skip"
