@@ -1,0 +1,64 @@
+{
+ "variant": "results/variants/r1_s2.npz",
+ "neurons": 166700,
+ "relabelled": 9977,
+ "sign_flipped": 8697,
+ "inhibitory_to_excitatory": 2685,
+ "excitatory_to_inhibitory": 6012,
+ "synapses": 124177617.0,
+ "synapses_from_flipped_frac": 0.05315958028088105,
+ "inhibitory_synapse_frac_before": 0.3838324905204132,
+ "inhibitory_synapse_frac_after": 0.3996011777227131,
+ "senses": {
+  "VS_L": {
+   "neurons": 16,
+   "sign_flipped": 2
+  },
+  "HS_L": {
+   "neurons": 5,
+   "sign_flipped": 0
+  },
+  "HALT_L": {
+   "neurons": 104,
+   "sign_flipped": 3
+  },
+  "JO_L": {
+   "neurons": 228,
+   "sign_flipped": 12
+  },
+  "LEG1_L": {
+   "neurons": 45,
+   "sign_flipped": 3
+  },
+  "VS_R": {
+   "neurons": 18,
+   "sign_flipped": 1
+  },
+  "HS_R": {
+   "neurons": 5,
+   "sign_flipped": 0
+  },
+  "HALT_R": {
+   "neurons": 101,
+   "sign_flipped": 3
+  },
+  "JO_R": {
+   "neurons": 247,
+   "sign_flipped": 13
+  },
+  "LEG1_R": {
+   "neurons": 20,
+   "sign_flipped": 1
+  }
+ },
+ "sense_neurons": 789,
+ "sense_sign_flipped": 38,
+ "readout_types": 42,
+ "readout_neurons": 112,
+ "readout_sign_flipped": 1,
+ "readout_sign_flipped_neurons": [
+  "DNg46_R: glutamate -> acetylcholine"
+ ],
+ "readout_input_synapses_from_flipped_frac": 0.04921500133802525,
+ "sense_input_synapses_from_flipped_frac": 0.05280466204411773
+}

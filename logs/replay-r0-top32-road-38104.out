@@ -1,0 +1,11 @@
+/home/s/st/stevejobs/flybrain/venv-cuda/lib/python3.11/site-packages/torch/cuda/__init__.py:129: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+Tarmac SL9 + 70 kg: 78.2 kg, self-stable 4.70..7.74 m/s; start at 4.5 m/s, gusts 5 Nm, 48 riders on cpu
+sensory gain overrides: {'hs_heading': 150.0, 'hs_lane': 50.0}
+senses : VS_L 16, HS_L 5, HALT_L 104, JO_L 228, LEG1_L 45, VS_R 18, HS_R 5, HALT_R 101, JO_R 247, LEG1_R 20  (789 neurons)
+readout: DNp20_R#10059 1, DNg46_R#810937 1, DNg46_L#15442 1, DNp22(hb1560471374)_R#11872 1, DNp20_L#10162 1, DNp22_L#12306 1, DNge043(hb1499778528)_L#11458 1, DNb06_L#10888 1, DNge088_L#13133 1, DNge097_L#15448 1, DNge043(hb1499778528)_R#11500 1, DNp17(DNp16/17)_R#25535 1, DNge097_R#16935 1, DNp17_L#29685 1, DNg94_R#16731 1, DNp17_R#97614 1, DNp17_L#27598 1, DNpe013(PS168)_L#10834 1, DNg90_L#10160 1, DNp17_R#34023 1, DNg94_L#28940 1, DNp17_L#35630 1, DNpe014_R#14446 1, DNpe013(PS168)_R#10054 1, DNpe008(PS225)_L#37163 1, DNpe008(PS225)_L#40934 1, DNge087_R#26385 1, DNp17_L#35398 1, DNpe008(PS225)_R#34569 1, DNge087_L#34292 1, DNpe008(PS225)_L#38416 1, DNpe054(DNp16/17)_L#42051 1
+brain: brain.npz, 166,700 neurons, 789 driven, 32 read out, w_syn 0.1293 mV
+  after warm-up, DN rates (Hz): DNp20_R#10059 22, DNg46_R#810937 1, DNg46_L#15442 1, DNp22(hb1560471374)_R#11872 1, DNp20_L#10162 39, DNge043(hb1499778528)_L#11458 6, DNb06_L#10888 30, DNge043(hb1499778528)_R#11500 11, DNpe013(PS168)_L#10834 4, DNpe013(PS168)_R#10054 5
+  population 11,452 spikes/s per brain
+replay of /home/s/st/stevejobs/.cache/sb-replay/top32_mu.json: upright  8.88 s (max 15.00,   4% finish)  dist  39.1 m  |y| 3.45 m  v 4.50  bailed 0  pop 26,681 sp/s  792s
+trace -> /home/s/st/stevejobs/.cache/sb-replay/top32_mu_road_trace.json
