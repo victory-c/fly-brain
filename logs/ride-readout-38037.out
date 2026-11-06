@@ -39,3 +39,6 @@ gen 25  fit best  16.32 mean  13.01  upright 12.25 s (max 15.00,  60% finish)  d
 gen 26  fit best  16.32 mean  14.28  upright 13.38 s (max 15.00,  71% finish)  dist  58.8 m  |y| 1.49 m  v 4.50  bailed 0  pop 32,290 sp/s  523s
 gen 27  fit best  16.32 mean  14.07  upright 13.15 s (max 15.00,  75% finish)  dist  58.0 m  |y| 1.39 m  v 4.50  bailed 0  pop 31,671 sp/s  498s
 gen 28  fit best  16.31 mean  14.15  upright 13.20 s (max 15.00,  71% finish)  dist  57.9 m  |y| 1.57 m  v 4.50  bailed 0  pop 33,414 sp/s  488s
+gen 29  fit best  16.32 mean  14.93  upright 13.92 s (max 15.00,  77% finish)  dist  61.1 m  |y| 1.25 m  v 4.50  bailed 0  pop 32,128 sp/s  498s
+done: best fitness 16.33, results -> results/rungs/r0/bypass/v4.5_s201/cem.json  (226.8 min)
+== done Fri Nov  6 08:35:45 AM PST 2026
