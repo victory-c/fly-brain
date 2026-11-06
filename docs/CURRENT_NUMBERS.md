@@ -67,7 +67,9 @@ paths are relative to `fly_brain/` unless they start with `logs/`, `site/` or `J
 
 The Slurm node came back from its Debian 13 upgrade with `nvidia-smi` working but CUDA unable to initialise: the
 `nvidia_uvm` kernel module is not loaded and `/dev/nvidia-uvm` is missing, so `cuInit` returns 999 and torch falls
-back to the CPU without failing (the log says "48 riders on cpu"). Loading the module needs root. Until that is
+back to the CPU without failing (the log says "48 riders on cpu"). The module is built as `nvidia-current-uvm`, but
+`/etc/modprobe.d/nvidia.conf` on the node is an old local file where Debian expects the symlink that maps
+`nvidia-uvm` to it, so `modprobe nvidia-uvm` fails. Loading the module needs root. Until that is
 fixed every job is a CPU job (`sbatch --gres=none -c N` overrides a script's GPU request). Python 3.11 also left
 the node; `venv` and `venv-cuda` now point at a conda-forge Python 3.11.18 in the home directory, with the packages
 untouched (torch 2.5.1+cu121, numpy 2.4.6, pandas 3.0.6).
@@ -77,6 +79,8 @@ untouched (torch 2.5.1+cu121, numpy 2.4.6, pandas 3.0.6).
 | Pre-test cell, 30 brains x 1.3 s, CPU | about 290 s per probe at 8 threads on the real wiring (36,000 spikes/s per brain); 1,224 s at 8 million spikes/s (16 threads) | `logs/pretest-37928.out`, `logs/pretest-37936.out` |
 | Balance-gate generation on CPU, 48 threads, node shared with other jobs | 2,003 s, 1,695 s and 1,373 s for generations 0 to 2 of R3 (riders up 1 to 2 s on average), against 167 s and 134 s for generations 0 and 1 of the real wiring on the GPU | `logs/ride-rung-37938.out`, `results/gate/v4.5_s201/cem.json` |
 | One job | at most 24 h (partition limit), so a CPU search continues with `runs/ride.py --resume` | `ride-rung.sbatch` |
+| CPU step with the C kernel (`brain/lif_kernel.c`, from 2026-11-05 18:00), full brain, 48 flies, 16 threads | 5.5, 10.1 and 6.9 ms per step against 34.7, 66.3 and 40.2 ms with the torch ops, at 1,600, 81,000 and 280 undriven spikes/s per brain; the same spikes and the same `v`, `g`, `free_at`, `count` after 2,500 steps in all three | `notes/kern/bench3.py` run by hand on corruption (not in the repo); `tests/test_engine.py::test_c_kernel_and_torch_ops_agree_bit_for_bit` on the small network |
+| Balance-gate generation on CPU with the C kernel, 48 threads | 681 s and 705 s for generations 14 and 15 of R3 seed 201, against 3,590 to 4,036 s for generations 8 to 13 with the torch ops (riders up about 7 s in both) | `logs/ride-rung-37946.out`, `logs/ride-rung-37938.out` |
 
 ## Fly Brain Live (`/dashboard/`)
 
