@@ -150,6 +150,12 @@ At 4.0 m/s the hands-off bike mostly falls; at 4.5 m/s it mostly drifts off the 
 partly a lane-keeping floor. Generation 0 of the search (0.75-1.0 s) did worse than hands-off, because small random steering weights
 destabilise the bike. Compare learned decoders against these floors, not against generation 0.
 
+The 4.5 m/s floor was replayed again on 2026-11-06 with 48 riders (job 38084): 5.38 s, 41 left the road and 7
+fell, none rode all 15 s. Without the off-road rule the same bike lasts 8.65 s and 46 of 48 fall (job 38082), so
+the rule shortens the hands-off ride but the bike falls either way. See "Replays with and without the off-road
+rule" below. The two replays are different samples of the same condition; the documents keep quoting 5.7 s as
+the hands-off level.
+
 ## The wiring ladder: what each generated rung changes
 
 `brain/variants.py` now writes every rung (R1, R2, R3, R3.5, R4, R5; `docs/GLOSSARY.md` section 7). Seed 1 of
@@ -408,7 +414,8 @@ Reading, one seed:
   0.03 to 0.045 per weight at the end of the search, that 47 of the 48 riders of a search generation carry; job 38077, 48 riders x 15 s, seed 201, the
   same options): 9.04 s upright, 7 of 48 ride all 15 s, 41 leave the road, none falls
   (`results/rungs/r0/top8/v4.5_s201/replay_mu_summary.json`, `logs/replay-r0-top8-38077.out`). The hands-off replay
-  above lost 3 of 16 riders to a fall and 13 to the road. The gate's decoders were not replayed this way, so the
+  above lost 3 of 16 riders to a fall and 13 to the road; a 48-rider one lost 7 to a fall and 41 to the road (see
+  "Replays with and without the off-road rule" below). The gate's decoders were not replayed this way, so the
   9.04 s has no hand-picked counterpart; compare the generation means.
 - That decoder's steering weights: DNp20 right +0.218, DNp20 left -0.253, the other six between -0.056 and +0.017.
   The DNp20 pair holds 67% of the summed absolute weight.
@@ -419,11 +426,127 @@ Reading, one seed:
   search setup: the gate searches around a riding operating point (`--zbar`) with the roll features uncentred,
   while this run centres every feature on its warm-up rate (`--center-all`), which riding exceeds by 4 to 16 Hz
   per neuron in the replay. The replay's 41 off-road riders leave on both sides (21 and 20), so (c) is not shown
-  to matter. This run does not separate these; top-32 tests only whether more roll-rate-ranked neurons are
-  enough.
-- Next: the sensory bypass (job 38037, started 2026-11-06 04:48) and the top-32 readout (job 38078, queued on
-  2026-11-06 04:23 behind the bypass; the R2 pilot ride, job 38039, now waits for it), and 8 neurons drawn at
-  random from the screen's pool (`randk`, job 38079, queued on 2026-11-06 05:12 behind the R1 ride).
+  to matter. The bypass search below uses the same set-up, and its mean decoder keeps 48 of 48 riders on the
+  road; that takes (c) out of the list. This run does not separate (a) from (b); top-32 tests only whether more
+  roll-rate-ranked neurons are enough.
+- Next: the top-32 readout (job 38078, started 2026-11-06 08:35 when the bypass search below ended; the R2 pilot
+  ride, job 38039, waits for it), 8 neurons drawn at random from the screen's pool (`randk`, job 38079, queued
+  on 2026-11-06 05:12 behind the R1 ride), and the bypass with every synapse off (job 38086, see below).
+
+### Readout pilot on the real wiring: the sensory bypass (CPU, 2026-11-06)
+
+`ride-readout.sbatch 4.5 201 r0 bypass` (job 38037; 30 generations in 3.78 h of search, 176 to 523 s each): the
+same search as the top-8 pilot above (same script, options, speed and CEM seed), but the decoder reads the ten
+driven sensory populations themselves, one mean rate each: VS, HS, halteres, Johnston's organ and front-leg
+proprioceptors, on each side (16 + 5 + 104 + 228 + 45 neurons on the left, 18 + 5 + 101 + 247 + 20 on the right,
+789 in all). The brain still runs, at 31,700 to 36,200 spikes/s in generations 25 to 29, but nothing downstream of
+the driven neurons is read. The wiring could still reach the decoder through the driven neurons themselves: they
+are ordinary model neurons and receive 486,000 synapses from the rest of the brain (VS and HS cells thousands
+each). The check is the same search with every synapse switched off (`ride-readout.sbatch 4.5 201 r0 bypass0`,
+`runs/ride.py --no-synapses`, job 38086, started 2026-11-06 09:31, still running): after warm-up the ten
+populations fire at the same rates to the printed 1 Hz, and in its first 8 generations the mean riding time is
+within 0.002 s of this search's in every generation (`results/rungs/r0/bypass_nosyn/v4.5_s201/cem.json`). So far
+nothing the brain does reaches the bypass decoder. Mean riding time in seconds
+(`results/rungs/r0/bypass/v4.5_s201/cem.json`), next to the top-8 search and the gate's two searches with the
+hand-picked readout:
+
+| Generation | bypass, seed 201 | riding all 15 s | top-8, seed 201 | riding all 15 s | hand-picked, seed 201 | hand-picked, seed 202 |
+|---|---|---|---|---|---|---|
+| 0 | 1.29 | 0% | 1.33 | 0% | 1.01 | 0.87 |
+| 3 | 3.96 | 0% | 5.16 | 2% | 5.42 | 3.11 |
+| 5 | 5.48 | 0% | 5.23 | 0% | 6.83 | 4.93 |
+| 6 | 6.01 | 2% | 5.00 | 2% | 7.48 | 6.99 |
+| 7 | 6.91 | 8% | 5.75 | 2% | 8.60 | 6.92 |
+| 9 | 7.10 | 13% | 7.12 | 13% | 9.59 | 9.63 |
+| 10 | 7.21 | 13% | 7.11 | 6% | 9.03 | 10.07 |
+| 15 | 10.65 | 44% | 7.01 | 10% | 10.95 | 9.22 |
+| 20 | 11.27 | 56% | 7.62 | 6% | 10.98 | 9.39 |
+| 24 | 13.82 | 77% | 6.03 | 2% | 10.46 | 11.74 |
+| 25 | 12.25 | 60% | 6.44 | 4% | 10.75 | 10.87 |
+| 27 | 13.15 | 75% | 7.92 | 4% | 10.30 | 9.81 |
+| 29 | 13.92 | 77% | 7.21 | 6% | 9.50 | 10.77 |
+
+Reading, one seed:
+- The bypass search passed the hands-off level (5.69 s) in generation 6 and kept climbing: 10.65 s in generation
+  15, 13.82 s in generation 24, 13.92 s in generation 29 with 37 of 48 riders finishing. Averaged over generations
+  25 to 29: 13.18 s, against 7.15 s for top-8 and 9.95 and 10.64 s for the hand-picked readout. By the end the
+  search's sampling width was within 0.005 of its floor (0.03) on all eleven steering weights.
+- Replay of the search's final mean decoder (job 38081, 48 riders x 15 s, seed 201, the same options; the
+  counterpart of job 38077 for top-8): all 48 riders ride the full 15 s, none falls and none leaves the road
+  (`results/rungs/r0/bypass/v4.5_s201/replay_mu_summary.json`, `logs/replay-r0-bypass-38081.out`). They end
+  0.48 m from the center line on average (median 0.40 m, largest 2.75 m; the road edge is at 3.5 m). In the
+  search's last generation 37 of 48 finished. That generation differs from the replay in three ways: 47 of its
+  48 riders carried the sampled spread (0.030 to 0.034 per weight), its mean was the one before the last update,
+  and it had its own gust, start-lean and brain-noise draws. So the 11 that did not finish cannot be pinned on
+  one of these; the sampled spread is the likely cause, not a shown one. Top-8 moves the same way: 3 of 48 in
+  its last generation, 7 of 48 in its replay. The top-8 mean decoder replayed the same way lost 41 of 48 to the
+  road.
+- That decoder's steering weights, left then right: VS -0.051 / +0.317, HS -0.110 / +0.102, halteres -0.207 /
+  -0.034, Johnston's organ -0.064 / +0.211, leg proprioceptors -0.071 / +0.106, bias +0.053. Four of the five
+  senses get opposite signs on the two sides; the largest single weight is on the right VS population.
+- Against top-8, the two runs share everything but the neurons read. Up to generation 10 they are never more
+  than 1.4 s apart and each leads at times: top-8 by 1.35 s in generation 4 (5.63 against 4.28 s), the bypass by
+  1.16 s in generation 7 (6.91 against 5.75 s). In generations 8 to 10 they are level (7.21 against 7.11 s in
+  generation 10). After that the bypass rides on and top-8 stays where it is: 13.92 against 7.21 s in
+  generation 29. So the search set-up that `ride-readout.sbatch` uses (every feature centred on its warm-up rate,
+  no lane filter, 40 ms smoothing throughout) can find a decoder that stays on the road when the features carry
+  the lane. In the bypass they do: the HS populations it reads are told the heading and the lane offset directly
+  (`--gains hs_heading=150,hs_lane=50`). So the search set-up, difference (c) in the top-8 reading above, is no
+  longer on the list of what top-8 could be missing. It leaves (a) and (b): which neurons the eight are, and how
+  a lane signal is read from them. The bypass does not settle (b) for single neurons: its features are means
+  over 5 to 247 neurons, and top-8 reads eight single neurons at 40 ms with no lane filter.
+- Against the hand-picked readout through the brain, there is no clear order in generations 0 to 5. The bypass is
+  behind both gate searches from generation 6 to 14 (7.21 s in generation 10 against 9.03 and 10.07 s), goes back
+  and forth with them in generations 15 to 21, and is ahead of both from generation 22 on. Its 13.92 s and
+  77% in generation 29 match what the better of the two gate searches ended on in generation 57 (13.71 s, 77%;
+  that search first rode 13.5 s or more in generation 50), and the other gate search never got there (12.97 s at
+  its best, 11.89 s in its last generation). The two set-ups differ (see (b) and (c) above), the gate search
+  tunes 86 weights (84 steering weights, the bias and the lane-filter gain) against 11 here with the same 48
+  riders per generation, and the gate ran on the GPU, so this is not a like-for-like comparison of learning
+  speed. What it does show is that a linear decoder on the ten sensory rates is enough for this task.
+  The preregistration draft lists the bypass as the ceiling. After 30 generations it is level with the best the
+  hand-picked readout reached in 58: 13.18 s over its last five generations against 13.37 s over the better gate
+  search's last five (11.38 s for the other), and 13.92 s in its best generation against 14.11 s. The one gate
+  search that got there first rode 13.5 s or more in generation 50, against generation 24 here; given the
+  differences above, that does not say which readout is easier to learn.
+
+### Replays with and without the off-road rule (CPU, 2026-11-06)
+
+Five replays at 4.5 m/s, 48 riders x 15 s, seed 201, 5 Nm gusts, each riding one fixed decoder with the options of
+`ride-readout.sbatch`. "Hands-off" is the blank decoder the readout searches start from (steering weights and
+bias 0, pedal held). The off-road rule (`--offroad 3.5`) ends a ride when the rider is more than 3.5 m from the
+center line; without it only a fall ends a ride. Per-rider outcomes: `tools/replay_summary.py` on each trace, with
+the `--offroad` the replay ran with (3.5, or 0 for the two replays without the rule).
+
+| Decoder | Off-road rule | Upright, mean | Ride all 15 s | Leave the road | Fall | Job, summary |
+|---|---|---|---|---|---|---|
+| hands-off | 3.5 m | 5.38 s | 0 of 48 | 41 | 7 | 38084, `results/rungs/r0/handsoff/v4.5_s201/replay_road_summary.json` |
+| hands-off | none | 8.65 s | 2 of 48 | | 46 | 38082, `results/rungs/r0/handsoff/v4.5_s201/replay_noroad_summary.json` |
+| top-8, search mean | 3.5 m | 9.04 s | 7 of 48 | 41 | 0 | 38077, `results/rungs/r0/top8/v4.5_s201/replay_mu_summary.json` |
+| top-8, search mean | none | 15.00 s | 48 of 48 | | 0 | 38083, `results/rungs/r0/top8/v4.5_s201/replay_mu_noroad_summary.json` |
+| bypass, search mean | 3.5 m | 15.00 s | 48 of 48 | 0 | 0 | 38081, `results/rungs/r0/bypass/v4.5_s201/replay_mu_summary.json` |
+
+- Hands-off with the rule: 5.38 s here against 5.69 s in the gate's hands-off replay (16 riders, on the login VM,
+  `results/gate/v4.5_s201/handsoff_trace.json`, 3 fell and 13 left the road). The two are different samples of the
+  same condition; the documents keep quoting 5.7 s as the hands-off level.
+- Hands-off without the rule: the bike falls by itself. 46 of 48 riders fall, between 5.0 and 13.3 s (median
+  8.0 s); the two still upright at 15 s are 3.9 and 31.9 m from the center line. So the bike with no steering
+  falls even without the off-road rule. The rule only ends its rides sooner: 5.38 s upright on average instead
+  of 8.65 s.
+- Top-8 without the rule: every rider stays upright for the full 15 s. At the end the median distance from the
+  center line over all 48 riders is 7.7 m and the largest is 30.3 m. 14 riders are within 3.5 m and 34 beyond it,
+  24 on one side and 10 on the other. With the rule the same decoder lost 41 of 48 to the road and none to a
+  fall. So this decoder balances every rider and holds no lane.
+- The preregistration draft leaves a choice open (section 9a, point 5): give the per-brain readout a lane signal
+  of its own, or score riding time without the off-road rule. Without the rule the replayed top-8 mean decoder is
+  at the 15 s cap, 6.4 s above the hands-off bike scored the same way (8.65 s). That is one fixed decoder, from a
+  search that had the rule on. No search has run without the rule, so the score section 5 uses (the mean of a
+  search's last generation, which includes the search's random variation) is not measured without it; with the
+  rule that score was below the replay by 1.1 s for the bypass (13.9 against 15.0 s) and 1.8 s for top-8 (7.2
+  against 9.0 s). If a search without the rule also ends near the cap, there is no room above top-8 unless the
+  rides get longer or the gusts stronger. Scored with the rule, the top-8 mean decoder rides 9.0 s in its replay
+  (job 38077) and top-8 rode 7.2 s in its search's last generation, and the bypass shows that 15 s is reachable
+  with the rule when the readout carries the lane.
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
