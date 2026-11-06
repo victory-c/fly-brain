@@ -7,8 +7,8 @@
 #   sbatch ride-rung.sbatch V0 SEED BRAIN TAG [MINUTES=300] [W_SYN_SCALE]
 #   e.g. sbatch ride-rung.sbatch 4.5 201 results/variants/r4_s1.npz r4_s1_w1.5 300 1.5   (R4 needs ~1.5, see runs/pretest.py)
 # Resubmitting the same command continues the search from $OUT/cem.json (runs/ride.py --resume). Without a GPU:
-#   sbatch --gres=none -c 48 --time=1-00:00:00 ride-rung.sbatch 4.5 201 results/variants/r3_s1.npz r3_s1_cpu 1320
-# (on CPU the engine uses its C kernel, brain/lif_kernel.c: about 12 min a generation at 48 threads)
+#   sbatch --gres=none -c 32 --time=1-00:00:00 ride-rung.sbatch 4.5 201 results/variants/r3_s1.npz r3_s1_cpu 1320
+# (on CPU the engine uses its C kernel, brain/lif_kernel.c: 8 to 16 min a generation; more than 32 threads do not help)
 # GENS (environment, default 80) is the total number of generations: sbatch --export=ALL,GENS=60 ...
 #SBATCH --job-name=ride-rung
 #SBATCH --partition=ocf-hpc
