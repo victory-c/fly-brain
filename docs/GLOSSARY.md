@@ -246,7 +246,7 @@ checking what each keeps; `runs/pretest.py` runs the transmission gate on the re
   dozen torch passes, the same arithmetic in the same order, the same spikes bit for bit. Built once per machine
   by `brain/kernel.py` (gcc, OpenMP); `FLY_BRAIN_KERNEL=0` turns it off. A GPU still runs the torch ops.
 - **Resumed search.** A CPU balance-gate generation takes 30 to 75 min with the torch ops (about 12 min with the C
-  kernel) and a job at most a day, so a search runs
+  kernel, more when the node is busy) and a job at most a day, so a search runs
   over several jobs: `runs/ride.py --resume cem.json` restores the CEM state, and resubmitting the same
   `ride-rung.sbatch` command continues it (`GENS` caps the total generations).
 - **Sensory bypass, hands-off floor.** The two reference lines for riding: a decoder that reads the sensory
