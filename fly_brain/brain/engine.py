@@ -20,6 +20,10 @@ fired are reset last. tests/test_brian2.py checks this against Brian2 itself, sp
 Spikes are delivered event by event: only the connectome rows of neurons that fired are read, so a step costs
 in proportion to the activity, not to the 25.6 million connected pairs.
 
+On a CPU the same step runs in C when a compiler is around (brain/kernel.py, lif_kernel.c): one pass over the
+state instead of a dozen, the same arithmetic in the same order, the same spikes and state bit for bit
+(tests/test_engine.py). Engine(..., kernel=False) keeps the torch ops, which are also what a GPU runs.
+
 State lives in the Engine between calls, so one class serves one-shot experiments (experiment below) and a brain
 in a closed loop with a body (brain/loop.py). Every state tensor is (flies, neurons): B independent trials that
 share the connectome and nothing else.
@@ -29,6 +33,8 @@ import time
 
 import numpy as np
 import torch
+
+from . import kernel as _kernel
 
 PARAMS = {  # Shiu et al. 2024, model.py, with the sources given there
     "dt": 0.1,          # ms, Brian2's default clock
@@ -55,11 +61,15 @@ W_SYN = PARAMS["w_syn"] * W_SYN_SCALE
 class Engine:
     """B flies, one connectome. `inputs` are the neurons that receive Poisson drive (set with drive())."""
 
-    def __init__(self, brain, flies, inputs=(), params=None, device=None, seed=0, silence=()):
+    def __init__(self, brain, flies, inputs=(), params=None, device=None, seed=0, silence=(), kernel=None):
         self.p = p = dict(PARAMS, **(params or {}))
         self.B, self.N = flies, brain.n
         self.dev = dev = torch.device(device or "cpu")
         self.ptr, self.post, self.syn = brain.on(dev)
+        # the C fast path: on by default on a CPU when it can be built; kernel=False keeps the torch ops
+        self.kernel = _kernel.load() if dev.type == "cpu" and kernel is not False else None
+        if kernel is True and self.kernel is None:
+            raise RuntimeError("Engine(kernel=True): the C kernel is not available here (CPU and gcc needed)")
         dt = p["dt"]
         self.delay = max(1, round(p["t_dly"] / dt))
         self.decay_g = math.exp(-dt / p["tau"])
@@ -87,6 +97,9 @@ class Engine:
         self.free_at = torch.zeros(B, N, dtype=torch.int32, device=dev)  # first step at which a neuron integrates again
         self.count = torch.zeros(B, N, dtype=torch.int32, device=dev)    # spikes since reset
         self.in_flight = [torch.empty(0, dtype=torch.int64, device=dev) for _ in range(self.delay)]
+        if self.kernel is not None:
+            self._live = torch.zeros(B, N, dtype=torch.bool)
+            self._fired = torch.empty(B * N, dtype=torch.int64)  # untouched pages cost nothing
         self.t = 0
         self.seconds = 0.0
 
@@ -101,6 +114,11 @@ class Engine:
     def _deliver(self, spikes, live):
         """Add the synaptic input of `spikes` (flat fly * N + neuron indices) to g of the `live` neurons."""
         N = self.N
+        if self.kernel is not None:
+            self.kernel.lif_deliver(self.g.data_ptr(), live.data_ptr(), spikes.data_ptr(), spikes.numel(), N,
+                                    self.ptr.data_ptr(), self.post.data_ptr(), self.syn.data_ptr(),
+                                    self.transmits.data_ptr(), self.w_syn)
+            return
         fly, pre = torch.div(spikes, N, rounding_mode="floor"), spikes % N
         keep = self.transmits[pre]
         fly, pre = fly[keep], pre[keep]
@@ -119,12 +137,21 @@ class Engine:
     def step(self):
         """Advance every fly by dt. Returns this step's spikes as flat fly * N + neuron indices."""
         t, v, g = self.t, self.v, self.g
-        live = self.free_at <= t
-        torch.where(live, v * self.decay_v + g * self.g_to_v, v, out=v)
-        torch.where(live, g * self.decay_g, g, out=g)
-        firing = (v > self.v_th) & live
-        spikes = torch.nonzero(firing.view(-1)).squeeze(1)
-        live &= ~firing
+        if self.kernel is not None:
+            live = self._live
+            for x, dtype in ((v, torch.float32), (g, torch.float32), (self.free_at, torch.int32)):
+                assert x.dtype == dtype and x.shape == live.shape and x.is_contiguous()  # C reads raw memory
+            n = self.kernel.lif_dense(v.data_ptr(), g.data_ptr(), self.free_at.data_ptr(), live.data_ptr(),
+                                      self.B * self.N, t, self.decay_v, self.g_to_v, self.decay_g, self.v_th,
+                                      self._fired.data_ptr())
+            spikes = self._fired[:n].clone()
+        else:
+            live = self.free_at <= t
+            torch.where(live, v * self.decay_v + g * self.g_to_v, v, out=v)
+            torch.where(live, g * self.decay_g, g, out=g)
+            firing = (v > self.v_th) & live
+            spikes = torch.nonzero(firing.view(-1)).squeeze(1)
+            live &= ~firing
 
         slot = t % self.delay
         if self.in_flight[slot].numel():

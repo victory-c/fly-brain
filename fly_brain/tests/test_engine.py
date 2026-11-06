@@ -146,3 +146,32 @@ def test_cuda_matches_cpu_statistically(tmp_path):
     cpu = experiment(b, [0], 150.0, flies=200, ms=500.0)["mean_hz"]
     gpu = experiment(b, [0], 150.0, flies=200, ms=500.0, device="cuda")["mean_hz"]
     assert np.allclose(cpu, gpu, rtol=0.05)
+
+
+@pytest.mark.parametrize("flies", [3, 160])  # 160 x 500 state entries is enough for the kernel's threaded paths
+def test_c_kernel_and_torch_ops_agree_bit_for_bit(tmp_path, flies):
+    """brain/lif_kernel.c against the torch ops of Engine.step on the random network: the same spikes at every
+    step and the same state at the end, with silenced neurons, undelayed-recovery inputs and a drive that
+    differs between flies."""
+    from brain import kernel
+    if kernel.load() is None:
+        pytest.skip("no C kernel here (gcc needed)")
+    edges, v0 = network()
+    brain = toy(tmp_path, N, edges)
+    silence = list(range(40, 60))
+    engines = [Engine(brain, flies, INPUTS, seed=11, silence=silence, kernel=k) for k in (False, True)]
+    assert engines[0].kernel is None and engines[1].kernel is not None
+    hz = torch.linspace(500.0, 9000.0, flies)[:, None].expand(flies, len(INPUTS))
+    start = torch.as_tensor(v0 - PARAMS["v_0"], dtype=torch.float32)
+    for eng in engines:
+        eng.drive(hz)
+        eng.v[:] = start * torch.linspace(0.5, 1.0, flies)[:, None]
+    total = 0
+    for step in range(STEPS):
+        ref, fast = (eng.step() for eng in engines)
+        assert torch.equal(ref, fast), f"step {step}"
+        total += ref.numel()
+    assert total > 50 * flies  # the network was active, so delivery and resets were exercised
+    for name in ("v", "g", "free_at", "count"):
+        assert torch.equal(getattr(engines[0], name), getattr(engines[1], name)), name
+
