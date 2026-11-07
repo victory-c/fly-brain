@@ -235,6 +235,10 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 38129 | 2026-11-07 12:18 | COMPLETED | 00:13:16 | 16 cpu, 16G | replay of the R2 seed-202 pilot's final CEM mean without the off-road rule: 47 of 48 upright for 15 s, 1 falls, 3 beyond 3.5 m -> results/rungs/r2_s1_cpu/v4.5_s202/replay_mu_noroad_summary.json | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=16G --time=01:30:00 -c 16 -J replay-r2_s202-noroad -o logs/replay-r2_s202-noroad-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/fl...` | `/home/s/st/stevejobs/.cache/sb-replay/r2_s202_mu_noroad_trace.json`, `/home/s/st/stevejobs/.cache/sb-replay/unused_r2_s202_noroad.json`, [replay-r2_s202-noroad-38129.out](logs/replay-r2_s202-noroad-38129.out) |
 | 38130 | 2026-11-07 12:43 | COMPLETED | 00:10:55 | 16 cpu, 16G | replay of the gate's seed-203 final CEM mean (R0, CPU search), 48 riders x 15 s, seed 201, with the off-road rule: 14.26 s upright, 38 finish, 10 leave the road, none falls -> results/gate/v4.5_s203/replay_mu_summary.json | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=16G --time=01:30:00 -c 16 -J replay-r0_s203-road -o logs/replay-r0_s203-road-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybra...` | `/home/s/st/stevejobs/.cache/sb-replay/r0_s203_mu_road_trace.json`, `/home/s/st/stevejobs/.cache/sb-replay/unused_r0_s203_road.json`, [replay-r0_s203-road-38130.out](logs/replay-r0_s203-road-38130.out) |
 | 38131 | 2026-11-07 12:43 | COMPLETED | 00:10:48 | 16 cpu, 16G | replay of the gate's seed-203 final CEM mean without the off-road rule: all 48 upright for 15 s, 5 beyond 3.5 m -> results/gate/v4.5_s203/replay_mu_noroad_summary.json | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=16G --time=01:30:00 -c 16 -J replay-r0_s203-noroad -o logs/replay-r0_s203-noroad-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/fl...` | `/home/s/st/stevejobs/.cache/sb-replay/r0_s203_mu_noroad_trace.json`, `/home/s/st/stevejobs/.cache/sb-replay/unused_r0_s203_noroad.json`, [replay-r0_s203-noroad-38131.out](logs/replay-r0_s203-noroad-38131.out) |
+| 38132 | 2026-11-07 12:57 | COMPLETED | 00:00:24 | 2 cpu, 12G | second R3 rewiring draw (brain/variants.py r3 --seed 2) -> results/variants/r3_s2.npz | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=12G --time=00:20:00 -c 2 -J variants-r3-s2 -o ../logs/variants-r3-s2-%j.out --wrap cd /home/s/st/stevejobs/flybrain/fly_brain && /home/s/st/stevejobs/flybra...` (in `./fly_brain`) | [variants-r3-s2-38132.out](logs/variants-r3-s2-38132.out) |
+| 38133 | 2026-11-07 12:57 | COMPLETED | 00:00:24 | 2 cpu, 12G | second R2 rewiring draw (brain/variants.py r2 --seed 2) -> results/variants/r2_s2.npz | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=12G --time=00:20:00 -c 2 -J variants-r2-s2 -o ../logs/variants-r2-s2-%j.out --wrap cd /home/s/st/stevejobs/flybrain/fly_brain && /home/s/st/stevejobs/flybra...` (in `./fly_brain`) | [variants-r2-s2-38133.out](logs/variants-r2-s2-38133.out) |
+| 38134 | Unknown | PENDING | 00:00:00 |  | pilot ride on R3, rewiring draw 2 (balance gate unchanged, 4.5 m/s, seed 201, 60 generations) on CPU -> results/rungs/r3_s2_cpu/ | `sbatch --parsable --gres=none --mem=32G --time=1-00:00:00 -c 32 --export=ALL,GENS=60 -J ride-r3d2-cpu ride-rung.sbatch 4.5 201 results/variants/r3_s2.npz r3_s2_cpu 1320` |  |
+| 38135 | Unknown | PENDING | 00:00:00 |  | pilot ride on R2, rewiring draw 2 (balance gate unchanged, 4.5 m/s, seed 201, 60 generations) on CPU -> results/rungs/r2_s2_cpu/ | `sbatch --parsable --gres=none --mem=32G --time=1-00:00:00 -c 32 --export=ALL,GENS=60 -J ride-r2d2-cpu ride-rung.sbatch 4.5 201 results/variants/r2_s2.npz r2_s2_cpu 1320` |  |
 
 ## Full command lines
 
@@ -876,4 +880,16 @@ sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=16G --time=01:30:00
 
 ```bash
 sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=16G --time=01:30:00 -c 16 -J replay-r0_s203-noroad -o logs/replay-r0_s203-noroad-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain/fly_brain; /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m runs.ride --readout lane --lane hs --lane-filter results/gate/v4.5_s203/probe.json --tau-lane-ms 300 --center-batch --gains hs_heading=150,hs_lane=50 --v0 4.5 --gust 5 --offroad 0 --lane-penalty 0.02 --riders 48 --seconds 15 --seed 201 --replay /home/s/st/stevejobs/.cache/sb-replay/r0_s203_mu.json --trace /home/s/st/stevejobs/.cache/sb-replay/r0_s203_mu_noroad_trace.json --out /home/s/st/stevejobs/.cache/sb-replay/unused_r0_s203_noroad.json
+```
+
+**38132** (variants-r3-s2)
+
+```bash
+sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=12G --time=00:20:00 -c 2 -J variants-r3-s2 -o ../logs/variants-r3-s2-%j.out --wrap cd /home/s/st/stevejobs/flybrain/fly_brain && /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m brain.variants r3 --seed 2
+```
+
+**38133** (variants-r2-s2)
+
+```bash
+sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=12G --time=00:20:00 -c 2 -J variants-r2-s2 -o ../logs/variants-r2-s2-%j.out --wrap cd /home/s/st/stevejobs/flybrain/fly_brain && /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m brain.variants r2 --seed 2
 ```
