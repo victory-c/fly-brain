@@ -1,0 +1,2 @@
+r3 seed 2: 25,582,938 connections -> 24,010,350 after merging; synapses 124,177,616 -> 124,177,616; 39.46% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r3_s2.npz
+  25,267 (type, side) groups, 13,611 with one neuron (8.2% of neurons keep their inputs)

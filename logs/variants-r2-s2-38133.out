@@ -1,0 +1,2 @@
+r2 seed 2: 25,582,938 connections -> 25,582,938 after merging; synapses 124,177,616 -> 127,313,600; 100.00% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r2_s2.npz
+  jitter factors: median 1.000, 16-84% 0.801-1.249
