@@ -471,7 +471,12 @@ Reading on 2026-11-06, one rewiring draw (two for R1):
   property of R1's rewiring and not what set draw 1 apart. So on two draws with one CEM seed each, R1 rides 45% below and 8% below the real
   wiring: whether draw 1 is a bad draw or a bad search is what job 38108 (draw 1, seed 202) tests; at generation
   19 it rode 7.99 s with 12% finishing, where draw 1 with seed 201 rode 4.91 s at generation 20. Replays of
-  draw 2's final mean decoder (jobs 38120 and 38121) are queued. Draw 2 (`results/variants/r1_s2.npz`,
+  draw 2's final mean decoder (jobs 38120 and 38121; table under "Replays with and without the off-road rule"):
+  with the off-road rule 13.47 s, 29 of 48 finish, 15 leave the road, 4 fall; without it 39 of 48 are upright at
+  15 s and 9 fall, 7 of the 39 end beyond 3.5 m (median over all 48: 1.3 m), and the riders beyond 3.5 m are
+  mostly on the side opposite to draw 1's drift (8 against 2, counting the fallen riders' final positions). So
+  draw 2's decoder holds the lane about as well as R3's (22 and 28 finish) and falls more often than any other
+  replayed hand-picked decoder (9 without the rule, against 0 to 4). Draw 2 (`results/variants/r1_s2.npz`,
   `results/rungs/r1_s2_cpu/sign_flips.json`) changes the sign of 8,697 neurons (5.2%), among them 3 of the 34 VS
   cells, none of the 10 HS cells and 1 of the 112 readout neurons; it has not been through the pre-test.
 - R4 at 1.2 did not learn in 25 generations: 0.76 s at generation 0, 0.56 s at generation 1, then 1.25 to 1.84 s
@@ -789,10 +794,10 @@ weights and bias 0, pedal held):
   (job 38077) and top-8 rode 7.2 s in its search's last generation, and the bypass shows that 15 s is reachable
   with the rule when the readout carries the lane.
 
-The hand-picked readout on R0, R3, R1 and R2: the CEM mean after each search's last generation (jobs 38092 to 38101, 38118 and 38119;
+The hand-picked readout on R0, R3, R1 (two draws) and R2: the CEM mean after each search's last generation (jobs 38092 to 38101, 38118 to 38121;
 summaries `replay_mu_summary.json` and `replay_mu_noroad_summary.json` next to each search's `cem.json`, under
 `results/gate/v4.5_s201`, `results/gate/v4.5_s202`, `results/rungs/r3_s1_cpu/v4.5_s201`, `.../v4.5_s202` and
-`results/rungs/r1_s1_cpu/v4.5_s201`). "Beyond 3.5 m" counts the riders still upright at 15 s that are more than
+`results/rungs/r1_s1_cpu/v4.5_s201` and `results/rungs/r1_s2_cpu/v4.5_s201`). "Beyond 3.5 m" counts the riders still upright at 15 s that are more than
 3.5 m from the center line; the median is over all 48 riders' final distance from the center line:
 
 | Search | Last generation of the search | With the rule: upright, mean | Ride all 15 s | Leave the road | Fall | Without the rule: upright at 15 s | Fall | Beyond 3.5 m | Median distance |
@@ -803,19 +808,20 @@ summaries `replay_mu_summary.json` and `replay_mu_noroad_summary.json` next to e
 | R3, seed 202 | 11.14 s, 52% | 12.73 s | 28 of 48 | 17 | 3 | 44 of 48 | 4 | 10 | 1.91 m |
 | R1, seed 201 | 7.01 s, 8% | 10.12 s | 10 of 48 | 37 | 1 | 47 of 48 | 1 | 35 | 7.17 m |
 | R2, seed 201 | 13.42 s, 69% | 14.68 s | 46 of 48 | 2 | 0 | 48 of 48 | 0 | 0 | 0.88 m |
-| R1 draw 2, seed 201 | 11.75 s, 40% | queued (job 38120) | | | | queued (job 38121) | | | |
+| R1 draw 2, seed 201 | 11.75 s, 40% | 13.47 s | 29 of 48 | 15 | 4 | 39 of 48 | 9 | 7 | 1.35 m |
 
-- With the rule, 88 of the 92 rides that end early across the six replays end at the road edge and 4 end in a
-  fall. Without the rule 283 of 288 riders are upright at 15 s. These decoders balance on all four wirings;
-  what separates R0, R2, R3 and R1 is how many riders ride all 15 s on the road: 46 and 44 on the real wiring,
-  46 on R2, 22 and 28 on R3, 10 on R1.
-- Without the rule the four wirings are within 0.4 s of each other and of the cap (15.00 and 15.00 s; 15.00 s;
-  15.00 and 14.63 s; 14.82 s). So for the open choice in the preregistration draft (section 9a, point 5), riding time
+- With the rule, 103 of the 111 rides that end early across the seven replays end at the road edge and 8 end in
+  a fall (4 of the 8 on R1 draw 2). Without the rule 322 of 336 riders are upright at 15 s (9 of the 14 falls on
+  R1 draw 2). These decoders balance on all four wirings, R1 draw 2's least reliably; what separates R0, R2,
+  R3 and R1 is how many riders ride all 15 s on the road: 46 and 44 on the real wiring, 46 on R2, 22 and 28 on
+  R3, 10 and 29 on R1's two draws.
+- Without the rule the four wirings are within 0.5 s of each other and of the cap (15.00 and 15.00 s; 15.00 s;
+  15.00 and 14.63 s; 14.82 and 14.50 s). So for the open choice in the preregistration draft (section 9a, point 5), riding time
   scored without the off-road rule would not separate R0, R2, R3 and R1 with this readout at 15 s and 5 Nm: the
   difference between them is in the lane, and the rule is what scores it. One replay seed per decoder, fixed
   decoders from searches that had the rule on.
 - The riders' final distance from the center line without the rule orders the wirings the same way as riding
-  time with it: medians of 0.8 and 0.9 m (R0), 0.9 m (R2), 2.7 and 1.9 m (R3), 7.2 m (R1).
+  time with it: medians of 0.8 and 0.9 m (R0), 0.9 m (R2), 2.7 and 1.9 m (R3), 7.2 and 1.3 m (R1's two draws).
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
