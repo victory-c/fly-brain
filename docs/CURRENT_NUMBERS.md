@@ -617,7 +617,10 @@ Reading, one seed:
   `ride-gate.sbatch` on CPU, `results/gate/v4.5_s203`), so that the seed-SD in prediction 1 rests on three
   values instead of two, and a second seed on R2 (job 38125, seed 202, `results/rungs/r2_s1_cpu/v4.5_s202`),
   so that R2 has two seeds like R3. Both finished on 2026-11-07 (12:41 and 12:08; bullets above); the replays of
-  the R0 seed-203 decoder (38130, 38131) finished at 13:10. Nothing of this project is running or queued.
+  the R0 seed-203 decoder (38130, 38131) finished at 13:10. Started 2026-11-07 13:00: pilot rides on a second
+  rewiring draw of R3 (job 38134, `results/variants/r3_s2.npz` from job 38132, `results/rungs/r3_s2_cpu/`) and
+  of R2 (job 38135, `results/variants/r2_s2.npz` from job 38133, `results/rungs/r2_s2_cpu/`), CEM seed 201, so
+  that R2 and R3 have two draws like R1.
 
 ### Readout pilot on the real wiring: the top-32 screened neurons (CPU, 2026-11-06)
 
