@@ -130,6 +130,8 @@ NOTES = {
     "38121": "replay of the R1 draw-2 pilot's final CEM mean without the off-road rule: 39 of 48 upright for 15 s, 9 fall, 7 of the 39 beyond 3.5 m -> results/rungs/r1_s2_cpu/v4.5_s201/replay_mu_noroad_summary.json",
     "38122": "replay of the R1 draw-1 seed-202 pilot's final CEM mean, 48 riders x 15 s, seed 201, with the off-road rule: 14.73 s upright, 44 finish, 4 leave the road, none falls -> results/rungs/r1_s1_cpu/v4.5_s202/replay_mu_summary.json",
     "38123": "replay of the R1 draw-1 seed-202 pilot's final CEM mean without the off-road rule: all 48 upright for 15 s, 1 beyond 3.5 m -> results/rungs/r1_s1_cpu/v4.5_s202/replay_mu_noroad_summary.json",
+    "38124": "balance gate on the real wiring with a third CEM seed (203), 4.5 m/s, 60 generations, on CPU (ride-gate.sbatch): a third R0 seed for the seed-SD that prediction 1 is stated in -> results/gate/v4.5_s203",
+    "38125": "pilot ride on R2 with a second CEM seed (202; balance gate unchanged, 4.5 m/s, 60 generations) on CPU -> results/rungs/r2_s1_cpu/v4.5_s202",
     "38112": "replay of the random-8 pilot's final CEM mean without the off-road rule: all 48 fall, 7.82 s upright on average -> results/rungs/r0/rand8_r0/v4.5_s201/replay_mu_noroad_summary.json",
     "38104": "replay of the top-32 pilot's final CEM mean, 48 riders x 15 s, seed 201: 8.88 s upright, 2 finish, 46 leave the road, none falls -> results/rungs/r0/top32/v4.5_s201/replay_mu_summary.json",
     "38105": "replay of the top-32 pilot's final CEM mean without the off-road rule: all 48 upright for 15 s, 44 of them more than 3.5 m from the center line -> results/rungs/r0/top32/v4.5_s201/replay_mu_noroad_summary.json",

@@ -582,7 +582,10 @@ Reading, one seed:
   see the two sections below. The random-8 control (`randk`, job 38079) finished at 14:23, see its section below.
   The R2 pilot ride (job 38039) finished at 20:10 and the R1 draw-2 pilot ride (job 38107) at 22:27, see "Pilot
   rides on rewired brains", and R1 draw 1 with CEM seed 202 (job 38108) at 03:59 on 2026-11-07, its replays
-  (38122, 38123) at 04:14. Nothing of this project is running or queued.
+  (38122, 38123) at 04:14. Started 2026-11-07 04:50: a third CEM seed on the real wiring (job 38124, seed 203,
+  `ride-gate.sbatch` on CPU, `results/gate/v4.5_s203`), so that the seed-SD in prediction 1 rests on three
+  values instead of two, and a second seed on R2 (job 38125, seed 202, `results/rungs/r2_s1_cpu/v4.5_s202`),
+  so that R2 has two seeds like R3.
 
 ### Readout pilot on the real wiring: the top-32 screened neurons (CPU, 2026-11-06)
 
