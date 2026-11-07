@@ -1,0 +1,7 @@
+== 04:26:46 1) probe on results/variants/r2_s1.npz
+  MNhm03   MNhm03_L        L  vnc_motor 13.500000  7.000000   6.500000   7.840000
+
+-> results/rungs/r2_s1_cpu/v4.5_s202/probe.json
+init_hold: 29.6 W holds 4.5 m/s
+== 04:27:21 gate v0=4.5 seed=202, max 1320 min
+== 04:27:21 2) ride_slow_mu trace at v0=4.5
