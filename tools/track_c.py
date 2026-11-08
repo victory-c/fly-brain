@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Track C decodability from one replay (preregistration section 7): ridge regression from spike counts in 100 ms bins
-to the bike's roll rate, and N90, the number of neurons needed to reach 90% of the R^2 of the whole site.
+to the bike's roll rate, and N90, the number of neurons needed to reach 90% of a reference R^2.
 
 Input: `runs/ride.py --replay ... --counts-out COUNTS.npz --trace TRACE.json` (best run with --offroad 0, so that every
 rider gives 15 s) and that brain's passenger screen. Needs pandas with pyarrow (the compute node's venv). From fly_brain/:
@@ -8,9 +8,11 @@ rider gives 15 s) and that brain's passenger screen. Needs pandas with pyarrow (
     PYTHONPATH=. python ../tools/track_c.py COUNTS.npz TRACE.json results/rungs/screens/r0.parquet OUT.json
 
 Cross-validation is 5 folds over riders, so a test rider's bins never train the model. The ridge penalty is chosen once
-per site, by an inner split of the training riders with all of the site's neurons, and kept for the smaller subsets.
-Screen order is decreasing |r_phi_dot| in the brain's own screen; random order is 20 shuffles. Only neurons that spiked
-during the replay count as candidates. Simulated calcium imaging and the probe-distance sweep are not done here.
+per site, by an inner split of the training riders with the site's active neurons, and kept for the smaller subsets.
+Screen order is decreasing |r_phi_dot| in the brain's own screen; random order is 20 shuffles, over all of the site's
+neurons (silent ones count towards N) and, separately, over the neurons active in this replay. The wing-motor site is
+scored against two references: 90% of its own R^2 and 90% of the descending site's R^2.
+Simulated calcium imaging and the probe-distance sweep are not done here.
 """
 import json
 import sys
@@ -101,22 +103,37 @@ def main():
     folds = np.array_split(rng.permutation(riders), 5)
     out = {"counts": counts_path, "trace": trace_path, "screen": screen_path, "samples": int(len(y)), "riders": int(len(riders)),
            "roll_rate_sd": float(y.std()), "sites": {}}
-    for name in ("descending", "wing_motor"):
-        m = (site == name) & (X_all.sum(0) > 0)
+    descending_r2 = None
+    for name in ("descending", "wing_motor"):  # the descending site first: its R^2 is the wing-motor site's second reference
+        m = site == name  # every neuron at the site, silent ones too: an experimenter cannot pick the active ones before recording
         X, r = X_all[:, m], rows[m]
-        lam = pick_lambda(X, y, rider, folds)
+        active = X.sum(0) > 0
+        lam = pick_lambda(X[:, active], y, rider, folds)
         full = cv_r2(X, y, rider, folds, lam)
-        target = 0.9 * full
+        if name == "descending":
+            descending_r2 = full
         by_screen = np.argsort(-np.abs(np.nan_to_num(screen.loc[r, "r_phi_dot"].to_numpy())), kind="stable")
-        n_screen, curve = n90(X, y, rider, folds, lam, by_screen, target)
-        rand = [n90(X, y, rider, folds, lam, np.random.default_rng(100 + i).permutation(X.shape[1]), target)[0] for i in range(20)]
-        rand = [x for x in rand if x is not None]
-        out["sites"][name] = {"neurons": int((site == name).sum()), "active": int(m.sum()), "lambda": lam, "r2_all": round(full, 4),
-                              "target_r2": round(target, 4), "n90_screen": n_screen, "n90_random_median": float(np.median(rand)),
-                              "n90_random_q25_q75": [float(x) for x in np.percentile(rand, [25, 75])], "r2_screen_curve": curve}
+        res = {"neurons": int(m.sum()), "active": int(active.sum()), "lambda": lam, "r2_all": round(full, 4), "references": {}}
+        for ref, value in (("site", full), ("descending", descending_r2)):
+            if name == "descending" and ref == "descending":
+                continue
+            target = 0.9 * value
+            n_screen, curve = n90(X, y, rider, folds, lam, by_screen, target)
+            rand_all = [n90(X, y, rider, folds, lam, np.random.default_rng(100 + i).permutation(X.shape[1]), target)[0] for i in range(20)]
+            act = np.flatnonzero(active)
+            rand_act = [n90(X, y, rider, folds, lam, act[np.random.default_rng(100 + i).permutation(len(act))], target)[0] for i in range(20)]
+            def stats(v):
+                ok = [x for x in v if x is not None]
+                return {"reached": len(ok), "median": float(np.median(ok)) if ok else None,
+                        "q25_q75": [float(x) for x in np.percentile(ok, [25, 75])] if ok else None}
+            res["references"][ref] = {"target_r2": round(target, 4), "n90_screen": n_screen, "r2_screen_curve": curve,
+                                      "n90_random_all_site_neurons": stats(rand_all), "n90_random_active_neurons_only": stats(rand_act)}
+        out["sites"][name] = res
     print(json.dumps({k: v for k, v in out.items() if k != "sites"}))
     for k, v in out["sites"].items():
-        print(k, {a: b for a, b in v.items() if a != "r2_screen_curve"})
+        print(k, {a: b for a, b in v.items() if a != "references"})
+        for ref, x in v["references"].items():
+            print("  reference:", ref, {a: b for a, b in x.items() if a != "r2_screen_curve"})
     json.dump(out, open(out_path, "w"), indent=1)
 
 
