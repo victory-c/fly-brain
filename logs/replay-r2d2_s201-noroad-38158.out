@@ -8,3 +8,5 @@ readout: DNp20_L 1, DNp20_R 1, DNp22_L 1, DNp22_R 1, DNg46_L 1, DNg46_R 1, DNge0
 brain: results/variants/r2_s2.npz, 166,700 neurons, 789 driven, 112 read out, w_syn 0.1293 mV
   after warm-up, DN rates (Hz): DNp20_L 20, DNp20_R 8, DNp22_R 2, DNg46_L 3, DNg46_R 2, DNge043_L 5, DNge043_R 13, DNb06_L 16, DNpe013_L 7, DNpe013_R 5, DNg90_R 2, DNp33_L 18, DNp33_R 4, DNge091_L 2, DNg29_L 56, DNg29_R 26, DNg41_L 20, DNg41_R 25, DNp18_L 19, DNp18_R 43, DNp73_L 58, DNp73_R 8, b2 MN_L 3, b2 MN_R 5, hg1 MN_L 11, hg1 MN_R 3, DNa01_L 3, DNa01_R 1, DNa02_L 1, DNa03_L 2, DNa03_R 1, MDN_L 3, MDN_R 4, DNa16_L 2, DNa16_R 7, DNb03_L 4, DNb03_R 5, DNa06_L 5, DNa06_R 5, DNp15_L 7, DNp15_R 22, DNge107_L 1, DNge107_R 11, DNge086_R 3, DNge031_L 9, DNge031_R 17, DNge033_L 13, DNge033_R 20, GNG283_L 3, GNG283_R 9
   population 18,516 spikes/s per brain
+replay of /home/s/st/stevejobs/.cache/sb-replay/r2d2_s201_mu.json: upright 15.00 s (max 15.00, 100% finish)  dist  66.5 m  |y| 2.41 m  v 4.50  bailed 0  pop 45,985 sp/s  692s
+trace -> /home/s/st/stevejobs/.cache/sb-replay/r2d2_s201_mu_noroad_trace.json
