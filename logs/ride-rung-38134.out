@@ -35,3 +35,7 @@ gen 10  fit best  16.16 mean   8.10  upright  7.75 s (max 15.00,  10% finish)  d
 gen 11  fit best  16.09 mean   8.15  upright  7.84 s (max 15.00,   4% finish)  dist  33.8 m  |y| 3.30 m  v 4.50  bailed 0  pop 41,007 sp/s  541s
 gen 12  fit best  15.92 mean   7.95  upright  7.68 s (max 15.00,  15% finish)  dist  33.3 m  |y| 2.99 m  v 4.50  bailed 0  pop 41,304 sp/s  533s
 gen 13  fit best  15.82 mean   7.42  upright  7.12 s (max 15.00,   8% finish)  dist  30.7 m  |y| 3.24 m  v 4.50  bailed 0  pop 43,096 sp/s  527s
+gen 14  fit best  16.00 mean   7.29  upright  7.00 s (max 15.00,   2% finish)  dist  30.0 m  |y| 3.29 m  v 4.50  bailed 0  pop 37,471 sp/s  510s
+gen 15  fit best  16.20 mean   7.60  upright  7.28 s (max 15.00,   6% finish)  dist  31.5 m  |y| 3.28 m  v 4.50  bailed 0  pop 37,508 sp/s  515s
+gen 16  fit best  15.23 mean   7.39  upright  7.06 s (max 15.00,   2% finish)  dist  30.6 m  |y| 3.41 m  v 4.50  bailed 0  pop 35,261 sp/s  505s
+gen 17  fit best  15.90 mean   8.59  upright  8.21 s (max 15.00,   6% finish)  dist  35.6 m  |y| 3.37 m  v 4.50  bailed 0  pop 35,174 sp/s  531s
