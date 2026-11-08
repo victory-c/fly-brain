@@ -1,0 +1,66 @@
+"""Track B scoring pilot: decoder-free predictions on the real wiring and on rewired brains.
+
+Runs the conditions of the rows of scrambled-brains docs/track_b_predictions_DRAFT.csv that need no further choice of
+stimulus rate or readout, at Shiu's 150 Hz for 1 s in 30 flies. Taste groups are driven on one side (Shiu's one
+labellum), Johnston's organ groups on both. With no input the network is silent, so "no stimulus" is 0 Hz.
+
+    python -m runs.predictions --out results/track_b/r0.json
+    python -m runs.predictions --brain results/variants/r1_s1.npz --out results/track_b/r1_s1.json
+"""
+import argparse
+import json
+
+import numpy as np
+
+from brain import stimuli
+from brain.connectome import Brain
+from brain.engine import PARAMS, W_SYN, experiment
+
+SIGNED = [("sugar_mn9", "mn9", "sugar", None, 1), ("water_mn9", "mn9", "water", None, 1),
+          ("bitter_suppression", "mn9", "sugar+bitter", "sugar", -1), ("ir94e_suppression", "mn9", "sugar+ir94e", "sugar", -1),
+          ("jo_f_mdn", "mdn", "jo_f", None, 1)]
+NULL = [("bitter_alone_mn9", "mn9", "bitter"), ("jo_ce_mdn", "mdn", "jo_ce"), ("sugar_gf_crosstalk", "gf", "sugar")]
+TASTE = {"sugar", "water", "bitter", "ir94e"}
+
+
+def inputs(cond):
+    groups = [stimuli.group(g, side="R" if g in TASTE else None) for g in cond.split("+")]
+    return np.unique(np.concatenate(groups))
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--brain", default=None)
+    ap.add_argument("--w-syn-scale", type=float, default=None, help="default: the calibrated W_SYN (scale 0.47)")
+    ap.add_argument("--flies", type=int, default=30)
+    ap.add_argument("--ms", type=float, default=1000.0)
+    ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--device", default="cpu")
+    ap.add_argument("--out", required=True)
+    a = ap.parse_args()
+    brain = Brain(a.brain) if a.brain else Brain()
+    w = W_SYN if a.w_syn_scale is None else PARAMS["w_syn"] * a.w_syn_scale
+    m = stimuli.neurons()
+    read = {"mn9": stimuli.mn9(), "mdn": m.loc[m["type"] == "MDN", "row"].to_numpy(np.int64),
+            "gf": np.array([stimuli.instance("DNp01(GF)_L"), stimuli.instance("DNp01(GF)_R")], dtype=np.int64)}
+    conds = sorted({r[2] for r in SIGNED} | {r[3] for r in SIGNED if r[3]} | {r[2] for r in NULL})
+    rec = np.unique(np.concatenate(list(read.values())))
+    rates = {}
+    for c in conds:
+        r = experiment(brain, inputs(c), stimuli.SHIU_HZ, flies=a.flies, ms=a.ms, bin_ms=a.ms, record_neurons=rec,
+                       params={"w_syn": w}, seed=a.seed, device=a.device)
+        rates[c] = {k: float(r["mean_hz"][v].mean()) for k, v in read.items()}
+        print(c, {k: round(v, 2) for k, v in rates[c].items()}, f"network {float(np.mean(r['undriven_hz'])):,.0f}", flush=True)
+    signed = []
+    for name, ro, c, ref, sign in SIGNED:
+        d = rates[c][ro] - (rates[ref][ro] if ref else 0.0)
+        signed.append({"id": name, "difference_hz": round(d, 3), "expected_sign": sign, "as_expected": bool(np.sign(d) == sign)})
+    nulls = [{"id": name, "rate_hz": round(rates[c][ro], 3)} for name, ro, c in NULL]
+    out = {"brain": a.brain or "brain.npz", "w_syn": w, "flies": a.flies, "ms": a.ms, "seed": a.seed, "rates": rates, "signed": signed,
+           "score": sum(s["as_expected"] for s in signed) / len(signed), "null_rows": nulls}
+    print("score", out["score"], [s["id"] for s in signed if not s["as_expected"]])
+    json.dump(out, open(a.out, "w"), indent=1)
+
+
+if __name__ == "__main__":
+    main()
