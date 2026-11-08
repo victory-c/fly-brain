@@ -578,8 +578,10 @@ Reading on 2026-11-06, one rewiring draw (two for R1):
   the center line on average (every other brain 4 to 9.5 s), so the operating point came from 9,512 on-road
   samples with a lane signal of +0.021; and its network runs at 49,700 spikes/s per brain over the last five
   generations (draw 1: 40,200 and 39,700; R0 36,200 to 38,800), the highest of the finished pilots. Its
-  generations took 207 to 1,000 s (the others 87 to 565 s). Replays of this decoder (jobs 38157 and 38158) are
-  queued. R2 on two draws and three searches: 13.42, 13.46 and 11.96 s, median 13.42 s.
+  generations took 207 to 1,000 s (the others 87 to 565 s). Replays of this decoder (jobs 38157 and 38158): with
+  the off-road rule 13.35 s, 34 of 48 finish, 14 leave the road, none falls; without it all 48 stay upright and
+  9 end beyond 3.5 m (median 1.6 m, 23 riders on one side and 25 on the other): between the real wiring's
+  decoders (46, 44 and 38 finish) and R3 draw 1's (22 and 28). R2 on two draws and three searches: 13.42, 13.46 and 11.96 s, median 13.42 s.
 - R4 at 1.2 did not learn in 25 generations: 0.76 s at generation 0, 0.56 s at generation 1, then 1.25 to 1.84 s
   from generation 8 on (1.69 s at generation 24), where the real wiring was at about 10 s. No rider rode the full
   15 s; the longest single ride was 8.2 s. That is below the hands-off bike: with this readout a searched decoder
@@ -662,7 +664,7 @@ Reading, one seed:
   `results/rungs/r2_s2_cpu/`), CEM seed 201, so that R2 and R3 have two draws like R1. R3 draw 2 finished at
   03:07 on 2026-11-08 (8.53 s) and R2 draw 2 at 04:25 (11.96 s), see their bullets. R3 draw 2 with seed 202
   (38154) started at 03:10; the R3 draw-2 replays (38155, 38156) finished at 04:26 and the R2 draw-2 replays
-  (38157, 38158) are queued.
+  (38157, 38158) at 04:42. Running: job 38154 only.
 
 ### Readout pilot on the real wiring: the top-32 screened neurons (CPU, 2026-11-06)
 
@@ -906,9 +908,10 @@ weights and bias 0, pedal held):
   (job 38077) and top-8 rode 7.2 s in its search's last generation, and the bypass shows that 15 s is reachable
   with the rule when the readout carries the lane.
 
-The hand-picked readout on R0 (three seeds), R3 (two draws), R1 (two draws, two seeds on draw 1) and R2 (two seeds): the CEM mean after each search's last generation (jobs 38092 to 38101, 38118 to 38123, 38128 to 38131, 38155 and 38156;
+The hand-picked readout on R0 (three seeds), R3 (two draws), R1 (two draws, two seeds on draw 1) and R2 (two draws, two seeds on draw 1): the CEM mean after each search's last generation (jobs 38092 to 38101, 38118 to 38123, 38128 to 38131, 38155 to 38158;
 summaries `replay_mu_summary.json` and `replay_mu_noroad_summary.json` next to each search's `cem.json`, under
-`results/gate/v4.5_s201`, `.../v4.5_s202`, `.../v4.5_s203`, `results/rungs/r3_s1_cpu/v4.5_s201`, `.../v4.5_s202`, `results/rungs/r3_s2_cpu/v4.5_s201` and
+`results/gate/v4.5_s201`, `.../v4.5_s202`, `.../v4.5_s203`, `results/rungs/r3_s1_cpu/v4.5_s201`, `.../v4.5_s202`, `results/rungs/r3_s2_cpu/v4.5_s201`,
+`results/rungs/r2_s1_cpu/v4.5_s201`, `.../v4.5_s202`, `results/rungs/r2_s2_cpu/v4.5_s201`,
 `results/rungs/r1_s1_cpu/v4.5_s201`, `.../v4.5_s202` and `results/rungs/r1_s2_cpu/v4.5_s201`). "Beyond 3.5 m" counts the riders still upright at 15 s that are more than
 3.5 m from the center line; the median is over all 48 riders' final distance from the center line:
 
@@ -925,21 +928,21 @@ summaries `replay_mu_summary.json` and `replay_mu_noroad_summary.json` next to e
 | R1 draw 2, seed 201 | 11.75 s, 40% | 13.47 s | 29 of 48 | 15 | 4 | 39 of 48 | 9 | 7 | 1.35 m |
 | R1 draw 1, seed 202 | 12.27 s, 56% | 14.73 s | 44 of 48 | 4 | 0 | 48 of 48 | 0 | 1 | 0.89 m |
 | R3 draw 2, seed 201 | 8.53 s, 10% | 10.97 s | 15 of 48 | 33 | 0 | 48 of 48 | 0 | 32 | 7.53 m |
-| R2 draw 2, seed 201 | 11.96 s, 44% | queued (job 38157) | | | | queued (job 38158) | | | |
+| R2 draw 2, seed 201 | 11.96 s, 44% | 13.35 s | 34 of 48 | 14 | 0 | 48 of 48 | 0 | 9 | 1.56 m |
 
-- With the rule, 155 of the 163 rides that end early across the eleven replays end at the road edge and 8 end
-  in a fall (4 of the 8 on R1 draw 2). Without the rule 513 of 528 riders are upright at 15 s (9 of the 15 falls
+- With the rule, 169 of the 177 rides that end early across the twelve replays end at the road edge and 8 end
+  in a fall (4 of the 8 on R1 draw 2). Without the rule 561 of 576 riders are upright at 15 s (9 of the 15 falls
   on R1 draw 2). These decoders balance on all four wirings, R1 draw 2's least reliably; what separates the
-  decoders is how many riders ride all 15 s on the road: 46, 44 and 38 on the real wiring, 46 and 43 on R2, 22 and 28 on
+  decoders is how many riders ride all 15 s on the road: 46, 44 and 38 on the real wiring, 46 and 43 on R2 draw 1 and 34 on R2 draw 2, 22 and 28 on
   R3 draw 1 and 15 on R3 draw 2, 10 and 44 for the two searches on R1 draw 1 and 29 on R1 draw 2. The two R1 draw-1 decoders span the
   whole range on the same brain, so with this readout the lane result is as much the search's as the wiring's.
 - Without the rule the four wirings are within 0.5 s of each other and of the cap (15.00, 15.00 and 15.00 s;
-  15.00 and 14.83 s; 15.00, 14.63 and 15.00 s; 14.82, 15.00 and 14.50 s). So for the open choice in the preregistration draft (section 9a, point 5), riding time
+  15.00, 14.83 and 15.00 s; 15.00, 14.63 and 15.00 s; 14.82, 15.00 and 14.50 s). So for the open choice in the preregistration draft (section 9a, point 5), riding time
   scored without the off-road rule would not separate R0, R2, R3 and R1 with this readout at 15 s and 5 Nm: the
   difference between them is in the lane, and the rule is what scores it. One replay seed per decoder, fixed
   decoders from searches that had the rule on.
 - The riders' final distance from the center line without the rule orders the wirings the same way as riding
-  time with it: medians of 0.8, 0.9 and 1.2 m (R0), 0.9 and 0.7 m (R2), 2.7 and 1.9 m (R3 draw 1) and 7.5 m (R3 draw 2), 7.2 and 0.9 m (R1 draw 1's two
+  time with it: medians of 0.8, 0.9 and 1.2 m (R0), 0.9 and 0.7 m (R2 draw 1) and 1.6 m (R2 draw 2), 2.7 and 1.9 m (R3 draw 1) and 7.5 m (R3 draw 2), 7.2 and 0.9 m (R1 draw 1's two
   searches) and 1.3 m (R1 draw 2).
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
