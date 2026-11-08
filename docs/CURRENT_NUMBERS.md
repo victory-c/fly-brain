@@ -493,6 +493,12 @@ Reading on 2026-11-06, one rewiring draw (two for R1):
   first draw-1 pilot goes against the prediction as drafted; the other two R1 pilots are inside it. The
   prediction is written for the per-brain top-k readouts over 3 draws and 5 seeds; these are the hand-picked
   readout on two draws and two CEM seeds, on CPU against the real wiring's GPU runs.
+  On 2026-11-08 the prediction was restated on the median over seeds (scrambled-brains `docs/PREREGISTRATION.md`
+  section 8 and 9a.7). With the hand-picked readout the pilots' medians are R0 11.89 s (three seeds, SD 1.42),
+  R1 11.75 s (three searches on two draws; the stalled search is the lowest of the three, so it only sets the
+  median at the next value up, 11.75 instead of 12.01 s, where it dragged the mean down to 10.34 s) and R2
+  13.44 s (two seeds). R1's median is 0.1 SD below R0's and R2's 1.1 SD above, so just outside: the median puts
+  R0 at its middle seed, 11.89 s, where its mean is 12.17 s.
 - Two more R1 pilots tell the rewiring draw from the search seed, same script and settings: draw 2 with CEM
   seed 201 (job 38107; `results/rungs/r1_s2_cpu/`) and draw 1 with CEM seed 202 (job 38108;
   `results/rungs/r1_s1_cpu/v4.5_s202`). Both finished and both ride near the real wiring (next two bullets).
