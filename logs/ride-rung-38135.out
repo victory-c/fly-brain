@@ -21,3 +21,8 @@ CEM starts from best_theta of results/rungs/r2_s2_cpu/v4.5_s201/init_hold.json; 
 lane-filter gain starts at 0.00 with width 1.0
   after warm-up, DN rates (Hz): DNp20_L 21, DNp20_R 8, DNp22_R 3, DNg46_L 4, DNg46_R 2, DNge043_L 5, DNge043_R 14, DNb06_L 18, DNpe013_L 8, DNpe013_R 7, DNg90_R 3, DNp33_L 18, DNp33_R 5, DNge091_L 2, DNg29_L 56, DNg29_R 27, DNg41_L 21, DNg41_R 26, DNp18_L 18, DNp18_R 45, DNp73_L 57, DNp73_R 7, b1 MN_L 1, b2 MN_L 2, b2 MN_R 5, hg1 MN_L 11, hg1 MN_R 4, DNa01_L 3, DNa01_R 1, DNa02_L 1, DNa03_L 2, DNa03_R 1, DNg100_L 1, DNg100_R 1, MDN_L 2, MDN_R 2, DNa16_L 2, DNa16_R 8, DNb03_L 5, DNb03_R 5, DNa06_L 7, DNa06_R 8, DNp15_L 8, DNp15_R 24, DNge107_L 2, DNge107_R 12, DNge086_R 3, DNge031_L 9, DNge031_R 18, DNge033_L 12, DNge033_R 19, GNG283_L 3, GNG283_R 10
   population 17,778 spikes/s per brain
+gen  0  fit best   8.47 mean   1.02  upright  0.95 s (max  8.00,   0% finish)  dist   4.1 m  |y| 0.51 m  v 4.50  bailed 0  pop 74,074 sp/s  326s
+gen  1  fit best   5.60 mean   1.35  upright  1.26 s (max  5.17,   0% finish)  dist   5.4 m  |y| 0.80 m  v 4.50  bailed 0  pop 67,662 sp/s  207s
+gen  2  fit best   9.02 mean   2.72  upright  2.57 s (max  8.57,   0% finish)  dist  11.0 m  |y| 1.60 m  v 4.50  bailed 0  pop 66,612 sp/s  331s
+gen  3  fit best  14.78 mean   4.49  upright  4.28 s (max 14.34,   0% finish)  dist  18.0 m  |y| 3.01 m  v 4.50  bailed 0  pop 56,846 sp/s  561s
+gen  4  fit best   9.44 mean   4.87  upright  4.65 s (max  8.83,   0% finish)  dist  19.7 m  |y| 2.73 m  v 4.50  bailed 0  pop 54,982 sp/s  328s
