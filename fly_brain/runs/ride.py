@@ -72,6 +72,30 @@ class BrainRecorder:
         print(f"brain -> {path}  ({act.shape[0]} bins of {self.bin_ms:.0f} ms, {act.shape[1]} riders, {act.shape[2]:,} points)")
 
 
+class CountRecorder:
+    """Spike counts per bin of the neurons a decodability analysis reads (tools/track_c.py): every descending neuron
+    and the wing motor neurons. Same interface as BrainRecorder for `episode` (bin_ms, add); the bike state comes from
+    the replay's trace. Bins keep filling after a rider's ride ended, so the analysis masks them with the trace's `done`."""
+
+    def __init__(self, meta, bin_ms, device):
+        meta = meta.sort_values("row")
+        site = np.where(meta["superclass"].to_numpy() == "descending_neuron", "descending",
+                        np.where((meta["superclass"].to_numpy() == "vnc_motor") & (meta["subclass"].to_numpy() == "wm"), "wing_motor", ""))
+        keep = np.flatnonzero(site != "")
+        self.rows, self.site = meta["row"].to_numpy()[keep], site[keep]
+        self.idx = torch.as_tensor(self.rows, device=device)
+        self.bin_ms, self.counts = bin_ms, []
+
+    def add(self, counts):
+        """counts (B, N): every neuron's spikes in one bin."""
+        self.counts.append(counts[:, self.idx].to(torch.int16).cpu())
+
+    def save(self, path):
+        counts = torch.stack(self.counts).numpy()  # (bins, B, neurons)
+        np.savez_compressed(path, counts=counts, rows=self.rows, site=self.site, bin_ms=self.bin_ms)
+        print(f"counts -> {path}  ({counts.shape[0]} bins of {self.bin_ms:.0f} ms, {counts.shape[1]} riders, {counts.shape[2]:,} neurons)")
+
+
 class AttemptRecorder(BrainRecorder):
     """Every rider of every CEM generation as an 'attempt' (runs/ride.py --log-attempts): the bike state, steering,
     pedalling and the gust every 50 ms for all riders, each region's mean rate per bin for all riders, and the whole
@@ -191,6 +215,7 @@ def parse():
     ap.add_argument("--replay", default=None, help="results json with best_theta")
     ap.add_argument("--trace", default="results/ride_trace.json")
     ap.add_argument("--brain-out", default=None, help="replay/open loop: record every rider's whole brain to this npz (brain map)")
+    ap.add_argument("--counts-out", default=None, help="replay/open loop: spike counts per bin of every descending neuron and the wing motor neurons (tools/track_c.py); not together with --brain-out")
     ap.add_argument("--brain-bin-ms", type=float, default=100.0, help="time bin of the brain recording")
     ap.add_argument("--log-attempts", default=None, help="CEM: record every rider of every generation to this dir (attempts page)")
     ap.add_argument("--quiet", action="store_true")
@@ -372,11 +397,14 @@ def main():
             theta = torch.tensor(dec.prior_mean(), device=ride.dev)[None, :].repeat(a.riders, 1)
             label = "open loop (prior decoder: no steering, ~70 W)"
         log = []
-        rec = BrainRecorder(ride.meta, ride.senses.idx, a.brain_bin_ms, ride.dev) if a.brain_out else None
+        if a.brain_out and a.counts_out:
+            raise SystemExit("--brain-out and --counts-out cannot be used together")
+        rec = BrainRecorder(ride.meta, ride.senses.idx, a.brain_bin_ms, ride.dev) if a.brain_out else (
+            CountRecorder(ride.meta, a.brain_bin_ms, ride.dev) if a.counts_out else None)
         r = ride.episode(theta, seed=a.seed, log=log, verbose=True, brain=rec)
         print(f"{label}:", ride.summary(r))
         if rec is not None:
-            rec.save(ROOT / a.brain_out)
+            rec.save(ROOT / (a.brain_out or a.counts_out))
         trace = {"mode": label, "state_names": STATE, "dn_names": ride.readout.names, "sense_names": ride.senses.names,
                  "theta": theta[0].cpu().tolist(), "theta_names": dec_names(dec), "trace": log,
                  "result": {k: (v.tolist() if isinstance(v, np.ndarray) else v) for k, v in r.items()}}
