@@ -7,3 +7,18 @@ r0_w1.1 VS scale 0.52: 43,607 spikes/s, 28,539 outside the driven neurons (2,542
 r0_w1.1 HALT scale 0.52: 46,540 spikes/s, 28,914 outside the driven neurons (2,294 of them fire), outputs |z|>3: 64 (null mean 0.1, max 8), max |z| 26.8 (null 5.0) (50.1 s)
 -> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/model_side/pretest_r0_w1.1.json
 == tmbr18 14:59:00
+r0_tmbr18 VS scale 0.47: 40,947 spikes/s, 25,878 outside the driven neurons (2,167 of them fire), outputs |z|>3: 41 (null mean 0.2, max 6), max |z| 37.9 (null 4.4) (49.9 s)
+r0_tmbr18 HALT scale 0.47: 44,068 spikes/s, 26,442 outside the driven neurons (2,156 of them fire), outputs |z|>3: 53 (null mean 0.2, max 6), max |z| 29.2 (null 4.9) (51.3 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/model_side/pretest_r0_tmbr18.json
+== tmbr22 15:00:44
+r0_tmbr22 VS scale 0.47: 32,217 spikes/s, 17,149 outside the driven neurons (1,437 of them fire), outputs |z|>3: 31 (null mean 0.1, max 4), max |z| 39.0 (null 4.2) (49.6 s)
+r0_tmbr22 HALT scale 0.47: 34,934 spikes/s, 17,309 outside the driven neurons (1,500 of them fire), outputs |z|>3: 29 (null mean 0.1, max 4), max |z| 29.7 (null 4.7) (50.6 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/model_side/pretest_r0_tmbr22.json
+== tau4.5 15:02:27
+r0_tau4.5 VS scale 0.47: 31,402 spikes/s, 16,333 outside the driven neurons (1,325 of them fire), outputs |z|>3: 29 (null mean 0.1, max 10), max |z| 46.6 (null 4.5) (49.8 s)
+r0_tau4.5 HALT scale 0.47: 34,734 spikes/s, 17,109 outside the driven neurons (1,380 of them fire), outputs |z|>3: 32 (null mean 0.1, max 3), max |z| 26.0 (null 4.9) (50.0 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/model_side/pretest_r0_tau4.5.json
+== tau5.5 15:04:10
+r0_tau5.5 VS scale 0.47: 40,766 spikes/s, 25,697 outside the driven neurons (2,103 of them fire), outputs |z|>3: 45 (null mean 0.2, max 6), max |z| 37.9 (null 4.8) (45.8 s)
+r0_tau5.5 HALT scale 0.47: 43,496 spikes/s, 25,871 outside the driven neurons (2,113 of them fire), outputs |z|>3: 54 (null mean 0.1, max 4), max |z| 25.1 (null 4.6) (44.7 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/model_side/pretest_r0_tau5.5.json

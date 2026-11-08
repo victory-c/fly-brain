@@ -1,0 +1,49 @@
+{
+ "counts": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r3_counts.npz",
+ "trace": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r3_trace.json",
+ "screen": "results/rungs/screens/r3_s1.parquet",
+ "samples": 7200,
+ "riders": 48,
+ "roll_rate_sd": 0.3993133813656573,
+ "sites": {
+  "descending": {
+   "neurons": 1314,
+   "active": 371,
+   "lambda": 100.0,
+   "r2_all": 0.9584,
+   "target_r2": 0.8626,
+   "n90_screen": 3,
+   "n90_random_median": 80.0,
+   "n90_random_q25_q75": [
+    55.25,
+    127.25
+   ],
+   "r2_screen_curve": {
+    "1": 0.7254,
+    "2": 0.755,
+    "3": 0.8989
+   }
+  },
+  "wing_motor": {
+   "neurons": 67,
+   "active": 40,
+   "lambda": 0.1,
+   "r2_all": 0.867,
+   "target_r2": 0.7803,
+   "n90_screen": 6,
+   "n90_random_median": 17.5,
+   "n90_random_q25_q75": [
+    15.0,
+    21.25
+   ],
+   "r2_screen_curve": {
+    "1": 0.1038,
+    "2": 0.6806,
+    "3": 0.7387,
+    "4": 0.778,
+    "5": 0.7782,
+    "6": 0.7904
+   }
+  }
+ }
+}

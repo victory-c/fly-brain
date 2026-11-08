@@ -1,0 +1,103 @@
+{
+ "counts": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r1_counts.npz",
+ "trace": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r1_trace.json",
+ "screen": "results/rungs/screens/r1_s1.parquet",
+ "samples": 7200,
+ "riders": 48,
+ "roll_rate_sd": 0.2679737009203679,
+ "sites": {
+  "descending": {
+   "neurons": 1314,
+   "active": 350,
+   "lambda": 100.0,
+   "r2_all": 0.927,
+   "references": {
+    "site": {
+     "target_r2": 0.8343,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.5691,
+      "2": 0.598,
+      "3": 0.8609
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 454.0,
+      "q25_q75": [
+       344.5,
+       574.0
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 100.5,
+      "q25_q75": [
+       77.5,
+       119.0
+      ]
+     }
+    }
+   }
+  },
+  "wing_motor": {
+   "neurons": 67,
+   "active": 31,
+   "lambda": 0.1,
+   "r2_all": 0.9027,
+   "references": {
+    "site": {
+     "target_r2": 0.8124,
+     "n90_screen": 4,
+     "r2_screen_curve": {
+      "1": 0.1526,
+      "2": 0.1633,
+      "3": 0.7623,
+      "4": 0.8482
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 37.0,
+      "q25_q75": [
+       25.0,
+       43.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 14.0,
+      "q25_q75": [
+       11.75,
+       17.25
+      ]
+     }
+    },
+    "descending": {
+     "target_r2": 0.8343,
+     "n90_screen": 4,
+     "r2_screen_curve": {
+      "1": 0.1526,
+      "2": 0.1633,
+      "3": 0.7623,
+      "4": 0.8482
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 39.0,
+      "q25_q75": [
+       32.75,
+       44.5
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 16.5,
+      "q25_q75": [
+       13.0,
+       18.5
+      ]
+     }
+    }
+   }
+  }
+ }
+}

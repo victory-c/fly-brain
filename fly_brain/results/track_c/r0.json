@@ -1,0 +1,106 @@
+{
+ "counts": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r0_counts.npz",
+ "trace": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r0_trace.json",
+ "screen": "results/rungs/screens/r0.parquet",
+ "samples": 7200,
+ "riders": 48,
+ "roll_rate_sd": 0.4239463471378045,
+ "sites": {
+  "descending": {
+   "neurons": 1314,
+   "active": 393,
+   "lambda": 100.0,
+   "r2_all": 0.9617,
+   "references": {
+    "site": {
+     "target_r2": 0.8655,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.7545,
+      "2": 0.7743,
+      "3": 0.9136
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 277.0,
+      "q25_q75": [
+       188.0,
+       354.5
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 73.0,
+      "q25_q75": [
+       49.5,
+       99.75
+      ]
+     }
+    }
+   }
+  },
+  "wing_motor": {
+   "neurons": 67,
+   "active": 33,
+   "lambda": 10.0,
+   "r2_all": 0.909,
+   "references": {
+    "site": {
+     "target_r2": 0.8181,
+     "n90_screen": 4,
+     "r2_screen_curve": {
+      "1": 0.4072,
+      "2": 0.4231,
+      "3": 0.4846,
+      "4": 0.845
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 29.5,
+      "q25_q75": [
+       23.5,
+       34.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 14.0,
+      "q25_q75": [
+       11.75,
+       16.0
+      ]
+     }
+    },
+    "descending": {
+     "target_r2": 0.8655,
+     "n90_screen": 7,
+     "r2_screen_curve": {
+      "1": 0.4072,
+      "2": 0.4231,
+      "3": 0.4846,
+      "4": 0.845,
+      "6": 0.8638,
+      "7": 0.889,
+      "8": 0.8901
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 44.0,
+      "q25_q75": [
+       41.0,
+       50.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 18.5,
+      "q25_q75": [
+       15.75,
+       22.5
+      ]
+     }
+    }
+   }
+  }
+ }
+}

@@ -6,3 +6,6 @@ readout: DNp20_L 1, DNp20_R 1, DNp22_L 1, DNp22_R 1, DNg46_L 1, DNg46_R 1, DNge0
 brain: results/variants/r3_s1.npz, 166,700 neurons, 789 driven, 112 read out, w_syn 0.1293 mV
   after warm-up, DN rates (Hz): DNp20_L 37, DNp20_R 23, DNp22_R 1, DNg46_L 1, DNg46_R 1, DNge043_L 5, DNge043_R 9, DNb06_L 26, DNpe013_L 2, DNpe013_R 4, DNp33_L 22, DNp33_R 7, DNge091_L 2, DNg29_L 42, DNg29_R 28, DNg41_L 17, DNg41_R 24, DNp18_L 37, DNp18_R 45, DNp73_L 54, DNp73_R 8, b2 MN_L 7, b2 MN_R 1, hg1 MN_L 21, hg1 MN_R 11, DNa03_R 2, DNa16_L 2, DNa16_R 6, DNb03_L 4, DNb03_R 7, DNa06_L 6, DNa06_R 8, DNp15_L 5, DNp15_R 27, DNge107_R 11, DNge086_R 4, DNge031_L 19, DNge031_R 21, DNge033_L 4, DNge033_R 8, GNG283_L 3, GNG283_R 15
   population 9,284 spikes/s per brain
+replay of /home/s/st/stevejobs/.cache/sb-replay/r3_s201_mu.json: upright 15.00 s (max 15.00, 100% finish)  dist  65.8 m  |y| 3.94 m  v 4.50  bailed 0  pop 34,168 sp/s  736s
+counts -> /home/s/st/stevejobs/.cache/sb-replay/trackc_r3_counts.npz  (150 bins of 100 ms, 48 riders, 1,381 neurons)
+trace -> /home/s/st/stevejobs/.cache/sb-replay/trackc_r3_trace.json

@@ -1,0 +1,16 @@
+== r0
+{"counts": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r0_counts.npz", "trace": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r0_trace.json", "screen": "results/rungs/screens/r0.parquet", "samples": 7200, "riders": 48, "roll_rate_sd": 0.4239463471378045}
+descending {'neurons': 1314, 'active': 393, 'lambda': 100.0, 'r2_all': 0.9617, 'target_r2': 0.8655, 'n90_screen': 3, 'n90_random_median': 73.0, 'n90_random_q25_q75': [49.5, 99.75]}
+wing_motor {'neurons': 67, 'active': 33, 'lambda': 10.0, 'r2_all': 0.909, 'target_r2': 0.8181, 'n90_screen': 4, 'n90_random_median': 14.0, 'n90_random_q25_q75': [11.75, 16.0]}
+== r1
+{"counts": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r1_counts.npz", "trace": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r1_trace.json", "screen": "results/rungs/screens/r1_s1.parquet", "samples": 7200, "riders": 48, "roll_rate_sd": 0.2679737009203679}
+descending {'neurons': 1314, 'active': 350, 'lambda': 100.0, 'r2_all': 0.927, 'target_r2': 0.8343, 'n90_screen': 3, 'n90_random_median': 100.5, 'n90_random_q25_q75': [77.5, 119.0]}
+wing_motor {'neurons': 67, 'active': 31, 'lambda': 0.1, 'r2_all': 0.9027, 'target_r2': 0.8124, 'n90_screen': 4, 'n90_random_median': 14.0, 'n90_random_q25_q75': [11.75, 17.25]}
+== r2
+{"counts": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r2_counts.npz", "trace": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r2_trace.json", "screen": "results/rungs/screens/r2_s1.parquet", "samples": 7200, "riders": 48, "roll_rate_sd": 0.43494438827986737}
+descending {'neurons': 1314, 'active': 408, 'lambda': 100.0, 'r2_all': 0.9637, 'target_r2': 0.8673, 'n90_screen': 3, 'n90_random_median': 57.5, 'n90_random_q25_q75': [47.25, 88.5]}
+wing_motor {'neurons': 67, 'active': 35, 'lambda': 100.0, 'r2_all': 0.9048, 'target_r2': 0.8143, 'n90_screen': 3, 'n90_random_median': 13.5, 'n90_random_q25_q75': [10.0, 18.0]}
+== r3
+{"counts": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r3_counts.npz", "trace": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r3_trace.json", "screen": "results/rungs/screens/r3_s1.parquet", "samples": 7200, "riders": 48, "roll_rate_sd": 0.3993133813656573}
+descending {'neurons': 1314, 'active': 371, 'lambda': 100.0, 'r2_all': 0.9584, 'target_r2': 0.8626, 'n90_screen': 3, 'n90_random_median': 80.0, 'n90_random_q25_q75': [55.25, 127.25]}
+wing_motor {'neurons': 67, 'active': 40, 'lambda': 0.1, 'r2_all': 0.867, 'target_r2': 0.7803, 'n90_screen': 6, 'n90_random_median': 17.5, 'n90_random_q25_q75': [15.0, 21.25]}
