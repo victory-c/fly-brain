@@ -78,6 +78,8 @@ def main():
     ap.add_argument("--warmup-ms", type=float, default=300.0)
     ap.add_argument("--v", type=float, default=4.5)
     ap.add_argument("--w-syn-scale", type=float, default=None, help="default: the calibrated W_SYN (scale 0.47)")
+    ap.add_argument("--t-mbr", type=float, default=None, help="model-side rung: membrane time constant in ms (default the engine's 20)")
+    ap.add_argument("--tau", type=float, default=None, help="model-side rung: synaptic time constant in ms (default the engine's 5)")
     ap.add_argument("--device", default="auto")
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--null-splits", type=int, default=1000,
@@ -100,7 +102,7 @@ def main():
         P = base.clone()
         P[: B // 2, senses.names.index(f"{pop}_L")] += a.extra
         P[B // 2:, senses.names.index(f"{pop}_R")] += a.extra
-        loop = BrainLoop(brain, B, senses.idx, [], params={"w_syn": w}, device=dev, seed=a.seed)
+        loop = BrainLoop(brain, B, senses.idx, [], params={"w_syn": w, **({"t_mbr": a.t_mbr} if a.t_mbr else {}), **({"tau": a.tau} if a.tau else {})}, device=dev, seed=a.seed)
         loop.set_rates(P @ senses.E)
         loop.run(a.warmup_ms)
         loop.take_counts()
