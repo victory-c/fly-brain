@@ -11,17 +11,32 @@
    "active": 371,
    "lambda": 100.0,
    "r2_all": 0.9584,
-   "target_r2": 0.8626,
-   "n90_screen": 3,
-   "n90_random_median": 80.0,
-   "n90_random_q25_q75": [
-    55.25,
-    127.25
-   ],
-   "r2_screen_curve": {
-    "1": 0.7254,
-    "2": 0.755,
-    "3": 0.8989
+   "references": {
+    "site": {
+     "target_r2": 0.8626,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.7254,
+      "2": 0.755,
+      "3": 0.8989
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 297.0,
+      "q25_q75": [
+       188.0,
+       384.75
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 80.0,
+      "q25_q75": [
+       55.25,
+       127.25
+      ]
+     }
+    }
    }
   },
   "wing_motor": {
@@ -29,20 +44,70 @@
    "active": 40,
    "lambda": 0.1,
    "r2_all": 0.867,
-   "target_r2": 0.7803,
-   "n90_screen": 6,
-   "n90_random_median": 17.5,
-   "n90_random_q25_q75": [
-    15.0,
-    21.25
-   ],
-   "r2_screen_curve": {
-    "1": 0.1038,
-    "2": 0.6806,
-    "3": 0.7387,
-    "4": 0.778,
-    "5": 0.7782,
-    "6": 0.7904
+   "references": {
+    "site": {
+     "target_r2": 0.7803,
+     "n90_screen": 6,
+     "r2_screen_curve": {
+      "1": 0.1038,
+      "2": 0.6806,
+      "3": 0.7387,
+      "4": 0.778,
+      "5": 0.7782,
+      "6": 0.7904
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 35.5,
+      "q25_q75": [
+       30.0,
+       42.0
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 17.5,
+      "q25_q75": [
+       15.0,
+       21.25
+      ]
+     }
+    },
+    "descending": {
+     "target_r2": 0.8626,
+     "n90_screen": 29,
+     "r2_screen_curve": {
+      "1": 0.1038,
+      "2": 0.6806,
+      "3": 0.7387,
+      "4": 0.778,
+      "6": 0.7904,
+      "8": 0.8449,
+      "12": 0.8544,
+      "16": 0.8556,
+      "24": 0.8609,
+      "28": 0.8619,
+      "29": 0.8639,
+      "30": 0.8638,
+      "32": 0.8657
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 64.5,
+      "q25_q75": [
+       60.75,
+       65.0
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 36.0,
+      "q25_q75": [
+       34.0,
+       39.0
+      ]
+     }
+    }
    }
   }
  }
