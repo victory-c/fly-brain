@@ -960,6 +960,62 @@ summaries `replay_mu_summary.json` and `replay_mu_noroad_summary.json` next to e
   time with it: medians of 0.8, 0.9 and 1.2 m (R0), 0.9 and 0.7 m (R2 draw 1) and 1.6 m (R2 draw 2), 2.7 and 1.9 m (R3 draw 1) and 7.5 and 0.9 m (R3 draw 2's two searches), 7.2 and 0.9 m (R1 draw 1's two
   searches) and 1.3 m (R1 draw 2).
 
+### Track C pilot: decoding roll rate from recorded neurons (CPU, 2026-11-08)
+
+One replay per brain of a final CEM mean decoder (hand-picked readout, draw 1, 48 riders x 15 s, seed 201, no off-road
+rule, jobs 38178 to 38181; R1 uses seed 202's decoder, because seed 201's search stalled). `runs/ride.py --counts-out` records
+the spike counts of all 1,314 descending neurons and the 67 wing motor neurons in 100 ms bins; `tools/track_c.py` (job
+38185, `results/track_c/<rung>.json`) fits ridge regressions to the bike's bin-mean roll rate. 7,200 samples per
+brain, five folds over riders, so a test rider never trains the model; R^2 is pooled out of fold. N90 is the number of
+neurons reaching 90% of a reference R^2, adding them in order of the brain's own screen (|r_phi_dot|) or in 20 random
+orders. Random orders are drawn over all of the site's neurons, silent ones included, because a recording cannot pick the
+active ones in advance; the medians for active neurons only are given as well.
+
+| Brain | Site, reference | Active neurons | R^2 of the site | Target R^2 | N90, screen order | N90, random: median (25-75%) | Random, active only: median |
+|---|---|---|---|---|---|---|---|
+| R0 | descending | 393 of 1,314 | 0.962 | 0.866 | 3 | 277 (188-355) | 73 |
+| R1 | descending | 350 | 0.927 | 0.834 | 3 | 454 (345-574) | 100.5 |
+| R2 | descending | 408 | 0.964 | 0.867 | 3 | 249.5 (144-345) | 57.5 |
+| R3 | descending | 371 | 0.958 | 0.863 | 3 | 297 (188-385) | 80 |
+| R0 | wing motor, its own R^2 | 33 of 67 | 0.909 | 0.818 | 4 | 29.5 (24-34) | 14 |
+| R1 | wing motor, its own R^2 | 31 | 0.903 | 0.812 | 4 | 37 (25-43) | 14 |
+| R2 | wing motor, its own R^2 | 35 | 0.905 | 0.814 | 3 | 31 (24-35) | 13.5 |
+| R3 | wing motor, its own R^2 | 40 | 0.867 | 0.780 | 6 | 35.5 (30-42) | 17.5 |
+| R0 | wing motor, descending R^2 | 33 | 0.909 | 0.866 | 7 | 44 (41-50) | 18.5 |
+| R1 | wing motor, descending R^2 | 31 | 0.903 | 0.834 | 4 | 39 (33-45) | 16.5 |
+| R2 | wing motor, descending R^2 | 35 | 0.905 | 0.867 | 7 | 46.5 (44-53) | 22.5 |
+| R3 | wing motor, descending R^2 | 40 | 0.867 | 0.863 | 29 | 64.5 (61-65) | 36 |
+
+The roll-rate SD differs between the replays: 0.42, 0.27, 0.43 and 0.40 on R0 to R3.
+
+- Screened neurons are far cheaper than random ones at the descending site (3 against medians of 250 to 454), and N90 at that
+  site is 3 on all four brains, so with these data N90 does not separate R0 to R3.
+- The wing-motor site depends on the reference. Preregistration section 7 can be read as one reference for both sites (the
+  descending R^2) or as each site's own. Against its own R^2 the screened N90 is 3 to 6. Against the descending R^2 it is 4, 7, 7
+  and 29; R3's wing-motor site gives only 0.867 against a target of 0.863, so its 29 sits at the edge of what that site can reach. One
+  replay per brain cannot say whether R3's difference is real.
+- Limits: one replay seed and one rewiring draw per brain; each brain rides under its own decoder, so the roll-rate
+  statistics differ; the riders are in closed loop, so a neuron can predict roll rate because it follows the haltere input or
+  because the decoder reads it and steers. No rung past R3 has a decoder to replay: R3.5 and R5 have not been ridden and the R4 pilot
+  did not learn. The ridge penalty is chosen once per site. The simulated jGCaMP8 and probe-distance parts of preregistration
+  section 7 are not done.
+
+### Model-side rung: pre-test on the real wiring (CPU, 2026-11-08)
+
+`runs/pretest.py` with 30 brains on R0 (job 38183, `results/rungs/model_side/`), one parameter moved by 10% at a time; the rate
+window is 10,750 to 43,000 spikes/s outside the driven neurons, and R0 itself gives 21,300 on the VS probe with 38 and 39 lateralised outputs.
+
+| Variant | Network spikes/s, VS / haltere | Lateralised outputs, VS / haltere (null max) | Gate |
+|---|---|---|---|
+| synaptic scale x 0.9 (0.423) | 14,522 / 14,724 | 25 / 21 (7 / 7) | pass |
+| synaptic scale x 1.1 (0.517) | 28,539 / 28,914 | 49 / 64 (10 / 8) | pass |
+| membrane time constant 18 ms | 25,878 / 26,442 | 41 / 53 (6 / 6) | pass |
+| membrane time constant 22 ms | 17,149 / 17,309 | 31 / 29 (4 / 4) | pass |
+| synaptic time constant 4.5 ms | 16,333 / 17,109 | 29 / 32 (10 / 3) | pass |
+| synaptic time constant 5.5 ms | 25,697 / 25,871 | 45 / 54 (6 / 4) | pass |
+
+All six pass. A 10% change in synaptic scale moves the network rate by about a third, and a 10% change in either time constant by about a fifth. Only the pre-test has run; none of these variants has been ridden.
+
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
 `brain/variants.py` rewires the connectome. R4 shuffles every connection's target, which keeps each neuron's
