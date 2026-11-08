@@ -11,17 +11,32 @@
    "active": 408,
    "lambda": 100.0,
    "r2_all": 0.9637,
-   "target_r2": 0.8673,
-   "n90_screen": 3,
-   "n90_random_median": 57.5,
-   "n90_random_q25_q75": [
-    47.25,
-    88.5
-   ],
-   "r2_screen_curve": {
-    "1": 0.6564,
-    "2": 0.6672,
-    "3": 0.914
+   "references": {
+    "site": {
+     "target_r2": 0.8673,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.6564,
+      "2": 0.6672,
+      "3": 0.914
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 249.5,
+      "q25_q75": [
+       144.25,
+       344.5
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 57.5,
+      "q25_q75": [
+       47.25,
+       88.5
+      ]
+     }
+    }
    }
   },
   "wing_motor": {
@@ -29,17 +44,61 @@
    "active": 35,
    "lambda": 100.0,
    "r2_all": 0.9048,
-   "target_r2": 0.8143,
-   "n90_screen": 3,
-   "n90_random_median": 13.5,
-   "n90_random_q25_q75": [
-    10.0,
-    18.0
-   ],
-   "r2_screen_curve": {
-    "1": 0.5715,
-    "2": 0.5771,
-    "3": 0.816
+   "references": {
+    "site": {
+     "target_r2": 0.8143,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.5715,
+      "2": 0.5771,
+      "3": 0.816
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 31.0,
+      "q25_q75": [
+       24.0,
+       35.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 13.5,
+      "q25_q75": [
+       10.0,
+       18.0
+      ]
+     }
+    },
+    "descending": {
+     "target_r2": 0.8673,
+     "n90_screen": 7,
+     "r2_screen_curve": {
+      "1": 0.5715,
+      "2": 0.5771,
+      "3": 0.816,
+      "4": 0.8307,
+      "6": 0.8536,
+      "7": 0.8687,
+      "8": 0.8705
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 46.5,
+      "q25_q75": [
+       44.0,
+       53.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 22.5,
+      "q25_q75": [
+       19.0,
+       25.0
+      ]
+     }
+    }
    }
   }
  }
