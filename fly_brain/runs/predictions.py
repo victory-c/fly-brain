@@ -24,7 +24,7 @@ TASTE = {"sugar", "water", "bitter", "ir94e"}
 
 
 def inputs(cond, taste_side):
-    groups = [stimuli.group(g, side=taste_side if g in TASTE else None) for g in cond.split("+")]
+    groups = [stimuli.group(g, side=(None if taste_side == "both" else taste_side) if g in TASTE else None) for g in cond.split("+")]
     return np.unique(np.concatenate(groups))
 
 
@@ -35,7 +35,7 @@ def main():
     ap.add_argument("--flies", type=int, default=30)
     ap.add_argument("--ms", type=float, default=1000.0)
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--taste-side", default="R", choices=["L", "R"], help="the side of the taste groups (at scale 0.47 the left side barely drives MN9 on the real wiring)")
+    ap.add_argument("--taste-side", default="R", choices=["L", "R", "both"], help="the side of the taste groups (at scale 0.47 the left side barely drives MN9 on the real wiring)")
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
