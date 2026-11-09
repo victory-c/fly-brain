@@ -1,0 +1,4 @@
+== r0
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0, 'dnp': 0.0} network 10,123
+loom {'mn9': 0.0, 'mdn': 0.07, 'gf': 263.88, 'dnp': 182.62} network 90,617
+sugar {'mn9': 30.02, 'mdn': 0.0, 'gf': 0.0, 'dnp': 0.0} network 9,333
