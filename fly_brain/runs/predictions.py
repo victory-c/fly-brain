@@ -2,7 +2,7 @@
 
 Runs the conditions of the rows of scrambled-brains docs/track_b_predictions_DRAFT.csv that need no further choice of
 stimulus rate or readout, at Shiu's 150 Hz for 1 s in 30 flies. Taste groups are driven on one side (Shiu's one
-labellum), Johnston's organ groups on both. With no input the network is silent, so "no stimulus" is 0 Hz.
+labellum; --taste-side), Johnston's organ groups on both. With no input the network is silent, so "no stimulus" is 0 Hz.
 
     python -m runs.predictions --out results/track_b/r0.json
     python -m runs.predictions --brain results/variants/r1_s1.npz --out results/track_b/r1_s1.json
@@ -23,8 +23,8 @@ NULL = [("bitter_alone_mn9", "mn9", "bitter"), ("jo_ce_mdn", "mdn", "jo_ce"), ("
 TASTE = {"sugar", "water", "bitter", "ir94e"}
 
 
-def inputs(cond):
-    groups = [stimuli.group(g, side="R" if g in TASTE else None) for g in cond.split("+")]
+def inputs(cond, taste_side):
+    groups = [stimuli.group(g, side=taste_side if g in TASTE else None) for g in cond.split("+")]
     return np.unique(np.concatenate(groups))
 
 
@@ -35,6 +35,7 @@ def main():
     ap.add_argument("--flies", type=int, default=30)
     ap.add_argument("--ms", type=float, default=1000.0)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--taste-side", default="R", choices=["L", "R"], help="the side of the taste groups (at scale 0.47 the left side barely drives MN9 on the real wiring)")
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
@@ -47,7 +48,7 @@ def main():
     rec = np.unique(np.concatenate(list(read.values())))
     rates = {}
     for c in conds:
-        r = experiment(brain, inputs(c), stimuli.SHIU_HZ, flies=a.flies, ms=a.ms, bin_ms=a.ms, record_neurons=rec,
+        r = experiment(brain, inputs(c, a.taste_side), stimuli.SHIU_HZ, flies=a.flies, ms=a.ms, bin_ms=a.ms, record_neurons=rec,
                        params={"w_syn": w}, seed=a.seed, device=a.device)
         rates[c] = {k: float(r["mean_hz"][v].mean()) for k, v in read.items()}
         print(c, {k: round(v, 2) for k, v in rates[c].items()}, f"network {float(np.mean(r['undriven_hz'])):,.0f}", flush=True)
@@ -56,7 +57,7 @@ def main():
         d = rates[c][ro] - (rates[ref][ro] if ref else 0.0)
         signed.append({"id": name, "difference_hz": round(d, 3), "expected_sign": sign, "as_expected": bool(np.sign(d) == sign)})
     nulls = [{"id": name, "rate_hz": round(rates[c][ro], 3)} for name, ro, c in NULL]
-    out = {"brain": a.brain or "brain.npz", "w_syn": w, "flies": a.flies, "ms": a.ms, "seed": a.seed, "rates": rates, "signed": signed,
+    out = {"brain": a.brain or "brain.npz", "w_syn": w, "flies": a.flies, "ms": a.ms, "seed": a.seed, "taste_side": a.taste_side, "rates": rates, "signed": signed,
            "score": sum(s["as_expected"] for s in signed) / len(signed), "null_rows": nulls}
     print("score", out["score"], [s["id"] for s in signed if not s["as_expected"]])
     json.dump(out, open(a.out, "w"), indent=1)
