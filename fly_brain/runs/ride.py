@@ -23,7 +23,7 @@ import pandas as pd
 import torch
 
 from bike.dynamics import STATE, Peloton
-from bike.readout import READOUTS, Decoder, Readout, bypass_groups, topk_groups
+from bike.readout import READOUTS, Decoder, Readout, bypass_groups, lane_groups, topk_groups
 from bike.senses import Senses
 from bike.tarmac import eigen_speeds, tarmac_sl9, whipple_matrices
 from brain.loop import BrainLoop
@@ -184,6 +184,7 @@ def parse():
                          "or the driven sensory neurons themselves (bypass: the brain does no work)")
     ap.add_argument("--screen", default=None, help="topk/randk: this brain's runs/screen.py parquet (its own passenger screen)")
     ap.add_argument("--k", type=int, default=8, help="topk/randk: how many neurons the decoder reads")
+    ap.add_argument("--lane-k", type=int, default=0, help="topk/randk: also read this many descending (type, side) groups picked by this brain's HS probe (--lane-filter)")
     ap.add_argument("--readout-seed", type=int, default=0, help="randk: which random draw")
     ap.add_argument("--sigma-new", type=float, default=0.8, help="CEM width for decoder weights absent from --init-theta")
     ap.add_argument("--lane-filter", default=None, help="runs/probe.py json: add one matched-filter lane signal (HS) with one gain")
@@ -245,6 +246,8 @@ class Ride:
                 if not a.screen:
                     raise SystemExit(f"--readout {a.readout} needs --screen (this brain's runs/screen.py parquet)")
                 groups = topk_groups(ROOT / a.screen, meta, a.k, random=(a.readout == "randk"), seed=a.readout_seed)
+                if a.lane_k:  # the per-brain lane channel: descending groups picked by this brain's own HS probe
+                    groups = groups + lane_groups(ROOT / a.lane_filter, meta, a.lane_k)
                 self.readout = Readout(meta, device=self.dev, groups=groups)
             elif a.readout == "bypass":
                 self.readout = Readout(meta, device=self.dev, groups=bypass_groups(self.senses))

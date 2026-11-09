@@ -36,8 +36,16 @@ case $RO in
   bypass0) NAME=bypass_nosyn;    RARG="--readout bypass --no-synapses" ;;  # the driven neurons with every synapse off
   *) echo "READOUT must be topk, randk, bypass or bypass0" >&2; exit 2 ;;
 esac
+# LANE_K (environment, default 0): add a per-brain lane channel, the LANE_K descending groups this brain's own HS probe picks,
+# read through its matched filter with 300 ms smoothing -> .../<NAME>_lane<LANE_K>/
+LANE_K=${LANE_K:-0}; [ "$LANE_K" -gt 0 ] && NAME=${NAME}_lane$LANE_K
 OUT=results/rungs/$TAG/$NAME/v${V0}_s${SEED}
 mkdir -p $OUT
+LARG=""
+if [ "$LANE_K" -gt 0 ]; then
+  [ -s $OUT/probe.json ] || $PY -m runs.probe $BARG $WARG --pop HS VS HALT --extra 30 --brains 16 --ms 1000 --out $OUT/probe.json 2>&1 | tail -3
+  LARG="--lane-k $LANE_K --lane-filter $OUT/probe.json --tau-lane-ms 300"
+fi
 # blank steering + speed-holding pedal, brake off -> $OUT/init_hold.json (as in ride-gate.sbatch)
 $PY - $V0 $OUT <<PYEOF
 import json, math, sys
@@ -52,7 +60,7 @@ json.dump({"best_theta": theta, "decoder_names": ["steer:bias", "pedal:gain", "p
 print(f"init_hold: {P:.1f} W holds {v0} m/s")
 PYEOF
 echo "== $(date +%T) CEM from a blank decoder: $TAG, $NAME, v0=$V0, seed $SEED, max $MIN min"
-$PY -m runs.ride $BARG $WARG $RARG --init-theta $OUT/init_hold.json --sigma-new 0.1 --sigma0 0.3 --sigma-min 0.03 --sigma-pedal 0 \
+$PY -m runs.ride $BARG $WARG $RARG $LARG --init-theta $OUT/init_hold.json --sigma-new 0.1 --sigma0 0.3 --sigma-min 0.03 --sigma-pedal 0 \
   --center-all --center-batch --lane hs --gains hs_heading=150,hs_lane=50 --v0 $V0 --gust 5 --offroad 3.5 --lane-penalty 0.02 \
   --riders 48 --seconds 15 --generations ${GENS:-80} --max-minutes $MIN --seed $SEED --out $OUT/cem.json --resume $OUT/cem.json
 echo "== done $(date)"

@@ -13,6 +13,8 @@ power and braking. Its weights are the only thing that is *learned* (bike/README
 is never changed. Steering is a linear readout squashed by tanh; pedalling and braking are sigmoids of
 the forward and backward drives.
 """
+import json
+
 import numpy as np
 import pandas as pd
 import torch
@@ -59,6 +61,19 @@ def topk_groups(screen, meta, k, by="phi_dot", random=False, seed=0, superclasse
         label = n["instance"] if isinstance(n.get("instance"), str) else (n["type"] if isinstance(n.get("type"), str) else "neuron")
         groups.append((f"{label}#{int(n['bodyId'])}", "", np.array([int(n["row"])], dtype=np.int64)))
     return groups
+
+
+def lane_groups(probe, meta, m, pop="HS", zmin=3.0):
+    """A per-brain lane channel: the m descending (type, side) groups that respond most to the left-vs-right HS probe of
+    this brain (runs/probe.py), one feature each. Named like the hand-picked readout's, so lane_filter_from_probe finds them."""
+    best = {}
+    for r in json.loads(open(probe).read())[pop]:
+        if r["superclass"] == "descending_neuron" and abs(r["z"]) >= zmin:
+            key = (r["type"], r["somaSide"])
+            best[key] = max(best.get(key, 0.0), abs(r["z"]))
+    pick = sorted(best, key=lambda k: -best[k])[:m]
+    ty, side = meta["type"].astype(str).to_numpy(), meta["somaSide"].astype(str).to_numpy()
+    return [(t, s, meta["row"].to_numpy()[(ty == t) & (side == s)].astype(np.int64)) for t, s in pick]
 
 
 def bypass_groups(senses):
