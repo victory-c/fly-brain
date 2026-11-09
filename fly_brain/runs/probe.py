@@ -37,6 +37,8 @@ def main():
     ap.add_argument("--lane", default="hs")
     ap.add_argument("--device", default="auto")
     ap.add_argument("--brain", default=None, help="connectome npz (default brain.npz); e.g. from brain/variants.py")
+    ap.add_argument("--t-mbr", type=float, default=None, help="model-side rung: membrane time constant in ms")
+    ap.add_argument("--tau", type=float, default=None, help="model-side rung: synaptic time constant in ms")
     ap.add_argument("--w-syn-scale", type=float, default=None, help="override the calibrated synapse scale (0.47)")
     ap.add_argument("--out", default="results/probe.json")
     a = ap.parse_args()
@@ -56,7 +58,7 @@ def main():
         P[: B // 2, iL] += a.extra
         P[B // 2:, iR] += a.extra
         w = W_SYN if a.w_syn_scale is None else PARAMS["w_syn"] * a.w_syn_scale
-        loop = BrainLoop(brain, B, senses.idx, [], params={"w_syn": w}, device=dev, seed=1)
+        loop = BrainLoop(brain, B, senses.idx, [], params={"w_syn": w, **({"t_mbr": a.t_mbr} if a.t_mbr else {}), **({"tau": a.tau} if a.tau else {})}, device=dev, seed=1)
         loop.set_rates(P @ senses.E)
         loop.run(a.warmup_ms)
         loop.take_counts()
