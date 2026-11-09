@@ -6,3 +6,5 @@ readout: DNp20_R#10059 1, DNg46_R#810937 1, DNg46_L#15442 1, DNp22(hb1560471374)
 brain: brain.npz, 166,700 neurons, 789 driven, 45 read out, w_syn 0.1293 mV
   after warm-up, DN rates (Hz): DNp20_R#10059 22, DNg46_R#810937 1, DNg46_L#15442 1, DNp22(hb1560471374)_R#11872 1, DNp20_L#10162 39, DNge043(hb1499778528)_L#11458 6, DNb06_L#10888 30, DNge043(hb1499778528)_R#11500 11, DNpe013(PS168)_L#10834 4, DNpe013(PS168)_R#10054 5, DNg41_R 23, DNa02_R 1, DNg41_L 19, DNge107_R 13, DNb03_L 5, DNge086_R 4, DNge006_L 3, DNa16_L 3, DNb06_L 30, DNa06_L 8, DNge033_L 6, DNg89_L 2
   population 11,452 spikes/s per brain
+replay of /home/s/st/stevejobs/.cache/sb-replay/top32lane_mu.json: upright 10.94 s (max 15.00,  25% finish)  dist  47.8 m  |y| 2.94 m  v 4.50  bailed 0  pop 40,791 sp/s  812s
+trace -> /home/s/st/stevejobs/.cache/sb-replay/top32lane_mu_road_trace.json
