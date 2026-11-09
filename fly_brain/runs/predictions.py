@@ -1,8 +1,7 @@
 """Track B scoring pilot: decoder-free predictions on the real wiring and on rewired brains.
 
 Runs the conditions of scrambled-brains docs/track_b_predictions.csv, at Shiu's 150 Hz unless the row sets a rate
-(sugar dose 20 and 100 Hz, as flybench's dose_response), for 1 s in 30 flies. The looming detectors are LPLC2 and LC4 on both sides. Taste groups are driven on one side (Shiu's one
-labellum; --taste-side), Johnston's organ groups on both. With no input the network is silent, so "no stimulus" is 0 Hz.
+(sugar dose 20 and 100 Hz, as flybench's dose_response), for 1 s in 30 flies. The looming detectors are LPLC2 and LC4 on both sides. Taste groups are driven on both sides by default (--taste-side). With no input the network is silent, so "no stimulus" is 0 Hz.
 
     python -m runs.predictions --out results/track_b/r0.json
     python -m runs.predictions --brain results/variants/r1_s1.npz --out results/track_b/r1_s1.json
@@ -44,7 +43,7 @@ def main():
     ap.add_argument("--flies", type=int, default=30)
     ap.add_argument("--ms", type=float, default=1000.0)
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--taste-side", default="R", choices=["L", "R", "both"], help="the side of the taste groups (at scale 0.47 the left side barely drives MN9 on the real wiring)")
+    ap.add_argument("--taste-side", default="both", choices=["L", "R", "both"], help="the side of the taste groups (at scale 0.47 the left side barely drives MN9 on the real wiring)")
     ap.add_argument("--device", default="cpu")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
@@ -68,8 +67,8 @@ def main():
         signed.append({"id": name, "difference_hz": round(d, 3), "expected_sign": sign, "as_expected": bool(np.sign(d) == sign)})
     nulls = [{"id": name, "rate_hz": round(rates[c][ro], 3)} for name, ro, c in NULL]
     out = {"brain": a.brain or "brain.npz", "w_syn": w, "flies": a.flies, "ms": a.ms, "seed": a.seed, "taste_side": a.taste_side, "rates": rates, "signed": signed,
-           "score": sum(s["as_expected"] for s in signed) / len(signed), "null_rows": nulls}
-    print("score", out["score"], [s["id"] for s in signed if not s["as_expected"]])
+           "sign_score": sum(s["as_expected"] for s in signed) / len(signed), "null_rows": nulls}
+    print("sign score (the preregistered score is tools/track_b_score.py)", out["sign_score"], [s["id"] for s in signed if not s["as_expected"]])
     json.dump(out, open(a.out, "w"), indent=1)
 
 
