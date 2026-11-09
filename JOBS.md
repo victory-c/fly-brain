@@ -257,6 +257,8 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 38183 | 2026-11-08 14:55 | COMPLETED | 00:10:19 | 16 cpu, 24G | model-side rung pre-test on R0, 30 brains: synaptic scale x0.9 and x1.1, t_mbr 18 and 22 ms, tau 4.5 and 5.5 ms; all six pass -> results/rungs/model_side/ | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=24G --time=06:00:00 -c 16 -J pretest-model-side -o logs/pretest-model-side-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain...` | `$O/pretest_r0_$t.json`, [pretest-model-side-38183.out](logs/pretest-model-side-38183.out) |
 | 38184 | 2026-11-08 15:10 | COMPLETED | 00:01:31 | 16 cpu, 32G | Track C pilot analysis, first version (random orders over active neurons only, wing-motor site against its own R^2); replaced by job 38185 | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=32G --time=03:00:00 -c 16 -J trackc-analysis -o logs/trackc-analysis-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain/fly_b...` | [trackc-analysis-38184.out](logs/trackc-analysis-38184.out) |
 | 38185 | 2026-11-08 15:24 | COMPLETED | 00:06:59 | 16 cpu, 32G | Track C pilot analysis (tools/track_c.py) on R0 to R3: N90 3 in screen order at the descending site on all four brains, random-order medians 250 to 454 over all site neurons -> results/track_c/ | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=32G --time=03:00:00 -c 16 -J trackc-analysis2 -o logs/trackc-analysis2-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain/fly...` | [trackc-analysis2-38185.out](logs/trackc-analysis2-38185.out) |
+| 38186 | 2026-11-08 15:36 | COMPLETED | 00:02:23 | 16 cpu, 24G |  | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=24G --time=00:40:00 -c 16 -J trackb-r0 -o logs/trackb-r0-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain/fly_brain; /home/...` | `results/track_b/r0.json`, [trackb-r0-38186.out](logs/trackb-r0-38186.out) |
+| 38187 | 2026-11-08 15:38 | COMPLETED | 00:20:13 | 16 cpu, 24G |  | `sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=24G --time=02:00:00 -c 16 -J trackb-rungs -o logs/trackb-rungs-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain/fly_brain; ...` | `results/track_b/$v.json;`, [trackb-rungs-38187.out](logs/trackb-rungs-38187.out) |
 
 ## Full command lines
 
@@ -988,4 +990,16 @@ sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=32G --time=03:00:00
 
 ```bash
 sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=32G --time=03:00:00 -c 16 -J trackc-analysis2 -o logs/trackc-analysis2-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain/fly_brain; PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python ; echo == r0; PYTHONPATH=. $PY ../tools/track_c.py /home/s/st/stevejobs/.cache/sb-replay/trackc_r0_counts.npz /home/s/st/stevejobs/.cache/sb-replay/trackc_r0_trace.json results/rungs/screens/r0.parquet results/track_c/r0.json; echo == r1; PYTHONPATH=. $PY ../tools/track_c.py /home/s/st/stevejobs/.cache/sb-replay/trackc_r1_counts.npz /home/s/st/stevejobs/.cache/sb-replay/trackc_r1_trace.json results/rungs/screens/r1_s1.parquet results/track_c/r1.json; echo == r2; PYTHONPATH=. $PY ../tools/track_c.py /home/s/st/stevejobs/.cache/sb-replay/trackc_r2_counts.npz /home/s/st/stevejobs/.cache/sb-replay/trackc_r2_trace.json results/rungs/screens/r2_s1.parquet results/track_c/r2.json; echo == r3; PYTHONPATH=. $PY ../tools/track_c.py /home/s/st/stevejobs/.cache/sb-replay/trackc_r3_counts.npz /home/s/st/stevejobs/.cache/sb-replay/trackc_r3_trace.json results/rungs/screens/r3_s1.parquet results/track_c/r3.json
+```
+
+**38186** (trackb-r0)
+
+```bash
+sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=24G --time=00:40:00 -c 16 -J trackb-r0 -o logs/trackb-r0-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain/fly_brain; /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m runs.predictions --out results/track_b/r0.json
+```
+
+**38187** (trackb-rungs)
+
+```bash
+sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=24G --time=02:00:00 -c 16 -J trackb-rungs -o logs/trackb-rungs-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain/fly_brain; PY=/home/s/st/stevejobs/flybrain/venv-cuda/bin/python; for v in r1_s1 r1_s2 r2_s1 r2_s2 r3_s1 r3_s2 r35_s1 r4_s1 r5_s1; do echo "== $v $(date +%T)"; $PY -m runs.predictions --brain results/variants/$v.npz --out results/track_b/$v.json; done
 ```

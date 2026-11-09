@@ -1,0 +1,8 @@
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 5,878
+jo_ce {'mn9': 0.53, 'mdn': 0.0, 'gf': 0.0} network 54,822
+jo_f {'mn9': 3.23, 'mdn': 0.0, 'gf': 0.0} network 6,246
+sugar {'mn9': 22.48, 'mdn': 0.0, 'gf': 0.0} network 5,042
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 8,697
+sugar+ir94e {'mn9': 0.13, 'mdn': 0.0, 'gf': 0.0} network 6,536
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 305
+score 0.6 ['water_mn9', 'jo_f_mdn']
