@@ -20,3 +20,6 @@ lane-filter gain starts at 0.00 with width 1.0
   after warm-up, DN rates (Hz): DNp20_L 33, DNp20_R 20, DNg46_L 1, DNg46_R 1, DNge043_L 4, DNge043_R 6, DNb06_L 25, DNpe013_L 1, DNpe013_R 2, DNp33_L 20, DNp33_R 6, DNge091_L 2, DNg29_L 44, DNg29_R 28, DNg41_L 18, DNg41_R 22, DNp18_L 38, DNp18_R 45, DNp73_L 52, DNp73_R 8, b2 MN_L 6, b2 MN_R 1, hg1 MN_L 17, hg1 MN_R 11, DNa02_R 1, DNa03_R 2, DNa16_L 2, DNa16_R 5, DNb03_L 5, DNb03_R 4, DNa06_L 3, DNa06_R 6, DNp15_L 7, DNp15_R 27, DNge107_R 8, DNge086_R 3, DNge031_L 18, DNge031_R 20, DNge033_L 2, DNge033_R 5, GNG283_L 3, GNG283_R 12
   population 8,681 spikes/s per brain
 gen  0  fit best   8.47 mean   1.20  upright  1.13 s (max  8.00,   0% finish)  dist   4.8 m  |y| 0.66 m  v 4.50  bailed 0  pop 54,707 sp/s  371s
+gen  1  fit best   6.57 mean   1.51  upright  1.41 s (max  6.12,   0% finish)  dist   6.0 m  |y| 0.90 m  v 4.50  bailed 0  pop 51,287 sp/s  252s
+gen  2  fit best  11.31 mean   3.37  upright  3.20 s (max 10.86,   0% finish)  dist  13.5 m  |y| 2.24 m  v 4.50  bailed 0  pop 44,853 sp/s  553s
+gen  3  fit best  15.01 mean   4.89  upright  4.68 s (max 14.73,   0% finish)  dist  19.8 m  |y| 2.63 m  v 4.50  bailed 0  pop 44,922 sp/s  652s
