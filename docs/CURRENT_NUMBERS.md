@@ -1033,6 +1033,21 @@ five signed rows whose difference has the expected sign. Differences in Hz:
 
 - At the scales the pre-test singled out (job 38190, `results/track_b/calibrated/`, right taste groups): R3.5 at 0.5 scores 0.4 (sugar to MN9 +1.17 Hz and Ir94e suppression -0.67 Hz as expected; adding bitter raises MN9 by 12.0 Hz, the wrong sign, and bitter alone drives it at 3.4 Hz). R4 at 1.2, which no pre-test passed, scores 0 with no MN9 or MDN response to any row. R5 at 2.0 scores 0, and the JO-C/E null row fails: JO-C/E drives MDN at 45.1 Hz.
 
+The table above is the first pilot, on a draft list. The final list (scrambled-brains `docs/track_b_predictions.csv`, each source read on 2026-11-09; job 38207, `results/track_b/final/`, `tools/track_b_score.py`, both taste sides at scale 0.47) has six scored rows and two reported controls. A scored row passes if its sign is right and it is at least half R0's size: R0 1.0 (by construction), R1 draw 1 0.33, R1 draw 2 1.0, R2 draw 1 1.0, R2 draw 2 0.83 (dose response fails), R3 draws 1 and 2 1.0, R3.5, R4 and R5 0. The criterion, the list of rows and the two-sided drive were chosen after the first pilot on the draft list, and the two rows that failed on the real wiring were dropped then, so it is not blind.
+
+### Per-brain lane channel: pilot on the real wiring (GPU, 2026-11-09)
+
+`LANE_K=12 ride-readout.sbatch 4.5 201 r0 topk K`, jobs 38201 and 38202, 30 generations: top-k plus the 12 descending (type, side) groups this brain's HS probe picks, through its matched filter with 300 ms smoothing. Replays of the final mean decoder (48 riders x 15 s, seed 201, jobs 38220 to 38223, `results/rungs/r0/top<K>_lane12/v4.5_s201/replay_mu_*summary.json`):
+
+| Readout | Last generation | Mean of last five | Lane gain | Replay with rule: finish / road / fall | Without rule: upright / beyond 3.5 m | Median distance |
+|---|---|---|---|---|---|---|
+| top-8 + lane | 6.93 s, 2% | 7.45 s | -0.08 | 6 / 41 / 1 | 39 / 28 | 6.4 m |
+| top-8 (CPU) | 7.21 s, 6% | 7.15 s | none | 7 / 41 / 0 | 48 / 34 | 7.7 m |
+| top-32 + lane | 8.83 s, 15% | 7.99 s | -0.09 | 12 / 36 / 0 | 48 / 27 | 3.8 m |
+| top-32 (CPU) | 6.24 s, 0% | 6.19 s | none | 2 / 46 / 0 | 48 / 44 | 16.5 m |
+
+The channel helps at k = 32 and not at k = 8, and neither holds the lane: the hand-picked readout's replays keep 46, 44 and 38 of 48. One seed; the lane runs were on GPU and the runs without on CPU, so the differences are not all the channel's. The readout for the confirmatory runs is still open (preregistration 9a, point 5).
+
 ### Model-side rung: pre-test on the real wiring (CPU, 2026-11-08)
 
 `runs/pretest.py` with 30 brains on R0 (job 38183, `results/rungs/model_side/`), one parameter moved by 10% at a time; the rate
