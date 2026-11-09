@@ -1,0 +1,112 @@
+{
+ "r0": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s1": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s2": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s1": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s2": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r35_s1": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r3_s1": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r3_s2": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r4_s1": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r5_s1": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ }
+}
