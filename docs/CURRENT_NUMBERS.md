@@ -1000,6 +1000,37 @@ The roll-rate SD differs between the replays: 0.42, 0.27, 0.43 and 0.40 on R0 to
   did not learn. The ridge penalty is chosen once per site. The simulated jGCaMP8 and probe-distance parts of preregistration
   section 7 are not done.
 
+### Track B pilot: decoder-free predictions on the ladder (CPU, 2026-11-08)
+
+`python -m runs.predictions` (jobs 38186 and 38187, `results/track_b/`): the rows of scrambled-brains
+`docs/track_b_predictions_DRAFT.csv` that need no further choice, 150 Hz Poisson drive for 1 s in 30 flies at synaptic scale 0.47, taste groups on the
+right side (Shiu's one labellum; the left side is below) and Johnston's-organ groups on both. With no input the network is silent, so "no stimulus" is 0 Hz. The score is the fraction of the
+five signed rows whose difference has the expected sign. Differences in Hz:
+
+| Brain | Score | Sugar to MN9 | Water to MN9 | Bitter on sugar, MN9 | Ir94e on sugar, MN9 | JO-F to MDN | Null rows: JO-C/E to MDN (Hz) |
+|---|---|---|---|---|---|---|---|
+| R0 | 0.6 | +22.48 | 0 | -22.48 | -22.35 | 0 | 0 |
+| R1 draw 1 | 0.6 | +0.03 | 0 | -0.03 | -0.03 | 0 | 0 |
+| R1 draw 2 | 0.6 | +21.90 | 0 | -21.90 | -21.40 | 0 | 0.04 |
+| R2 draw 1 | 0.6 | +24.82 | 0 | -24.82 | -24.55 | 0 | 1.26 |
+| R2 draw 2 | 0.6 | +12.02 | 0 | -12.02 | -12.02 | 0 | 2.82 |
+| R3 draw 1 | 0.6 | +22.87 | 0 | -22.87 | -22.80 | 0 | 0.74 |
+| R3 draw 2 | 0.6 | +22.52 | 0 | -22.52 | -22.35 | 0 | 0.25 |
+| R3.5 | 0 | 0 | 0 | +4.50 | +0.02 | 0 | 0 |
+| R4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| R5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+- The real wiring itself scores 0.6: water does not drive MN9 and JO-F does not drive MDN at these settings. Those two rows
+  cannot separate rungs as they stand.
+- A sign score hides magnitude. R1 draw 1 scores 0.6 with sugar driving MN9 at 0.03 Hz, about 700 times below the real wiring (R1 draw 2: 21.9 Hz), and its
+  suppression rows pass on that one-in-a-few-spikes response. This row-by-row sign score is the one section 6 of the preregistration defines.
+- R4 and R5 score 0 with every readout at 0 Hz. R3.5 also scores 0, but not through silence: sugar gives MN9 0 Hz and adding bitter raises it to 4.5 Hz, so both
+  suppression rows have the wrong sign, and JO-C/E drives MN9 at 21.7 Hz. The bitter-alone and sugar-to-giant-fiber null rows are 0 Hz on every brain except R3.5's
+  bitter-alone at 0.72 Hz. All of this is at scale 0.47: scoring at each rung's calibrated scale and the 100 draws for R1 and R2 (section 6) are not done, and this pilot has two draws for R1 to R3 and one for the rest.
+- The result depends on the side driven. Driving the left labellum instead (job 38189, `results/track_b/left/`), sugar drives MN9 at only 0.13 Hz on the real wiring (22.48 Hz from the
+  right), and at 0.08 to 1.58 Hz on the R1 to R3 draws, except R1 draw 1 at 0. The sign score is still 0.6 on R0 and on every R1 to R3 draw but R1 draw 1 (0), resting on responses of a fraction of a
+  spike per second. So the 0.6 is not a robust number, and the right-side rates at scale 0.47 cannot be taken to hold for the other side.
+
 ### Model-side rung: pre-test on the real wiring (CPU, 2026-11-08)
 
 `runs/pretest.py` with 30 brains on R0 (job 38183, `results/rungs/model_side/`), one parameter moved by 10% at a time; the rate
