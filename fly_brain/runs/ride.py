@@ -202,6 +202,8 @@ def parse():
     ap.add_argument("--zbar", default=None, help=".npy (D,): mean input of each decoder weight while riding (0 for bias, pedal, brake); CEM then searches steer:bias at that operating point")
     ap.add_argument("--max-minutes", type=float, default=0.0, help="CEM: stop before a generation that would end past this wall time")
     ap.add_argument("--resume", default=None, help="CEM: continue the search stored in this results json (its mu, sigma, history and best), e.g. after a job hit its time limit; --generations is the total. The gust and start-lean draws restart from a seed of their own, and --log-attempts keeps only the new generations")
+    ap.add_argument("--t-mbr", type=float, default=None, help="model-side rung: membrane time constant in ms (default the engine's 20)")
+    ap.add_argument("--tau", type=float, default=None, help="model-side rung: synaptic time constant in ms (default the engine's 5)")
     ap.add_argument("--w-syn-scale", type=float, default=None, help="override the calibrated synapse scale (W_SYN_SCALE, 0.47)")
     ap.add_argument("--brain", default=None, help="connectome npz (default brain.npz); e.g. a rewired one from brain/variants.py")
     ap.add_argument("--no-synapses", action="store_true",
@@ -255,7 +257,7 @@ class Ride:
             brain = Brain(a.brain or ROOT / "brain.npz")
             w = W_SYN if a.w_syn_scale is None else PARAMS["w_syn"] * a.w_syn_scale
             self.loop = BrainLoop(brain, a.riders, self.senses.idx, self.readout.idx,
-                                  params={"w_syn": w}, device=self.dev, seed=a.seed)
+                                  params={"w_syn": w, **({"t_mbr": a.t_mbr} if a.t_mbr else {}), **({"tau": a.tau} if a.tau else {})}, device=self.dev, seed=a.seed)
             if a.no_synapses:  # after the engine has sized the Poisson kick from w
                 self.loop.engine.w_syn = 0.0
             print(f"brain: {a.brain or 'brain.npz'}, {brain.n:,} neurons, {len(self.senses.idx)} driven, {len(self.readout.idx)} read out, "

@@ -22,7 +22,7 @@ set -euo pipefail
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-8}
 cd "$SLURM_SUBMIT_DIR/fly_brain"
 PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
-V0=${1:?speed m/s}; SEED=${2:?seed}; BRAIN=${3:?connectome npz}; TAG=${4:?tag}; MIN=${5:-300}; WS=${6:-}; WARG=${WS:+--w-syn-scale $WS}
+V0=${1:?speed m/s}; SEED=${2:?seed}; BRAIN=${3:?connectome npz}; TAG=${4:?tag}; MIN=${5:-300}; WS=${6:-}; WARG="${WS:+--w-syn-scale $WS} ${MODEL_ARGS:-}"  # MODEL_ARGS (environment): e.g. "--t-mbr 18" for the model-side rung
 OUT=results/rungs/${TAG}/v${V0}_s${SEED}
 mkdir -p $OUT
 echo "== $(date +%T) 1) probe on $BRAIN"
