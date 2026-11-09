@@ -1,0 +1,90 @@
+== r0
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 5,886
+jo_ce {'mn9': 0.53, 'mdn': 0.0, 'gf': 0.0} network 54,822
+jo_f {'mn9': 3.23, 'mdn': 0.0, 'gf': 0.0} network 6,246
+sugar {'mn9': 0.13, 'mdn': 0.0, 'gf': 0.0} network 2,748
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 7,524
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 5,229
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 284
+score 0.6 ['water_mn9', 'jo_f_mdn']
+== r1_s1
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 3,679
+jo_ce {'mn9': 4.15, 'mdn': 0.0, 'gf': 0.0} network 51,433
+jo_f {'mn9': 2.23, 'mdn': 0.0, 'gf': 0.0} network 6,347
+sugar {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 1,457
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 4,981
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 3,635
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 252
+score 0.0 ['sugar_mn9', 'water_mn9', 'bitter_suppression', 'ir94e_suppression', 'jo_f_mdn']
+== r1_s2
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 4,942
+jo_ce {'mn9': 7.38, 'mdn': 0.04, 'gf': 0.0} network 46,155
+jo_f {'mn9': 0.67, 'mdn': 0.0, 'gf': 0.0} network 4,930
+sugar {'mn9': 0.2, 'mdn': 0.0, 'gf': 0.0} network 4,505
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 10,772
+sugar+ir94e {'mn9': 0.03, 'mdn': 0.0, 'gf': 0.0} network 113,393
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 284
+score 0.6 ['water_mn9', 'jo_f_mdn']
+== r2_s1
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 6,774
+jo_ce {'mn9': 0.33, 'mdn': 1.26, 'gf': 0.0} network 57,343
+jo_f {'mn9': 0.97, 'mdn': 0.0, 'gf': 0.0} network 7,194
+sugar {'mn9': 0.22, 'mdn': 0.0, 'gf': 0.0} network 3,144
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 8,758
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 6,039
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 303
+score 0.6 ['water_mn9', 'jo_f_mdn']
+== r2_s2
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 6,638
+jo_ce {'mn9': 0.47, 'mdn': 2.82, 'gf': 0.0} network 57,611
+jo_f {'mn9': 0.75, 'mdn': 0.0, 'gf': 0.0} network 6,360
+sugar {'mn9': 1.58, 'mdn': 0.0, 'gf': 0.0} network 3,184
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 8,121
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 5,533
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 313
+score 0.6 ['water_mn9', 'jo_f_mdn']
+== r3_s1
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 5,022
+jo_ce {'mn9': 1.5, 'mdn': 0.74, 'gf': 0.0} network 67,982
+jo_f {'mn9': 3.77, 'mdn': 0.0, 'gf': 0.0} network 6,173
+sugar {'mn9': 0.25, 'mdn': 0.0, 'gf': 0.0} network 2,896
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 6,777
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 4,647
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 290
+score 0.6 ['water_mn9', 'jo_f_mdn']
+== r3_s2
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 6,449
+jo_ce {'mn9': 2.65, 'mdn': 0.25, 'gf': 0.0} network 56,472
+jo_f {'mn9': 3.75, 'mdn': 0.0, 'gf': 0.0} network 6,042
+sugar {'mn9': 0.08, 'mdn': 0.0, 'gf': 0.0} network 2,804
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 7,734
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 4,704
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 288
+score 0.6 ['water_mn9', 'jo_f_mdn']
+== r35_s1
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 320
+jo_ce {'mn9': 21.68, 'mdn': 0.0, 'gf': 6.42} network 44,510
+jo_f {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 166
+sugar {'mn9': 0.0, 'mdn': 0.71, 'gf': 0.0} network 518
+sugar+bitter {'mn9': 0.0, 'mdn': 0.81, 'gf': 0.0} network 838
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.68, 'gf': 0.0} network 740
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 6
+score 0.0 ['sugar_mn9', 'water_mn9', 'bitter_suppression', 'ir94e_suppression', 'jo_f_mdn']
+== r4_s1
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 272
+jo_ce {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 2,322
+jo_f {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 137
+sugar {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 416
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 699
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 646
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 2
+score 0.0 ['sugar_mn9', 'water_mn9', 'bitter_suppression', 'ir94e_suppression', 'jo_f_mdn']
+== r5_s1
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 234
+jo_ce {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 1,967
+jo_f {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 112
+sugar {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 365
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 600
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.17, 'gf': 0.0} network 572
+water {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0} network 2
+score 0.0 ['sugar_mn9', 'water_mn9', 'bitter_suppression', 'ir94e_suppression', 'jo_f_mdn']
