@@ -1031,6 +1031,8 @@ five signed rows whose difference has the expected sign. Differences in Hz:
   right), and at 0.08 to 1.58 Hz on the R1 to R3 draws, except R1 draw 1 at 0. The sign score is still 0.6 on R0 and on every R1 to R3 draw but R1 draw 1 (0), resting on responses of a fraction of a
   spike per second. So the 0.6 is not a robust number, and the right-side rates at scale 0.47 cannot be taken to hold for the other side.
 
+- At the scales the pre-test singled out (job 38190, `results/track_b/calibrated/`, right taste groups): R3.5 at 0.5 scores 0.4 (sugar to MN9 +1.17 Hz and Ir94e suppression -0.67 Hz as expected; adding bitter raises MN9 by 12.0 Hz, the wrong sign, and bitter alone drives it at 3.4 Hz). R4 at 1.2, which no pre-test passed, scores 0 with no MN9 or MDN response to any row. R5 at 2.0 scores 0, and the JO-C/E null row fails: JO-C/E drives MDN at 45.1 Hz.
+
 ### Model-side rung: pre-test on the real wiring (CPU, 2026-11-08)
 
 `runs/pretest.py` with 30 brains on R0 (job 38183, `results/rungs/model_side/`), one parameter moved by 10% at a time; the rate
@@ -1045,7 +1047,7 @@ window is 10,750 to 43,000 spikes/s outside the driven neurons, and R0 itself gi
 | synaptic time constant 4.5 ms | 16,333 / 17,109 | 29 / 32 (10 / 3) | pass |
 | synaptic time constant 5.5 ms | 25,697 / 25,871 | 45 / 54 (6 / 4) | pass |
 
-All six pass. A 10% change in synaptic scale moves the network rate by about a third, and a 10% change in either time constant by about a fifth. Only the pre-test has run; none of these variants has been ridden.
+All six pass. A 10% change in synaptic scale moves the network rate by about a third, and a 10% change in either time constant by about a fifth. Pilot rides of the six variants on the real wiring (hand-picked readout, CEM seed 201, 60 generations; jobs 38191 to 38196, `results/rungs/model_<variant>_cpu/`, `MODEL_ARGS` in `ride-rung.sbatch`) started on 2026-11-08 16:30, two at a time.
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
