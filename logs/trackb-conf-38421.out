@@ -3,3 +3,33 @@
 sign score (the preregistered score is tools/track_b_score.py) 1.0 []
   9,954 neurons relabelled (5.97%), 8,627 changed sign (5.18%); 40.1% of synapses now inhibitory (was 38.4%)
 == 03:29:58 r1_s112 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,976 neurons relabelled (5.98%), 8,616 changed sign (5.17%); 40.1% of synapses now inhibitory (was 38.4%)
+== 03:33:06 r1_s113 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,825 neurons relabelled (5.89%), 8,542 changed sign (5.12%); 39.8% of synapses now inhibitory (was 38.4%)
+== 03:35:18 r1_s114 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,122 neurons relabelled (6.07%), 8,746 changed sign (5.25%); 40.1% of synapses now inhibitory (was 38.4%)
+== 03:38:30 r1_s115 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,893 neurons relabelled (5.93%), 8,559 changed sign (5.13%); 40.0% of synapses now inhibitory (was 38.4%)
+== 03:41:48 r1_s116 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,923 neurons relabelled (5.95%), 8,660 changed sign (5.19%); 40.2% of synapses now inhibitory (was 38.4%)
+== 03:43:59 r1_s117 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,883 neurons relabelled (5.93%), 8,650 changed sign (5.19%); 39.9% of synapses now inhibitory (was 38.4%)
+== 03:47:16 r1_s118 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,960 neurons relabelled (5.97%), 8,670 changed sign (5.20%); 39.7% of synapses now inhibitory (was 38.4%)
+== 03:50:31 r1_s119 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,942 neurons relabelled (5.96%), 8,632 changed sign (5.18%); 40.0% of synapses now inhibitory (was 38.4%)
+== 03:52:50 r1_s120 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.249
+== 03:56:04 r2_s111 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 03:59:13 r2_s112 
