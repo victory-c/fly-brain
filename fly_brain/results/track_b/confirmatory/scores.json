@@ -21,6 +21,1095 @@
    "loom_dnp02_dnp11": true
   }
  },
+ "r1_s102": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": false,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s103": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s104": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s105": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s106": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s107": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": false,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s108": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s109": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s110": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": false,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s111": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s112": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s113": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s114": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s115": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s116": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s117": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s118": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s119": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s120": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s121": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s122": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s123": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s124": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s125": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s126": {
+  "score": 0.6666666666666666,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s127": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s128": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s129": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s130": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s131": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s132": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s133": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s134": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s135": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s136": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s137": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s138": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s139": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s140": {
+  "score": 0.6666666666666666,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s141": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s142": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s143": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s144": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s145": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s146": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s147": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s148": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s149": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s150": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s151": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s152": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s153": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s154": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s155": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s156": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s157": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s158": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s159": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": false,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s160": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s161": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s162": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s163": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s164": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s165": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s166": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s167": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s168": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s169": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s170": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s171": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s172": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s173": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": false,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s174": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s175": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s176": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s177": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s178": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s179": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s180": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s181": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s182": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s183": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s184": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s185": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s186": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s187": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s188": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s189": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s190": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s191": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s192": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s193": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s194": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s195": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s196": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s197": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s198": {
+  "score": 0.3333333333333333,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s199": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s200": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
  "r2_s101": {
   "score": 1.0,
   "rows": {
@@ -30,6 +1119,1293 @@
    "dose_response": true,
    "loom_gf": true,
    "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s102": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s103": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s104": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s105": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s106": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s107": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s108": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s109": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s110": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s111": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s112": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s113": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s114": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s115": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s116": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s117": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s118": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s119": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s120": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s121": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s122": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s123": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s124": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s125": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s126": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s127": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s128": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s129": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s130": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s131": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s132": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s133": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s134": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s135": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s136": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s137": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s138": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s139": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s140": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s141": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s142": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s143": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s144": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s145": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s146": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s147": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s148": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s149": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s150": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s151": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s152": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s153": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s154": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s155": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s156": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s157": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s158": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s159": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s160": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s161": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s162": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s163": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s164": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s165": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s166": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s167": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s168": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s169": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s170": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s171": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s172": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s173": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s174": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s175": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s176": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s177": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s178": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s179": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s180": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s181": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s182": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s183": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s184": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s185": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s186": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s187": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s188": {
+  "score": 0.8333333333333334,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": false,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s189": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s190": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s191": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s192": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s193": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s194": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s195": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s196": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s197": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s198": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s199": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s200": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r35_s3": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r35_s4": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r35_s5": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r3_s3": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r3_s4": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r3_s5": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r4_s3": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r4_s3_w1.2": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r4_s4": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r4_s4_w1.2": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r4_s5": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r4_s5_w1.2": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r5_s3": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r5_s3_w2.0": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r5_s4": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r5_s4_w2.0": {
+  "score": 0.16666666666666666,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r5_s5": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
+  }
+ },
+ "r5_s5_w2.0": {
+  "score": 0.0,
+  "rows": {
+   "sugar_mn9": false,
+   "bitter_suppression": false,
+   "ir94e_suppression": false,
+   "dose_response": false,
+   "loom_gf": false,
+   "loom_dnp02_dnp11": false
   }
  }
 }
