@@ -1046,7 +1046,7 @@ The table above is the first pilot, on a draft list. The final list (scrambled-b
 | top-32 + lane | 8.83 s, 15% | 7.99 s | -0.09 | 12 / 36 / 0 | 48 / 27 | 3.8 m |
 | top-32 (CPU) | 6.24 s, 0% | 6.19 s | none | 2 / 46 / 0 | 48 / 44 | 16.5 m |
 
-The channel helps at k = 32 and not at k = 8, and neither holds the lane: the hand-picked readout's replays keep 46, 44 and 38 of 48. One seed; the lane runs were on GPU and the runs without on CPU, so the differences are not all the channel's. The readout for the confirmatory runs is still open (preregistration 9a, point 5).
+The channel helps at k = 32 and not at k = 8, and neither holds the lane: the hand-picked readout's replays keep 46, 44 and 38 of 48. One seed; the lane runs were on GPU and the runs without on CPU, so the differences are not all the channel's. Decided 2026-11-09 (preregistration 9a, point 5): the hand-picked readout is primary, top-32 plus the lane channel secondary.
 
 ### Model-side rung: pre-test on the real wiring (CPU, 2026-11-08)
 
