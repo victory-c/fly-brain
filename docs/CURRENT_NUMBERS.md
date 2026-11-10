@@ -1080,7 +1080,33 @@ window is 10,750 to 43,000 spikes/s outside the driven neurons, and R0 itself gi
 | synaptic time constant 4.5 ms | 16,333 / 17,109 | 29 / 32 (10 / 3) | pass |
 | synaptic time constant 5.5 ms | 25,697 / 25,871 | 45 / 54 (6 / 4) | pass |
 
-All six pass. A 10% change in synaptic scale moves the network rate by about a third, and a 10% change in either time constant by about a fifth. Pilot rides of the six variants on the real wiring (hand-picked readout, CEM seed 201, 60 generations; jobs 38191 to 38196, `results/rungs/model_<variant>_cpu/`, `MODEL_ARGS` in `ride-rung.sbatch`) started on 2026-11-08 16:30, two at a time.
+All six pass. A 10% change in synaptic scale moves the network rate by about a third, and a 10% change in either time constant by about a fifth. Pilot rides of the six variants on the real wiring (hand-picked readout, CEM seed 201, 60 generations; jobs 38191 to 38196, `results/rungs/model_<variant>_cpu/`, `MODEL_ARGS` in `ride-rung.sbatch`) ran on the CPU, two at a time, and finished on 2026-11-09.
+
+| Variant | Riding time, last generation (s) | Riders finishing | Population rate while riding (spikes/s) |
+|---|---|---|---|
+| synaptic scale x 0.9 | 12.43 | 60% | 25,082 |
+| synaptic scale x 1.1 | 9.26 | 27% | 48,264 |
+| membrane time constant 18 ms | 11.05 | 31% | 44,756 |
+| membrane time constant 22 ms | 13.36 | 75% | 27,789 |
+| synaptic time constant 4.5 ms | 10.63 | 31% | 26,986 |
+| synaptic time constant 5.5 ms | 12.38 | 58% | 48,912 |
+
+One seed each, so these are pilots. R0's three pilots (seeds 201 to 203) gave 13.71, 11.89 and 10.91 s (SD 1.4): every variant except scale x 1.1 is within one SD of R0's median, and x 1.1 is 1.9 SD below it. The confirmatory rides of these variants (seeds 211 to 213) are in the secondary design.
+
+## Closed-loop scale of R3.5 and R5 (preregistration section 4)
+
+`ride-rung.sbatch` with `GENS=0` on draw 1, CEM seed 211, jobs 38363 to 38368, then `tools/replay_rate.py --window 0.6` against R0's 23,388 spikes/s (`results/rungs/cl_<rung>_w<scale>/`, CPU).
+
+| Brain | Scale | First 0.6 s, spikes/s | Relative to R0 |
+|---|---|---|---|
+| R3.5 | 0.47 | 20,763 | 0.89 |
+| R3.5 | 0.5 | 36,568 | 1.56 |
+| R3.5 | 0.53 | 67,866 | 2.90 |
+| R3.5 | 0.56 | 92,167 | 3.94 |
+| R5 | 1.5 | 13,546 | 0.58 |
+| R5 | 2 | 37,752 | 1.61 |
+
+By the rule (smallest |log(rate / 23,400)|, within 2x), R3.5 rides at 0.47 and R5 at 2.0, and no bisection is needed. R4 stays at 1.2 from the pilot. The R3.5 rate is steep: 0.06 of scale is a factor of 4.4. The three single rides (draw 1, seed 211, 4.5 m/s, hand-picked readout) are on the CPU, chained, jobs 38371 to 38373, because the GPUs are taken; the preregistration allows that and they are reported as CPU runs. Tags `conf_r35_s1_w0.47_cpu`, `conf_r4_s1_w1.2_cpu`, `conf_r5_s1_w2_cpu`.
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 

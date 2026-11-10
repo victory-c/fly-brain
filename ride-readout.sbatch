@@ -26,6 +26,8 @@ set -euo pipefail
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-8}
 cd "$SLURM_SUBMIT_DIR/fly_brain"
 PY=${PY:-$SLURM_SUBMIT_DIR/venv-cuda/bin/python}
+# REQUIRE_CUDA=1 (environment): stop at once if the GPU is unusable, instead of silently searching on the CPU (confirmatory runs)
+[ "${REQUIRE_CUDA:-0}" = 1 ] && $PY -c "import torch; assert torch.cuda.is_available(), 'no CUDA'"
 V0=${1:?speed m/s}; SEED=${2:?seed}; RUNG=${3:?r0 or a rung}; RO=${4:?topk|randk|bypass|bypass0}; K=${5:-8}; MIN=${6:-300}; WS=${7:-}; RSEED=${8:-0}
 WARG=${WS:+--w-syn-scale $WS}; TAG=${RUNG}${WS:+_w$WS}
 if [ "$RUNG" = r0 ]; then BARG=""; else BARG="--brain results/variants/$RUNG.npz"; fi
