@@ -42,3 +42,20 @@ sign score (the preregistered score is tools/track_b_score.py) 1.0 []
 sign score (the preregistered score is tools/track_b_score.py) 1.0 []
   jitter factors: median 1.000, 16-84% 0.801-1.249
 == 12:59:58 r2_s185 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:01:35 r2_s186 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:03:11 r2_s187 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.249
+== 13:04:42 r2_s188 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:06:18 r2_s189 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:07:54 r2_s190 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+== done Tue Nov 10 01:09:07 PM PST 2026
