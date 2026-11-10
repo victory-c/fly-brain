@@ -22,3 +22,7 @@ r3_s3 HALT scale 0.47: 29,885 spikes/s, 12,264 outside the driven neurons (1,420
 r3_s4 VS scale 0.47: 27,817 spikes/s, 12,756 outside the driven neurons (1,311 of them fire), outputs |z|>3: 31 (null mean 0.1, max 6), max |z| 48.0 (null 4.6) (36.9 s)
 r3_s4 HALT scale 0.47: 31,421 spikes/s, 13,801 outside the driven neurons (1,443 of them fire), outputs |z|>3: 37 (null mean 0.1, max 5), max |z| 32.5 (null 4.8) (27.0 s)
 -> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r3_s4_b30_w0.47.json
+r3_s5 VS scale 0.47: 30,457 spikes/s, 15,396 outside the driven neurons (1,419 of them fire), outputs |z|>3: 36 (null mean 0.2, max 9), max |z| 38.2 (null 4.7) (46.8 s)
+r3_s5 HALT scale 0.47: 34,049 spikes/s, 16,428 outside the driven neurons (1,588 of them fire), outputs |z|>3: 42 (null mean 0.2, max 8), max |z| 32.2 (null 4.8) (49.0 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r3_s5_b30_w0.47.json
+== done Mon Nov  9 07:02:08 PM PST 2026
