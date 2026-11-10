@@ -1124,7 +1124,24 @@ One decoder, so this checks the tool and does not test anything. The final mean 
 
 ## Track B confirmatory runs (preregistration section 6)
 
-`trackb-conf.sbatch`, CPU, `results/track_b/confirmatory/`, scored by `python3 tools/track_b_score.py <dir> --by-rung`. The preregistration gives the numbers of draws, not which ones, so these were picked before any run so that no Track B pilot has used them: R1 and R2 draws 101 to 200; R3, R3.5, R4 and R5 draws 3 to 5 (only R3 has those draws in Track A; R3.5, R4 and R5 ride draw 1 there). Scales: 0.47 for every rung, plus each rung's closed-loop scale where it differs (R4 1.2, R5 2.0). R0's reference (job 38414) came out identical to the pilot's `final/r0.json`. Test, one draw each (job 38415): R1 draw 101 and R2 draw 101 both score 1.0, which says nothing about the mean over 100 draws. The rest is queued as jobs 38416 to 38429, about 2.75 min per brain.
+`trackb-conf.sbatch`, CPU, `results/track_b/confirmatory/`, scored by `python3 tools/track_b_score.py <dir> --by-rung`. The preregistration gives the numbers of draws, not which ones, so these were picked before any run so that no Track B pilot has used them: R1 and R2 draws 101 to 200; R3, R3.5, R4 and R5 draws 3 to 5 (only R3 has those draws in Track A; R3.5, R4 and R5 ride draw 1 there). Scales: 0.47 for every rung, plus each rung's closed-loop scale where it differs (R4 1.2, R5 2.0). R0's reference (job 38414) came out identical to the pilot's `final/r0.json`. Test, one draw each (job 38415): R1 draw 101 and R2 draw 101 both score 1.0, which says nothing about the mean over 100 draws. The rest ran as jobs 38416 to 38429 (2026-11-10 01:33 to 13:52, all completed, 218 brains, no failed draw).
+
+Results (fraction of the six scored rows passed, mean over draws; `scores.json` holds every brain's rows):
+
+| Rung | Scale | Draws | Mean score | Draws by score |
+|---|---|---|---|---|
+| R0 | 0.47 | 1 | 1.000 | |
+| R1 | 0.47 | 100 | 0.682 | 31 at 1.0, 27 at 0.83, 2 at 0.67, 40 at 0.33 |
+| R2 | 0.47 | 100 | 0.993 | 96 at 1.0, 4 at 0.83 |
+| R3 | 0.47 | 3 | 1.000 | |
+| R3.5 | 0.47 | 3 | 0.000 | |
+| R4 | 0.47 / 1.2 | 3 / 3 | 0.000 / 0.000 | |
+| R5 | 0.47 / 2.0 | 3 / 3 | 0.000 / 0.056 | one draw at 2.0 passes loom to DNp02/DNp11 |
+
+- R1 loses only taste rows. Both loom rows pass on all 100 draws (median 255 and 174 Hz against R0's 264 and 183). The four taste rows mostly keep their sign and fall below half of R0 (median 18, -17, -17 and 2.4 Hz against 30, -30, -30 and 7.4); 13 row failures out of 228 are sign flips. Where one taste row fails, the others usually fail with it: 40 draws pass the two loom rows only.
+- R2 loses only the dose-response row, on 4 draws, by size.
+- R3.5, R4 and R5: the taste rows give exactly 0 Hz difference (no response reaches MN9 or the suppression readouts), so they fail by sign; the loom rows keep at most a fraction of R0's difference. The closed-loop scale (R4 1.2, R5 2.0) does not bring the rows back.
+- So the ladder is R0, R2, R3 at or near full score, R1 in between, and every rung from R3.5 up at or near zero. The preregistration states no numerical Track B prediction; this is reported as the decoder-free result of section 6.
 
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
