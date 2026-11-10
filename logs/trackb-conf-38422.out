@@ -1,0 +1,23 @@
+  10,028 neurons relabelled (6.02%), 8,735 changed sign (5.24%); 40.1% of synapses now inhibitory (was 38.4%)
+== 06:08:14 r1_s121 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,977 neurons relabelled (5.99%), 8,693 changed sign (5.21%); 40.1% of synapses now inhibitory (was 38.4%)
+== 06:11:23 r1_s122 
+sign score (the preregistered score is tools/track_b_score.py) 0.8333333333333334 ['dose_response']
+  9,983 neurons relabelled (5.99%), 8,664 changed sign (5.20%); 40.1% of synapses now inhibitory (was 38.4%)
+== 06:14:38 r1_s123 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,907 neurons relabelled (5.94%), 8,649 changed sign (5.19%); 39.8% of synapses now inhibitory (was 38.4%)
+== 06:17:13 r1_s124 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,201 neurons relabelled (6.12%), 8,855 changed sign (5.31%); 40.1% of synapses now inhibitory (was 38.4%)
+== 06:20:02 r1_s125 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,091 neurons relabelled (6.05%), 8,800 changed sign (5.28%); 40.2% of synapses now inhibitory (was 38.4%)
+== 06:23:14 r1_s126 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,831 neurons relabelled (5.90%), 8,499 changed sign (5.10%); 40.2% of synapses now inhibitory (was 38.4%)
+== 06:26:38 r1_s127 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,078 neurons relabelled (6.05%), 8,762 changed sign (5.26%); 40.1% of synapses now inhibitory (was 38.4%)
+== 06:29:47 r1_s128 
