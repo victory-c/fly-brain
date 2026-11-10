@@ -1,0 +1,7 @@
+== 00:55:01 1) probe on results/variants/r1_s3.npz
+hiii2 MN     hiii2 MN_L        L         vnc_motor  1.620000  0.00   1.62   4.140000
+
+-> results/rungs/conf_r1_s3/v4.5_s211/probe.json
+init_hold: 29.6 W holds 4.5 m/s
+== 00:55:53 gate v0=4.5 seed=211, max 340 min
+== 00:55:53 2) ride_slow_mu trace at v0=4.5
