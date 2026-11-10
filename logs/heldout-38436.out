@@ -1,0 +1,7 @@
+have /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r0/v4.5_s211/heldout/gust301.json
+== /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r0/v4.5_s211: gust302, v 4.5, seed 302
+replay of /tmp/tmpa5x_901m/decoder.json: upright 14.80 s (max 15.00,  96% finish)  dist  65.4 m  |y| 0.96 m  v 4.50  bailed 0  pop 37,448 sp/s  458s
+{"riders": 48, "finished": 46, "bailed": 0, "left_road": 1, "fell": 1, "lateral_mean": 0.96180863911286, "lateral_median": 0.7583621144294739, "upright_mean": 14.802118420600891, "upright_max": 15.000247955322266, "offroad_m": 3.5}
+have /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r0/v4.5_s211/heldout/vplus.json
+have /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r0/v4.5_s211/heldout/vminus.json
+== done Tue Nov 10 02:03:16 PM PST 2026

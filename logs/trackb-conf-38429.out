@@ -28,3 +28,34 @@ sign score (the preregistered score is tools/track_b_score.py) 1.0 []
   9,876 neurons relabelled (5.92%), 8,585 changed sign (5.15%); 40.0% of synapses now inhibitory (was 38.4%)
 == 13:28:01 r1_s200 
 sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:30:18 r2_s191 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:32:29 r2_s192 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.249
+== 13:34:42 r2_s193 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:36:49 r2_s194 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:38:59 r2_s195 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:41:21 r2_s196 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:43:34 r2_s197 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:46:00 r2_s198 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:48:07 r2_s199 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 13:50:18 r2_s200 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+== done Tue Nov 10 01:51:58 PM PST 2026
