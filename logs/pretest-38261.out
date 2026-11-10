@@ -1,0 +1,24 @@
+r1_s3 VS scale 0.47: 32,501 spikes/s, 17,440 outside the driven neurons (1,416 of them fire), outputs |z|>3: 32 (null mean 0.1, max 4), max |z| 46.9 (null 4.5) (49.6 s)
+r1_s3 HALT scale 0.47: 35,192 spikes/s, 17,571 outside the driven neurons (1,509 of them fire), outputs |z|>3: 28 (null mean 0.1, max 3), max |z| 15.9 (null 4.0) (29.9 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r1_s3_b30_w0.47.json
+r1_s4 VS scale 0.47: 34,273 spikes/s, 19,212 outside the driven neurons (1,540 of them fire), outputs |z|>3: 27 (null mean 0.2, max 7), max |z| 36.9 (null 5.3) (27.9 s)
+r1_s4 HALT scale 0.47: 37,067 spikes/s, 19,446 outside the driven neurons (1,604 of them fire), outputs |z|>3: 25 (null mean 0.2, max 6), max |z| 34.2 (null 4.4) (29.2 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r1_s4_b30_w0.47.json
+r1_s5 VS scale 0.47: 34,926 spikes/s, 19,865 outside the driven neurons (1,371 of them fire), outputs |z|>3: 29 (null mean 0.1, max 4), max |z| 41.8 (null 4.0) (29.0 s)
+r1_s5 HALT scale 0.47: 37,932 spikes/s, 20,310 outside the driven neurons (1,474 of them fire), outputs |z|>3: 28 (null mean 0.1, max 3), max |z| 26.5 (null 4.3) (45.5 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r1_s5_b30_w0.47.json
+r2_s3 VS scale 0.47: 49,409 spikes/s, 34,348 outside the driven neurons (2,365 of them fire), outputs |z|>3: 21 (null mean 0.9, max 155), max |z| 39.0 (null 4.7) (50.7 s)
+r2_s3 HALT scale 0.47: 53,646 spikes/s, 36,025 outside the driven neurons (2,417 of them fire), outputs |z|>3: 20 (null mean 1.0, max 160), max |z| 36.7 (null 4.7) (50.4 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r2_s3_b30_w0.47.json
+r2_s4 VS scale 0.47: 41,018 spikes/s, 25,956 outside the driven neurons (2,642 of them fire), outputs |z|>3: 43 (null mean 0.2, max 13), max |z| 35.1 (null 4.3) (49.0 s)
+r2_s4 HALT scale 0.47: 43,596 spikes/s, 25,975 outside the driven neurons (2,650 of them fire), outputs |z|>3: 37 (null mean 0.2, max 6), max |z| 30.8 (null 4.6) (48.5 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r2_s4_b30_w0.47.json
+r2_s5 VS scale 0.47: 33,967 spikes/s, 18,906 outside the driven neurons (1,640 of them fire), outputs |z|>3: 27 (null mean 0.3, max 19), max |z| 47.8 (null 5.1) (48.5 s)
+r2_s5 HALT scale 0.47: 38,974 spikes/s, 21,354 outside the driven neurons (1,767 of them fire), outputs |z|>3: 35 (null mean 0.2, max 8), max |z| 30.6 (null 4.5) (48.0 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r2_s5_b30_w0.47.json
+r3_s3 VS scale 0.47: 27,090 spikes/s, 12,028 outside the driven neurons (1,254 of them fire), outputs |z|>3: 27 (null mean 0.2, max 8), max |z| 47.3 (null 4.1) (48.6 s)
+r3_s3 HALT scale 0.47: 29,885 spikes/s, 12,264 outside the driven neurons (1,420 of them fire), outputs |z|>3: 30 (null mean 0.1, max 13), max |z| 35.7 (null 4.5) (38.1 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r3_s3_b30_w0.47.json
+r3_s4 VS scale 0.47: 27,817 spikes/s, 12,756 outside the driven neurons (1,311 of them fire), outputs |z|>3: 31 (null mean 0.1, max 6), max |z| 48.0 (null 4.6) (36.9 s)
+r3_s4 HALT scale 0.47: 31,421 spikes/s, 13,801 outside the driven neurons (1,443 of them fire), outputs |z|>3: 37 (null mean 0.1, max 5), max |z| 32.5 (null 4.8) (27.0 s)
+-> /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/pretest_r3_s4_b30_w0.47.json

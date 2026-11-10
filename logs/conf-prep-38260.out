@@ -1,0 +1,19 @@
+r1 seed 3: 25,582,938 connections -> 25,582,938 after merging; synapses 124,177,616 -> 124,177,616; 100.00% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r1_s3.npz
+  10,006 neurons relabelled (6.00%), 8,708 changed sign (5.22%); 40.2% of synapses now inhibitory (was 38.4%)
+r1 seed 4: 25,582,938 connections -> 25,582,938 after merging; synapses 124,177,616 -> 124,177,616; 100.00% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r1_s4.npz
+  9,916 neurons relabelled (5.95%), 8,657 changed sign (5.19%); 39.9% of synapses now inhibitory (was 38.4%)
+r1 seed 5: 25,582,938 connections -> 25,582,938 after merging; synapses 124,177,616 -> 124,177,616; 100.00% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r1_s5.npz
+  10,032 neurons relabelled (6.02%), 8,707 changed sign (5.22%); 40.1% of synapses now inhibitory (was 38.4%)
+r2 seed 3: 25,582,938 connections -> 25,582,938 after merging; synapses 124,177,616 -> 127,328,392; 100.00% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r2_s3.npz
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+r2 seed 4: 25,582,938 connections -> 25,582,938 after merging; synapses 124,177,616 -> 127,287,464; 100.00% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r2_s4.npz
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+r2 seed 5: 25,582,938 connections -> 25,582,938 after merging; synapses 124,177,616 -> 127,295,128; 100.00% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r2_s5.npz
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+r3 seed 3: 25,582,938 connections -> 24,009,819 after merging; synapses 124,177,616 -> 124,177,616; 39.46% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r3_s3.npz
+  25,267 (type, side) groups, 13,611 with one neuron (8.2% of neurons keep their inputs)
+r3 seed 4: 25,582,938 connections -> 24,010,219 after merging; synapses 124,177,616 -> 124,177,616; 39.47% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r3_s4.npz
+  25,267 (type, side) groups, 13,611 with one neuron (8.2% of neurons keep their inputs)
+r3 seed 5: 25,582,938 connections -> 24,009,308 after merging; synapses 124,177,616 -> 124,177,616; 39.46% of the original connections survive; written /home/s/st/stevejobs/flybrain/fly_brain/results/variants/r3_s5.npz
+  25,267 (type, side) groups, 13,611 with one neuron (8.2% of neurons keep their inputs)
+== done Mon Nov  9 06:48:52 PM PST 2026
