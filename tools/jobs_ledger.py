@@ -180,6 +180,13 @@ NOTES = {
     "38262": "passenger screens of the nine new draws (secondary readout)",
 }
 NOTES.update({str(j): "confirmatory ride, preregistration prereg-v1 section 5 primary design, hand-picked readout, 60 generations, GPU" for j in range(38263, 38363)})
+NOTES.update({
+    "38370": "passenger screen of R4 draw 1 at scale 1.2 (secondary readout, CPU)",
+    "38371": "preregistered single ride, R3.5 draw 1 at its closed-loop scale 0.47, seed 211, hand-picked readout, CPU",
+    "38372": "preregistered single ride, R4 draw 1 at its closed-loop scale 1.2, seed 211, hand-picked readout, CPU",
+    "38373": "preregistered single ride, R5 draw 1 at its closed-loop scale 2.0, seed 211, hand-picked readout, CPU",
+})
+NOTES.update({str(j): "confirmatory ride, preregistration prereg-v1 section 5 secondary design, 60 generations, GPU, after the primary design" for j in range(38374, 38412)})
 
 LEFT_OUT = {"36054", "36055", "36056", "36057", "36062", "36064"}  # Fly Bar jobs, not part of this repo
 
