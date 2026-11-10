@@ -175,7 +175,11 @@ NOTES = {
     "38112": "replay of the random-8 pilot's final CEM mean without the off-road rule: all 48 fall, 7.82 s upright on average -> results/rungs/r0/rand8_r0/v4.5_s201/replay_mu_noroad_summary.json",
     "38104": "replay of the top-32 pilot's final CEM mean, 48 riders x 15 s, seed 201: 8.88 s upright, 2 finish, 46 leave the road, none falls -> results/rungs/r0/top32/v4.5_s201/replay_mu_summary.json",
     "38105": "replay of the top-32 pilot's final CEM mean without the off-road rule: all 48 upright for 15 s, 44 of them more than 3.5 m from the center line -> results/rungs/r0/top32/v4.5_s201/replay_mu_noroad_summary.json",
+    "38260": "rewiring draws 3 to 5 of R1, R2 and R3 for the confirmatory runs (preregistration tag prereg-v1)",
+    "38261": "pre-test of the nine new draws at 0.47, 30 brains (preregistration section 5)",
+    "38262": "passenger screens of the nine new draws (secondary readout)",
 }
+NOTES.update({str(j): "confirmatory ride, preregistration prereg-v1 section 5 primary design, hand-picked readout, 60 generations, GPU" for j in range(38263, 38363)})
 
 LEFT_OUT = {"36054", "36055", "36056", "36057", "36062", "36064"}  # Fly Bar jobs, not part of this repo
 
