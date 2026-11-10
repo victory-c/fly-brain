@@ -1122,6 +1122,10 @@ The first primary ride (R0, 4.5 m/s, CEM seed 211, job 38263) reached 60 generat
 
 One decoder, so this checks the tool and does not test anything. The final mean rides longer than the last generation's mean because the generation includes the search's noise around it.
 
+## Track B confirmatory runs (preregistration section 6)
+
+`trackb-conf.sbatch`, CPU, `results/track_b/confirmatory/`, scored by `python3 tools/track_b_score.py <dir> --by-rung`. The preregistration gives the numbers of draws, not which ones, so these were picked before any run so that no Track B pilot has used them: R1 and R2 draws 101 to 200; R3, R3.5, R4 and R5 draws 3 to 5 (only R3 has those draws in Track A; R3.5, R4 and R5 ride draw 1 there). Scales: 0.47 for every rung, plus each rung's closed-loop scale where it differs (R4 1.2, R5 2.0). R0's reference (job 38414) came out identical to the pilot's `final/r0.json`. Test, one draw each (job 38415): R1 draw 101 and R2 draw 101 both score 1.0, which says nothing about the mean over 100 draws. The rest is queued as jobs 38416 to 38429, about 2.75 min per brain.
+
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
 `brain/variants.py` rewires the connectome. R4 shuffles every connection's target, which keeps each neuron's
