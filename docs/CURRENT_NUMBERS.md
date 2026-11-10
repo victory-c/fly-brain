@@ -1122,6 +1122,19 @@ The first primary ride (R0, 4.5 m/s, CEM seed 211, job 38263) reached 60 generat
 
 One decoder, so this checks the tool and does not test anything. The final mean rides longer than the last generation's mean because the generation includes the search's noise around it.
 
+## Confirmatory rides so far (2026-11-10)
+
+Last-generation riding time of each finished 60-generation ride, 4.5 m/s, CEM seed 211. One seed per rung so far, so no prediction is tested yet.
+
+| Rung | Job | Device | Minutes | Riding time (s) | Finished |
+|---|---|---|---|---|---|
+| R0 | 38263 | GPU | 294 | 12.79 | 62% |
+| R1 draw 3 | 38264 | GPU | 312 | 14.65 | 85% |
+| R1 draw 4 | 38265 | GPU | 307 | 13.72 | 71% |
+| R3.5 draw 1, scale 0.47 | 38371 | CPU | 163 | 2.71 | 0% |
+
+R3.5's single ride is the one prediction 2 uses for its transition clause; it is 21% of R0's first ride, and the test waits for R0's median over five seeds. Held-out replays queued on the CPU: 38436 (R0, gust302 only, the rest done in 38413), 38437 and 38438 (R1 draws 3 and 4).
+
 ## Track B confirmatory runs (preregistration section 6)
 
 `trackb-conf.sbatch`, CPU, `results/track_b/confirmatory/`, scored by `python3 tools/track_b_score.py <dir> --by-rung`. The preregistration gives the numbers of draws, not which ones, so these were picked before any run so that no Track B pilot has used them: R1 and R2 draws 101 to 200; R3, R3.5, R4 and R5 draws 3 to 5 (only R3 has those draws in Track A; R3.5, R4 and R5 ride draw 1 there). Scales: 0.47 for every rung, plus each rung's closed-loop scale where it differs (R4 1.2, R5 2.0). R0's reference (job 38414) came out identical to the pilot's `final/r0.json`. Test, one draw each (job 38415): R1 draw 101 and R2 draw 101 both score 1.0, which says nothing about the mean over 100 draws. The rest ran as jobs 38416 to 38429 (2026-11-10 01:33 to 13:52, all completed, 218 brains, no failed draw).
