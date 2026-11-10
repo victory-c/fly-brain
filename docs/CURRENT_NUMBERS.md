@@ -1048,6 +1048,24 @@ The table above is the first pilot, on a draft list. The final list (scrambled-b
 
 The channel helps at k = 32 and not at k = 8, and neither holds the lane: the hand-picked readout's replays keep 46, 44 and 38 of 48. One seed; the lane runs were on GPU and the runs without on CPU, so the differences are not all the channel's. Decided 2026-11-09 (preregistration 9a, point 5): the hand-picked readout is primary, top-32 plus the lane channel secondary.
 
+### Confirmatory draws: pre-test at scale 0.47 (GPU, 2026-11-09, job 38261)
+
+Rewiring draws 3 to 5, 30 brains, run after the preregistration tag `prereg-v1`. Rate is outside the driven neurons, VS / haltere. Pass: lateralised outputs above the null maximum on both probes, rate within 10,750 to 43,000 (`results/rungs/pretest_<draw>_b30_w0.47.json`).
+
+| Draw | Spikes/s | Lateralised outputs (null max) | Verdict |
+|---|---|---|---|
+| R1 s3 | 17,440 / 17,571 | 32 (4) / 28 (3) | pass |
+| R1 s4 | 19,212 / 19,446 | 27 (7) / 25 (6) | pass |
+| R1 s5 | 19,865 / 20,310 | 29 (4) / 28 (3) | pass |
+| R2 s3 | 34,348 / 36,025 | 21 (155) / 20 (160) | **fail**: the null maximum is far above the outputs (null mean 0.9 / 1.0) |
+| R2 s4 | 25,956 / 25,975 | 43 (13) / 37 (6) | pass |
+| R2 s5 | 18,906 / 21,354 | 27 (19) / 35 (8) | pass |
+| R3 s3 | 12,028 / 12,264 | 27 (8) / 30 (13) | pass |
+| R3 s4 | 12,756 / 13,801 | 31 (6) / 37 (5) | pass |
+| R3 s5 | 15,396 / 16,428 | 36 (9) / 42 (8) | pass |
+
+R2 draw 3 fails on the null only; under section 5 of the preregistration it is ridden anyway, reported, and its runs enter the medians.
+
 ### Model-side rung: pre-test on the real wiring (CPU, 2026-11-08)
 
 `runs/pretest.py` with 30 brains on R0 (job 38183, `results/rungs/model_side/`), one parameter moved by 10% at a time; the rate
