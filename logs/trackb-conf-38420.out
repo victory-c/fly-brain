@@ -27,3 +27,31 @@ sign score (the preregistered score is tools/track_b_score.py) 1.0 []
 == 02:57:47 r1_s110 
 sign score (the preregistered score is tools/track_b_score.py) 1.0 []
 have results/track_b/confirmatory/r2_s101.json
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 03:00:04 r2_s102 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 03:03:21 r2_s103 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.249
+== 03:06:39 r2_s104 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 03:08:52 r2_s105 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 03:12:06 r2_s106 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 03:15:23 r2_s107 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.249
+== 03:17:42 r2_s108 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 03:20:59 r2_s109 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 03:24:18 r2_s110 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+== done Tue Nov 10 03:25:54 AM PST 2026
