@@ -23,3 +23,33 @@ screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, o
 driven neurons total 46,039 sp/s; rest of brain 54,850 sp/s; 3,362 neurons > 1 Hz, 1,704 > 20 Hz
 == descending neurons above 0.5 Hz (261 of 1314)
 == 19:26:02 screen r2_s4 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cuda
+  t=10.0s  alive 48/48  mean|phi|  6.8 deg  pop 99,656 sp/s  wall 210s
+  t=15.0s  alive 48/48  mean|phi|  4.9 deg  pop 87,777 sp/s  wall 301s
+driven neurons total 46,039 sp/s; rest of brain 56,876 sp/s; 3,472 neurons > 1 Hz, 1,746 > 20 Hz
+== descending neurons above 0.5 Hz (270 of 1314)
+== 19:31:34 screen r2_s5 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cuda
+  t=10.0s  alive 48/48  mean|phi|  6.8 deg  pop 90,827 sp/s  wall 182s
+  t=15.0s  alive 48/48  mean|phi|  4.9 deg  pop 80,344 sp/s  wall 275s
+driven neurons total 46,039 sp/s; rest of brain 49,300 sp/s; 3,369 neurons > 1 Hz, 1,628 > 20 Hz
+== descending neurons above 0.5 Hz (261 of 1314)
+== 19:38:31 screen r3_s3 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cuda
+  t=10.0s  alive 48/48  mean|phi|  6.8 deg  pop 88,300 sp/s  wall 211s
+  t=15.0s  alive 48/48  mean|phi|  4.9 deg  pop 79,290 sp/s  wall 317s
+driven neurons total 46,039 sp/s; rest of brain 46,169 sp/s; 3,315 neurons > 1 Hz, 1,578 > 20 Hz
+== descending neurons above 0.5 Hz (256 of 1314)
+== 19:44:01 screen r3_s4 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cuda
+  t=10.0s  alive 48/48  mean|phi|  6.8 deg  pop 88,694 sp/s  wall 203s
+  t=15.0s  alive 48/48  mean|phi|  4.9 deg  pop 77,492 sp/s  wall 310s
+driven neurons total 46,038 sp/s; rest of brain 46,261 sp/s; 3,243 neurons > 1 Hz, 1,593 > 20 Hz
+== descending neurons above 0.5 Hz (249 of 1314)
+== 19:49:24 screen r3_s5 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cuda
+  t=10.0s  alive 48/48  mean|phi|  6.8 deg  pop 91,588 sp/s  wall 215s
+  t=15.0s  alive 48/48  mean|phi|  4.9 deg  pop 78,165 sp/s  wall 312s
+driven neurons total 46,036 sp/s; rest of brain 48,169 sp/s; 3,301 neurons > 1 Hz, 1,616 > 20 Hz
+== descending neurons above 0.5 Hz (247 of 1314)
+== done Mon Nov  9 07:55:15 PM PST 2026

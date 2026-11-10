@@ -1,0 +1,7 @@
+== 19:55:19 1) probe on brain.npz
+  MNhm03               MNhm03_R        R         vnc_motor  7.120000 11.620000  -4.500000  -5.510000
+
+-> results/rungs/conf_r0/v4.5_s211/probe.json
+init_hold: 29.6 W holds 4.5 m/s
+== 19:56:14 gate v0=4.5 seed=211, max 340 min
+== 19:56:14 2) ride_slow_mu trace at v0=4.5
