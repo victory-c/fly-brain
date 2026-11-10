@@ -1143,8 +1143,9 @@ Held-out replays of the final mean decoder (CPU, 48 riders, 15 s; jobs 38413 and
 | R0 seed 211 | 14.05 (38) | 14.80 (46) | 13.10 (28) | 7.77 (0) |
 | R1 draw 3 | 14.75 (44) | 15.00 (48) | 14.61 (42) | 12.71 (24) |
 | R1 draw 4 | 14.89 (46) | 14.84 (47) | 14.45 (42) | 11.43 (10) |
+| R1 draw 5 | 13.56 (36) | 13.87 (41) | 10.10 (17) | 7.85 (0) |
 
-Unseen gusts cost little on all three. Slowing to 4.0 m/s costs the most: R0's decoder finishes no rider (35 fall), R1's finish 24 and 10 (R1 draw 4 loses most of the rest off the road, 37 riders). Section 5 makes these descriptive, not tests. R1 draw 5's replays are job 38442.
+Unseen gusts cost little on all three. Slowing to 4.0 m/s costs the most: R0's decoder finishes no rider (35 fall), R1's finish 24 and 10 (R1 draw 4 loses most of the rest off the road, 37 riders). Section 5 makes these descriptive, not tests. R1 draw 5 (job 38442), the weakest of the three rides, also loses the most off the road at both test speeds (31 riders at +0.5, 33 at -0.5) and finishes no rider at 4.0 m/s, like R0.
 
 ## Track B confirmatory runs (preregistration section 6)
 
