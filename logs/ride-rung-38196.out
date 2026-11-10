@@ -77,3 +77,7 @@ gen 54  fit best  15.99 mean  12.81  upright 12.31 s (max 15.00,  44% finish)  d
 gen 55  fit best  15.99 mean  11.66  upright 11.18 s (max 15.00,  40% finish)  dist  48.6 m  |y| 2.53 m  v 4.50  bailed 0  pop 52,808 sp/s  436s
 gen 56  fit best  16.12 mean  12.52  upright 12.02 s (max 15.00,  56% finish)  dist  52.3 m  |y| 2.24 m  v 4.50  bailed 0  pop 49,656 sp/s  427s
 gen 57  fit best  16.09 mean  12.86  upright 12.34 s (max 15.00,  62% finish)  dist  53.7 m  |y| 2.05 m  v 4.50  bailed 0  pop 51,558 sp/s  424s
+gen 58  fit best  16.14 mean  12.69  upright 12.15 s (max 15.00,  54% finish)  dist  53.3 m  |y| 2.17 m  v 4.50  bailed 0  pop 49,242 sp/s  439s
+gen 59  fit best  15.99 mean  12.83  upright 12.38 s (max 15.00,  58% finish)  dist  53.9 m  |y| 2.32 m  v 4.50  bailed 0  pop 48,912 sp/s  413s
+done: best fitness 16.18, results -> results/rungs/model_tau5.5_cpu/v4.5_s201/cem.json  (422.3 min)
+== done Mon Nov  9 11:13:14 PM PST 2026
