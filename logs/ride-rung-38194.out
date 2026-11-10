@@ -78,3 +78,6 @@ gen 55  fit best  16.24 mean  13.19  upright 12.48 s (max 15.00,  54% finish)  d
 gen 56  fit best  16.22 mean  13.35  upright 12.68 s (max 15.00,  60% finish)  dist  55.4 m  |y| 1.96 m  v 4.50  bailed 0  pop 30,388 sp/s  856s
 gen 57  fit best  16.21 mean  13.99  upright 13.26 s (max 15.00,  62% finish)  dist  58.4 m  |y| 1.94 m  v 4.50  bailed 0  pop 28,795 sp/s  673s
 gen 58  fit best  16.17 mean  13.06  upright 12.38 s (max 15.00,  54% finish)  dist  54.4 m  |y| 2.20 m  v 4.50  bailed 0  pop 28,673 sp/s  717s
+gen 59  fit best  16.20 mean  14.05  upright 13.36 s (max 15.00,  75% finish)  dist  59.0 m  |y| 1.61 m  v 4.50  bailed 0  pop 27,789 sp/s  569s
+done: best fitness 16.24, results -> results/rungs/model_tmbr22_cpu/v4.5_s201/cem.json  (765.3 min)
+== done Mon Nov  9 04:08:01 PM PST 2026
