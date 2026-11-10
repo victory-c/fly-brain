@@ -1,0 +1,9 @@
+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0, 'dnp': 0.0} network 10,123
+loom {'mn9': 0.0, 'mdn': 0.07, 'gf': 263.88, 'dnp': 182.62} network 90,617
+sugar {'mn9': 30.02, 'mdn': 0.0, 'gf': 0.0, 'dnp': 0.0} network 9,333
+sugar+bitter {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0, 'dnp': 0.0} network 13,534
+sugar+ir94e {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0, 'dnp': 0.0} network 10,464
+sugar@100 {'mn9': 7.38, 'mdn': 0.0, 'gf': 0.0, 'dnp': 0.0} network 4,417
+sugar@20 {'mn9': 0.0, 'mdn': 0.0, 'gf': 0.0, 'dnp': 0.0} network 252
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+== done Tue Nov 10 01:26:55 AM PST 2026
