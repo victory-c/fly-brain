@@ -1,0 +1,1808 @@
+{
+ "HS": [
+  {
+   "type": "DNge033",
+   "instance": "DNge033_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 21.0,
+   "hz_R": 12.625,
+   "diff": 8.375,
+   "z": 4.063000202178955
+  },
+  {
+   "type": "DNge073",
+   "instance": "DNge073_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 1.25,
+   "hz_R": 0.375,
+   "diff": 0.875,
+   "z": 3.809999942779541
+  },
+  {
+   "type": "DNg74_b",
+   "instance": "DNg74_b_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 5.625,
+   "hz_R": 2.0,
+   "diff": 3.625,
+   "z": 3.4210000038146973
+  },
+  {
+   "type": "Sternal anterior rotator MN",
+   "instance": "Sternal anterior rotator MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 4.5,
+   "hz_R": 1.75,
+   "diff": 2.75,
+   "z": 3.3359999656677246
+  },
+  {
+   "type": "DNg04",
+   "instance": "DNg04_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 6.875,
+   "hz_R": 3.75,
+   "diff": 3.125,
+   "z": 3.3299999237060547
+  },
+  {
+   "type": "DNg15",
+   "instance": "DNg15_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 15.0,
+   "hz_R": 10.25,
+   "diff": 4.75,
+   "z": 3.1500000953674316
+  },
+  {
+   "type": "MNad62",
+   "instance": "MNad62_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 1.125,
+   "hz_R": 7.875,
+   "diff": -6.75,
+   "z": -2.815999984741211
+  },
+  {
+   "type": "DNg97",
+   "instance": "DNg97_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 48.875,
+   "hz_R": 36.75,
+   "diff": 12.125,
+   "z": 2.813999891281128
+  },
+  {
+   "type": "DNg16",
+   "instance": "DNg16_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 46.5,
+   "hz_R": 34.5,
+   "diff": 12.0,
+   "z": 2.7920000553131104
+  },
+  {
+   "type": "DNge046",
+   "instance": "DNge046_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 14.0,
+   "hz_R": 9.5,
+   "diff": 4.5,
+   "z": 2.744999885559082
+  },
+  {
+   "type": "hg3 MN",
+   "instance": "hg3 MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 1.5,
+   "hz_R": 0.5,
+   "diff": 1.0,
+   "z": 2.5299999713897705
+  },
+  {
+   "type": "Sternal anterior rotator MN",
+   "instance": "Sternal anterior rotator MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 15.375,
+   "hz_R": 11.0,
+   "diff": 4.375,
+   "z": 2.427999973297119
+  },
+  {
+   "type": "DNg69",
+   "instance": "DNg69_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 32.0,
+   "hz_R": 24.375,
+   "diff": 7.625,
+   "z": 2.385999917984009
+  },
+  {
+   "type": "DNge013",
+   "instance": "DNge013_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 4.75,
+   "hz_R": 2.5,
+   "diff": 2.25,
+   "z": 2.374000072479248
+  },
+  {
+   "type": "MNnm09",
+   "instance": "MNnm09_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 13.5,
+   "hz_R": 9.875,
+   "diff": 3.625,
+   "z": 2.2720000743865967
+  },
+  {
+   "type": "DNge107",
+   "instance": "DNge107_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 4.875,
+   "hz_R": 3.0,
+   "diff": 1.875,
+   "z": 2.239000082015991
+  },
+  {
+   "type": "MN2Da",
+   "instance": "MN2Da_L",
+   "somaSide": "L",
+   "superclass": "cb_motor",
+   "hz_L": 16.875,
+   "hz_R": 12.625,
+   "diff": 4.25,
+   "z": 2.23799991607666
+  },
+  {
+   "type": "DNg98",
+   "instance": "DNg98_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 1.375,
+   "hz_R": 2.875,
+   "diff": -1.5,
+   "z": -2.23799991607666
+  },
+  {
+   "type": "DNge102",
+   "instance": "DNge102_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 14.375,
+   "hz_R": 10.75,
+   "diff": 3.625,
+   "z": 2.2149999141693115
+  },
+  {
+   "type": "DNg14",
+   "instance": "DNg14_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 13.125,
+   "hz_R": 9.375,
+   "diff": 3.75,
+   "z": 2.171999931335449
+  },
+  {
+   "type": "MNad19",
+   "instance": "MNad19_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 1.75,
+   "hz_R": 0.5,
+   "diff": 1.25,
+   "z": 2.1570000648498535
+  },
+  {
+   "type": "Tr flexor MN",
+   "instance": "Tr flexor MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 37.625,
+   "hz_R": 29.75,
+   "diff": 7.875,
+   "z": 2.121999979019165
+  },
+  {
+   "type": "MNnm11",
+   "instance": "MNnm11_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 59.5,
+   "hz_R": 49.125,
+   "diff": 10.375,
+   "z": 2.1089999675750732
+  },
+  {
+   "type": "Ti extensor MN",
+   "instance": "Ti extensor MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 4.875,
+   "hz_R": 3.0,
+   "diff": 1.875,
+   "z": 2.1029999256134033
+  },
+  {
+   "type": "DNg56",
+   "instance": "DNg56_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 24.0,
+   "hz_R": 18.5,
+   "diff": 5.5,
+   "z": 2.0789999961853027
+  },
+  {
+   "type": "DNbe007",
+   "instance": "DNbe007(VES042)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 2.0,
+   "hz_R": 3.875,
+   "diff": -1.875,
+   "z": -2.062999963760376
+  },
+  {
+   "type": "DNpe003",
+   "instance": "DNpe003(VES081)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 13.0,
+   "hz_R": 9.625,
+   "diff": 3.375,
+   "z": 2.059000015258789
+  },
+  {
+   "type": "DNg70",
+   "instance": "DNg70_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 21.125,
+   "hz_R": 16.375,
+   "diff": 4.75,
+   "z": 2.0290000438690186
+  },
+  {
+   "type": "MNad46",
+   "instance": "MNad46_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 15.25,
+   "hz_R": 11.625,
+   "diff": 3.625,
+   "z": 2.0139999389648438
+  },
+  {
+   "type": "Ti extensor MN",
+   "instance": "Ti extensor MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 41.625,
+   "hz_R": 33.25,
+   "diff": 8.375,
+   "z": 2.000999927520752
+  },
+  {
+   "type": "DNae001",
+   "instance": "DNae001(DNa01)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 30.375,
+   "hz_R": 24.125,
+   "diff": 6.25,
+   "z": 1.965999960899353
+  },
+  {
+   "type": "DNae003",
+   "instance": "DNae003(PS040)_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 47.0,
+   "hz_R": 37.375,
+   "diff": 9.625,
+   "z": 1.9520000219345093
+  },
+  {
+   "type": "DVMn 3a, b",
+   "instance": "DVMn 3a, b_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 39.0,
+   "hz_R": 30.5,
+   "diff": 8.5,
+   "z": 1.9470000267028809
+  },
+  {
+   "type": "DNp20",
+   "instance": "DNp20_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 6.25,
+   "hz_R": 4.0,
+   "diff": 2.25,
+   "z": 1.9470000267028809
+  },
+  {
+   "type": "Sternal anterior rotator MN",
+   "instance": "Sternal anterior rotator MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 41.25,
+   "hz_R": 33.375,
+   "diff": 7.875,
+   "z": 1.9429999589920044
+  },
+  {
+   "type": "Pleural remotor/abductor MN",
+   "instance": "Pleural remotor/abductor MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 41.125,
+   "hz_R": 33.375,
+   "diff": 7.75,
+   "z": 1.9390000104904175
+  },
+  {
+   "type": "DNa02",
+   "instance": "DNa02_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 102.125,
+   "hz_R": 84.0,
+   "diff": 18.125,
+   "z": 1.9199999570846558
+  },
+  {
+   "type": "hg3 MN",
+   "instance": "hg3 MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 18.625,
+   "hz_R": 15.0,
+   "diff": 3.625,
+   "z": 1.9129999876022339
+  },
+  {
+   "type": "DNp03",
+   "instance": "DNp03_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 15.5,
+   "hz_R": 12.25,
+   "diff": 3.25,
+   "z": 1.909000039100647
+  },
+  {
+   "type": "DNg85",
+   "instance": "DNg85_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 43.625,
+   "hz_R": 35.25,
+   "diff": 8.375,
+   "z": 1.906000018119812
+  },
+  {
+   "type": "DLMn c-f",
+   "instance": "DLMn c-f_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 1.625,
+   "hz_R": 0.625,
+   "diff": 1.0,
+   "z": 1.8990000486373901
+  },
+  {
+   "type": "DNae009",
+   "instance": "DNae009(PS009)_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 15.125,
+   "hz_R": 11.875,
+   "diff": 3.25,
+   "z": 1.8980000019073486
+  },
+  {
+   "type": "DNg29",
+   "instance": "DNg29_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 19.625,
+   "hz_R": 14.375,
+   "diff": 5.25,
+   "z": 1.8940000534057617
+  },
+  {
+   "type": "GNG650",
+   "instance": "GNG650_L",
+   "somaSide": "L",
+   "superclass": "cb_motor",
+   "hz_L": 42.125,
+   "hz_R": 33.75,
+   "diff": 8.375,
+   "z": 1.8899999856948853
+  },
+  {
+   "type": "DNg84",
+   "instance": "DNg84_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 70.5,
+   "hz_R": 56.75,
+   "diff": 13.75,
+   "z": 1.8890000581741333
+  },
+  {
+   "type": "DNge088",
+   "instance": "DNge088_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 1.5,
+   "hz_R": 0.5,
+   "diff": 1.0,
+   "z": 1.8860000371932983
+  },
+  {
+   "type": "Pleural remotor/abductor MN",
+   "instance": "Pleural remotor/abductor MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 68.75,
+   "hz_R": 54.5,
+   "diff": 14.25,
+   "z": 1.8860000371932983
+  },
+  {
+   "type": "iii1 MN",
+   "instance": "iii1 MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 52.125,
+   "hz_R": 42.0,
+   "diff": 10.125,
+   "z": 1.875
+  },
+  {
+   "type": "DNg102",
+   "instance": "DNg102_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 11.75,
+   "hz_R": 9.125,
+   "diff": 2.625,
+   "z": 1.8680000305175781
+  },
+  {
+   "type": "MNad14",
+   "instance": "MNad14_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 35.75,
+   "hz_R": 29.0,
+   "diff": 6.75,
+   "z": 1.8530000448226929
+  },
+  {
+   "type": "hg1 MN",
+   "instance": "hg1 MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 82.875,
+   "hz_R": 68.625,
+   "diff": 14.25,
+   "z": 1.8530000448226929
+  },
+  {
+   "type": "DNp20",
+   "instance": "DNp20_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 101.25,
+   "hz_R": 86.0,
+   "diff": 15.25,
+   "z": 1.8480000495910645
+  },
+  {
+   "type": "CvN5",
+   "instance": "CvN5_R",
+   "somaSide": "R",
+   "superclass": "cb_motor",
+   "hz_L": 33.75,
+   "hz_R": 26.875,
+   "diff": 6.875,
+   "z": 1.843000054359436
+  },
+  {
+   "type": "Sternal posterior rotator MN",
+   "instance": "Sternal posterior rotator MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 34.625,
+   "hz_R": 27.75,
+   "diff": 6.875,
+   "z": 1.8420000076293945
+  },
+  {
+   "type": "i1 MN",
+   "instance": "i1 MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 65.875,
+   "hz_R": 53.5,
+   "diff": 12.375,
+   "z": 1.840999960899353
+  },
+  {
+   "type": "Sternotrochanter MN",
+   "instance": "Sternotrochanter MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 23.5,
+   "hz_R": 18.75,
+   "diff": 4.75,
+   "z": 1.8380000591278076
+  },
+  {
+   "type": "MNad20",
+   "instance": "MNad20_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 40.25,
+   "hz_R": 33.0,
+   "diff": 7.25,
+   "z": 1.8350000381469727
+  },
+  {
+   "type": "DNpe023",
+   "instance": "DNpe023(LAL201)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 34.375,
+   "hz_R": 27.375,
+   "diff": 7.0,
+   "z": 1.8329999446868896
+  },
+  {
+   "type": "DNp21",
+   "instance": "DNp21(PS236)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 63.125,
+   "hz_R": 51.625,
+   "diff": 11.5,
+   "z": 1.8279999494552612
+  },
+  {
+   "type": "DNge042",
+   "instance": "DNge042_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 84.125,
+   "hz_R": 68.375,
+   "diff": 15.75,
+   "z": 1.8109999895095825
+  }
+ ],
+ "VS": [
+  {
+   "type": "Ti extensor MN",
+   "instance": "Ti extensor MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 8.0,
+   "hz_R": 0.375,
+   "diff": 7.625,
+   "z": 5.927999973297119
+  },
+  {
+   "type": "DNg81",
+   "instance": "DNg81_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 0.25,
+   "hz_R": 1.875,
+   "diff": -1.625,
+   "z": -4.035999774932861
+  },
+  {
+   "type": "DNg30",
+   "instance": "DNg30_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 1.875,
+   "hz_R": 0.5,
+   "diff": 1.375,
+   "z": 2.299999952316284
+  },
+  {
+   "type": "MN7",
+   "instance": "MN7_L",
+   "somaSide": "L",
+   "superclass": "cb_motor",
+   "hz_L": 1.0,
+   "hz_R": 2.125,
+   "diff": -1.125,
+   "z": -2.190999984741211
+  },
+  {
+   "type": "hg3 MN",
+   "instance": "hg3 MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 2.25,
+   "hz_R": 0.625,
+   "diff": 1.625,
+   "z": 1.9739999771118164
+  },
+  {
+   "type": "DNg37",
+   "instance": "DNg37_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 6.25,
+   "hz_R": 4.25,
+   "diff": 2.0,
+   "z": 1.8990000486373901
+  },
+  {
+   "type": "DNbe007",
+   "instance": "DNbe007(VES042)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 3.125,
+   "hz_R": 5.0,
+   "diff": -1.875,
+   "z": -1.8070000410079956
+  },
+  {
+   "type": "DNge107",
+   "instance": "DNge107_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 2.75,
+   "hz_R": 4.25,
+   "diff": -1.5,
+   "z": -1.5119999647140503
+  },
+  {
+   "type": "MNad62",
+   "instance": "MNad62_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 2.5,
+   "hz_R": 1.25,
+   "diff": 1.25,
+   "z": 1.4509999752044678
+  },
+  {
+   "type": "MNwm36",
+   "instance": "MNwm36_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 2.25,
+   "hz_R": 1.0,
+   "diff": 1.25,
+   "z": 1.4509999752044678
+  },
+  {
+   "type": "DNg98",
+   "instance": "DNg98_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 1.375,
+   "hz_R": 2.25,
+   "diff": -0.875,
+   "z": -1.4479999542236328
+  },
+  {
+   "type": "MNad06",
+   "instance": "MNad06_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 6.875,
+   "hz_R": 9.25,
+   "diff": -2.375,
+   "z": -1.3359999656677246
+  },
+  {
+   "type": "DNge172",
+   "instance": "DNge172_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 3.875,
+   "hz_R": 5.25,
+   "diff": -1.375,
+   "z": -1.3109999895095825
+  },
+  {
+   "type": "Ti extensor MN",
+   "instance": "Ti extensor MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 2.625,
+   "hz_R": 3.625,
+   "diff": -1.0,
+   "z": -1.3020000457763672
+  },
+  {
+   "type": "CvN5",
+   "instance": "CvN5_R",
+   "somaSide": "R",
+   "superclass": "cb_motor",
+   "hz_L": 22.75,
+   "hz_R": 28.875,
+   "diff": -6.125,
+   "z": -1.2230000495910645
+  },
+  {
+   "type": "MNnm09",
+   "instance": "MNnm09_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 9.375,
+   "hz_R": 12.25,
+   "diff": -2.875,
+   "z": -1.2070000171661377
+  },
+  {
+   "type": "DNp26",
+   "instance": "DNp26_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 1.25,
+   "hz_R": 1.75,
+   "diff": -0.5,
+   "z": -1.2059999704360962
+  },
+  {
+   "type": "DNg04",
+   "instance": "DNg04_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 3.625,
+   "hz_R": 5.25,
+   "diff": -1.625,
+   "z": -1.2000000476837158
+  },
+  {
+   "type": "Sternal posterior rotator MN",
+   "instance": "Sternal posterior rotator MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 26.625,
+   "hz_R": 34.0,
+   "diff": -7.375,
+   "z": -1.1920000314712524
+  },
+  {
+   "type": "Tr flexor MN",
+   "instance": "Tr flexor MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 24.875,
+   "hz_R": 31.5,
+   "diff": -6.625,
+   "z": -1.1779999732971191
+  },
+  {
+   "type": "MNad46",
+   "instance": "MNad46_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 10.25,
+   "hz_R": 13.125,
+   "diff": -2.875,
+   "z": -1.1729999780654907
+  },
+  {
+   "type": "MNhl59",
+   "instance": "MNhl59_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 9.75,
+   "hz_R": 12.875,
+   "diff": -3.125,
+   "z": -1.0750000476837158
+  },
+  {
+   "type": "DNp20",
+   "instance": "DNp20_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 3.375,
+   "hz_R": 4.75,
+   "diff": -1.375,
+   "z": -1.0420000553131104
+  },
+  {
+   "type": "Sternal anterior rotator MN",
+   "instance": "Sternal anterior rotator MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 29.0,
+   "hz_R": 35.125,
+   "diff": -6.125,
+   "z": -1.0410000085830688
+  },
+  {
+   "type": "MNad34",
+   "instance": "MNad34_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 18.875,
+   "hz_R": 23.25,
+   "diff": -4.375,
+   "z": -1.00600004196167
+  },
+  {
+   "type": "DNg16",
+   "instance": "DNg16_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 30.75,
+   "hz_R": 38.0,
+   "diff": -7.25,
+   "z": -0.9990000128746033
+  },
+  {
+   "type": "DNg38",
+   "instance": "DNg38_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 19.0,
+   "hz_R": 23.5,
+   "diff": -4.5,
+   "z": -0.9890000224113464
+  },
+  {
+   "type": "MNad17",
+   "instance": "MNad17_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 3.75,
+   "hz_R": 4.875,
+   "diff": -1.125,
+   "z": -0.9679999947547913
+  },
+  {
+   "type": "DNp45",
+   "instance": "DNp45(PVLP117)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 3.5,
+   "hz_R": 4.375,
+   "diff": -0.875,
+   "z": -0.9539999961853027
+  },
+  {
+   "type": "MN9",
+   "instance": "MN9_L",
+   "somaSide": "L",
+   "superclass": "cb_motor",
+   "hz_L": 40.375,
+   "hz_R": 48.625,
+   "diff": -8.25,
+   "z": -0.9470000267028809
+  },
+  {
+   "type": "DNp08",
+   "instance": "DNp08(PS271)_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 13.25,
+   "hz_R": 16.125,
+   "diff": -2.875,
+   "z": -0.8980000019073486
+  },
+  {
+   "type": "DNg13",
+   "instance": "DNg13_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 15.5,
+   "hz_R": 18.875,
+   "diff": -3.375,
+   "z": -0.8980000019073486
+  },
+  {
+   "type": "DNg15",
+   "instance": "DNg15_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 9.625,
+   "hz_R": 11.75,
+   "diff": -2.125,
+   "z": -0.8799999952316284
+  },
+  {
+   "type": "DNge073",
+   "instance": "DNge073_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 2.125,
+   "hz_R": 1.625,
+   "diff": 0.5,
+   "z": 0.878000020980835
+  },
+  {
+   "type": "DNge068",
+   "instance": "DNge068_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 1.875,
+   "hz_R": 2.5,
+   "diff": -0.625,
+   "z": -0.871999979019165
+  },
+  {
+   "type": "DNg74_b",
+   "instance": "DNg74_b_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 2.625,
+   "hz_R": 1.625,
+   "diff": 1.0,
+   "z": 0.8349999785423279
+  },
+  {
+   "type": "DNge143",
+   "instance": "DNge143_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 11.25,
+   "hz_R": 13.5,
+   "diff": -2.25,
+   "z": -0.8320000171661377
+  },
+  {
+   "type": "DNb03",
+   "instance": "DNb03_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 18.5,
+   "hz_R": 22.0,
+   "diff": -3.5,
+   "z": -0.8309999704360962
+  },
+  {
+   "type": "DNg29",
+   "instance": "DNg29_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 12.0,
+   "hz_R": 14.5,
+   "diff": -2.5,
+   "z": -0.8289999961853027
+  },
+  {
+   "type": "Sternal anterior rotator MN",
+   "instance": "Sternal anterior rotator MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 9.375,
+   "hz_R": 11.125,
+   "diff": -1.75,
+   "z": -0.8270000219345093
+  },
+  {
+   "type": "DNg69",
+   "instance": "DNg69_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 21.5,
+   "hz_R": 25.75,
+   "diff": -4.25,
+   "z": -0.824999988079071
+  },
+  {
+   "type": "DNg75",
+   "instance": "DNg75(hb1874217622)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 40.25,
+   "hz_R": 47.375,
+   "diff": -7.125,
+   "z": -0.8050000071525574
+  },
+  {
+   "type": "MNad07",
+   "instance": "MNad07_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 1.375,
+   "hz_R": 0.875,
+   "diff": 0.5,
+   "z": 0.8040000200271606
+  },
+  {
+   "type": "DNp30",
+   "instance": "DNp30_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 5.125,
+   "hz_R": 4.125,
+   "diff": 1.0,
+   "z": 0.8009999990463257
+  },
+  {
+   "type": "DNge129",
+   "instance": "DNge129_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 13.75,
+   "hz_R": 16.125,
+   "diff": -2.375,
+   "z": -0.7979999780654907
+  },
+  {
+   "type": "DNp27",
+   "instance": "DNp27_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 18.625,
+   "hz_R": 22.0,
+   "diff": -3.375,
+   "z": -0.7929999828338623
+  },
+  {
+   "type": "DNge031",
+   "instance": "DNge031_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 9.875,
+   "hz_R": 7.375,
+   "diff": 2.5,
+   "z": 0.7770000100135803
+  },
+  {
+   "type": "Fe reductor MN",
+   "instance": "Fe reductor MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 71.125,
+   "hz_R": 83.125,
+   "diff": -12.0,
+   "z": -0.7760000228881836
+  },
+  {
+   "type": "MNad10",
+   "instance": "MNad10_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 2.375,
+   "hz_R": 3.0,
+   "diff": -0.625,
+   "z": -0.7730000019073486
+  },
+  {
+   "type": "DNp34",
+   "instance": "DNp34_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 50.875,
+   "hz_R": 59.625,
+   "diff": -8.75,
+   "z": -0.7699999809265137
+  },
+  {
+   "type": "MNad20",
+   "instance": "MNad20_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 40.75,
+   "hz_R": 47.375,
+   "diff": -6.625,
+   "z": -0.7699999809265137
+  },
+  {
+   "type": "DNg33",
+   "instance": "DNg33_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 105.0,
+   "hz_R": 122.875,
+   "diff": -17.875,
+   "z": -0.7670000195503235
+  },
+  {
+   "type": "MN11D",
+   "instance": "MN11D_R",
+   "somaSide": "R",
+   "superclass": "cb_motor",
+   "hz_L": 21.875,
+   "hz_R": 26.5,
+   "diff": -4.625,
+   "z": -0.7540000081062317
+  },
+  {
+   "type": "MNad11",
+   "instance": "MNad11_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 20.0,
+   "hz_R": 23.375,
+   "diff": -3.375,
+   "z": -0.7540000081062317
+  },
+  {
+   "type": "Tergopleural/Pleural promotor MN",
+   "instance": "Tergopleural/Pleural promotor MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 1.0,
+   "hz_R": 1.375,
+   "diff": -0.375,
+   "z": -0.753000020980835
+  },
+  {
+   "type": "DNa02",
+   "instance": "DNa02_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 76.375,
+   "hz_R": 88.0,
+   "diff": -11.625,
+   "z": -0.7440000176429749
+  },
+  {
+   "type": "DNpe053",
+   "instance": "DNpe053(SMP454)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 44.75,
+   "hz_R": 52.125,
+   "diff": -7.375,
+   "z": -0.7429999709129333
+  },
+  {
+   "type": "DNg62",
+   "instance": "DNg62_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 53.875,
+   "hz_R": 62.625,
+   "diff": -8.75,
+   "z": -0.7350000143051147
+  },
+  {
+   "type": "Sternotrochanter MN",
+   "instance": "Sternotrochanter MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 51.5,
+   "hz_R": 59.25,
+   "diff": -7.75,
+   "z": -0.7350000143051147
+  },
+  {
+   "type": "DNpe025",
+   "instance": "DNpe025(PVLP145)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 6.625,
+   "hz_R": 7.875,
+   "diff": -1.25,
+   "z": -0.7319999933242798
+  }
+ ],
+ "HALT": [
+  {
+   "type": "DNpe030",
+   "instance": "DNpe030_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 3.625,
+   "hz_R": 0.125,
+   "diff": 3.5,
+   "z": 7.290999889373779
+  },
+  {
+   "type": "DNg96",
+   "instance": "DNg96_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 10.75,
+   "hz_R": 21.375,
+   "diff": -10.625,
+   "z": -6.570000171661377
+  },
+  {
+   "type": "DNbe007",
+   "instance": "DNbe007(VES042)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 6.5,
+   "hz_R": 2.5,
+   "diff": 4.0,
+   "z": 4.064000129699707
+  },
+  {
+   "type": "DNge073",
+   "instance": "DNge073_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 4.5,
+   "hz_R": 1.75,
+   "diff": 2.75,
+   "z": 3.4149999618530273
+  },
+  {
+   "type": "DNge172",
+   "instance": "DNge172_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 1.375,
+   "hz_R": 0.25,
+   "diff": 1.125,
+   "z": 2.6679999828338623
+  },
+  {
+   "type": "MNad19",
+   "instance": "MNad19_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 0.375,
+   "hz_R": 1.25,
+   "diff": -0.875,
+   "z": -2.578000068664551
+  },
+  {
+   "type": "Tergotr. MN",
+   "instance": "Tergotr. MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 1.25,
+   "hz_R": 0.25,
+   "diff": 1.0,
+   "z": 2.4119999408721924
+  },
+  {
+   "type": "MNad21",
+   "instance": "MNad21_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 2.125,
+   "hz_R": 1.125,
+   "diff": 1.0,
+   "z": 2.3340001106262207
+  },
+  {
+   "type": "DNge172",
+   "instance": "DNge172_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 3.75,
+   "hz_R": 6.0,
+   "diff": -2.25,
+   "z": -2.259000062942505
+  },
+  {
+   "type": "DNp41",
+   "instance": "DNp41(PS295)_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 1.5,
+   "hz_R": 0.375,
+   "diff": 1.125,
+   "z": 1.9240000247955322
+  },
+  {
+   "type": "DNg04",
+   "instance": "DNg04_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 3.875,
+   "hz_R": 6.0,
+   "diff": -2.125,
+   "z": -1.8029999732971191
+  },
+  {
+   "type": "Ti extensor MN",
+   "instance": "Ti extensor MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 3.125,
+   "hz_R": 4.625,
+   "diff": -1.5,
+   "z": -1.7940000295639038
+  },
+  {
+   "type": "Tergopleural/Pleural promotor MN",
+   "instance": "Tergopleural/Pleural promotor MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 2.0,
+   "hz_R": 1.0,
+   "diff": 1.0,
+   "z": 1.7059999704360962
+  },
+  {
+   "type": "DNp45",
+   "instance": "DNp45(PVLP117)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 2.75,
+   "hz_R": 4.375,
+   "diff": -1.625,
+   "z": -1.659000039100647
+  },
+  {
+   "type": "DLMn c-f",
+   "instance": "DLMn c-f_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 1.75,
+   "hz_R": 2.875,
+   "diff": -1.125,
+   "z": -1.6330000162124634
+  },
+  {
+   "type": "DNae001",
+   "instance": "DNae001(DNa01)_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 3.0,
+   "hz_R": 4.5,
+   "diff": -1.5,
+   "z": -1.5490000247955322
+  },
+  {
+   "type": "DNpe053",
+   "instance": "DNpe053(SMP454)_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 0.5,
+   "hz_R": 1.125,
+   "diff": -0.625,
+   "z": -1.5160000324249268
+  },
+  {
+   "type": "DNg30",
+   "instance": "DNg30_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 0.875,
+   "hz_R": 1.625,
+   "diff": -0.75,
+   "z": -1.465999960899353
+  },
+  {
+   "type": "DNg37",
+   "instance": "DNg37_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 4.875,
+   "hz_R": 3.5,
+   "diff": 1.375,
+   "z": 1.434000015258789
+  },
+  {
+   "type": "DNg98",
+   "instance": "DNg98_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 1.375,
+   "hz_R": 2.25,
+   "diff": -0.875,
+   "z": -1.2120000123977661
+  },
+  {
+   "type": "Sternal anterior rotator MN",
+   "instance": "Sternal anterior rotator MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 2.25,
+   "hz_R": 3.625,
+   "diff": -1.375,
+   "z": -1.1770000457763672
+  },
+  {
+   "type": "DNge081",
+   "instance": "DNge081_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 4.375,
+   "hz_R": 5.5,
+   "diff": -1.125,
+   "z": -1.1089999675750732
+  },
+  {
+   "type": "DNp31",
+   "instance": "DNp31_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 8.625,
+   "hz_R": 6.75,
+   "diff": 1.875,
+   "z": 1.090000033378601
+  },
+  {
+   "type": "DNp20",
+   "instance": "DNp20_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 4.25,
+   "hz_R": 3.375,
+   "diff": 0.875,
+   "z": 1.0880000591278076
+  },
+  {
+   "type": "DNge053",
+   "instance": "DNge053_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 2.75,
+   "hz_R": 3.75,
+   "diff": -1.0,
+   "z": -1.0789999961853027
+  },
+  {
+   "type": "DNp04",
+   "instance": "DNp04_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 21.875,
+   "hz_R": 26.875,
+   "diff": -5.0,
+   "z": -1.0740000009536743
+  },
+  {
+   "type": "DNg104",
+   "instance": "DNg104_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 15.875,
+   "hz_R": 12.875,
+   "diff": 3.0,
+   "z": 1.069000005722046
+  },
+  {
+   "type": "DNp26",
+   "instance": "DNp26_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 1.25,
+   "hz_R": 2.0,
+   "diff": -0.75,
+   "z": -1.0069999694824219
+  },
+  {
+   "type": "DNge013",
+   "instance": "DNge013_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 2.875,
+   "hz_R": 2.0,
+   "diff": 0.875,
+   "z": 1.0010000467300415
+  },
+  {
+   "type": "Fe reductor MN",
+   "instance": "Fe reductor MN_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 2.25,
+   "hz_R": 3.125,
+   "diff": -0.875,
+   "z": -0.9860000014305115
+  },
+  {
+   "type": "DNp47",
+   "instance": "DNp47(PS293)_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 0.75,
+   "hz_R": 1.25,
+   "diff": -0.5,
+   "z": -0.9700000286102295
+  },
+  {
+   "type": "DNp35",
+   "instance": "DNp35(PVLP136)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 15.0,
+   "hz_R": 18.25,
+   "diff": -3.25,
+   "z": -0.9470000267028809
+  },
+  {
+   "type": "DNg105",
+   "instance": "DNg105_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 58.125,
+   "hz_R": 51.0,
+   "diff": 7.125,
+   "z": 0.9259999990463257
+  },
+  {
+   "type": "DNpe025",
+   "instance": "DNpe025(PVLP145)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 8.625,
+   "hz_R": 7.125,
+   "diff": 1.5,
+   "z": 0.9179999828338623
+  },
+  {
+   "type": "GNG653",
+   "instance": "GNG653_R",
+   "somaSide": "R",
+   "superclass": "cb_motor",
+   "hz_L": 9.0,
+   "hz_R": 10.875,
+   "diff": -1.875,
+   "z": -0.8859999775886536
+  },
+  {
+   "type": "DNp12",
+   "instance": "DNp12(WED105)_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 3.5,
+   "hz_R": 4.5,
+   "diff": -1.0,
+   "z": -0.8730000257492065
+  },
+  {
+   "type": "Sternal anterior rotator MN",
+   "instance": "Sternal anterior rotator MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 35.75,
+   "hz_R": 31.125,
+   "diff": 4.625,
+   "z": 0.8690000176429749
+  },
+  {
+   "type": "DNge102",
+   "instance": "DNge102_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 13.25,
+   "hz_R": 11.25,
+   "diff": 2.0,
+   "z": 0.8610000014305115
+  },
+  {
+   "type": "DNp13",
+   "instance": "DNp13_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 2.875,
+   "hz_R": 3.625,
+   "diff": -0.75,
+   "z": -0.8420000076293945
+  },
+  {
+   "type": "DNg47",
+   "instance": "DNg47_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 6.5,
+   "hz_R": 5.5,
+   "diff": 1.0,
+   "z": 0.7490000128746033
+  },
+  {
+   "type": "DNge035",
+   "instance": "DNge035_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 0.75,
+   "hz_R": 1.25,
+   "diff": -0.5,
+   "z": -0.7179999947547913
+  },
+  {
+   "type": "DNge068",
+   "instance": "DNge068_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 3.0,
+   "hz_R": 2.625,
+   "diff": 0.375,
+   "z": 0.6729999780654907
+  },
+  {
+   "type": "CvN5",
+   "instance": "CvN5_R",
+   "somaSide": "R",
+   "superclass": "cb_motor",
+   "hz_L": 29.5,
+   "hz_R": 25.875,
+   "diff": 3.625,
+   "z": 0.671999990940094
+  },
+  {
+   "type": "DNge060",
+   "instance": "DNge060_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 15.25,
+   "hz_R": 17.375,
+   "diff": -2.125,
+   "z": -0.6660000085830688
+  },
+  {
+   "type": "DNp30",
+   "instance": "DNp30_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 4.375,
+   "hz_R": 3.75,
+   "diff": 0.625,
+   "z": 0.6600000262260437
+  },
+  {
+   "type": "MNad10",
+   "instance": "MNad10_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 2.75,
+   "hz_R": 3.25,
+   "diff": -0.5,
+   "z": -0.6579999923706055
+  },
+  {
+   "type": "MNad14",
+   "instance": "MNad14_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 31.125,
+   "hz_R": 27.75,
+   "diff": 3.375,
+   "z": 0.6570000052452087
+  },
+  {
+   "type": "DNge058",
+   "instance": "DNge058_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 7.75,
+   "hz_R": 8.875,
+   "diff": -1.125,
+   "z": -0.6420000195503235
+  },
+  {
+   "type": "DLMn c-f",
+   "instance": "DLMn c-f_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 4.125,
+   "hz_R": 3.625,
+   "diff": 0.5,
+   "z": 0.5979999899864197
+  },
+  {
+   "type": "MNad06",
+   "instance": "MNad06_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 8.25,
+   "hz_R": 9.25,
+   "diff": -1.0,
+   "z": -0.5879999995231628
+  },
+  {
+   "type": "DNp01",
+   "instance": "DNp01(GF)_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 25.0,
+   "hz_R": 22.375,
+   "diff": 2.625,
+   "z": 0.5839999914169312
+  },
+  {
+   "type": "MN11D",
+   "instance": "MN11D_R",
+   "somaSide": "R",
+   "superclass": "cb_motor",
+   "hz_L": 23.875,
+   "hz_R": 27.5,
+   "diff": -3.625,
+   "z": -0.5659999847412109
+  },
+  {
+   "type": "MNad10",
+   "instance": "MNad10_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 10.625,
+   "hz_R": 9.375,
+   "diff": 1.25,
+   "z": 0.5569999814033508
+  },
+  {
+   "type": "Fe reductor MN",
+   "instance": "Fe reductor MN_R",
+   "somaSide": "R",
+   "superclass": "vnc_motor",
+   "hz_L": 81.375,
+   "hz_R": 74.625,
+   "diff": 6.75,
+   "z": 0.5339999794960022
+  },
+  {
+   "type": "MNad11",
+   "instance": "MNad11_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 23.25,
+   "hz_R": 21.125,
+   "diff": 2.125,
+   "z": 0.5040000081062317
+  },
+  {
+   "type": "DNpe031",
+   "instance": "DNpe031(PVLP116)_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 7.0,
+   "hz_R": 7.75,
+   "diff": -0.75,
+   "z": -0.49399998784065247
+  },
+  {
+   "type": "DNg41",
+   "instance": "DNg41_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 11.125,
+   "hz_R": 12.125,
+   "diff": -1.0,
+   "z": -0.48899999260902405
+  },
+  {
+   "type": "MNnm11",
+   "instance": "MNnm11_L",
+   "somaSide": "L",
+   "superclass": "vnc_motor",
+   "hz_L": 48.375,
+   "hz_R": 45.0,
+   "diff": 3.375,
+   "z": 0.46700000762939453
+  },
+  {
+   "type": "DNge031",
+   "instance": "DNge031_R",
+   "somaSide": "R",
+   "superclass": "descending_neuron",
+   "hz_L": 9.125,
+   "hz_R": 7.75,
+   "diff": 1.375,
+   "z": 0.4650000035762787
+  },
+  {
+   "type": "DNg16",
+   "instance": "DNg16_L",
+   "somaSide": "L",
+   "superclass": "descending_neuron",
+   "hz_L": 35.25,
+   "hz_R": 32.375,
+   "diff": 2.875,
+   "z": 0.460999995470047
+  }
+ ]
+}

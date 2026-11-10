@@ -1,0 +1,25 @@
+== 19:02:09 screen r1_s3 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cuda
+  t=10.0s  alive 48/48  mean|phi|  6.8 deg  pop 78,650 sp/s  wall 218s
+  t=15.0s  alive 48/48  mean|phi|  4.9 deg  pop 64,906 sp/s  wall 331s
+driven neurons total 46,041 sp/s; rest of brain 36,733 sp/s; 2,820 neurons > 1 Hz, 1,399 > 20 Hz
+== descending neurons above 0.5 Hz (215 of 1314)
+== 19:09:23 screen r1_s4 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cuda
+  t=10.0s  alive 48/48  mean|phi|  6.8 deg  pop 87,990 sp/s  wall 222s
+  t=15.0s  alive 48/48  mean|phi|  4.9 deg  pop 78,383 sp/s  wall 334s
+driven neurons total 46,039 sp/s; rest of brain 43,883 sp/s; 3,267 neurons > 1 Hz, 1,520 > 20 Hz
+== descending neurons above 0.5 Hz (281 of 1314)
+== 19:15:11 screen r1_s5 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cuda
+  t=10.0s  alive 48/48  mean|phi|  6.8 deg  pop 81,490 sp/s  wall 205s
+  t=15.0s  alive 48/48  mean|phi|  4.9 deg  pop 68,485 sp/s  wall 311s
+driven neurons total 46,049 sp/s; rest of brain 39,099 sp/s; 2,858 neurons > 1 Hz, 1,425 > 20 Hz
+== descending neurons above 0.5 Hz (174 of 1314)
+== 19:20:35 screen r2_s3 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cuda
+  t=10.0s  alive 48/48  mean|phi|  6.8 deg  pop 98,704 sp/s  wall 212s
+  t=15.0s  alive 48/48  mean|phi|  4.9 deg  pop 87,346 sp/s  wall 309s
+driven neurons total 46,039 sp/s; rest of brain 54,850 sp/s; 3,362 neurons > 1 Hz, 1,704 > 20 Hz
+== descending neurons above 0.5 Hz (261 of 1314)
+== 19:26:02 screen r2_s4 
