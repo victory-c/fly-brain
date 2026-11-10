@@ -186,6 +186,7 @@ NOTES.update({
     "38372": "preregistered single ride, R4 draw 1 at its closed-loop scale 1.2, seed 211, hand-picked readout, CPU",
     "38373": "preregistered single ride, R5 draw 1 at its closed-loop scale 2.0, seed 211, hand-picked readout, CPU",
 })
+NOTES["38413"] = "test of tools/heldout.py on the first confirmatory ride (R0, 4.5 m/s, seed 211)"
 NOTES.update({str(j): "confirmatory ride, preregistration prereg-v1 section 5 secondary design, 60 generations, GPU, after the primary design" for j in range(38374, 38412)})
 
 LEFT_OUT = {"36054", "36055", "36056", "36057", "36062", "36064"}  # Fly Bar jobs, not part of this repo

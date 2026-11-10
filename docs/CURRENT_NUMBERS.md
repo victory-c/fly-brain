@@ -1108,6 +1108,20 @@ One seed each, so these are pilots. R0's three pilots (seeds 201 to 203) gave 13
 
 By the rule (smallest |log(rate / 23,400)|, within 2x), R3.5 rides at 0.47 and R5 at 2.0, and no bisection is needed. R4 stays at 1.2 from the pilot. The R3.5 rate is steep: 0.06 of scale is a factor of 4.4. The three single rides (draw 1, seed 211, 4.5 m/s, hand-picked readout) are on the CPU, chained, jobs 38371 to 38373, because the GPUs are taken; the preregistration allows that and they are reported as CPU runs. Tags `conf_r35_s1_w0.47_cpu`, `conf_r4_s1_w1.2_cpu`, `conf_r5_s1_w2_cpu`.
 
+## First confirmatory ride and the held-out replay tool
+
+The first primary ride (R0, 4.5 m/s, CEM seed 211, job 38263) reached 60 generations on the GPU in 294 min, under the 340 min cap: 12.79 s riding time in the last generation, 62% of riders finishing.
+
+`tools/heldout.py` (with `heldout.sbatch`) replays a search's final mean decoder with the settings recorded in its `cem.json`, into `<run>/heldout/<condition>.json`. Section 5 gives gust seeds for the gust test only; the speed conditions reuse replay seed 301. Test on that ride, CPU, job 38413, about 7 min per condition:
+
+| Condition | Speed (m/s) | Riding time (s) | Finished / 48 | Left road | Fell |
+|---|---|---|---|---|---|
+| gust seed 301 | 4.5 | 14.05 | 38 | 8 | 2 |
+| speed +0.5 | 5.0 | 13.10 | 28 | 20 | 0 |
+| speed -0.5 | 4.0 | 7.77 | 0 | 13 | 35 |
+
+One decoder, so this checks the tool and does not test anything. The final mean rides longer than the last generation's mean because the generation includes the search's noise around it.
+
 ## Rewired brains: transmission pre-test (Scrambled Brains pilot)
 
 `brain/variants.py` rewires the connectome. R4 shuffles every connection's target, which keeps each neuron's
