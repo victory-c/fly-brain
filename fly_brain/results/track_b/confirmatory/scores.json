@@ -1,0 +1,35 @@
+{
+ "r0": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r1_s101": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ },
+ "r2_s101": {
+  "score": 1.0,
+  "rows": {
+   "sugar_mn9": true,
+   "bitter_suppression": true,
+   "ir94e_suppression": true,
+   "dose_response": true,
+   "loom_gf": true,
+   "loom_dnp02_dnp11": true
+  }
+ }
+}
