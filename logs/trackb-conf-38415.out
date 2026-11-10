@@ -1,2 +1,7 @@
   9,936 neurons relabelled (5.96%), 8,594 changed sign (5.16%); 40.2% of synapses now inhibitory (was 38.4%)
 == 01:28:12 r1_s101 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 01:31:03 r2_s101 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+== done Tue Nov 10 01:32:52 AM PST 2026

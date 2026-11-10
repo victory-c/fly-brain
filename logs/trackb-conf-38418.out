@@ -1,0 +1,10 @@
+r4 seed 3: 25,582,938 connections -> 25,495,869 after merging; synapses 124,177,616 -> 124,177,616; 0.58% of the original connections survive; written /tmp/tmp.ixdnJ74Fvc/r4_s3.npz
+== 02:10:46 r4_s3 scale 1.2
+sign score (the preregistered score is tools/track_b_score.py) 0.3333333333333333 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response']
+r4 seed 4: 25,582,938 connections -> 25,495,495 after merging; synapses 124,177,616 -> 124,177,616; 0.58% of the original connections survive; written /tmp/tmp.ixdnJ74Fvc/r4_s4.npz
+== 02:14:09 r4_s4 scale 1.2
+sign score (the preregistered score is tools/track_b_score.py) 0.3333333333333333 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response']
+r4 seed 5: 25,582,938 connections -> 25,495,816 after merging; synapses 124,177,616 -> 124,177,616; 0.58% of the original connections survive; written /tmp/tmp.ixdnJ74Fvc/r4_s5.npz
+== 02:17:04 r4_s5 scale 1.2
+sign score (the preregistered score is tools/track_b_score.py) 0.3333333333333333 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response']
+== done Tue Nov 10 02:19:51 AM PST 2026

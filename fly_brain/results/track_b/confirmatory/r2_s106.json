@@ -1,0 +1,101 @@
+{
+ "brain": "/tmp/tmp.pHYWGTqSHg/r2_s106.npz",
+ "w_syn": 0.12925,
+ "flies": 30,
+ "ms": 1000.0,
+ "seed": 0,
+ "taste_side": "both",
+ "rates": {
+  "bitter": {
+   "mn9": 0.0,
+   "mdn": 0.0,
+   "gf": 0.0,
+   "dnp": 0.0
+  },
+  "loom": {
+   "mn9": 0.0,
+   "mdn": 0.225,
+   "gf": 262.51666666666665,
+   "dnp": 183.16666666666666
+  },
+  "sugar": {
+   "mn9": 34.3,
+   "mdn": 0.0,
+   "gf": 0.0,
+   "dnp": 0.0
+  },
+  "sugar+bitter": {
+   "mn9": 0.0,
+   "mdn": 0.0,
+   "gf": 0.0,
+   "dnp": 0.0
+  },
+  "sugar+ir94e": {
+   "mn9": 0.016666666666666666,
+   "mdn": 0.0,
+   "gf": 0.0,
+   "dnp": 0.0
+  },
+  "sugar@100": {
+   "mn9": 14.95,
+   "mdn": 0.0,
+   "gf": 0.0,
+   "dnp": 0.0
+  },
+  "sugar@20": {
+   "mn9": 0.0,
+   "mdn": 0.0,
+   "gf": 0.0,
+   "dnp": 0.0
+  }
+ },
+ "signed": [
+  {
+   "id": "sugar_mn9",
+   "difference_hz": 34.3,
+   "expected_sign": 1,
+   "as_expected": true
+  },
+  {
+   "id": "bitter_suppression",
+   "difference_hz": -34.3,
+   "expected_sign": -1,
+   "as_expected": true
+  },
+  {
+   "id": "ir94e_suppression",
+   "difference_hz": -34.283,
+   "expected_sign": -1,
+   "as_expected": true
+  },
+  {
+   "id": "dose_response",
+   "difference_hz": 14.95,
+   "expected_sign": 1,
+   "as_expected": true
+  },
+  {
+   "id": "loom_gf",
+   "difference_hz": 262.517,
+   "expected_sign": 1,
+   "as_expected": true
+  },
+  {
+   "id": "loom_dnp02_dnp11",
+   "difference_hz": 183.167,
+   "expected_sign": 1,
+   "as_expected": true
+  }
+ ],
+ "sign_score": 1.0,
+ "null_rows": [
+  {
+   "id": "bitter_alone_mn9",
+   "rate_hz": 0.0
+  },
+  {
+   "id": "sugar_gf_crosstalk",
+   "rate_hz": 0.0
+  }
+ ]
+}

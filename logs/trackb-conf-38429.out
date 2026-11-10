@@ -1,0 +1,30 @@
+  10,105 neurons relabelled (6.06%), 8,770 changed sign (5.26%); 40.1% of synapses now inhibitory (was 38.4%)
+== 13:09:30 r1_s191 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,006 neurons relabelled (6.00%), 8,668 changed sign (5.20%); 40.0% of synapses now inhibitory (was 38.4%)
+== 13:11:01 r1_s192 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,988 neurons relabelled (5.99%), 8,678 changed sign (5.21%); 39.9% of synapses now inhibitory (was 38.4%)
+== 13:12:30 r1_s193 
+sign score (the preregistered score is tools/track_b_score.py) 0.3333333333333333 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response']
+  9,945 neurons relabelled (5.97%), 8,703 changed sign (5.22%); 40.1% of synapses now inhibitory (was 38.4%)
+== 13:14:10 r1_s194 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,812 neurons relabelled (5.89%), 8,534 changed sign (5.12%); 39.9% of synapses now inhibitory (was 38.4%)
+== 13:16:33 r1_s195 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,006 neurons relabelled (6.00%), 8,723 changed sign (5.23%); 40.0% of synapses now inhibitory (was 38.4%)
+== 13:18:55 r1_s196 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,034 neurons relabelled (6.02%), 8,718 changed sign (5.23%); 40.2% of synapses now inhibitory (was 38.4%)
+== 13:21:12 r1_s197 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,991 neurons relabelled (5.99%), 8,716 changed sign (5.23%); 40.1% of synapses now inhibitory (was 38.4%)
+== 13:23:33 r1_s198 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,002 neurons relabelled (6.00%), 8,718 changed sign (5.23%); 40.0% of synapses now inhibitory (was 38.4%)
+== 13:25:49 r1_s199 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,876 neurons relabelled (5.92%), 8,585 changed sign (5.15%); 40.0% of synapses now inhibitory (was 38.4%)
+== 13:28:01 r1_s200 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []

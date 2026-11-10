@@ -1,0 +1,7 @@
+== 10:29:38 screen r4_s1 scale 1.2
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cpu
+  t=10.0s  alive 48/48  mean|phi|  4.6 deg  pop 76,394 sp/s  wall 401s
+  t=15.0s  alive 48/48  mean|phi|  4.8 deg  pop 62,288 sp/s  wall 672s
+driven neurons total 45,436 sp/s; rest of brain 72,371 sp/s; 12,734 neurons > 1 Hz, 1,253 > 20 Hz
+== descending neurons above 0.5 Hz (348 of 1314)
+== done Tue Nov 10 10:41:00 AM PST 2026

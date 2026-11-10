@@ -1,0 +1,19 @@
+r4 seed 3: 25,582,938 connections -> 25,495,869 after merging; synapses 124,177,616 -> 124,177,616; 0.58% of the original connections survive; written /tmp/tmp.CPjQVallxZ/r4_s3.npz
+== 01:52:47 r4_s3 
+sign score (the preregistered score is tools/track_b_score.py) 0.0 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response', 'loom_gf', 'loom_dnp02_dnp11']
+r4 seed 4: 25,582,938 connections -> 25,495,495 after merging; synapses 124,177,616 -> 124,177,616; 0.58% of the original connections survive; written /tmp/tmp.CPjQVallxZ/r4_s4.npz
+== 01:56:09 r4_s4 
+sign score (the preregistered score is tools/track_b_score.py) 0.0 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response', 'loom_gf', 'loom_dnp02_dnp11']
+r4 seed 5: 25,582,938 connections -> 25,495,816 after merging; synapses 124,177,616 -> 124,177,616; 0.58% of the original connections survive; written /tmp/tmp.CPjQVallxZ/r4_s5.npz
+== 01:58:42 r4_s5 
+sign score (the preregistered score is tools/track_b_score.py) 0.16666666666666666 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response', 'loom_gf']
+r5 seed 3: 25,582,938 connections -> 25,549,105 after merging; synapses 124,177,616 -> 124,177,616; 0.27% of the original connections survive; written /tmp/tmp.CPjQVallxZ/r5_s3.npz
+== 02:02:01 r5_s3 
+sign score (the preregistered score is tools/track_b_score.py) 0.0 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response', 'loom_gf', 'loom_dnp02_dnp11']
+r5 seed 4: 25,582,938 connections -> 25,548,502 after merging; synapses 124,177,616 -> 124,177,616; 0.27% of the original connections survive; written /tmp/tmp.CPjQVallxZ/r5_s4.npz
+== 02:05:11 r5_s4 
+sign score (the preregistered score is tools/track_b_score.py) 0.16666666666666666 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response', 'loom_gf']
+r5 seed 5: 25,582,938 connections -> 25,548,830 after merging; synapses 124,177,616 -> 124,177,616; 0.26% of the original connections survive; written /tmp/tmp.CPjQVallxZ/r5_s5.npz
+== 02:07:27 r5_s5 
+sign score (the preregistered score is tools/track_b_score.py) 0.0 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response', 'loom_gf', 'loom_dnp02_dnp11']
+== done Tue Nov 10 02:09:52 AM PST 2026
