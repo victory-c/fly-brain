@@ -1,0 +1,48 @@
+  9,917 neurons relabelled (5.95%), 8,619 changed sign (5.17%); 40.0% of synapses now inhibitory (was 38.4%)
+== 11:34:49 r1_s161 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,912 neurons relabelled (5.95%), 8,614 changed sign (5.17%); 39.9% of synapses now inhibitory (was 38.4%)
+== 11:36:21 r1_s162 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,874 neurons relabelled (5.92%), 8,556 changed sign (5.13%); 39.9% of synapses now inhibitory (was 38.4%)
+== 11:38:03 r1_s163 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,038 neurons relabelled (6.02%), 8,742 changed sign (5.24%); 40.1% of synapses now inhibitory (was 38.4%)
+== 11:39:42 r1_s164 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,056 neurons relabelled (6.03%), 8,729 changed sign (5.24%); 40.1% of synapses now inhibitory (was 38.4%)
+== 11:41:18 r1_s165 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  10,026 neurons relabelled (6.01%), 8,746 changed sign (5.25%); 40.1% of synapses now inhibitory (was 38.4%)
+== 11:42:55 r1_s166 
+sign score (the preregistered score is tools/track_b_score.py) 0.8333333333333334 ['dose_response']
+  9,917 neurons relabelled (5.95%), 8,631 changed sign (5.18%); 40.0% of synapses now inhibitory (was 38.4%)
+== 11:44:34 r1_s167 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  9,749 neurons relabelled (5.85%), 8,477 changed sign (5.09%); 40.1% of synapses now inhibitory (was 38.4%)
+== 11:46:07 r1_s168 
+sign score (the preregistered score is tools/track_b_score.py) 0.8333333333333334 ['dose_response']
+  10,055 neurons relabelled (6.03%), 8,749 changed sign (5.25%); 40.1% of synapses now inhibitory (was 38.4%)
+== 11:47:37 r1_s169 
+sign score (the preregistered score is tools/track_b_score.py) 0.3333333333333333 ['sugar_mn9', 'bitter_suppression', 'ir94e_suppression', 'dose_response']
+  9,961 neurons relabelled (5.98%), 8,659 changed sign (5.19%); 40.3% of synapses now inhibitory (was 38.4%)
+== 11:49:10 r1_s170 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 11:50:42 r2_s161 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 11:52:16 r2_s162 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.249
+== 11:53:53 r2_s163 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 11:55:29 r2_s164 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 11:57:09 r2_s165 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
+  jitter factors: median 1.000, 16-84% 0.801-1.248
+== 11:58:43 r2_s166 
+sign score (the preregistered score is tools/track_b_score.py) 1.0 []
