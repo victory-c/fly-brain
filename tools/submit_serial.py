@@ -102,7 +102,7 @@ def main():
 def relay(a, queued, links):
     busy = sorted(n for n in queued if n.startswith(PREFIXES))
     if busy and not a.after:
-        print(f"a link is already in Slurm ({', '.join(busy)}); nothing submitted")
+        print(f"{len(busy)} links already in Slurm ({busy[0]}{', ...' if len(busy) > 1 else ''}); nothing submitted")
         return
     try:
         tries = json.loads(TRIES.read_text())
