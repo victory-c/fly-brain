@@ -3,6 +3,7 @@
 Every Slurm job run from this repo on the OCF cluster (node `corruption`), newest last. Generated
 by `python3 tools/jobs_ledger.py` from `sacct`; do not edit by hand, add context to `NOTES` there.
 Commands run from the job's working directory (`.` = repo root, `fly_brain/` for most `srun` jobs).
+The one-CPU relay jobs of the Scrambled Brains queue (`serial-next`, tools/submit_serial.py --next) are left out; see logs/serial-next-*.out.
 
 | Job | Started | State | Time | Resources | What | Command | Logs / outputs |
 |---|---|---|---|---|---|---|---|
@@ -288,8 +289,8 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 38268 | 2026-11-10 15:09 | COMPLETED | 04:51:11 | 8 cpu, 16G | confirmatory ride, preregistration prereg-v1 section 5 primary design, hand-picked readout, 60 generations, GPU | `sbatch --parsable --job-name=cm-r2_s4-v4.5-s211 --export=ALL,GENS=60,REQUIRE_CUDA=1 --dependency=afterany:38266 ride-rung.sbatch 4.5 211 results/variants/r2_s4.npz conf_r2_s4 340` | [ride-rung-38268.out](logs/ride-rung-38268.out) |
 | 38269 | 2026-11-10 16:10 | COMPLETED | 04:56:11 | 8 cpu, 16G | confirmatory ride, preregistration prereg-v1 section 5 primary design, hand-picked readout, 60 generations, GPU | `sbatch --parsable --job-name=cm-r2_s5-v4.5-s211 --export=ALL,GENS=60,REQUIRE_CUDA=1 --dependency=afterany:38267 ride-rung.sbatch 4.5 211 results/variants/r2_s5.npz conf_r2_s5 340` | [ride-rung-38269.out](logs/ride-rung-38269.out) |
 | 38270 | 2026-11-10 20:00 | COMPLETED | 04:42:11 | 8 cpu, 16G | confirmatory ride, preregistration prereg-v1 section 5 primary design, hand-picked readout, 60 generations, GPU | `sbatch --parsable --job-name=cm-r3_s3-v4.5-s211 --export=ALL,GENS=60,REQUIRE_CUDA=1 --dependency=afterany:38268 ride-rung.sbatch 4.5 211 results/variants/r3_s3.npz conf_r3_s3 340` | [ride-rung-38270.out](logs/ride-rung-38270.out) |
-| 38271 | 2026-11-10 21:06 | RUNNING | 04:26:09 | 8 cpu, 16G | confirmatory ride, preregistration prereg-v1 section 5 primary design, hand-picked readout, 60 generations, GPU | `sbatch --parsable --job-name=cm-r3_s4-v4.5-s211 --export=ALL,GENS=60,REQUIRE_CUDA=1 --dependency=afterany:38269 ride-rung.sbatch 4.5 211 results/variants/r3_s4.npz conf_r3_s4 340` | [ride-rung-38271.out](logs/ride-rung-38271.out) |
-| 38272 | 2026-11-11 00:42 | RUNNING | 00:50:27 | 8 cpu, 16G | confirmatory ride, preregistration prereg-v1 section 5 primary design, hand-picked readout, 60 generations, GPU | `sbatch --parsable --job-name=cm-r3_s5-v4.5-s211 --export=ALL,GENS=60,REQUIRE_CUDA=1 --dependency=afterany:38270 ride-rung.sbatch 4.5 211 results/variants/r3_s5.npz conf_r3_s5 340` | [ride-rung-38272.out](logs/ride-rung-38272.out) |
+| 38271 | 2026-11-10 21:06 | RUNNING | 04:31:59 | 8 cpu, 16G | confirmatory ride, preregistration prereg-v1 section 5 primary design, hand-picked readout, 60 generations, GPU | `sbatch --parsable --job-name=cm-r3_s4-v4.5-s211 --export=ALL,GENS=60,REQUIRE_CUDA=1 --dependency=afterany:38269 ride-rung.sbatch 4.5 211 results/variants/r3_s4.npz conf_r3_s4 340` | [ride-rung-38271.out](logs/ride-rung-38271.out) |
+| 38272 | 2026-11-11 00:42 | RUNNING | 00:56:17 | 8 cpu, 16G | confirmatory ride, preregistration prereg-v1 section 5 primary design, hand-picked readout, 60 generations, GPU | `sbatch --parsable --job-name=cm-r3_s5-v4.5-s211 --export=ALL,GENS=60,REQUIRE_CUDA=1 --dependency=afterany:38270 ride-rung.sbatch 4.5 211 results/variants/r3_s5.npz conf_r3_s5 340` | [ride-rung-38272.out](logs/ride-rung-38272.out) |
 | 38363 | 2026-11-09 19:04 | COMPLETED | 00:01:57 | 16 cpu, 32G |  | `sbatch --parsable --gres=none -c 16 --mem=32G --time=01:00:00 --job-name=cl-r35_s1-w0.47 --export=ALL,GENS=0 ride-rung.sbatch 4.5 211 results/variants/r35_s1.npz cl_r35_s1_w0.47 30 0.47` | [ride-rung-38363.out](logs/ride-rung-38363.out) |
 | 38364 | 2026-11-09 19:06 | COMPLETED | 00:02:12 | 16 cpu, 32G |  | `sbatch --parsable --gres=none -c 16 --mem=32G --time=01:00:00 --job-name=cl-r35_s1-w0.5 --export=ALL,GENS=0 --dependency=afterany:38363 ride-rung.sbatch 4.5 211 results/variants/r35_s1.npz cl_r35_s1_w0.5 30 0.5` | [ride-rung-38364.out](logs/ride-rung-38364.out) |
 | 38365 | 2026-11-09 19:08 | COMPLETED | 00:01:40 | 16 cpu, 32G |  | `sbatch --parsable --gres=none -c 16 --mem=32G --time=01:00:00 --job-name=cl-r35_s1-w0.53 --export=ALL,GENS=0 --dependency=afterany:38364 ride-rung.sbatch 4.5 211 results/variants/r35_s1.npz cl_r35_s1_w0.53 30 0.53` | [ride-rung-38365.out](logs/ride-rung-38365.out) |
@@ -325,6 +326,7 @@ Commands run from the job's working directory (`.` = repo root, `fly_brain/` for
 | 38455 | 2026-11-10 20:05 | COMPLETED | 00:33:02 | 32 cpu, 32G | Held-out replays, R2 draw 4 seed 211 | `sbatch --parsable --job-name=ho-r2_s4-v4.5-s211 heldout.sbatch gust301,gust302,vplus,vminus fly_brain/results/rungs/conf_r2_s4/v4.5_s211/cem.json` | [heldout-38455.out](logs/heldout-38455.out) |
 | 38456 | 2026-11-10 21:10 | COMPLETED | 00:31:30 | 32 cpu, 32G | Held-out replays, R2 draw 5 seed 211 | `sbatch --parsable --job-name=ho-r2_s5-v4.5-s211 heldout.sbatch gust301,gust302,vplus,vminus fly_brain/results/rungs/conf_r2_s5/v4.5_s211/cem.json` | [heldout-38456.out](logs/heldout-38456.out) |
 | 38462 | None | CANCELLED | 00:00:00 |  | Held-out replays, R3 draw 3 seed 211 | `sbatch --parsable --job-name=ho-r3_s3-v4.5-s211 heldout.sbatch gust301,gust302,vplus,vminus fly_brain/results/rungs/conf_r3_s3/v4.5_s211/cem.json` |  |
+| 38689 | 2026-11-11 01:38 | COMPLETED | 00:00:00 | 2 cpu, 1G |  | `sbatch --parsable -J relay-test --partition=ocf-hpc --nodelist=corruption --gres=none -c 1 --mem=1G -t 00:05:00 -o logs/relay-test-%j.out --wrap cd ~/flybrain; hostname; which sbatch squeue; venv-cuda/bin/python tools...` | [relay-test-38689.out](logs/relay-test-38689.out) |
 
 ## Full command lines
 
@@ -1130,4 +1132,10 @@ sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=16G --time=01:00:00
 
 ```bash
 sbatch --parsable -p ocf-hpc -w corruption --gres=none --mem=16G --time=01:00:00 -c 16 -J replay-top32lane-noroad -o logs/replay-top32lane-noroad-%j.out --wrap set -e; export OMP_NUM_THREADS=16; cd /home/s/st/stevejobs/flybrain/fly_brain; /home/s/st/stevejobs/flybrain/venv-cuda/bin/python -m runs.ride --readout topk --screen results/rungs/screens/r0.parquet --k 32 --lane-k 12 --lane-filter results/rungs/r0/top32_lane12/v4.5_s201/probe.json --tau-lane-ms 300 --center-all --center-batch --lane hs --gains hs_heading=150,hs_lane=50 --v0 4.5 --gust 5 --offroad 0 --lane-penalty 0.02 --riders 48 --seconds 15 --seed 201 --replay /home/s/st/stevejobs/.cache/sb-replay/top32lane_mu.json --trace /home/s/st/stevejobs/.cache/sb-replay/top32lane_mu_noroad_trace.json --out /home/s/st/stevejobs/.cache/sb-replay/unused_top32lane_noroad.json
+```
+
+**38689** (relay-test)
+
+```bash
+sbatch --parsable -J relay-test --partition=ocf-hpc --nodelist=corruption --gres=none -c 1 --mem=1G -t 00:05:00 -o logs/relay-test-%j.out --wrap cd ~/flybrain; hostname; which sbatch squeue; venv-cuda/bin/python tools/submit_serial.py --next --after 1 --dry-run; sbatch --test-only serial-next.sbatch
 ```
