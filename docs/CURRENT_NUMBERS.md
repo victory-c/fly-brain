@@ -1138,6 +1138,7 @@ Last-generation riding time of each finished 60-generation ride, 4.5 m/s, CEM se
 | R3 draw 3 | 38270 | GPU | 277 | 13.19 | 60% |
 | R3 draw 4 | 38271 | GPU | 280 | 13.37 | 69% |
 | R3 draw 5 | 38272 | GPU | 274 | 13.54 | 75% |
+| R0 at 4.0 m/s | 38710 | GPU | 242 | 12.74 | 60% |
 | R3.5 draw 1, scale 0.47 | 38371 | CPU | 163 | 2.71 | 0% |
 | R4 draw 1, scale 1.2 | 38372 | CPU | 269 | 2.96 | 0% |
 | R5 draw 1, scale 2.0 | 38373 | CPU | 301 | 4.34 | 0% |
@@ -1166,6 +1167,7 @@ R2 draw 5 (job 38456) holds under new gusts; at +0.5 m/s 29 riders leave the roa
 R3 draw 3's replays were job 38462 (cancelled when the queue became one chain); they ran as job 38691, with draws 4 and 5 after it. Under new gusts no rider falls but 14 to 15 leave the road; at +0.5 m/s 33 leave the road and none falls; at 4.0 m/s 9 finish, 29 leave the road and 10 fall.
 R3 draw 4 (job 38706): no rider falls under new gusts or at +0.5 m/s, but 14 to 18 and 31 leave the road; at 4.0 m/s none finishes, 36 leave the road and 12 fall.
 R3 draw 5 (job 38708) holds best under new gusts (43 and 39 finish, none falls); at +0.5 m/s 34 leave the road; at 4.0 m/s 10 finish, 15 leave the road and 23 fall. At 4.0 m/s, riders who fall out of 48: R0 35; R2 26, 29 and 32; R3 10, 12 and 23; R1 14, 1 and 15. R1 and R3 lose more riders off the road there (R1 10, 37, 33; R3 29, 36, 15) than R0 (13) and R2 (18, 1, 12).
+R0's first ride at 4.0 m/s (job 38710, finished 2026-11-11, the last row; every other row is 4.5 m/s) ends at 12.74 s, 60% of riders finishing (last five generations 11.77 s), against 12.79 s for R0 at 4.5 m/s and 3.5 s for the bike with no steering at 4.0 m/s (16 riders). The balance-gate pilots at 4.0 m/s (seeds 201 and 202) ended at 11.8 and 9.6 s after 61 and 63 generations.
 R3's three draws (13.19, 13.37 and 13.54 s, finished 2026-11-11) all ride above R0's first seed; like R1's, this tests nothing until R0 has five seeds.
 
 ## The queue as one chain (2026-11-11)
