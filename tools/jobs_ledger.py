@@ -189,6 +189,7 @@ NOTES.update({
 NOTES.update({"38414": "Track B confirmatory, R0 reference", "38415": "Track B confirmatory, test: R1 and R2 draw 101"})
 NOTES.update({str(j): "Track B confirmatory, preregistration section 6, shuffles draws 3 to 5" for j in range(38416, 38420)})
 NOTES.update({str(j): "Track B confirmatory, preregistration section 6, R1 and R2, ten draws each" for j in range(38420, 38430)})
+NOTES.update({str(j): "Scrambled Brains queue as one chain (tools/submit_serial.py), one job at a time" for j in range(38463, 38688)})
 NOTES.update({"38436": "Held-out replays, R0 seed 211 (gust302)", "38437": "Held-out replays, R1 draw 3 seed 211", "38438": "Held-out replays, R1 draw 4 seed 211"})
 NOTES.update({"38442": "Held-out replays, R1 draw 5 seed 211"})
 NOTES.update({"38445": "Held-out replays, R2 draw 3 seed 211"})

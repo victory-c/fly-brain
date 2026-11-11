@@ -1160,6 +1160,10 @@ R2 draw 4 (job 38455) finishes every rider under gust seed 301; at 4.0 m/s 18 fi
 R2 draw 5 (job 38456) holds under new gusts; at +0.5 m/s 29 riders leave the road, at 4.0 m/s 4 finish and 32 fall.
 R3 draw 3's replays are job 38462.
 
+## The queue as one chain (2026-11-11)
+
+The cluster's default QoS (`normal`) sets one running job per user (`MaxJobsPU=1`). Slurm does not enforce it here (`AccountingStorageEnforce = none`), but the queue had been running two GPU rides and a CPU replay at once, holding 2 of the node's 3 GPUs while another user waited for one. So on 2026-11-11 at 01:33 the 128 pending jobs (two ride chains and the held-out replay 38462) were cancelled and everything left was queued again as one afterany chain by `tools/submit_serial.py --after 38272`: the held-out replays of R3 draws 3 to 5, then each remaining primary ride followed by its held-out replays, then the 38 secondary rides, then prediction 3's four replays. Jobs 38463 to 38687, 225 links (128 rides, 97 replays); the chain was checked to have no break. The rides and their order are unchanged, so this is not a deviation from the preregistration; it only roughly doubles the time left, to about four weeks at about 5 h per ride and 30 min per replay. List of links: `logs/local/submit-serial-2026-11-11.txt`.
+
 ## Track B confirmatory runs (preregistration section 6)
 
 `trackb-conf.sbatch`, CPU, `results/track_b/confirmatory/`, scored by `python3 tools/track_b_score.py <dir> --by-rung`. The preregistration gives the numbers of draws, not which ones, so these were picked before any run so that no Track B pilot has used them: R1 and R2 draws 101 to 200; R3, R3.5, R4 and R5 draws 3 to 5 (only R3 has those draws in Track A; R3.5, R4 and R5 ride draw 1 there). Scales: 0.47 for every rung, plus each rung's closed-loop scale where it differs (R4 1.2, R5 2.0). R0's reference (job 38414) came out identical to the pilot's `final/r0.json`. Test, one draw each (job 38415): R1 draw 101 and R2 draw 101 both score 1.0, which says nothing about the mean over 100 draws. The rest ran as jobs 38416 to 38429 (2026-11-10 01:33 to 13:52, all completed, 218 brains, no failed draw).
