@@ -1156,12 +1156,14 @@ Held-out replays of the final mean decoder (CPU, 48 riders, 15 s; jobs 38413 and
 | R2 draw 4 | 15.00 (48) | 14.63 (44) | 14.32 (42) | 12.31 (18) |
 | R2 draw 5 | 14.21 (41) | 14.46 (42) | 11.08 (19) | 8.76 (4) |
 | R3 draw 3 | 14.07 (33) | 14.15 (34) | 10.99 (15) | 10.50 (9) |
+| R3 draw 4 | 13.87 (34) | 13.05 (30) | 11.42 (17) | 7.19 (0) |
 
 Unseen gusts cost little on all three. Slowing to 4.0 m/s costs the most: R0's decoder finishes no rider (35 fall), R1's finish 24 and 10 (R1 draw 4 loses most of the rest off the road, 37 riders). Section 5 makes these descriptive, not tests. R1 draw 5 (job 38442), the weakest of the three rides, also loses the most off the road at both test speeds (31 riders at +0.5, 33 at -0.5) and finishes no rider at 4.0 m/s, like R0.
 R2 draw 3 (job 38445) keeps its training-speed riding time under new gusts and at +0.5 m/s, but about half its riders leave the road in each; at 4.0 m/s 4 finish and 26 fall.
 R2 draw 4 (job 38455) finishes every rider under gust seed 301; at 4.0 m/s 18 finish and 29 fall.
 R2 draw 5 (job 38456) holds under new gusts; at +0.5 m/s 29 riders leave the road, at 4.0 m/s 4 finish and 32 fall.
 R3 draw 3's replays were job 38462 (cancelled when the queue became one chain); they ran as job 38691, with draws 4 and 5 after it. Under new gusts no rider falls but 14 to 15 leave the road; at +0.5 m/s 33 leave the road and none falls; at 4.0 m/s 9 finish, 29 leave the road and 10 fall.
+R3 draw 4 (job 38706): no rider falls under new gusts or at +0.5 m/s, but 14 to 18 and 31 leave the road; at 4.0 m/s none finishes, 36 leave the road and 12 fall, the most falls of any confirmatory replay so far.
 R3's three draws (13.19, 13.37 and 13.54 s, finished 2026-11-11) all ride above R0's first seed; like R1's, this tests nothing until R0 has five seeds.
 
 ## The queue as one chain (2026-11-11)
