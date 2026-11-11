@@ -1133,6 +1133,7 @@ Last-generation riding time of each finished 60-generation ride, 4.5 m/s, CEM se
 | R1 draw 4 | 38265 | GPU | 307 | 13.72 | 71% |
 | R1 draw 5 | 38266 | GPU | 274 | 10.47 | 42% |
 | R2 draw 3 (failed the pre-test null, ridden as preregistered) | 38267 | GPU | 291 | 12.02 | 44% |
+| R2 draw 4 | 38268 | GPU | 286 | 13.05 | 71% |
 | R3.5 draw 1, scale 0.47 | 38371 | CPU | 163 | 2.71 | 0% |
 | R4 draw 1, scale 1.2 | 38372 | CPU | 269 | 2.96 | 0% |
 
@@ -1150,6 +1151,7 @@ Held-out replays of the final mean decoder (CPU, 48 riders, 15 s; jobs 38413 and
 
 Unseen gusts cost little on all three. Slowing to 4.0 m/s costs the most: R0's decoder finishes no rider (35 fall), R1's finish 24 and 10 (R1 draw 4 loses most of the rest off the road, 37 riders). Section 5 makes these descriptive, not tests. R1 draw 5 (job 38442), the weakest of the three rides, also loses the most off the road at both test speeds (31 riders at +0.5, 33 at -0.5) and finishes no rider at 4.0 m/s, like R0.
 R2 draw 3 (job 38445) keeps its training-speed riding time under new gusts and at +0.5 m/s, but about half its riders leave the road in each; at 4.0 m/s 4 finish and 26 fall.
+R2 draw 4's replays are job 38455.
 
 ## Track B confirmatory runs (preregistration section 6)
 
