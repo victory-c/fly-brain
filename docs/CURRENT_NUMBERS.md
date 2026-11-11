@@ -1134,8 +1134,9 @@ Last-generation riding time of each finished 60-generation ride, 4.5 m/s, CEM se
 | R1 draw 5 | 38266 | GPU | 274 | 10.47 | 42% |
 | R2 draw 3 (failed the pre-test null, ridden as preregistered) | 38267 | GPU | 291 | 12.02 | 44% |
 | R3.5 draw 1, scale 0.47 | 38371 | CPU | 163 | 2.71 | 0% |
+| R4 draw 1, scale 1.2 | 38372 | CPU | 269 | 2.96 | 0% |
 
-R3.5's single ride is the one prediction 2 uses for its transition clause; it is 21% of R0's first ride, and the test waits for R0's median over five seeds. R1's three draws (median 13.72 s) are above R0's first seed, which says nothing yet: prediction 1 compares medians over five R0 seeds against R0's seed-SD.
+R3.5's single ride is the one prediction 2 uses for its transition clause; it is 21% of R0's first ride, and the test waits for R0's median over five seeds. R4's single ride is the one prediction 5 uses: it is 23% of R0's first ride (last five generations 2.49 s), so unless R0's five seeds come out very differently, R4 does not ride as well as R0 and prediction 5's condition is not met. Section 5 gives the held-out tests to the primary runs only, so R3.5, R4 and R5 get none. R5's ride is job 38373. R1's three draws (median 13.72 s) are above R0's first seed, which says nothing yet: prediction 1 compares medians over five R0 seeds against R0's seed-SD.
 
 Held-out replays of the final mean decoder (CPU, 48 riders, 15 s; jobs 38413 and 38436 for R0, 38437 and 38438 for R1). Riding time in s, finished / 48 in brackets:
 
