@@ -250,17 +250,21 @@ def outputs(job):
     return ", ".join(found)
 
 
+SERIAL = "Scrambled Brains queue, relay (tools/submit_serial.py --next), one job at a time"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--since", default="2026-09-26")
     a = ap.parse_args()
-    jobs = [j for j in sacct(a.since) if j["WorkDir"].startswith(str(ROOT)) and j["JobID"] not in LEFT_OUT]
+    jobs = [j for j in sacct(a.since) if j["WorkDir"].startswith(str(ROOT)) and j["JobID"] not in LEFT_OUT and j["JobName"] != "serial-next"]
     lines = [
         "# Jobs",
         "",
         "Every Slurm job run from this repo on the OCF cluster (node `corruption`), newest last. Generated",
         "by `python3 tools/jobs_ledger.py` from `sacct`; do not edit by hand, add context to `NOTES` there.",
         "Commands run from the job's working directory (`.` = repo root, `fly_brain/` for most `srun` jobs).",
+        "The one-CPU relay jobs of the Scrambled Brains queue (`serial-next`, tools/submit_serial.py --next) are left out; see logs/serial-next-*.out.",
         "",
         "| Job | Started | State | Time | Resources | What | Command | Logs / outputs |",
         "|---|---|---|---|---|---|---|---|",
@@ -274,7 +278,7 @@ def main():
         wd = j["WorkDir"].replace(str(ROOT), ".") or "."
         cell = f"`{short.replace('|', '¦')}`" + (f" (in `{wd}`)" if wd != "." else "")
         lines.append(f"| {j['JobID']} | {j['Start'].replace('T', ' ')[:16]} | {j['State'].split(' ')[0]} | {j['Elapsed']} "
-                     f"| {resources(j)} | {NOTES.get(j['JobID'], '')} | {cell} | {outputs(j)} |")
+                     f"| {resources(j)} | {NOTES.get(j['JobID']) or (SERIAL if j['JobName'].startswith(('cm-', 'sc-', 'ho-')) and int(j['JobID'].split('_')[0]) > 38687 else '')} | {cell} | {outputs(j)} |")
     long = [j for j in jobs if len(j["SubmitLine"]) > 220 or "\n" in j["SubmitLine"]]
     if long:
         lines += ["", "## Full command lines", ""]
