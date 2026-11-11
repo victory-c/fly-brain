@@ -193,6 +193,7 @@ NOTES.update({"38436": "Held-out replays, R0 seed 211 (gust302)", "38437": "Held
 NOTES.update({"38442": "Held-out replays, R1 draw 5 seed 211"})
 NOTES.update({"38445": "Held-out replays, R2 draw 3 seed 211"})
 NOTES.update({"38455": "Held-out replays, R2 draw 4 seed 211"})
+NOTES.update({"38456": "Held-out replays, R2 draw 5 seed 211"})
 NOTES["38413"] = "test of tools/heldout.py on the first confirmatory ride (R0, 4.5 m/s, seed 211)"
 NOTES.update({str(j): "confirmatory ride, preregistration prereg-v1 section 5 secondary design, 60 generations, GPU, after the primary design" for j in range(38374, 38412)})
 
