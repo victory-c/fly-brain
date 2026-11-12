@@ -1161,6 +1161,7 @@ Held-out replays of the final mean decoder (CPU, 48 riders, 15 s; jobs 38413 and
 | R3 draw 4 | 13.87 (34) | 13.05 (30) | 11.42 (17) | 7.19 (0) |
 | R3 draw 5 | 14.54 (43) | 14.40 (39) | 9.35 (14) | 11.52 (10) |
 | R0 seed 211, trained at 4.0 m/s (tests at 4.5 and 3.5 m/s) | 14.21 (40) | 14.73 (44) | 12.78 (32) | 9.27 (4) |
+| R1 draw 3, trained at 4.0 m/s (tests at 4.5 and 3.5 m/s) | 14.88 (47) | 14.42 (42) | 14.52 (42) | 9.31 (4) |
 
 Unseen gusts cost little on all three. Slowing to 4.0 m/s costs the most: R0's decoder finishes no rider (35 fall), R1's finish 24 and 10 (R1 draw 4 loses most of the rest off the road, 37 riders). Section 5 makes these descriptive, not tests. R1 draw 5 (job 38442), the weakest of the three rides, also loses the most off the road at both test speeds (31 riders at +0.5, 33 at -0.5) and finishes no rider at 4.0 m/s, like R0.
 R2 draw 3 (job 38445) keeps its training-speed riding time under new gusts and at +0.5 m/s, but about half its riders leave the road in each; at 4.0 m/s 4 finish and 26 fall.
@@ -1170,6 +1171,7 @@ R3 draw 3's replays were job 38462 (cancelled when the queue became one chain); 
 R3 draw 4 (job 38706): no rider falls under new gusts or at +0.5 m/s, but 14 to 18 and 31 leave the road; at 4.0 m/s none finishes, 36 leave the road and 12 fall.
 R3 draw 5 (job 38708) holds best under new gusts (43 and 39 finish, none falls); at +0.5 m/s 34 leave the road; at 4.0 m/s 10 finish, 15 leave the road and 23 fall. At 4.0 m/s, riders who fall out of 48: R0 35; R2 26, 29 and 32; R3 10, 12 and 23; R1 14, 1 and 15. R1 and R3 lose more riders off the road there (R1 10, 37, 33; R3 29, 36, 15) than R0 (13) and R2 (18, 1, 12).
 R0's 4.0 m/s ride (job 38712): under new gusts 40 and 44 finish, 1 falls in each; at 4.5 m/s 32 finish and 16 leave the road, none falls; at 3.5 m/s 4 finish, 16 leave the road and 28 fall. Like R0's 4.5 m/s decoder, it copes with a faster bike and loses most riders to falls on a slower one.
+R1 draw 3's 4.0 m/s ride (job 38726): under new gusts 47 and 42 finish, none falls; at 4.5 m/s 42 finish, none falls; at 3.5 m/s 4 finish, 15 leave the road and 29 fall, close to R0's 4.0 m/s decoder (4, 16, 28).
 R0's first ride at 4.0 m/s (job 38710, finished 2026-11-11) ends at 12.74 s, 60% of riders finishing (last five generations 11.77 s; the rows marked 4.0 m/s are at that speed, every other row at 4.5 m/s), against 12.79 s for R0 at 4.5 m/s and 3.5 s for the bike with no steering at 4.0 m/s (16 riders). The balance-gate pilots at 4.0 m/s (seeds 201 and 202) ended at 11.8 and 9.6 s after 61 and 63 generations.
 R1 draw 3 at 4.0 m/s (job 38714) ends at 13.23 s, 73% finishing (last five generations 12.88 s), 0.49 s above R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 14.65 s.
 R3's three draws (13.19, 13.37 and 13.54 s, finished 2026-11-11) all ride above R0's first seed; like R1's, this tests nothing until R0 has five seeds.
