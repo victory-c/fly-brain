@@ -1210,7 +1210,7 @@ Results (fraction of the six scored rows passed, mean over draws; `scores.json` 
 | R4 | 0.47 / 1.2 | 3 / 3 | 0.000 / 0.000 | |
 | R5 | 0.47 / 2.0 | 3 / 3 | 0.000 / 0.056 | one draw at 2.0 passes loom to DNp02/DNp11 |
 
-- R1 loses only taste rows. Both loom rows pass on all 100 draws (median 255 and 174 Hz against R0's 264 and 183). The four taste rows mostly keep their sign and fall below half of R0 (median 18, -17, -17 and 2.4 Hz against 30, -30, -30 and 7.4); 13 row failures out of 228 are sign flips. Where one taste row fails, the others usually fail with it: 40 draws pass the two loom rows only.
+- R1 loses only taste rows. Both loom rows pass on all 100 draws (median 255 and 174 Hz against R0's 264 and 183). The four taste rows mostly keep their sign and fall below half of R0 (median 18, -17, -16 and 2.4 Hz against 30, -30, -30 and 7.4); 13 of the 191 failed rows (recounted from the per-draw files on 2026-11-12) are sign flips. Where one taste row fails, the others usually fail with it: 40 draws pass the two loom rows only.
 - R2 loses only the dose-response row, on 4 draws, by size.
 - R3.5, R4 and R5: the taste rows give exactly 0 Hz difference (no response reaches MN9 or the suppression readouts), so they fail by sign; the loom rows keep at most a fraction of R0's difference. The closed-loop scale (R4 1.2, R5 2.0) does not bring the rows back.
 - So the ladder is R0, R2, R3 at or near full score, R1 in between, and every rung from R3.5 up at or near zero. The preregistration states no numerical Track B prediction; this is reported as the decoder-free result of section 6.
@@ -1308,7 +1308,7 @@ speed line is from the earlier simulator.
 
 ## GPU runs do not repeat exactly
 
-The engine adds synaptic input with `index_add_` (`brain/engine.py:116`). On a GPU those additions happen in no
+The engine adds synaptic input with `index_add_` (`brain/engine.py:134`). On a GPU those additions happen in no
 fixed order, so floating-point sums differ in the last bits, a neuron close to threshold fires one step earlier or
 later, and two runs drift apart. The seed fixes the Poisson draws and the gusts, not the summation order. Jobs
 36543 and 36555 ran the same search with the same seed: both ended with 35 of 48 finishing, but with 885 and 836
