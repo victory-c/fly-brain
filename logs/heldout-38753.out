@@ -2,3 +2,12 @@
 replay of /tmp/tmp_hk_j0jm/decoder.json: upright 11.04 s (max 15.00,  31% finish)  dist  42.5 m  |y| 2.81 m  v 4.00  bailed 0  pop 44,821 sp/s  432s
 {"riders": 48, "finished": 15, "bailed": 0, "left_road": 32, "fell": 1, "lateral_mean": 2.8058010063444576, "lateral_median": 3.5027331113815308, "upright_mean": 11.039741297562918, "upright_max": 15.000247955322266, "offroad_m": 3.5}
 == /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r2_s3/v4.0_s211: gust302, v 4.0, seed 302
+replay of /tmp/tmpp9a05dzz/decoder.json: upright  9.78 s (max 15.00,  17% finish)  dist  37.3 m  |y| 2.89 m  v 4.00  bailed 0  pop 46,593 sp/s  433s
+{"riders": 48, "finished": 8, "bailed": 0, "left_road": 37, "fell": 3, "lateral_mean": 2.8947126287966967, "lateral_median": 3.50638747215271, "upright_mean": 9.775545701384544, "upright_max": 15.000247955322266, "offroad_m": 3.5}
+== /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r2_s3/v4.0_s211: vplus, v 4.5, seed 301
+replay of /tmp/tmpotdok1da/decoder.json: upright  9.97 s (max 15.00,  31% finish)  dist  43.6 m  |y| 2.79 m  v 4.50  bailed 0  pop 44,412 sp/s  425s
+{"riders": 48, "finished": 15, "bailed": 0, "left_road": 33, "fell": 0, "lateral_mean": 2.79474954555432, "lateral_median": 3.503975510597229, "upright_mean": 9.97492584089438, "upright_max": 15.000247955322266, "offroad_m": 3.5}
+== /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r2_s3/v4.0_s211: vminus, v 3.5, seed 301
+replay of /tmp/tmp3xt9sw45/decoder.json: upright  6.95 s (max 11.58,   0% finish)  dist  22.5 m  |y| 2.89 m  v 3.50  bailed 0  pop 54,191 sp/s  332s
+{"riders": 48, "finished": 0, "bailed": 0, "left_road": 34, "fell": 14, "lateral_mean": 2.891851100915422, "lateral_median": 3.506599545478821, "upright_mean": 6.947981958587964, "upright_max": 11.580169677734375, "offroad_m": 3.5}
+== done Thu Nov 12 02:19:42 PM PST 2026
