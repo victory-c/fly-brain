@@ -1140,6 +1140,7 @@ Last-generation riding time of each finished 60-generation ride, 4.5 m/s, CEM se
 | R3 draw 5 | 38272 | GPU | 274 | 13.54 | 75% |
 | R0 at 4.0 m/s | 38710 | GPU | 242 | 12.74 | 60% |
 | R1 draw 3 at 4.0 m/s | 38714 | GPU | 261 | 13.23 | 73% |
+| R1 draw 4 at 4.0 m/s | 38728 | GPU | 258 | 9.35 | 21% |
 | R3.5 draw 1, scale 0.47 | 38371 | CPU | 163 | 2.71 | 0% |
 | R4 draw 1, scale 1.2 | 38372 | CPU | 269 | 2.96 | 0% |
 | R5 draw 1, scale 2.0 | 38373 | CPU | 301 | 4.34 | 0% |
@@ -1174,6 +1175,7 @@ R0's 4.0 m/s ride (job 38712): under new gusts 40 and 44 finish, 1 falls in each
 R1 draw 3's 4.0 m/s ride (job 38726): under new gusts 47 and 42 finish, none falls; at 4.5 m/s 42 finish, none falls; at 3.5 m/s 4 finish, 15 leave the road and 29 fall, close to R0's 4.0 m/s decoder (4, 16, 28).
 R0's first ride at 4.0 m/s (job 38710, finished 2026-11-11) ends at 12.74 s, 60% of riders finishing (last five generations 11.77 s; the rows marked 4.0 m/s are at that speed, every other row at 4.5 m/s), against 12.79 s for R0 at 4.5 m/s and 3.5 s for the bike with no steering at 4.0 m/s (16 riders). The balance-gate pilots at 4.0 m/s (seeds 201 and 202) ended at 11.8 and 9.6 s after 61 and 63 generations.
 R1 draw 3 at 4.0 m/s (job 38714) ends at 13.23 s, 73% finishing (last five generations 12.88 s), 0.49 s above R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 14.65 s.
+R1 draw 4 at 4.0 m/s (job 38728) ends at 9.35 s, 21% finishing (last five generations 9.01 s), 27% below R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 13.72 s. The search sat at 6.7 to 7.1 s from generation 10 to 30 and was still climbing at the end (9.1 s at generation 50, 9.3 at 59). Its lane-filter weight is -0.07, not near zero as in the two stalled pilots (+0.01 and +0.00); R0's 4.0 m/s ride also ends with a lane weight near zero (+0.01) and still rides 12.74 s, so at 4.0 m/s that weight does not mark a stalled search. One seed per rung at 4.0 m/s: this tests nothing yet.
 R3's three draws (13.19, 13.37 and 13.54 s, finished 2026-11-11) all ride above R0's first seed; like R1's, this tests nothing until R0 has five seeds.
 
 ## The queue as one chain (2026-11-11)
