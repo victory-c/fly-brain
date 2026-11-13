@@ -5,3 +5,9 @@ replay of /tmp/tmpuqgsc4uh/decoder.json: upright 10.99 s (max 15.00,  42% finish
 replay of /tmp/tmphnx3gin_/decoder.json: upright 11.67 s (max 15.00,  48% finish)  dist  45.6 m  |y| 2.36 m  v 4.00  bailed 0  pop 30,863 sp/s  1317s
 {"riders": 48, "finished": 23, "bailed": 0, "left_road": 22, "fell": 3, "lateral_mean": 2.359820905762414, "lateral_median": 3.0804039239883423, "upright_mean": 11.671630462010702, "upright_max": 15.000247955322266, "offroad_m": 3.5}
 == /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r3_s3/v4.0_s211: vplus, v 4.5, seed 301
+replay of /tmp/tmp3zp15oev/decoder.json: upright  7.29 s (max 15.00,   8% finish)  dist  32.2 m  |y| 3.33 m  v 4.50  bailed 0  pop 28,891 sp/s  1635s
+{"riders": 48, "finished": 4, "bailed": 0, "left_road": 44, "fell": 0, "lateral_mean": 3.334858632956942, "lateral_median": 3.506532907485962, "upright_mean": 7.290281176567078, "upright_max": 15.000247955322266, "offroad_m": 3.5}
+== /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r3_s3/v4.0_s211: vminus, v 3.5, seed 301
+replay of /tmp/tmppsswlff6/decoder.json: upright  6.65 s (max 10.89,   0% finish)  dist  22.1 m  |y| 2.63 m  v 3.50  bailed 0  pop 39,259 sp/s  765s
+{"riders": 48, "finished": 0, "bailed": 0, "left_road": 28, "fell": 20, "lateral_mean": 2.6283442048976817, "lateral_median": 3.5043561458587646, "upright_mean": 6.654017234841983, "upright_max": 10.890153884887695, "offroad_m": 3.5}
+== done Fri Nov 13 01:16:48 PM PST 2026
