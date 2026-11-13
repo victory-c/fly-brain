@@ -1,0 +1,7 @@
+== 15:58:50 1) probe on results/variants/r2_s4.npz
+      MNad30       MNad30_L        L         vnc_motor  1.500000  0.000000   1.500000   4.900000
+
+-> results/rungs/conf_r2_s4/v4.0_s211/probe.json
+init_hold: 23.1 W holds 4.0 m/s
+== 15:59:37 gate v0=4.0 seed=211, max 340 min
+== 15:59:37 2) ride_slow_mu trace at v0=4.0
