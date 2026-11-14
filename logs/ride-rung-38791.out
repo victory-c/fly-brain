@@ -74,3 +74,10 @@ gen 51  fit best  15.94 mean  11.05  upright 10.68 s (max 15.00,  38% finish)  d
 gen 52  fit best  15.91 mean  11.66  upright 11.29 s (max 15.00,  33% finish)  dist  43.4 m  |y| 2.39 m  v 4.00  bailed 0  pop 65,414 sp/s  293s
 gen 53  fit best  15.90 mean  11.06  upright 10.67 s (max 15.00,  31% finish)  dist  41.0 m  |y| 2.48 m  v 4.00  bailed 0  pop 61,278 sp/s  293s
 gen 54  fit best  15.81 mean   9.98  upright  9.73 s (max 15.00,  21% finish)  dist  37.3 m  |y| 3.01 m  v 4.00  bailed 0  pop 56,291 sp/s  294s
+gen 55  fit best  15.92 mean  10.63  upright 10.29 s (max 15.00,  33% finish)  dist  39.6 m  |y| 2.44 m  v 4.00  bailed 0  pop 56,876 sp/s  294s
+gen 56  fit best  15.98 mean  11.85  upright 11.45 s (max 15.00,  31% finish)  dist  44.0 m  |y| 2.70 m  v 4.00  bailed 0  pop 52,340 sp/s  295s
+gen 57  fit best  15.92 mean  10.55  upright 10.25 s (max 15.00,  29% finish)  dist  39.6 m  |y| 2.70 m  v 4.00  bailed 0  pop 51,672 sp/s  294s
+gen 58  fit best  15.91 mean  11.72  upright 11.37 s (max 15.00,  31% finish)  dist  43.8 m  |y| 2.54 m  v 4.00  bailed 0  pop 51,607 sp/s  294s
+gen 59  fit best  16.02 mean  10.70  upright 10.37 s (max 15.00,  25% finish)  dist  39.7 m  |y| 2.78 m  v 4.00  bailed 0  pop 50,265 sp/s  294s
+done: best fitness 16.02, results -> results/rungs/conf_r3_s5/v4.0_s211/cem.json  (278.4 min)
+== done Fri Nov 13 11:50:41 PM PST 2026
