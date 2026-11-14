@@ -1146,6 +1146,7 @@ Last-generation riding time of each finished 60-generation ride, 4.5 m/s, CEM se
 | R2 draw 4 at 4.0 m/s | 38758 | GPU | 276 | 11.57 | 46% |
 | R2 draw 5 at 4.0 m/s | 38766 | GPU | 271 | 7.92 | 8% |
 | R3 draw 3 at 4.0 m/s | 38778 | GPU | 273 | 10.08 | 27% |
+| R3 draw 4 at 4.0 m/s | 38783 | GPU | 269 | 8.77 | 2% |
 | R3.5 draw 1, scale 0.47 | 38371 | CPU | 163 | 2.71 | 0% |
 | R4 draw 1, scale 1.2 | 38372 | CPU | 269 | 2.96 | 0% |
 | R5 draw 1, scale 2.0 | 38373 | CPU | 301 | 4.34 | 0% |
@@ -1198,6 +1199,7 @@ R2 draw 3 at 4.0 m/s (job 38750, finished 2026-11-12) ends at 8.16 s, 13% finish
 R2 draw 4 at 4.0 m/s (job 38758, finished 2026-11-12) ends at 11.57 s, 46% finishing (last five generations 10.66 s), 9% below R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 13.05 s. It climbed steadily (7.4 s at generation 20, 8.9 at 40) to about 10.5 s by generation 45 and held near there (9.3 to 11.1 s over generations 45 to 58); its last generation, 11.57 s, is its highest; its lane-filter weight, -0.18, is the largest in size of any 4.0 m/s ride so far. R2's two draws at 4.0 m/s so far: 8.16 and 11.57 s.
 R2 draw 5 at 4.0 m/s (job 38766, finished 2026-11-13) ends at 7.92 s, 8% finishing (last five generations 8.30 s), 38% below R0's 4.0 m/s ride and the lowest 4.0 m/s ride so far; at 4.5 m/s the same draw rode 13.26 s. It climbed to 7.5 s by generation 30 and then flattened (7.7 at 40, 8.1 at 50, 7.9 at 59); lane-filter weight -0.04. R2's three draws at 4.0 m/s: 8.16, 11.57 and 7.92 s (median 8.16) against R0's 12.74 s and R1's median 11.11 s. With one R0 seed at 4.0 m/s this tests nothing yet.
 R3 draw 3 at 4.0 m/s (job 38778, finished 2026-11-13) ends at 10.08 s, 27% finishing (last five generations 10.10 s), 21% below R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 13.19 s. It reached 8.3 s by generation 20, dipped to 7.7 at 30, rose to 10.1 by 50 and held there; lane-filter weight -0.05.
+R3 draw 4 at 4.0 m/s (job 38783, finished 2026-11-13) ends at 8.77 s with 1 of 48 riders finishing (last five generations 8.34 s), 31% below R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 13.37 s. It reached 6.7 s by generation 15, sat between 6.6 and 7.6 s to generation 40, and ended near 8 s; its last generation is its highest. Its lane-filter weight is +0.10, the only clearly positive one among the 4.0 m/s rides so far. R3's two draws at 4.0 m/s so far: 10.08 and 8.77 s.
 R3's three draws (13.19, 13.37 and 13.54 s, finished 2026-11-11) all ride above R0's first seed; like R1's, this tests nothing until R0 has five seeds.
 
 ## The queue as one chain (2026-11-11)
