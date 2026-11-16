@@ -384,7 +384,7 @@ The one-CPU relay jobs of the Scrambled Brains queue (`serial-next`, tools/submi
 | 38887 | 2026-11-15 22:54 | COMPLETED | 00:11:42 | 16 cpu, 32G |  | `sbatch --parsable --job-name=tc-n90 --time=03:00:00 trackc-analysis.sbatch n90` | [trackc-analysis-38887.out](logs/trackc-analysis-38887.out) |
 | 38889 | 2026-11-15 23:06 | COMPLETED | 03:08:15 | 16 cpu, 32G |  | `sbatch --parsable --job-name=tc-calcium --time=10:00:00 trackc-analysis.sbatch calcium` | [trackc-analysis-38889.out](logs/trackc-analysis-38889.out) |
 | 38893 | 2026-11-16 02:14 | COMPLETED | 01:46:20 | 16 cpu, 32G |  | `sbatch --parsable --job-name=tc-probe --time=10:00:00 trackc-analysis.sbatch probe` | [trackc-analysis-38893.out](logs/trackc-analysis-38893.out) |
-| 38895 | 2026-11-16 04:01 | RUNNING | 00:58:51 | 32 cpu, 32G | Scrambled Brains queue, relay (tools/submit_serial.py --next), one job at a time | `sbatch --parsable --job-name=ho-r3_s3-v4.5-s212 heldout.sbatch gust301,gust302,vplus,vminus fly_brain/results/rungs/conf_r3_s3/v4.5_s212/cem.json` | [heldout-38895.out](logs/heldout-38895.out) |
+| 38895 | 2026-11-16 04:01 | RUNNING | 01:28:51 | 32 cpu, 32G | Scrambled Brains queue, relay (tools/submit_serial.py --next), one job at a time | `sbatch --parsable --job-name=ho-r3_s3-v4.5-s212 heldout.sbatch gust301,gust302,vplus,vminus fly_brain/results/rungs/conf_r3_s3/v4.5_s212/cem.json` | [heldout-38895.out](logs/heldout-38895.out) |
 
 ## Full command lines
 
