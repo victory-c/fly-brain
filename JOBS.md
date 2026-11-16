@@ -385,7 +385,7 @@ The one-CPU relay jobs of the Scrambled Brains queue (`serial-next`, tools/submi
 | 38889 | 2026-11-15 23:06 | COMPLETED | 03:08:15 | 16 cpu, 32G |  | `sbatch --parsable --job-name=tc-calcium --time=10:00:00 trackc-analysis.sbatch calcium` | [trackc-analysis-38889.out](logs/trackc-analysis-38889.out) |
 | 38893 | 2026-11-16 02:14 | COMPLETED | 01:46:20 | 16 cpu, 32G |  | `sbatch --parsable --job-name=tc-probe --time=10:00:00 trackc-analysis.sbatch probe` | [trackc-analysis-38893.out](logs/trackc-analysis-38893.out) |
 | 38895 | 2026-11-16 04:01 | COMPLETED | 01:46:05 | 32 cpu, 32G | Scrambled Brains queue, relay (tools/submit_serial.py --next), one job at a time | `sbatch --parsable --job-name=ho-r3_s3-v4.5-s212 heldout.sbatch gust301,gust302,vplus,vminus fly_brain/results/rungs/conf_r3_s3/v4.5_s212/cem.json` | [heldout-38895.out](logs/heldout-38895.out) |
-| 38897 | 2026-11-16 05:47 | RUNNING | 03:12:45 | 8 cpu, 16G | Scrambled Brains queue, relay (tools/submit_serial.py --next), one job at a time | `sbatch --parsable --job-name=cm-r3_s4-v4.5-s212 --export=ALL,GENS=60,REQUIRE_CUDA=1 ride-rung.sbatch 4.5 212 results/variants/r3_s4.npz conf_r3_s4 340` | [ride-rung-38897.out](logs/ride-rung-38897.out) |
+| 38897 | 2026-11-16 05:47 | RUNNING | 03:42:45 | 8 cpu, 16G | Scrambled Brains queue, relay (tools/submit_serial.py --next), one job at a time | `sbatch --parsable --job-name=cm-r3_s4-v4.5-s212 --export=ALL,GENS=60,REQUIRE_CUDA=1 ride-rung.sbatch 4.5 212 results/variants/r3_s4.npz conf_r3_s4 340` | [ride-rung-38897.out](logs/ride-rung-38897.out) |
 
 ## Full command lines
 
