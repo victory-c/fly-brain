@@ -1,0 +1,7 @@
+== 19:43:27 screen r35_s1 
+screen: 48 riders, 15 s, PD rider steering, gusts 25.0 Nm, 789 driven neurons, on cpu
+  t=10.0s  alive 48/48  mean|phi|  4.6 deg  pop 78,406 sp/s  wall 362s
+  t=15.0s  alive 48/48  mean|phi|  4.8 deg  pop 80,052 sp/s  wall 583s
+driven neurons total 45,301 sp/s; rest of brain 45,117 sp/s; 2,754 neurons > 1 Hz, 1,549 > 20 Hz
+== descending neurons above 0.5 Hz (134 of 1314)
+== done Sun Nov 15 07:53:19 PM PST 2026

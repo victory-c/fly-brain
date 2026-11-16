@@ -1,0 +1,52 @@
+{
+ "ok": true,
+ "what": "pilot R0 replay (38178) re-run at 10 ms bins: 10-bin sums vs the 100 ms counts, trace equal except its wall-clock time",
+ "checks": {
+  "counts": {
+   "new_file": "/home/s/st/stevejobs/.cache/sb-replay/trackc10_r0_counts.npz",
+   "ref_file": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r0_counts.npz",
+   "new_bin_ms": 10.0,
+   "ref_bin_ms": 100.0,
+   "block": 10,
+   "new_shape": [
+    1500,
+    48,
+    1381
+   ],
+   "ref_shape": [
+    150,
+    48,
+    1381
+   ],
+   "blocks": 150,
+   "dropped_tail_bins": 0,
+   "bin_ms_ok": true,
+   "rows_equal": true,
+   "site_equal": true,
+   "shape_equal": true,
+   "counts_equal": true,
+   "cells_differing": 0,
+   "max_abs_diff": 0,
+   "spikes_new": 1984385,
+   "spikes_ref": 1984385,
+   "spikes_new_in_blocks": 1984385,
+   "ok": true
+  },
+  "trace": {
+   "new_file": "/home/s/st/stevejobs/.cache/sb-replay/trackc10_r0_trace.json",
+   "ref_file": "/home/s/st/stevejobs/.cache/sb-replay/trackc_r0_trace.json",
+   "size_new": 96228747,
+   "size_ref": 96228747,
+   "sha256_new": "2643cd0739b24437f18ef197b75c326f1b42f21304434cab6b8d1488eee1b88f",
+   "sha256_ref": "9b761077c03b3edb5b9b80beba5cb9b1299497c811c548b7b68d4eed9bce6f5b",
+   "byte_identical": false,
+   "equal_except_wall": true,
+   "parsed_equal": false,
+   "wall_new": 643.5822260379791,
+   "wall_ref": 945.8824138641357,
+   "differences": [],
+   "ok": true
+  }
+ },
+ "date": "2026-11-15T19:43:24-08:00"
+}
