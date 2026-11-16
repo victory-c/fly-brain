@@ -365,7 +365,8 @@ The one-CPU relay jobs of the Scrambled Brains queue (`serial-next`, tools/submi
 | 38835 | 2026-11-15 09:07 | COMPLETED | 04:56:41 | 8 cpu, 16G | Scrambled Brains queue, relay (tools/submit_serial.py --next), one job at a time | `sbatch --parsable --job-name=cm-r2_s5-v4.5-s212 --export=ALL,GENS=60,REQUIRE_CUDA=1 ride-rung.sbatch 4.5 212 results/variants/r2_s5.npz conf_r2_s5 340` | [ride-rung-38835.out](logs/ride-rung-38835.out) |
 | 38845 | 2026-11-15 14:04 | COMPLETED | 00:38:26 | 32 cpu, 32G | Scrambled Brains queue, relay (tools/submit_serial.py --next), one job at a time | `sbatch --parsable --job-name=ho-r2_s5-v4.5-s212 heldout.sbatch gust301,gust302,vplus,vminus fly_brain/results/rungs/conf_r2_s5/v4.5_s212/cem.json` | [heldout-38845.out](logs/heldout-38845.out) |
 | 38847 | 2026-11-15 14:43 | COMPLETED | 04:49:21 | 8 cpu, 16G | Scrambled Brains queue, relay (tools/submit_serial.py --next), one job at a time | `sbatch --parsable --job-name=cm-r3_s3-v4.5-s212 --export=ALL,GENS=60,REQUIRE_CUDA=1 ride-rung.sbatch 4.5 212 results/variants/r3_s3.npz conf_r3_s3 340` | [ride-rung-38847.out](logs/ride-rung-38847.out) |
-| 38854 | 2026-11-15 19:32 | RUNNING | 00:02:14 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-verify trackc.sbatch --pilot-r0` | [trackc-38854.out](logs/trackc-38854.out) |
+| 38854 | 2026-11-15 19:32 | COMPLETED | 00:10:57 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-verify trackc.sbatch --pilot-r0` | [trackc-38854.out](logs/trackc-38854.out) |
+| 38856 | 2026-11-15 19:43 | RUNNING | 00:01:34 | 16 cpu, 40G |  | `sbatch --parsable --job-name=scr-r35 --gres=none --cpus-per-task=16 --mem=40G --time=04:00:00 screen-rungs.sbatch r35_s1` | [screen-rungs-38856.out](logs/screen-rungs-38856.out) |
 
 ## Full command lines
 
