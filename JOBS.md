@@ -368,7 +368,8 @@ The one-CPU relay jobs of the Scrambled Brains queue (`serial-next`, tools/submi
 | 38854 | 2026-11-15 19:32 | COMPLETED | 00:10:57 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-verify trackc.sbatch --pilot-r0` | [trackc-38854.out](logs/trackc-38854.out) |
 | 38856 | 2026-11-15 19:43 | COMPLETED | 00:09:52 | 16 cpu, 40G |  | `sbatch --parsable --job-name=scr-r35 --gres=none --cpus-per-task=16 --mem=40G --time=04:00:00 screen-rungs.sbatch r35_s1` | [screen-rungs-38856.out](logs/screen-rungs-38856.out) |
 | 38858 | 2026-11-15 19:53 | COMPLETED | 00:22:39 | 16 cpu, 40G |  | `sbatch --parsable --job-name=scr-r5 --gres=none --cpus-per-task=16 --mem=40G --time=04:00:00 screen-rungs.sbatch r5_s1 2` | [screen-rungs-38858.out](logs/screen-rungs-38858.out) |
-| 38860 | 2026-11-15 20:16 | RUNNING | 00:04:30 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r0 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r0/v4.5_s211/cem.json` | [trackc-38860.out](logs/trackc-38860.out) |
+| 38860 | 2026-11-15 20:16 | COMPLETED | 00:10:40 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r0 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r0/v4.5_s211/cem.json` | [trackc-38860.out](logs/trackc-38860.out) |
+| 38862 | 2026-11-15 20:26 | RUNNING | 00:03:19 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r1_s3 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r1_s3/v4.5_s211/cem.json` | [trackc-38862.out](logs/trackc-38862.out) |
 
 ## Full command lines
 
