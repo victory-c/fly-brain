@@ -51,5 +51,7 @@
  "tc-r3_s4": 1,
  "tc-r3_s5": 1,
  "tc-r35_s1_w0.47_cpu": 1,
- "tc-r4_s1_w1.2_cpu": 1
+ "tc-r4_s1_w1.2_cpu": 1,
+ "tc-r5_s1_w2_cpu": 1,
+ "tc-n90": 1
 }

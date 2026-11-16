@@ -1,0 +1,112 @@
+{
+ "counts": "fly_brain/results/rungs/conf_r1_s3/v4.5_s211/trackc/counts10.npz",
+ "trace": "fly_brain/results/rungs/conf_r1_s3/v4.5_s211/trackc/trace.json",
+ "screen": "fly_brain/results/rungs/screens/r1_s3.parquet",
+ "samples": 7200,
+ "riders": 48,
+ "roll_rate_sd": 0.3197678104332712,
+ "sites": {
+  "descending": {
+   "neurons": 1314,
+   "active": 319,
+   "lambda": 100.0,
+   "r2_all": 0.943,
+   "references": {
+    "site": {
+     "target_r2": 0.8487,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.6254,
+      "2": 0.6341,
+      "3": 0.8695
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 384.5,
+      "q25_q75": [
+       302.5,
+       436.0
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 77.0,
+      "q25_q75": [
+       46.75,
+       93.75
+      ]
+     }
+    }
+   },
+   "primary_reference": "site"
+  },
+  "wing_motor": {
+   "neurons": 67,
+   "active": 29,
+   "lambda": 100.0,
+   "r2_all": 0.9216,
+   "references": {
+    "site": {
+     "target_r2": 0.8294,
+     "n90_screen": 5,
+     "r2_screen_curve": {
+      "1": 0.3693,
+      "2": 0.4033,
+      "3": 0.4564,
+      "4": 0.4922,
+      "5": 0.8426,
+      "6": 0.9021
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 29.5,
+      "q25_q75": [
+       24.75,
+       36.0
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 11.0,
+      "q25_q75": [
+       8.0,
+       15.0
+      ]
+     }
+    },
+    "descending": {
+     "target_r2": 0.8487,
+     "n90_screen": 6,
+     "r2_screen_curve": {
+      "1": 0.3693,
+      "2": 0.4033,
+      "3": 0.4564,
+      "4": 0.4922,
+      "5": 0.8426,
+      "6": 0.9021
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 31.0,
+      "q25_q75": [
+       27.25,
+       39.5
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 13.5,
+      "q25_q75": [
+       10.75,
+       15.25
+      ]
+     }
+    }
+   },
+   "primary_reference": "site"
+  }
+ },
+ "file_bin_ms": 10.0,
+ "bin_ms": 100.0,
+ "primary_reference": "site"
+}
