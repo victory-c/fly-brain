@@ -1282,6 +1282,52 @@ R3.5's replay was asked for 15 s, but every rider had fallen by 12.0 s and the r
 
 DN is the descending site (1,314 neurons), WM the wing-motor site (67 neurons); "active" counts neurons that fire at least once in those bins. On R0 to R3, two or three descending neurons in screen order reach 90% of the site's R², against medians of 171 to 391 in random order; at the wing-motor site it is two to five against medians of 29 to 39. The random orders draw from every site neuron, silent ones included, as section 7 specifies, and 69 to 77% of the descending site is silent on R0 to R3. Drawing only from active neurons, the random medians are 52 to 115 descending and 11 to 20 wing-motor on R0 to R3, so screen order still needs far fewer neurons, but the gap is smaller than the table shows. On R3.5, R4 and R5 it takes 14 to 19 descending neurons and 7 to 15 wing-motor neurons, and the wing-motor R² with every neuron falls to 0.45 to 0.61. These three brains also give fewer samples (2,190 to 5,890 against about 7,200), because their riders fall earlier, so their rows rest on less data. On R3.5, R4 and R5 the active-only random medians are 86, 180 and 308 descending and 15, 28 and 34 wing-motor; on R5, where 1,139 of 1,314 descending neurons fire, they are close to the all-neuron medians. The secondary reference, the wing-motor site against 90% of the descending R², is reached on 8 of the 13 brains (R1 and R2 draws 3 to 5, R3 draws 3 and 4), at 5 to 9 wing-motor neurons in screen order against random medians of 31 to 56. It is not reached on R0, R3 draw 5, R3.5, R4 or R5, where the wing-motor R² with every neuron is below that target. No Track C prediction is tested (section 8 of the preregistration has none).
 
+**Simulated jGCaMP8 (job 38889, 3 h 8 min, 2026-11-16).** The same 13 replays, turned into dF/F with `tools/track_c_calcium.py` as fixed in section 10, entry 1(f) of the preregistration. The primary rows are jGCaMP8m with saturation and N0 = 100 photons per neuron per 33.3 ms frame, at 30 Hz and at 10 Hz (its own acquisition, with three times the photons per frame); the 30 Hz movie averaged in threes is a third primary-flagged row. "Spikes" is the spike-count baseline on the same frames, after the same 1 s burn-in. A frame is dropped from the first control step in which the rider is done, which means fallen or, on R5 for 22 of 48 riders, bailed out through the giant-fibre escape. Under photon noise every neuron of a site varies, so all 1,314 and all 67 enter the fit. Random orders (20, over every site neuron) were run for the 30 Hz and 10 Hz own-acquisition rows only, and every one reached the site's own target. Files: `fly_brain/results/track_c/confirmatory/<brain>_calcium.json`.
+
+At 30 Hz:
+
+| Brain | Frames | DN spikes R² (N90) | DN 8m R² | DN 8m N90 screen | DN 8m N90 random | WM spikes R² (N90) | WM 8m R² | WM 8m N90 screen | WM 8m N90 random |
+|---|---|---|---|---|---|---|---|---|---|
+| R0 | 19,929 | 0.91 (4) | 0.55 | 200 | 796 | 0.69 (5) | 0.22 | 32 | 51 |
+| R1 draw 3 | 20,160 | 0.83 (5) | 0.44 | 159 | 699 | 0.77 (6) | 0.31 | 14 | 47 |
+| R1 draw 4 | 20,160 | 0.82 (4) | 0.35 | 204 | 861 | 0.73 (6) | 0.21 | 17 | 51 |
+| R1 draw 5 | 20,145 | 0.86 (5) | 0.45 | 129 | 738 | 0.73 (5) | 0.22 | 20 | 47 |
+| R2 draw 3 | 20,021 | 0.88 (3) | 0.36 | 73 | 823 | 0.73 (5) | 0.14 | 29 | 50 |
+| R2 draw 4 | 20,031 | 0.83 (6) | 0.29 | 88 | 709 | 0.69 (5) | 0.17 | 18 | 47 |
+| R2 draw 5 | 19,998 | 0.88 (4) | 0.47 | 133 | 845 | 0.77 (5) | 0.28 | 22 | 47 |
+| R3 draw 3 | 20,160 | 0.87 (5) | 0.40 | 128 | 813 | 0.75 (6) | 0.22 | 33 | 51 |
+| R3 draw 4 | 20,160 | 0.91 (4) | 0.50 | 118 | 774 | 0.74 (6) | 0.22 | 24 | 48 |
+| R3 draw 5 | 20,160 | 0.85 (6) | 0.30 | 200 | 876 | 0.65 (6) | 0.17 | 29 | 57 |
+| R3.5 at 0.47 | 5,167 | 0.70 (21) | 0.67 | 48 | 709 | 0.26 (7) | 0.35 | 5 | 37 |
+| R4 at 1.2 | 16,246 | 0.75 (23) | 0.65 | 150 | 633 | 0.34 (5) | 0.41 | 23 | 56 |
+| R5 at 2.0 | 10,485 | 0.83 (41) | 0.88 | 57 | 275 | 0.32 (31) | 0.58 | 15 | 45 |
+
+At 10 Hz (own acquisition):
+
+| Brain | Frames | DN spikes R² (N90) | DN 8m R² | DN 8m N90 screen | DN 8m N90 random | WM spikes R² (N90) | WM 8m R² | WM 8m N90 screen | WM 8m N90 random |
+|---|---|---|---|---|---|---|---|---|---|
+| R0 | 6,643 | 0.97 (3) | 0.50 | 188 | 713 | 0.83 (4) | 0.24 | 32 | 51 |
+| R1 draw 3 | 6,720 | 0.94 (3) | 0.40 | 137 | 589 | 0.92 (5) | 0.32 | 14 | 47 |
+| R1 draw 4 | 6,720 | 0.93 (2) | 0.31 | 257 | 891 | 0.90 (3) | 0.22 | 17 | 51 |
+| R1 draw 5 | 6,715 | 0.95 (2) | 0.41 | 70 | 522 | 0.89 (2) | 0.22 | 20 | 47 |
+| R2 draw 3 | 6,673 | 0.96 (2) | 0.32 | 53 | 686 | 0.89 (4) | 0.15 | 29 | 47 |
+| R2 draw 4 | 6,677 | 0.93 (3) | 0.25 | 225 | 871 | 0.86 (3) | 0.18 | 18 | 48 |
+| R2 draw 5 | 6,666 | 0.96 (2) | 0.42 | 96 | 712 | 0.91 (3) | 0.28 | 22 | 46 |
+| R3 draw 3 | 6,720 | 0.96 (3) | 0.37 | 64 | 678 | 0.91 (4) | 0.22 | 33 | 52 |
+| R3 draw 4 | 6,720 | 0.97 (3) | 0.46 | 94 | 690 | 0.89 (4) | 0.22 | 21 | 46 |
+| R3 draw 5 | 6,720 | 0.94 (3) | 0.26 | 240 | 930 | 0.83 (3) | 0.18 | 26 | 57 |
+| R3.5 at 0.47 | 1,710 | 0.87 (14) | 0.60 | 21 | 809 | 0.45 (7) | 0.34 | 5 | 37 |
+| R4 at 1.2 | 5,410 | 0.89 (14) | 0.63 | 83 | 477 | 0.61 (7) | 0.43 | 23 | 55 |
+| R5 at 2.0 | 3,480 | 0.93 (19) | 0.87 | 57 | 262 | 0.53 (15) | 0.59 | 15 | 45 |
+
+On R0 to R3 the indicator costs roughly half the signal at the descending site and most of it at the wing-motor site. At 30 Hz the primary 8m row keeps 35 to 60% of the spike R² at the descending site (0.29 to 0.55 against 0.82 to 0.91) and 20 to 40% at the wing-motor site (0.14 to 0.31 against 0.65 to 0.77); at 10 Hz it keeps 27 to 52% and 17 to 35%. Reaching 90% of the site's own R² then takes 73 to 204 descending neurons in screen order at 30 Hz (53 to 257 at 10 Hz), against 2 to 6 with spikes on the same frames, and 14 to 33 wing-motor neurons, against 2 to 6. Screen order still needs far fewer neurons than random order (medians 699 to 876 descending and 47 to 57 wing-motor at 30 Hz). The secondary reference, the wing-motor site against 90% of the descending R², is reached on none of the 13 brains under 8m at either rate, by screen order or by any random order.
+
+On R3.5, R4 and R5 the loss is smaller. Against 30 Hz spikes, their 8m R² is 0.96, 0.87 and 1.07 times the spike R² at the descending site and 1.31, 1.20 and 1.83 times at the wing-motor site; against 10 Hz spikes it is 0.68, 0.71 and 0.94 times at the descending site and 0.76, 0.70 and 1.12 times at the wing-motor site. So calcium beats spikes only at 30 Hz, where 33 ms spike counts are a noisy baseline that the indicator smooths, and clearly so only on R5. These brains' spike readout is not compact to begin with (spike N90 of 14 to 41 descending neurons, against 2 to 6 on R0 to R3), their wing-motor spike R² is low (0.26 to 0.34 at 30 Hz, against 0.65 to 0.77), and at the descending site R3.5 and R4 are lower too (0.70, 0.75) while R5 (0.83) is within R0 to R3's range. R5's 8m R² at the descending site (0.88 at 30 Hz) is higher than on any of R0 to R3. These brains also give fewer frames (5,167 to 16,246 at 30 Hz against about 20,000), because their riders fall, bail or leave the lane. Why the indicator reads them comparatively well has not been looked into, and nothing here says those brains ride better.
+
+Sensitivity rows, at N0 = 100 and 30 Hz. jGCaMP8f gives a higher R² than 8m at the descending site on every brain (0.38 to 0.64 on R0 to R3), and at the wing-motor site on every brain but R5. jGCaMP8s gives a much lower one (0.11 to 0.21 on R0 to R3); 8s keeps about 29% of the start-up transient after the burn-in, so its rows are the least reliable. The linear 8m row (0.46 to 0.72 on R0 to R3) differs from 8m in both saturation and its separately fitted kernel (decay 172 ms against 303 ms), so the gap is an upper bound on what saturation explains, not a measure of it. Over N0 = 30, 100 and 300, R² with every neuron moves by at most 0.09 at any site, variant and brain, which is up to 30% of the value where R² is small. At 10 Hz, own acquisition and the 30 Hz movie averaged in threes give R² within 0.03 for every 8m and linear row; 8f and 8s rows differ more, up to 0.06 (8s on R3 draw 5 at N0 = 300: 0.05 against 0.11).
+
+N90 under calcium is fragile. The screen-order curves have plateaus just under the target that a single neuron can cross: on R2 draw 4 at 30 Hz, R² stays at 0.23 to 0.24 from 80 to 87 neurons, below the 0.26 target, and jumps to 0.27 at the 88th. The 10 Hz own and averaged curves can differ widely even when their R² with every neuron agrees, so N90 differs by a factor of up to about 3.5 in the primary rows (R2 draw 4: 225 own, 65 averaged) and up to 4.6 across all rows. Culture kinetics at room temperature stand in for fly neurons in vivo, so these rows show what this indicator model does to this simulator's spikes, not what a fly imaging experiment would record.
+
 ## The queue as one chain (2026-11-11)
 
 The cluster's default QoS (`normal`) sets one running job per user (`MaxJobsPU=1`). Slurm does not enforce it here (`AccountingStorageEnforce = none`), but the queue had been running two GPU rides and a CPU replay at once, holding 2 of the node's 3 GPUs while another user waited for one. So on 2026-11-11 at 01:33 the 128 pending jobs (two ride chains and the held-out replay 38462) were cancelled and everything left was queued again as one afterany chain by `tools/submit_serial.py --after 38272`: the held-out replays of R3 draws 3 to 5, then each remaining primary ride followed by its held-out replays, then the 38 secondary rides, then prediction 3's four replays. Jobs 38463 to 38687, 225 links (128 rides, 97 replays); the chain was checked to have no break. The rides and their order are unchanged, so this is not a deviation from the preregistration; it only roughly doubles the time left, to about four weeks at about 5 h per ride and 30 min per replay. List of links: `logs/local/submit-serial-2026-11-11.txt`.
