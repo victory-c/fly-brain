@@ -374,7 +374,9 @@ The one-CPU relay jobs of the Scrambled Brains queue (`serial-next`, tools/submi
 | 38866 | 2026-11-15 20:55 | COMPLETED | 00:11:44 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r1_s5 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r1_s5/v4.5_s211/cem.json` | [trackc-38866.out](logs/trackc-38866.out) |
 | 38868 | 2026-11-15 21:06 | COMPLETED | 00:10:02 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r2_s3 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r2_s3/v4.5_s211/cem.json` | [trackc-38868.out](logs/trackc-38868.out) |
 | 38870 | 2026-11-15 21:16 | COMPLETED | 00:12:30 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r2_s4 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r2_s4/v4.5_s211/cem.json` | [trackc-38870.out](logs/trackc-38870.out) |
-| 38872 | 2026-11-15 21:29 | RUNNING | 00:00:39 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r2_s5 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r2_s5/v4.5_s211/cem.json` | [trackc-38872.out](logs/trackc-38872.out) |
+| 38872 | 2026-11-15 21:29 | COMPLETED | 00:11:07 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r2_s5 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r2_s5/v4.5_s211/cem.json` | [trackc-38872.out](logs/trackc-38872.out) |
+| 38874 | 2026-11-15 21:40 | COMPLETED | 00:12:58 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r3_s3 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r3_s3/v4.5_s211/cem.json` | [trackc-38874.out](logs/trackc-38874.out) |
+| 38876 | 2026-11-15 21:53 | RUNNING | 00:06:31 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r3_s4 trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r3_s4/v4.5_s211/cem.json` | [trackc-38876.out](logs/trackc-38876.out) |
 
 ## Full command lines
 
