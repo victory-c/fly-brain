@@ -77,23 +77,61 @@ class CountRecorder:
     and the wing motor neurons. Same interface as BrainRecorder for `episode` (bin_ms, add); the bike state comes from
     the replay's trace. Bins keep filling after a rider's ride ended, so the analysis masks them with the trace's `done`."""
 
-    def __init__(self, meta, bin_ms, device):
+    def __init__(self, meta, bin_ms, device, rows=None, site=None, ctrl_ms=10.0):
+        """rows: record these neuron rows instead (site: their labels; default descending / wing_motor / '').
+        bin_ms is rounded to whole control steps, as `episode` does, and the real bin is stored."""
         meta = meta.sort_values("row")
-        site = np.where(meta["superclass"].to_numpy() == "descending_neuron", "descending",
-                        np.where((meta["superclass"].to_numpy() == "vnc_motor") & (meta["subclass"].to_numpy() == "wm"), "wing_motor", ""))
-        keep = np.flatnonzero(site != "")
-        self.rows, self.site = meta["row"].to_numpy()[keep], site[keep]
+        lab = np.where(meta["superclass"].to_numpy() == "descending_neuron", "descending",
+                       np.where((meta["superclass"].to_numpy() == "vnc_motor") & (meta["subclass"].to_numpy() == "wm"), "wing_motor", ""))
+        if rows is None:
+            keep = np.flatnonzero(lab != "")
+            self.rows, self.site = meta["row"].to_numpy()[keep], lab[keep]
+        else:
+            self.rows = np.asarray(rows, dtype=np.int64)
+            self.site = (np.asarray(site) if site is not None else
+                         pd.Series(lab, index=meta["row"].to_numpy()).reindex(self.rows).fillna("").to_numpy().astype(str))
+            assert len(self.site) == len(self.rows)
         self.idx = torch.as_tensor(self.rows, device=device)
-        self.bin_ms, self.counts = bin_ms, []
+        self.bin_ms, self.counts = max(1, int(round(bin_ms / ctrl_ms))) * ctrl_ms, []
 
     def add(self, counts):
         """counts (B, N): every neuron's spikes in one bin."""
         self.counts.append(counts[:, self.idx].to(torch.int16).cpu())
 
-    def save(self, path):
-        counts = torch.stack(self.counts).numpy()  # (bins, B, neurons)
+    def save(self, path, name="counts"):
+        counts = torch.stack(self.counts).numpy() if self.counts else np.zeros((0, 0, len(self.rows)), np.int16)  # (bins, B, neurons)
         np.savez_compressed(path, counts=counts, rows=self.rows, site=self.site, bin_ms=self.bin_ms)
-        print(f"counts -> {path}  ({counts.shape[0]} bins of {self.bin_ms:.0f} ms, {counts.shape[1]} riders, {counts.shape[2]:,} neurons)")
+        print(f"{name} -> {path}  ({counts.shape[0]} bins of {self.bin_ms:.0f} ms, {counts.shape[1]} riders, {counts.shape[2]:,} neurons)")
+
+
+class SumRecorder(CountRecorder):
+    """A CountRecorder for other rows (the probe neighbourhoods of tools/track_c_probe.py) at a coarser bin: it adds up
+    `n` consecutive bins of `base_ms` (the bins the recorder it rides along with is fed) into one bin of n * base_ms.
+    An unfinished last bin is dropped, like the bins the episode never hands over."""
+
+    def __init__(self, meta, rows, bin_ms, device, base_ms, site=None):
+        super().__init__(meta, base_ms, device, rows=rows, site=site, ctrl_ms=base_ms)
+        self.n = max(1, int(round(bin_ms / base_ms)))
+        self.bin_ms, self.acc, self.k = self.n * base_ms, None, 0
+
+    def add(self, counts):
+        c = counts[:, self.idx].to(torch.int32)
+        self.acc = c if self.acc is None else self.acc + c
+        self.k += 1
+        if self.k == self.n:
+            self.counts.append(self.acc.to(torch.int16).cpu())
+            self.acc, self.k = None, 0
+
+
+class TeeRecorder:
+    """Hands every bin to several recorders; `bin_ms` is the first one's (the bin `episode` calls take_counts at)."""
+
+    def __init__(self, *recs):
+        self.recs, self.bin_ms = recs, recs[0].bin_ms
+
+    def add(self, counts):
+        for r in self.recs:
+            r.add(counts)
 
 
 class AttemptRecorder(BrainRecorder):
@@ -220,6 +258,10 @@ def parse():
     ap.add_argument("--brain-out", default=None, help="replay/open loop: record every rider's whole brain to this npz (brain map)")
     ap.add_argument("--counts-out", default=None, help="replay/open loop: spike counts per bin of every descending neuron and the wing motor neurons (tools/track_c.py); not together with --brain-out")
     ap.add_argument("--brain-bin-ms", type=float, default=100.0, help="time bin of the brain recording")
+    ap.add_argument("--probe-rows", default=None, help="replay/open loop: json list of neuron rows (tools/track_c_probe.py) to record to --probe-counts-out")
+    ap.add_argument("--probe-counts-out", default=None, help="replay/open loop: spike counts of the --probe-rows neurons per --probe-bin-ms bin, "
+                                                             "added up from the bins of --counts-out / --brain-out if one is given")
+    ap.add_argument("--probe-bin-ms", type=float, default=100.0, help="time bin of --probe-counts-out (a whole number of --brain-bin-ms bins)")
     ap.add_argument("--log-attempts", default=None, help="CEM: record every rider of every generation to this dir (attempts page)")
     ap.add_argument("--quiet", action="store_true")
     return ap.parse_args()
@@ -404,12 +446,25 @@ def main():
         log = []
         if a.brain_out and a.counts_out:
             raise SystemExit("--brain-out and --counts-out cannot be used together")
+        if bool(a.probe_rows) != bool(a.probe_counts_out):
+            raise SystemExit("--probe-rows and --probe-counts-out go together")
         rec = BrainRecorder(ride.meta, ride.senses.idx, a.brain_bin_ms, ride.dev) if a.brain_out else (
-            CountRecorder(ride.meta, a.brain_bin_ms, ride.dev) if a.counts_out else None)
-        r = ride.episode(theta, seed=a.seed, log=log, verbose=True, brain=rec)
+            CountRecorder(ride.meta, a.brain_bin_ms, ride.dev, ctrl_ms=a.ctrl_ms) if a.counts_out else None)
+        probe = None
+        if a.probe_counts_out:
+            prows = json.loads((ROOT / a.probe_rows).read_text())
+            prows = prows["rows"] if isinstance(prows, dict) else prows
+            base = max(1, int(round((rec.bin_ms if rec is not None else a.probe_bin_ms) / a.ctrl_ms))) * a.ctrl_ms  # episode's per_bin
+            probe = SumRecorder(ride.meta, prows, a.probe_bin_ms, ride.dev, base)
+            if abs(probe.bin_ms - a.probe_bin_ms) > 1e-6:
+                print(f"probe: {a.probe_bin_ms:g} ms is not a whole number of {base:g} ms bins, recording {probe.bin_ms:g} ms", flush=True)
+        feed = probe if rec is None else (rec if probe is None else TeeRecorder(rec, probe))
+        r = ride.episode(theta, seed=a.seed, log=log, verbose=True, brain=feed)
         print(f"{label}:", ride.summary(r))
         if rec is not None:
             rec.save(ROOT / (a.brain_out or a.counts_out))
+        if probe is not None:
+            probe.save(ROOT / a.probe_counts_out, name="probe counts")
         trace = {"mode": label, "state_names": STATE, "dn_names": ride.readout.names, "sense_names": ride.senses.names,
                  "theta": theta[0].cpu().tolist(), "theta_names": dec_names(dec), "trace": log,
                  "result": {k: (v.tolist() if isinstance(v, np.ndarray) else v) for k, v in r.items()}}

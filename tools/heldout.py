@@ -42,7 +42,8 @@ RESULTS = Path("fly_brain/results/rungs")
 # cem.json config keys that belong to the search, not to the ride, or that this script sets itself
 NOT_REPLAYED = {"generations", "max_minutes", "resume", "out", "init", "init_theta", "sigma_new", "sigma0", "sigma_lane_filter", "sigma_min",
                 "sigma_pedal", "elite", "ridge", "zbar", "dagger", "dagger_beta0", "replay", "trace", "brain_out", "counts_out", "brain_bin_ms",
-                "log_attempts", "oracle", "open_loop", "quiet", "device", "seed", "v0", "riders", "seconds"}
+                "log_attempts", "oracle", "open_loop", "quiet", "device", "seed", "v0", "riders", "seconds",
+                "probe_rows", "probe_counts_out", "probe_bin_ms"}
 
 
 def ride_args(cfg):

@@ -13,9 +13,12 @@ Screen order is decreasing |r_phi_dot| in the brain's own screen; random order i
 neurons (silent ones count towards N) and, separately, over the neurons active in this replay. The wing-motor site is
 scored against two references: 90% of its own R^2 and 90% of the descending site's R^2.
 Simulated calcium imaging and the probe-distance sweep are not done here.
+
+--sum-to-ms 100 sums a finer recording (e.g. 10 ms bins) into 100 ms bins before alignment. --primary-ref own marks the
+site's own R^2 as the primary reference in the output (preregistration 9a, point 9); without it the output is unchanged.
 """
+import argparse
 import json
-import sys
 
 import numpy as np
 import pandas as pd
@@ -39,6 +42,15 @@ def align(counts, bin_ms, trace):
         ok = ~done[lo:hi].any(0)  # the rider was riding for the whole bin
         X.append(counts[b, ok]); y.append(state[lo:hi, ok, phi_dot].mean(0)); rider.append(np.flatnonzero(ok))
     return np.concatenate(X).astype(np.float64), np.concatenate(y).astype(np.float64), np.concatenate(rider)
+
+
+def sum_bins(counts, bin_ms, to_ms):
+    """Sum groups of to_ms/bin_ms consecutive bins of (bins, riders, neurons) counts; an incomplete tail is dropped."""
+    k = int(round(to_ms / bin_ms))
+    if k < 1 or abs(k * bin_ms - to_ms) > 1e-6 * to_ms:
+        raise ValueError(f"--sum-to-ms {to_ms:g} is not a whole multiple of the file's {bin_ms:g} ms bins")
+    nb = counts.shape[0] // k
+    return counts[:nb * k].reshape(nb, k, *counts.shape[1:]).sum(1, dtype=np.int64), k * bin_ms
 
 
 def ridge_r2(Xtr, ytr, Xte, yte, lam):
@@ -92,17 +104,31 @@ def n90(X, y, rider, folds, lam, order, target):
 
 
 def main():
-    counts_path, trace_path, screen_path, out_path = sys.argv[1:5]
+    ap = argparse.ArgumentParser(description="Track C decodability from one replay.")
+    ap.add_argument("counts"); ap.add_argument("trace"); ap.add_argument("screen"); ap.add_argument("out")
+    ap.add_argument("--sum-to-ms", type=float, default=None, help="sum the file's bins into bins of this length first")
+    ap.add_argument("--primary-ref", choices=["own", "descending"], default=None,
+                    help="record which wing-motor reference is primary (prereg 9a point 9: own)")
+    a = ap.parse_args()
+    counts_path, trace_path, screen_path, out_path = a.counts, a.trace, a.screen, a.out
     z = np.load(counts_path)
     trace = json.load(open(trace_path))
     screen = pd.read_parquet(screen_path).set_index("row")
-    X_all, y, rider = align(z["counts"], float(z["bin_ms"]), trace)
+    counts, bin_ms = z["counts"], float(z["bin_ms"])
+    if a.sum_to_ms is not None:
+        file_bin_ms = bin_ms
+        counts, bin_ms = sum_bins(counts, bin_ms, a.sum_to_ms)
+    X_all, y, rider = align(counts, bin_ms, trace)
     rows, site = z["rows"], z["site"].astype(str)
     riders = np.unique(rider)
     rng = np.random.default_rng(0)
     folds = np.array_split(rng.permutation(riders), 5)
     out = {"counts": counts_path, "trace": trace_path, "screen": screen_path, "samples": int(len(y)), "riders": int(len(riders)),
            "roll_rate_sd": float(y.std()), "sites": {}}
+    if a.sum_to_ms is not None:
+        out["file_bin_ms"], out["bin_ms"] = file_bin_ms, bin_ms
+    if a.primary_ref is not None:
+        out["primary_reference"] = {"own": "site", "descending": "descending"}[a.primary_ref]
     descending_r2 = None
     for name in ("descending", "wing_motor"):  # the descending site first: its R^2 is the wing-motor site's second reference
         m = site == name  # every neuron at the site, silent ones too: an experimenter cannot pick the active ones before recording
@@ -114,6 +140,8 @@ def main():
             descending_r2 = full
         by_screen = np.argsort(-np.abs(np.nan_to_num(screen.loc[r, "r_phi_dot"].to_numpy())), kind="stable")
         res = {"neurons": int(m.sum()), "active": int(active.sum()), "lambda": lam, "r2_all": round(full, 4), "references": {}}
+        if a.primary_ref is not None:  # the descending site has only its own reference
+            res["primary_reference"] = "site" if name == "descending" else out["primary_reference"]
         for ref, value in (("site", full), ("descending", descending_r2)):
             if name == "descending" and ref == "descending":
                 continue
