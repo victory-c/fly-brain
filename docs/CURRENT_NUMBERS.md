@@ -1156,6 +1156,7 @@ Last-generation riding time of each finished 60-generation ride, 4.5 m/s, CEM se
 | R2 draw 4 seed 212 | 38831 | GPU | 290 | 12.47 | 58% |
 | R2 draw 5 seed 212 | 38835 | GPU | 297 | 11.02 | 48% |
 | R3 draw 3 seed 212 | 38847 | GPU | 289 | 11.66 | 40% |
+| R3 draw 4 seed 212 | 38897 | GPU | 289 | 11.28 | 35% |
 | R3.5 draw 1, scale 0.47 | 38371 | CPU | 163 | 2.71 | 0% |
 | R4 draw 1, scale 1.2 | 38372 | CPU | 269 | 2.96 | 0% |
 | R5 draw 1, scale 2.0 | 38373 | CPU | 301 | 4.34 | 0% |
@@ -1226,6 +1227,7 @@ R3 draw 5 at 4.0 m/s (job 38791, finished 2026-11-13) ends at 10.37 s, 25% finis
 
 **CEM seed 212 at 4.5 m/s (from 2026-11-14).** With seed 211 done on all 20 primary cells, the relay moved to seed 212. Rows marked seed 212 are at 4.5 m/s. R0 seed 212 (job 38798) ends at 12.45 s, 52% finishing (last five generations 11.36 s), against 12.79 s for seed 211, so R0 now has two of its five seeds at 4.5 m/s; the seed-SD that predictions 1 and 5 use needs all five. Seed 212 on the other draws, with seed 211 in brackets: R1 draw 3 12.38 (14.65), draw 4 12.95 (13.72), draw 5 11.23 (10.47); R2 draw 3 12.77 (12.02), draw 4 12.47 (13.05), draw 5 11.02 (13.26). Lane-filter weights for seed 212 run from -0.06 (R2 draw 5) to -0.18 (R1 draw 3, R2 draw 4); none is near zero, and no seed-212 search stalled (each was above 9.8 s by generation 20 except R1 draw 5, 7.7 s, and R2 draw 3, 9.8 s). R1 draw 3 seed 212 peaked earlier (last five generations 13.62 s against 12.38 s in the last one).
 R3 draw 3 seed 212 (job 38847, finished 2026-11-15) ends at 11.66 s, 40% finishing (last five generations 12.36 s), against 13.19 s for seed 211; it climbed steadily (7.5 s at generation 20, 10.7 at 40); lane-filter weight -0.16. Its held-out replays ran after the Track C links (job 38895, see the held-out table).
+R3 draw 4 seed 212 (job 38897, finished 2026-11-16) ends at 11.28 s, 17 of 48 riders finishing (last five generations 10.50 s), against 13.37 s for seed 211 and 9% below R0's seed 212 (12.45 s). It reached 7.1 s by generation 10 and 8.6 s at generation 20 (R1 draw 5 had 7.7 s and R3 draw 3 7.5 s there), then sat between 9.1 and 10.4 s from generation 25 to 58; its last generation, 11.28 s, is its highest. Lane-filter weight -0.11. Its held-out replays are job 38899.
 R3's three draws (13.19, 13.37 and 13.54 s, finished 2026-11-11) all ride above R0's first seed; like R1's, this tests nothing until R0 has five seeds.
 
 ## Confirmatory Track C at the front of the queue (2026-11-15)
