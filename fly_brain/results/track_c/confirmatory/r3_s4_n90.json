@@ -1,0 +1,113 @@
+{
+ "counts": "fly_brain/results/rungs/conf_r3_s4/v4.5_s211/trackc/counts10.npz",
+ "trace": "fly_brain/results/rungs/conf_r3_s4/v4.5_s211/trackc/trace.json",
+ "screen": "fly_brain/results/rungs/screens/r3_s4.parquet",
+ "samples": 7200,
+ "riders": 48,
+ "roll_rate_sd": 0.4870099833276145,
+ "sites": {
+  "descending": {
+   "neurons": 1314,
+   "active": 392,
+   "lambda": 100.0,
+   "r2_all": 0.9685,
+   "references": {
+    "site": {
+     "target_r2": 0.8716,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.7595,
+      "2": 0.7704,
+      "3": 0.9106
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 197.5,
+      "q25_q75": [
+       138.75,
+       351.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 55.0,
+      "q25_q75": [
+       32.0,
+       98.75
+      ]
+     }
+    }
+   },
+   "primary_reference": "site"
+  },
+  "wing_motor": {
+   "neurons": 67,
+   "active": 39,
+   "lambda": 100.0,
+   "r2_all": 0.8854,
+   "references": {
+    "site": {
+     "target_r2": 0.7969,
+     "n90_screen": 4,
+     "r2_screen_curve": {
+      "1": 0.163,
+      "2": 0.7241,
+      "3": 0.7684,
+      "4": 0.8006
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 28.5,
+      "q25_q75": [
+       21.5,
+       34.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 14.0,
+      "q25_q75": [
+       11.0,
+       17.5
+      ]
+     }
+    },
+    "descending": {
+     "target_r2": 0.8716,
+     "n90_screen": 9,
+     "r2_screen_curve": {
+      "1": 0.163,
+      "2": 0.7241,
+      "3": 0.7684,
+      "4": 0.8006,
+      "6": 0.8196,
+      "8": 0.8706,
+      "9": 0.8734,
+      "10": 0.8744,
+      "12": 0.8753
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 55.5,
+      "q25_q75": [
+       47.75,
+       60.75
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 28.0,
+      "q25_q75": [
+       24.75,
+       31.5
+      ]
+     }
+    }
+   },
+   "primary_reference": "site"
+  }
+ },
+ "file_bin_ms": 10.0,
+ "bin_ms": 100.0,
+ "primary_reference": "site"
+}

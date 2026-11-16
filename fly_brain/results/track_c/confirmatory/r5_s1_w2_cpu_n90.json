@@ -1,0 +1,126 @@
+{
+ "counts": "fly_brain/results/rungs/conf_r5_s1_w2_cpu/v4.5_s211/trackc/counts10.npz",
+ "trace": "fly_brain/results/rungs/conf_r5_s1_w2_cpu/v4.5_s211/trackc/trace.json",
+ "screen": "fly_brain/results/rungs/screens/r5_s1_w2.parquet",
+ "samples": 3960,
+ "riders": 48,
+ "roll_rate_sd": 0.555420014411359,
+ "sites": {
+  "descending": {
+   "neurons": 1314,
+   "active": 1139,
+   "lambda": 1000.0,
+   "r2_all": 0.9232,
+   "references": {
+    "site": {
+     "target_r2": 0.8308,
+     "n90_screen": 19,
+     "r2_screen_curve": {
+      "1": 0.0239,
+      "2": 0.2861,
+      "3": 0.3615,
+      "4": 0.3697,
+      "6": 0.4084,
+      "8": 0.4527,
+      "12": 0.7356,
+      "16": 0.7901,
+      "18": 0.7943,
+      "19": 0.8391,
+      "20": 0.8391,
+      "24": 0.841
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 361.0,
+      "q25_q75": [
+       293.0,
+       424.75
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 307.5,
+      "q25_q75": [
+       227.5,
+       370.5
+      ]
+     }
+    }
+   },
+   "primary_reference": "site"
+  },
+  "wing_motor": {
+   "neurons": 67,
+   "active": 54,
+   "lambda": 100.0,
+   "r2_all": 0.5268,
+   "references": {
+    "site": {
+     "target_r2": 0.4741,
+     "n90_screen": 15,
+     "r2_screen_curve": {
+      "1": 0.3628,
+      "2": 0.3733,
+      "3": 0.3776,
+      "4": 0.3776,
+      "6": 0.3798,
+      "8": 0.3772,
+      "12": 0.3776,
+      "14": 0.3912,
+      "15": 0.4808,
+      "16": 0.4809
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 33.5,
+      "q25_q75": [
+       27.5,
+       48.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 33.5,
+      "q25_q75": [
+       27.75,
+       37.0
+      ]
+     }
+    },
+    "descending": {
+     "target_r2": 0.8308,
+     "n90_screen": null,
+     "r2_screen_curve": {
+      "1": 0.3628,
+      "2": 0.3733,
+      "3": 0.3776,
+      "4": 0.3776,
+      "6": 0.3798,
+      "8": 0.3772,
+      "12": 0.3776,
+      "16": 0.4809,
+      "24": 0.4825,
+      "32": 0.5087,
+      "48": 0.5117,
+      "64": 0.5268,
+      "67": 0.5268
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 0,
+      "median": null,
+      "q25_q75": null
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 0,
+      "median": null,
+      "q25_q75": null
+     }
+    }
+   },
+   "primary_reference": "site"
+  }
+ },
+ "file_bin_ms": 10.0,
+ "bin_ms": 100.0,
+ "primary_reference": "site"
+}

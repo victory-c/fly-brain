@@ -1,0 +1,110 @@
+{
+ "counts": "fly_brain/results/rungs/conf_r3_s5/v4.5_s211/trackc/counts10.npz",
+ "trace": "fly_brain/results/rungs/conf_r3_s5/v4.5_s211/trackc/trace.json",
+ "screen": "fly_brain/results/rungs/screens/r3_s5.parquet",
+ "samples": 7200,
+ "riders": 48,
+ "roll_rate_sd": 0.3473266958436212,
+ "sites": {
+  "descending": {
+   "neurons": 1314,
+   "active": 382,
+   "lambda": 100.0,
+   "r2_all": 0.9402,
+   "references": {
+    "site": {
+     "target_r2": 0.8461,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.7225,
+      "2": 0.844,
+      "3": 0.8809
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 315.0,
+      "q25_q75": [
+       241.5,
+       368.0
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 82.0,
+      "q25_q75": [
+       67.5,
+       100.75
+      ]
+     }
+    }
+   },
+   "primary_reference": "site"
+  },
+  "wing_motor": {
+   "neurons": 67,
+   "active": 37,
+   "lambda": 0.1,
+   "r2_all": 0.8334,
+   "references": {
+    "site": {
+     "target_r2": 0.75,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.097,
+      "2": 0.7174,
+      "3": 0.7547
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 38.5,
+      "q25_q75": [
+       31.5,
+       46.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 20.0,
+      "q25_q75": [
+       18.0,
+       22.0
+      ]
+     }
+    },
+    "descending": {
+     "target_r2": 0.8461,
+     "n90_screen": null,
+     "r2_screen_curve": {
+      "1": 0.097,
+      "2": 0.7174,
+      "3": 0.7547,
+      "4": 0.7609,
+      "6": 0.8058,
+      "8": 0.8157,
+      "12": 0.8276,
+      "16": 0.8313,
+      "24": 0.831,
+      "32": 0.8325,
+      "48": 0.8334,
+      "64": 0.8334,
+      "67": 0.8334
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 0,
+      "median": null,
+      "q25_q75": null
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 0,
+      "median": null,
+      "q25_q75": null
+     }
+    }
+   },
+   "primary_reference": "site"
+  }
+ },
+ "file_bin_ms": 10.0,
+ "bin_ms": 100.0,
+ "primary_reference": "site"
+}

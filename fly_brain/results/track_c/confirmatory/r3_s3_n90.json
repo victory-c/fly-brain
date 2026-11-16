@@ -1,0 +1,110 @@
+{
+ "counts": "fly_brain/results/rungs/conf_r3_s3/v4.5_s211/trackc/counts10.npz",
+ "trace": "fly_brain/results/rungs/conf_r3_s3/v4.5_s211/trackc/trace.json",
+ "screen": "fly_brain/results/rungs/screens/r3_s3.parquet",
+ "samples": 7200,
+ "riders": 48,
+ "roll_rate_sd": 0.3661095577237617,
+ "sites": {
+  "descending": {
+   "neurons": 1314,
+   "active": 368,
+   "lambda": 100.0,
+   "r2_all": 0.9544,
+   "references": {
+    "site": {
+     "target_r2": 0.859,
+     "n90_screen": 3,
+     "r2_screen_curve": {
+      "1": 0.7483,
+      "2": 0.7679,
+      "3": 0.8913
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 315.0,
+      "q25_q75": [
+       214.25,
+       384.75
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 77.5,
+      "q25_q75": [
+       46.0,
+       100.25
+      ]
+     }
+    }
+   },
+   "primary_reference": "site"
+  },
+  "wing_motor": {
+   "neurons": 67,
+   "active": 42,
+   "lambda": 0.1,
+   "r2_all": 0.907,
+   "references": {
+    "site": {
+     "target_r2": 0.8163,
+     "n90_screen": 4,
+     "r2_screen_curve": {
+      "1": 0.3563,
+      "2": 0.7516,
+      "3": 0.7849,
+      "4": 0.8352
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 32.0,
+      "q25_q75": [
+       20.75,
+       35.0
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 16.0,
+      "q25_q75": [
+       12.0,
+       20.25
+      ]
+     }
+    },
+    "descending": {
+     "target_r2": 0.859,
+     "n90_screen": 6,
+     "r2_screen_curve": {
+      "1": 0.3563,
+      "2": 0.7516,
+      "3": 0.7849,
+      "4": 0.8352,
+      "5": 0.8359,
+      "6": 0.8788
+     },
+     "n90_random_all_site_neurons": {
+      "reached": 20,
+      "median": 42.0,
+      "q25_q75": [
+       37.25,
+       44.25
+      ]
+     },
+     "n90_random_active_neurons_only": {
+      "reached": 20,
+      "median": 23.5,
+      "q25_q75": [
+       18.0,
+       27.0
+      ]
+     }
+    }
+   },
+   "primary_reference": "site"
+  }
+ },
+ "file_bin_ms": 10.0,
+ "bin_ms": 100.0,
+ "primary_reference": "site"
+}

@@ -46,3 +46,74 @@ wing_motor {'neurons': 67, 'active': 34, 'lambda': 0.1, 'r2_all': 0.8874, 'prima
 -> fly_brain/results/track_c/confirmatory/r2_s3_n90.json
 == r2_s4 n90
 /home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c.py fly_brain/results/rungs/conf_r2_s4/v4.5_s211/trackc/counts10.npz fly_brain/results/rungs/conf_r2_s4/v4.5_s211/trackc/trace.json fly_brain/results/rungs/screens/r2_s4.parquet fly_brain/results/track_c/confirmatory/r2_s4_n90.part.json --sum-to-ms 100 --primary-ref own
+{"counts": "fly_brain/results/rungs/conf_r2_s4/v4.5_s211/trackc/counts10.npz", "trace": "fly_brain/results/rungs/conf_r2_s4/v4.5_s211/trackc/trace.json", "screen": "fly_brain/results/rungs/screens/r2_s4.parquet", "samples": 7157, "riders": 48, "roll_rate_sd": 0.288288341852721, "file_bin_ms": 10.0, "bin_ms": 100.0, "primary_reference": "site"}
+descending {'neurons': 1314, 'active': 411, 'lambda': 1000.0, 'r2_all': 0.9268, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.8341, 'n90_screen': 3, 'n90_random_all_site_neurons': {'reached': 20, 'median': 390.5, 'q25_q75': [343.0, 583.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 114.5, 'q25_q75': [77.25, 177.75]}}
+wing_motor {'neurons': 67, 'active': 32, 'lambda': 0.1, 'r2_all': 0.8617, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.7755, 'n90_screen': 3, 'n90_random_all_site_neurons': {'reached': 20, 'median': 35.5, 'q25_q75': [27.5, 42.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 13.5, 'q25_q75': [10.75, 18.25]}}
+  reference: descending {'target_r2': 0.8341, 'n90_screen': 7, 'n90_random_all_site_neurons': {'reached': 20, 'median': 54.5, 'q25_q75': [45.75, 58.5]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 24.0, 'q25_q75': [22.75, 25.0]}}
+-> fly_brain/results/track_c/confirmatory/r2_s4_n90.json
+== r2_s5 n90
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c.py fly_brain/results/rungs/conf_r2_s5/v4.5_s211/trackc/counts10.npz fly_brain/results/rungs/conf_r2_s5/v4.5_s211/trackc/trace.json fly_brain/results/rungs/screens/r2_s5.parquet fly_brain/results/track_c/confirmatory/r2_s5_n90.part.json --sum-to-ms 100 --primary-ref own
+{"counts": "fly_brain/results/rungs/conf_r2_s5/v4.5_s211/trackc/counts10.npz", "trace": "fly_brain/results/rungs/conf_r2_s5/v4.5_s211/trackc/trace.json", "screen": "fly_brain/results/rungs/screens/r2_s5.parquet", "samples": 7146, "riders": 48, "roll_rate_sd": 0.3825187248799623, "file_bin_ms": 10.0, "bin_ms": 100.0, "primary_reference": "site"}
+descending {'neurons': 1314, 'active': 385, 'lambda': 100.0, 'r2_all': 0.9596, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.8636, 'n90_screen': 2, 'n90_random_all_site_neurons': {'reached': 20, 'median': 315.0, 'q25_q75': [218.75, 375.0]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 80.5, 'q25_q75': [50.0, 108.25]}}
+wing_motor {'neurons': 67, 'active': 34, 'lambda': 1.0, 'r2_all': 0.9127, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.8214, 'n90_screen': 3, 'n90_random_all_site_neurons': {'reached': 20, 'median': 28.5, 'q25_q75': [23.5, 34.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 13.0, 'q25_q75': [11.0, 16.25]}}
+  reference: descending {'target_r2': 0.8636, 'n90_screen': 7, 'n90_random_all_site_neurons': {'reached': 20, 'median': 41.5, 'q25_q75': [32.75, 43.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 16.0, 'q25_q75': [14.0, 19.0]}}
+-> fly_brain/results/track_c/confirmatory/r2_s5_n90.json
+== r3_s3 n90
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c.py fly_brain/results/rungs/conf_r3_s3/v4.5_s211/trackc/counts10.npz fly_brain/results/rungs/conf_r3_s3/v4.5_s211/trackc/trace.json fly_brain/results/rungs/screens/r3_s3.parquet fly_brain/results/track_c/confirmatory/r3_s3_n90.part.json --sum-to-ms 100 --primary-ref own
+{"counts": "fly_brain/results/rungs/conf_r3_s3/v4.5_s211/trackc/counts10.npz", "trace": "fly_brain/results/rungs/conf_r3_s3/v4.5_s211/trackc/trace.json", "screen": "fly_brain/results/rungs/screens/r3_s3.parquet", "samples": 7200, "riders": 48, "roll_rate_sd": 0.3661095577237617, "file_bin_ms": 10.0, "bin_ms": 100.0, "primary_reference": "site"}
+descending {'neurons': 1314, 'active': 368, 'lambda': 100.0, 'r2_all': 0.9544, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.859, 'n90_screen': 3, 'n90_random_all_site_neurons': {'reached': 20, 'median': 315.0, 'q25_q75': [214.25, 384.75]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 77.5, 'q25_q75': [46.0, 100.25]}}
+wing_motor {'neurons': 67, 'active': 42, 'lambda': 0.1, 'r2_all': 0.907, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.8163, 'n90_screen': 4, 'n90_random_all_site_neurons': {'reached': 20, 'median': 32.0, 'q25_q75': [20.75, 35.0]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 16.0, 'q25_q75': [12.0, 20.25]}}
+  reference: descending {'target_r2': 0.859, 'n90_screen': 6, 'n90_random_all_site_neurons': {'reached': 20, 'median': 42.0, 'q25_q75': [37.25, 44.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 23.5, 'q25_q75': [18.0, 27.0]}}
+-> fly_brain/results/track_c/confirmatory/r3_s3_n90.json
+== r3_s4 n90
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c.py fly_brain/results/rungs/conf_r3_s4/v4.5_s211/trackc/counts10.npz fly_brain/results/rungs/conf_r3_s4/v4.5_s211/trackc/trace.json fly_brain/results/rungs/screens/r3_s4.parquet fly_brain/results/track_c/confirmatory/r3_s4_n90.part.json --sum-to-ms 100 --primary-ref own
+{"counts": "fly_brain/results/rungs/conf_r3_s4/v4.5_s211/trackc/counts10.npz", "trace": "fly_brain/results/rungs/conf_r3_s4/v4.5_s211/trackc/trace.json", "screen": "fly_brain/results/rungs/screens/r3_s4.parquet", "samples": 7200, "riders": 48, "roll_rate_sd": 0.4870099833276145, "file_bin_ms": 10.0, "bin_ms": 100.0, "primary_reference": "site"}
+descending {'neurons': 1314, 'active': 392, 'lambda': 100.0, 'r2_all': 0.9685, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.8716, 'n90_screen': 3, 'n90_random_all_site_neurons': {'reached': 20, 'median': 197.5, 'q25_q75': [138.75, 351.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 55.0, 'q25_q75': [32.0, 98.75]}}
+wing_motor {'neurons': 67, 'active': 39, 'lambda': 100.0, 'r2_all': 0.8854, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.7969, 'n90_screen': 4, 'n90_random_all_site_neurons': {'reached': 20, 'median': 28.5, 'q25_q75': [21.5, 34.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 14.0, 'q25_q75': [11.0, 17.5]}}
+  reference: descending {'target_r2': 0.8716, 'n90_screen': 9, 'n90_random_all_site_neurons': {'reached': 20, 'median': 55.5, 'q25_q75': [47.75, 60.75]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 28.0, 'q25_q75': [24.75, 31.5]}}
+-> fly_brain/results/track_c/confirmatory/r3_s4_n90.json
+== r3_s5 n90
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c.py fly_brain/results/rungs/conf_r3_s5/v4.5_s211/trackc/counts10.npz fly_brain/results/rungs/conf_r3_s5/v4.5_s211/trackc/trace.json fly_brain/results/rungs/screens/r3_s5.parquet fly_brain/results/track_c/confirmatory/r3_s5_n90.part.json --sum-to-ms 100 --primary-ref own
+{"counts": "fly_brain/results/rungs/conf_r3_s5/v4.5_s211/trackc/counts10.npz", "trace": "fly_brain/results/rungs/conf_r3_s5/v4.5_s211/trackc/trace.json", "screen": "fly_brain/results/rungs/screens/r3_s5.parquet", "samples": 7200, "riders": 48, "roll_rate_sd": 0.3473266958436212, "file_bin_ms": 10.0, "bin_ms": 100.0, "primary_reference": "site"}
+descending {'neurons': 1314, 'active': 382, 'lambda': 100.0, 'r2_all': 0.9402, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.8461, 'n90_screen': 3, 'n90_random_all_site_neurons': {'reached': 20, 'median': 315.0, 'q25_q75': [241.5, 368.0]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 82.0, 'q25_q75': [67.5, 100.75]}}
+wing_motor {'neurons': 67, 'active': 37, 'lambda': 0.1, 'r2_all': 0.8334, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.75, 'n90_screen': 3, 'n90_random_all_site_neurons': {'reached': 20, 'median': 38.5, 'q25_q75': [31.5, 46.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 20.0, 'q25_q75': [18.0, 22.0]}}
+  reference: descending {'target_r2': 0.8461, 'n90_screen': None, 'n90_random_all_site_neurons': {'reached': 0, 'median': None, 'q25_q75': None}, 'n90_random_active_neurons_only': {'reached': 0, 'median': None, 'q25_q75': None}}
+-> fly_brain/results/track_c/confirmatory/r3_s5_n90.json
+== r35_s1_w0.47_cpu n90
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c.py fly_brain/results/rungs/conf_r35_s1_w0.47_cpu/v4.5_s211/trackc/counts10.npz fly_brain/results/rungs/conf_r35_s1_w0.47_cpu/v4.5_s211/trackc/trace.json fly_brain/results/rungs/screens/r35_s1.parquet fly_brain/results/track_c/confirmatory/r35_s1_w0.47_cpu_n90.part.json --sum-to-ms 100 --primary-ref own
+{"counts": "fly_brain/results/rungs/conf_r35_s1_w0.47_cpu/v4.5_s211/trackc/counts10.npz", "trace": "fly_brain/results/rungs/conf_r35_s1_w0.47_cpu/v4.5_s211/trackc/trace.json", "screen": "fly_brain/results/rungs/screens/r35_s1.parquet", "samples": 2190, "riders": 48, "roll_rate_sd": 0.5146413835021298, "file_bin_ms": 10.0, "bin_ms": 100.0, "primary_reference": "site"}
+descending {'neurons': 1314, 'active': 194, 'lambda': 100.0, 'r2_all': 0.8652, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.7787, 'n90_screen': 14, 'n90_random_all_site_neurons': {'reached': 20, 'median': 585.0, 'q25_q75': [514.75, 688.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 85.5, 'q25_q75': [72.5, 94.5]}}
+wing_motor {'neurons': 67, 'active': 19, 'lambda': 0.1, 'r2_all': 0.4491, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.4042, 'n90_screen': 7, 'n90_random_all_site_neurons': {'reached': 20, 'median': 46.0, 'q25_q75': [41.5, 56.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 15.0, 'q25_q75': [11.0, 16.0]}}
+  reference: descending {'target_r2': 0.7787, 'n90_screen': None, 'n90_random_all_site_neurons': {'reached': 0, 'median': None, 'q25_q75': None}, 'n90_random_active_neurons_only': {'reached': 0, 'median': None, 'q25_q75': None}}
+-> fly_brain/results/track_c/confirmatory/r35_s1_w0.47_cpu_n90.json
+== r4_s1_w1.2_cpu n90
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c.py fly_brain/results/rungs/conf_r4_s1_w1.2_cpu/v4.5_s211/trackc/counts10.npz fly_brain/results/rungs/conf_r4_s1_w1.2_cpu/v4.5_s211/trackc/trace.json fly_brain/results/rungs/screens/r4_s1_w1.2.parquet fly_brain/results/track_c/confirmatory/r4_s1_w1.2_cpu_n90.part.json --sum-to-ms 100 --primary-ref own
+{"counts": "fly_brain/results/rungs/conf_r4_s1_w1.2_cpu/v4.5_s211/trackc/counts10.npz", "trace": "fly_brain/results/rungs/conf_r4_s1_w1.2_cpu/v4.5_s211/trackc/trace.json", "screen": "fly_brain/results/rungs/screens/r4_s1_w1.2.parquet", "samples": 5890, "riders": 48, "roll_rate_sd": 0.2857332647005398, "file_bin_ms": 10.0, "bin_ms": 100.0, "primary_reference": "site"}
+descending {'neurons': 1314, 'active': 471, 'lambda': 1000.0, 'r2_all': 0.8881, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.7993, 'n90_screen': 14, 'n90_random_all_site_neurons': {'reached': 20, 'median': 566.5, 'q25_q75': [451.5, 692.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 180.0, 'q25_q75': [145.25, 211.25]}}
+wing_motor {'neurons': 67, 'active': 42, 'lambda': 10.0, 'r2_all': 0.6075, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.5468, 'n90_screen': 7, 'n90_random_all_site_neurons': {'reached': 20, 'median': 47.5, 'q25_q75': [32.0, 56.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 28.0, 'q25_q75': [20.5, 33.0]}}
+  reference: descending {'target_r2': 0.7993, 'n90_screen': None, 'n90_random_all_site_neurons': {'reached': 0, 'median': None, 'q25_q75': None}, 'n90_random_active_neurons_only': {'reached': 0, 'median': None, 'q25_q75': None}}
+-> fly_brain/results/track_c/confirmatory/r4_s1_w1.2_cpu_n90.json
+== r5_s1_w2_cpu n90
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c.py fly_brain/results/rungs/conf_r5_s1_w2_cpu/v4.5_s211/trackc/counts10.npz fly_brain/results/rungs/conf_r5_s1_w2_cpu/v4.5_s211/trackc/trace.json fly_brain/results/rungs/screens/r5_s1_w2.parquet fly_brain/results/track_c/confirmatory/r5_s1_w2_cpu_n90.part.json --sum-to-ms 100 --primary-ref own
+{"counts": "fly_brain/results/rungs/conf_r5_s1_w2_cpu/v4.5_s211/trackc/counts10.npz", "trace": "fly_brain/results/rungs/conf_r5_s1_w2_cpu/v4.5_s211/trackc/trace.json", "screen": "fly_brain/results/rungs/screens/r5_s1_w2.parquet", "samples": 3960, "riders": 48, "roll_rate_sd": 0.555420014411359, "file_bin_ms": 10.0, "bin_ms": 100.0, "primary_reference": "site"}
+descending {'neurons': 1314, 'active': 1139, 'lambda': 1000.0, 'r2_all': 0.9232, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.8308, 'n90_screen': 19, 'n90_random_all_site_neurons': {'reached': 20, 'median': 361.0, 'q25_q75': [293.0, 424.75]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 307.5, 'q25_q75': [227.5, 370.5]}}
+wing_motor {'neurons': 67, 'active': 54, 'lambda': 100.0, 'r2_all': 0.5268, 'primary_reference': 'site'}
+  reference: site {'target_r2': 0.4741, 'n90_screen': 15, 'n90_random_all_site_neurons': {'reached': 20, 'median': 33.5, 'q25_q75': [27.5, 48.25]}, 'n90_random_active_neurons_only': {'reached': 20, 'median': 33.5, 'q25_q75': [27.75, 37.0]}}
+  reference: descending {'target_r2': 0.8308, 'n90_screen': None, 'n90_random_all_site_neurons': {'reached': 0, 'median': None, 'q25_q75': None}, 'n90_random_active_neurons_only': {'reached': 0, 'median': None, 'q25_q75': None}}
+-> fly_brain/results/track_c/confirmatory/r5_s1_w2_cpu_n90.json
+== done Sun Nov 15 11:06:26 PM PST 2026
