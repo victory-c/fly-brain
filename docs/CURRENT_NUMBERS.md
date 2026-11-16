@@ -1328,6 +1328,54 @@ Sensitivity rows, at N0 = 100 and 30 Hz. jGCaMP8f gives a higher R² than 8m at 
 
 N90 under calcium is fragile. The screen-order curves have plateaus just under the target that a single neuron can cross: on R2 draw 4 at 30 Hz, R² stays at 0.23 to 0.24 from 80 to 87 neurons, below the 0.26 target, and jumps to 0.27 at the 88th. The 10 Hz own and averaged curves can differ widely even when their R² with every neuron agrees, so N90 differs by a factor of up to about 3.5 in the primary rows (R2 draw 4: 225 own, 65 averaged) and up to 4.6 across all rows. Culture kinetics at room temperature stand in for fly neurons in vivo, so these rows show what this indicator model does to this simulator's spikes, not what a fly imaging experiment would record.
 
+**Probe distance (job 38893, 1 h 46 min, 2026-11-16).** `tools/track_c_probe.py` as fixed in section 10, entry 1(g) of the preregistration. A probe is a ball of radius r = 10, 25 or 50 µm that records every neuron whose soma lies inside it, site neuron or not. Its centre misses the named target's soma by d = 0 to 50 µm, along 20 fixed directions. Spike counts are at 100 ms, on the same rider-bins as the N90 analysis, with the same ridge and folds; the penalty is chosen once per target and radius on the d = 0 ball. Each cell below is the median R² over the 20 directions (at d = 0 all 20 are the same ball); the 25 to 75% range over directions and the fraction of the site's R² for every cell are in the files (`r2_q25_q75`, `fraction_median`, `fraction_q25_q75`). The balls hold the same neurons on every brain, since rewiring moves connections, not somata: around DNp20_R 14, 301 and 1,784 neurons at r = 10, 25 and 50 µm; around hg4 MN_L 14, 85 and 193. Files: `fly_brain/results/track_c/confirmatory/<brain>_probe.json`.
+
+Descending site, target DNp20_R (row 48):
+
+| Brain | Site R² | r 10, d 0 | r 10, d 10 | r 10, d 25 | r 25, d 0 | r 25, d 25 | r 25, d 50 | r 50, d 0 | r 50, d 50 |
+|---|---|---|---|---|---|---|---|---|---|
+| R0 | 0.97 | 0.70 | 0.49 | 0.00 | 0.85 | 0.74 | 0.13 | 0.89 | 0.84 |
+| R1 draw 3 | 0.94 | 0.67 | 0.44 | 0.00 | 0.76 | 0.68 | 0.11 | 0.83 | 0.79 |
+| R1 draw 4 | 0.92 | 0.63 | 0.42 | 0.00 | 0.71 | 0.62 | 0.05 | 0.81 | 0.75 |
+| R1 draw 5 | 0.95 | 0.74 | 0.50 | 0.00 | 0.81 | 0.72 | 0.15 | 0.86 | 0.81 |
+| R2 draw 3 | 0.96 | 0.77 | 0.52 | 0.00 | 0.84 | 0.75 | 0.13 | 0.87 | 0.84 |
+| R2 draw 4 | 0.93 | 0.71 | 0.48 | 0.00 | 0.79 | 0.69 | 0.13 | 0.84 | 0.80 |
+| R2 draw 5 | 0.96 | 0.77 | 0.54 | 0.00 | 0.84 | 0.77 | 0.17 | 0.88 | 0.85 |
+| R3 draw 3 | 0.95 | 0.76 | 0.50 | 0.00 | 0.84 | 0.77 | 0.06 | 0.87 | 0.84 |
+| R3 draw 4 | 0.97 | 0.78 | 0.52 | 0.01 | 0.86 | 0.77 | 0.07 | 0.89 | 0.86 |
+| R3 draw 5 | 0.94 | 0.74 | 0.47 | 0.00 | 0.81 | 0.73 | 0.08 | 0.86 | 0.82 |
+| R3.5 at 0.47 | 0.87 | 0.06 | 0.09 | 0.03 | 0.50 | 0.43 | 0.15 | 0.73 | 0.59 |
+| R4 at 1.2 | 0.89 | 0.01 | 0.03 | 0.04 | 0.68 | 0.49 | 0.14 | 0.82 | 0.69 |
+| R5 at 2.0 | 0.92 | 0.14 | 0.11 | 0.14 | 0.85 | 0.80 | 0.65 | 0.95 | 0.92 |
+
+Wing-motor site, target hg4 MN_L (row 144950):
+
+| Brain | Site R² | r 10, d 0 | r 10, d 10 | r 10, d 25 | r 25, d 0 | r 25, d 25 | r 25, d 50 | r 50, d 0 | r 50, d 50 |
+|---|---|---|---|---|---|---|---|---|---|
+| R0 | 0.83 | 0.44 | 0.27 | 0.00 | 0.54 | 0.38 | 0.00 | 0.65 | 0.65 |
+| R1 draw 3 | 0.92 | 0.43 | 0.26 | 0.00 | 0.53 | 0.32 | 0.00 | 0.56 | 0.57 |
+| R1 draw 4 | 0.90 | 0.13 | 0.05 | 0.00 | 0.20 | 0.12 | 0.00 | 0.25 | 0.46 |
+| R1 draw 5 | 0.89 | 0.24 | 0.19 | 0.00 | 0.41 | 0.21 | 0.00 | 0.47 | 0.56 |
+| R2 draw 3 | 0.89 | 0.31 | 0.23 | 0.00 | 0.46 | 0.25 | 0.00 | 0.52 | 0.58 |
+| R2 draw 4 | 0.86 | 0.18 | 0.09 | 0.00 | 0.20 | 0.12 | 0.00 | 0.29 | 0.41 |
+| R2 draw 5 | 0.91 | 0.36 | 0.27 | 0.00 | 0.53 | 0.28 | 0.00 | 0.61 | 0.60 |
+| R3 draw 3 | 0.91 | 0.25 | 0.20 | 0.00 | 0.44 | 0.22 | 0.00 | 0.55 | 0.55 |
+| R3 draw 4 | 0.89 | 0.25 | 0.23 | 0.00 | 0.50 | 0.26 | 0.00 | 0.61 | 0.64 |
+| R3 draw 5 | 0.83 | 0.06 | 0.04 | 0.00 | 0.18 | 0.09 | 0.00 | 0.34 | 0.44 |
+| R3.5 at 0.47 | 0.45 | 0.00 | 0.00 | 0.00 | 0.10 | 0.04 | 0.00 | 0.18 | 0.19 |
+| R4 at 1.2 | 0.61 | 0.02 | 0.02 | 0.00 | 0.33 | 0.20 | 0.01 | 0.34 | 0.29 |
+| R5 at 2.0 | 0.53 | 0.06 | 0.03 | 0.00 | 0.47 | 0.35 | 0.01 | 0.65 | 0.66 |
+
+At the descending site on R0 to R3, a 10 µm ball centred on DNp20_R gives R² 0.63 to 0.78, 68 to 81% of the site's R². Missing by 10 µm cuts the median to 0.42 to 0.54, and by 25 µm to 0.00 to 0.01. A 25 µm ball gives 0.71 to 0.86 on target, 0.62 to 0.77 at a 25 µm miss and 0.05 to 0.17 at 50 µm. A 50 µm ball gives 0.81 to 0.89 and loses little over the whole 50 µm (0.75 to 0.86). The wing-motor target is much weaker and varies more between brains: on R0 to R3, 0.06 to 0.44 for the 10 µm ball, 0.18 to 0.54 at 25 µm and 0.25 to 0.65 at 50 µm; the 10 µm ball gives 0.00 at a 25 µm miss and the 25 µm ball 0.00 at a 50 µm miss.
+
+Some of those zeros are balls that hold no neuron at all, which score 0 by rule rather than by fit. At a 25 µm miss, the 10 µm ball is empty in 5 of 20 directions around DNp20_R, 6 around DNp20_L, 10 around hg4 MN_L and 11 around hg4 MN_R; at a 50 µm miss it is empty in 10 to 19 of 20. The 25 µm ball is empty in 4 to 6 of 20 at a 50 µm miss. Off target the directions also differ a lot among balls that do hold neurons: with the 10 µm ball on DNp20_R at d = 10, the 25 to 75% range over directions runs from 0.03–0.12 at its low end to 0.62–0.78 at its high end on R0 to R3; with the 25 µm ball at d = 25 it is 0.34–0.56 to 0.68–0.83, and at d = 50 the upper quartile still reaches 0.66. Whether a missed probe keeps the signal depends strongly on which way it misses, and the medians hide that.
+
+At hg4 MN_L, the 50 µm ball's median at d = 50 is higher than on target on 8 of the 10 R0 to R3 brains (largest gap: R1 draw 4, 0.46 against 0.25). This does not happen for DNp20_R, and hg4 MN_R's 50 µm ball falls at d = 50 on 9 of the 10. One possible reason is that the shifted ball takes in more informative neighbours; it also holds fewer neurons than on target, under a penalty chosen on the target ball, and nothing here tests either.
+
+On R3.5, R4 and R5, the 10 µm balls on the primary targets carry almost nothing: 0.06, 0.01 and 0.14 on DNp20_R and 0.00 to 0.06 on hg4 MN_L. The replicate DNp20_L keeps a little on R4 (0.17) and more on R5 (0.46). Larger balls recover much of the site's R² (DNp20_R at 25 µm: 0.50, 0.68, 0.85; at 50 µm: 0.73, 0.82, 0.95). On R5, where about 87% of the neurons in each ball fire, the 25 µm ball's median is still 0.65 at d = 50, but its 25 to 75% range over directions is 0.01 to 0.72 and 5 of 20 balls are empty. A ball is not limited to the site, so its R² can exceed the site's: the fraction of the site R² on target is above 1 on R5 for the 50 µm balls on all four targets and for the 25 µm ball on hg4 MN_R (1.32), and on R4 for the 50 µm ball on hg4 MN_R (1.22).
+
+Replicates. With the 10 µm ball on target, DNp20_L gives about the same R² as DNp20_R on R0 (0.70) and a lower one on R1 to R3 (0.40 to 0.68); at larger misses it is sometimes higher. hg4 MN_R is weaker than hg4 MN_L at small radii on most brains (0.02 to 0.24 for the 10 µm ball on R0 to R3; equal on R1 draw 5 and higher on R3 draw 5), but its 50 µm ball, which holds 309 neurons, gives 0.28 to 0.62 on target. Six descending-site neurons have no atlas position and can never be in a probe; every wing-motor neuron has one.
+
 ## The queue as one chain (2026-11-11)
 
 The cluster's default QoS (`normal`) sets one running job per user (`MaxJobsPU=1`). Slurm does not enforce it here (`AccountingStorageEnforce = none`), but the queue had been running two GPU rides and a CPU replay at once, holding 2 of the node's 3 GPUs while another user waited for one. So on 2026-11-11 at 01:33 the 128 pending jobs (two ride chains and the held-out replay 38462) were cancelled and everything left was queued again as one afterany chain by `tools/submit_serial.py --after 38272`: the held-out replays of R3 draws 3 to 5, then each remaining primary ride followed by its held-out replays, then the 38 secondary rides, then prediction 3's four replays. Jobs 38463 to 38687, 225 links (128 rides, 97 replays); the chain was checked to have no break. The rides and their order are unchanged, so this is not a deviation from the preregistration; it only roughly doubles the time left, to about four weeks at about 5 h per ride and 30 min per replay. List of links: `logs/local/submit-serial-2026-11-11.txt`.
