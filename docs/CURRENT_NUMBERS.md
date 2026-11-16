@@ -1238,6 +1238,8 @@ Juyeon, who was to run Track C, may not be able to work with us, so on 2026-11-1
 
 Estimated 8 to 13 h in all, so the remaining rides move back about half a day.
 
+**Verification passed (job 38854, 2026-11-15, 11 min).** The pilot R0 replay at 10 ms bins gives 1,500 bins x 48 riders x 1,381 neurons; summed in tens they equal the pilot's 100 ms counts in every cell (1,984,385 spikes on both sides), and the trace equals the pilot's in everything but its wall-clock time (644 s against 946 s). So 10 ms recording leaves the ride unchanged and the 100 ms analysis of the preregistration is recovered exactly. `verify.json` says ok, and the relay went on to the screens (`scr-r35`, job 38856).
+
 ## The queue as one chain (2026-11-11)
 
 The cluster's default QoS (`normal`) sets one running job per user (`MaxJobsPU=1`). Slurm does not enforce it here (`AccountingStorageEnforce = none`), but the queue had been running two GPU rides and a CPU replay at once, holding 2 of the node's 3 GPUs while another user waited for one. So on 2026-11-11 at 01:33 the 128 pending jobs (two ride chains and the held-out replay 38462) were cancelled and everything left was queued again as one afterany chain by `tools/submit_serial.py --after 38272`: the held-out replays of R3 draws 3 to 5, then each remaining primary ride followed by its held-out replays, then the 38 secondary rides, then prediction 3's four replays. Jobs 38463 to 38687, 225 links (128 rides, 97 replays); the chain was checked to have no break. The rides and their order are unchanged, so this is not a deviation from the preregistration; it only roughly doubles the time left, to about four weeks at about 5 h per ride and 30 min per replay. List of links: `logs/local/submit-serial-2026-11-11.txt`.
