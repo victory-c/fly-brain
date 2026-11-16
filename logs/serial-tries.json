@@ -54,5 +54,6 @@
  "tc-r4_s1_w1.2_cpu": 1,
  "tc-r5_s1_w2_cpu": 1,
  "tc-n90": 1,
- "tc-calcium": 1
+ "tc-calcium": 1,
+ "tc-probe": 1
 }
