@@ -22,3 +22,57 @@ DNp20_R   r=25 lambda=1.0 d=0: 301 neurons (36 active); median R^2 by d: 0:0.762
 DNp20_R   r=50 lambda=10.0 d=0: 1784 neurons (141 active); median R^2 by d: 0:0.831 5:0.830 10:0.830 15:0.829 20:0.830 25:0.834 30:0.833 35:0.838 40:0.833 45:0.817 50:0.788
 DNp20_L   r=10 lambda=0.1 d=0: 14 neurons (2 active); median R^2 by d: 0:0.559 5:0.560 10:0.444 15:0.004 20:0.002 25:0.001 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
 DNp20_L   r=25 lambda=10.0 d=0: 195 neurons (27 active); median R^2 by d: 0:0.658 5:0.659 10:0.663 15:0.658 20:0.655 25:0.567 30:0.279 35:0.286 40:0.279 45:0.162 50:0.153
+DNp20_L   r=50 lambda=100.0 d=0: 1704 neurons (136 active); median R^2 by d: 0:0.786 5:0.786 10:0.783 15:0.786 20:0.784 25:0.784 30:0.782 35:0.778 40:0.782 45:0.774 50:0.702
+hg4 MN_L  r=10 lambda=0.1 d=0: 14 neurons (2 active); median R^2 by d: 0:0.429 5:0.429 10:0.261 15:-0.000 20:-0.000 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+hg4 MN_L  r=25 lambda=0.1 d=0: 85 neurons (5 active); median R^2 by d: 0:0.527 5:0.527 10:0.525 15:0.522 20:0.521 25:0.318 30:0.106 35:0.004 40:0.003 45:0.000 50:0.000
+hg4 MN_L  r=50 lambda=10.0 d=0: 193 neurons (16 active); median R^2 by d: 0:0.561 5:0.562 10:0.562 15:0.569 20:0.565 25:0.562 30:0.564 35:0.587 40:0.592 45:0.591 50:0.574
+hg4 MN_R  r=10 lambda=100.0 d=0: 9 neurons (2 active); median R^2 by d: 0:0.031 5:0.031 10:0.021 15:-0.000 20:-0.000 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+hg4 MN_R  r=25 lambda=100.0 d=0: 55 neurons (6 active); median R^2 by d: 0:0.105 5:0.105 10:0.105 15:0.105 20:0.105 25:0.034 30:-0.000 35:-0.000 40:-0.000 45:-0.000 50:0.000
+hg4 MN_R  r=50 lambda=100.0 d=0: 309 neurons (12 active); median R^2 by d: 0:0.412 5:0.412 10:0.412 15:0.412 20:0.414 25:0.412 30:0.413 35:0.409 40:0.354 45:0.354 50:0.329
+-> fly_brain/results/track_c/confirmatory/r1_s3_probe.part.json  (2022 distinct fits)
+-> fly_brain/results/track_c/confirmatory/r1_s3_probe.json
+== r1_s4 probe
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c_probe.py fit fly_brain/results/rungs/conf_r1_s4/v4.5_s211/trackc/probe100.npz fly_brain/results/rungs/conf_r1_s4/v4.5_s211/trackc/trace.json fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/track_c/confirmatory/r1_s4_n90.json fly_brain/results/track_c/confirmatory/r1_s4_probe.part.json
+DNp20_R   r=10 lambda=100.0 d=0: 14 neurons (4 active); median R^2 by d: 0:0.627 5:0.627 10:0.416 15:0.024 20:0.002 25:0.002 30:0.002 35:0.000 40:0.000 45:0.000 50:0.000
+DNp20_R   r=25 lambda=100.0 d=0: 301 neurons (41 active); median R^2 by d: 0:0.714 5:0.715 10:0.716 15:0.709 20:0.703 25:0.625 30:0.228 35:0.169 40:0.145 45:0.101 50:0.046
+DNp20_R   r=50 lambda=10.0 d=0: 1784 neurons (136 active); median R^2 by d: 0:0.811 5:0.795 10:0.782 15:0.782 20:0.782 25:0.784 30:0.789 35:0.791 40:0.782 45:0.775 50:0.753
+DNp20_L   r=10 lambda=10.0 d=0: 14 neurons (2 active); median R^2 by d: 0:0.456 5:0.456 10:0.334 15:0.009 20:0.002 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+DNp20_L   r=25 lambda=10.0 d=0: 195 neurons (26 active); median R^2 by d: 0:0.585 5:0.586 10:0.590 15:0.576 20:0.560 25:0.462 30:0.179 35:0.177 40:0.143 45:0.088 50:0.074
+DNp20_L   r=50 lambda=10.0 d=0: 1704 neurons (129 active); median R^2 by d: 0:0.713 5:0.713 10:0.711 15:0.710 20:0.707 25:0.705 30:0.708 35:0.708 40:0.706 45:0.696 50:0.620
+hg4 MN_L  r=10 lambda=100.0 d=0: 14 neurons (4 active); median R^2 by d: 0:0.129 5:0.045 10:0.045 15:-0.000 20:-0.000 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+hg4 MN_L  r=25 lambda=100.0 d=0: 85 neurons (7 active); median R^2 by d: 0:0.201 5:0.201 10:0.182 15:0.173 20:0.160 25:0.116 30:0.035 35:0.007 40:0.003 45:0.000 50:0.000
+hg4 MN_L  r=50 lambda=10.0 d=0: 193 neurons (22 active); median R^2 by d: 0:0.246 5:0.246 10:0.246 15:0.249 20:0.246 25:0.248 30:0.247 35:0.275 40:0.326 45:0.393 50:0.458
+hg4 MN_R  r=10 lambda=10.0 d=0: 9 neurons (2 active); median R^2 by d: 0:0.018 5:0.018 10:0.011 15:-0.000 20:-0.000 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+hg4 MN_R  r=25 lambda=0.1 d=0: 55 neurons (6 active); median R^2 by d: 0:0.147 5:0.147 10:0.147 15:0.145 20:0.058 25:0.020 30:-0.000 35:-0.000 40:0.000 45:-0.000 50:0.000
+hg4 MN_R  r=50 lambda=0.1 d=0: 309 neurons (9 active); median R^2 by d: 0:0.275 5:0.275 10:0.275 15:0.351 20:0.357 25:0.358 30:0.358 35:0.378 40:0.378 45:0.378 50:0.379
+-> fly_brain/results/track_c/confirmatory/r1_s4_probe.part.json  (2021 distinct fits)
+-> fly_brain/results/track_c/confirmatory/r1_s4_probe.json
+== r1_s5 probe
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c_probe.py fit fly_brain/results/rungs/conf_r1_s5/v4.5_s211/trackc/probe100.npz fly_brain/results/rungs/conf_r1_s5/v4.5_s211/trackc/trace.json fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/track_c/confirmatory/r1_s5_n90.json fly_brain/results/track_c/confirmatory/r1_s5_probe.part.json
+DNp20_R   r=10 lambda=100.0 d=0: 14 neurons (3 active); median R^2 by d: 0:0.741 5:0.747 10:0.504 15:0.044 20:0.002 25:0.001 30:0.002 35:0.000 40:-0.000 45:0.000 50:0.000
+DNp20_R   r=25 lambda=100.0 d=0: 301 neurons (39 active); median R^2 by d: 0:0.814 5:0.814 10:0.812 15:0.804 20:0.799 25:0.722 30:0.356 35:0.329 40:0.299 45:0.227 50:0.146
+DNp20_R   r=50 lambda=10.0 d=0: 1784 neurons (142 active); median R^2 by d: 0:0.856 5:0.856 10:0.856 15:0.856 20:0.857 25:0.857 30:0.857 35:0.860 40:0.854 45:0.849 50:0.815
+DNp20_L   r=10 lambda=1.0 d=0: 14 neurons (3 active); median R^2 by d: 0:0.574 5:0.574 10:0.430 15:0.004 20:0.002 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+DNp20_L   r=25 lambda=10.0 d=0: 195 neurons (27 active); median R^2 by d: 0:0.705 5:0.707 10:0.709 15:0.702 20:0.688 25:0.584 30:0.271 35:0.276 40:0.212 45:0.114 50:0.112
+DNp20_L   r=50 lambda=100.0 d=0: 1704 neurons (146 active); median R^2 by d: 0:0.795 5:0.795 10:0.795 15:0.796 20:0.795 25:0.794 30:0.792 35:0.789 40:0.790 45:0.774 50:0.715
+hg4 MN_L  r=10 lambda=100.0 d=0: 14 neurons (1 active); median R^2 by d: 0:0.238 5:0.238 10:0.192 15:-0.000 20:-0.000 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+hg4 MN_L  r=25 lambda=100.0 d=0: 85 neurons (3 active); median R^2 by d: 0:0.411 5:0.411 10:0.387 15:0.363 20:0.362 25:0.210 30:0.027 35:0.006 40:0.003 45:0.001 50:0.000
+hg4 MN_L  r=50 lambda=10.0 d=0: 193 neurons (14 active); median R^2 by d: 0:0.469 5:0.474 10:0.474 15:0.485 20:0.472 25:0.473 30:0.473 35:0.550 40:0.578 45:0.589 50:0.559
+hg4 MN_R  r=10 lambda=100.0 d=0: 9 neurons (2 active); median R^2 by d: 0:0.238 5:0.238 10:0.123 15:-0.000 20:-0.000 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+hg4 MN_R  r=25 lambda=100.0 d=0: 55 neurons (6 active); median R^2 by d: 0:0.261 5:0.261 10:0.261 15:0.261 20:0.257 25:0.232 30:0.011 35:0.000 40:-0.000 45:-0.000 50:0.000
+hg4 MN_R  r=50 lambda=100.0 d=0: 309 neurons (11 active); median R^2 by d: 0:0.502 5:0.502 10:0.502 15:0.502 20:0.513 25:0.515 30:0.546 35:0.518 40:0.434 45:0.431 50:0.378
+-> fly_brain/results/track_c/confirmatory/r1_s5_probe.part.json  (2022 distinct fits)
+-> fly_brain/results/track_c/confirmatory/r1_s5_probe.json
+== r2_s3 probe
+/home/s/st/stevejobs/flybrain/venv-cuda/bin/python /home/s/st/stevejobs/flybrain/tools/track_c_probe.py fit fly_brain/results/rungs/conf_r2_s3/v4.5_s211/trackc/probe100.npz fly_brain/results/rungs/conf_r2_s3/v4.5_s211/trackc/trace.json fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/track_c/confirmatory/r2_s3_n90.json fly_brain/results/track_c/confirmatory/r2_s3_probe.part.json
+DNp20_R   r=10 lambda=0.1 d=0: 14 neurons (4 active); median R^2 by d: 0:0.771 5:0.777 10:0.521 15:0.033 20:0.003 25:0.001 30:0.002 35:0.000 40:0.000 45:0.000 50:0.000
+DNp20_R   r=25 lambda=0.1 d=0: 301 neurons (44 active); median R^2 by d: 0:0.838 5:0.838 10:0.832 15:0.831 20:0.829 25:0.749 30:0.328 35:0.298 40:0.229 45:0.162 50:0.131
+DNp20_R   r=50 lambda=1.0 d=0: 1784 neurons (151 active); median R^2 by d: 0:0.875 5:0.874 10:0.874 15:0.873 20:0.874 25:0.873 30:0.872 35:0.876 40:0.873 45:0.866 50:0.840
+DNp20_L   r=10 lambda=0.1 d=0: 14 neurons (2 active); median R^2 by d: 0:0.550 5:0.550 10:0.371 15:0.004 20:0.002 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+DNp20_L   r=25 lambda=10.0 d=0: 195 neurons (29 active); median R^2 by d: 0:0.686 5:0.687 10:0.690 15:0.682 20:0.666 25:0.519 30:0.199 35:0.208 40:0.201 45:0.153 50:0.135
+DNp20_L   r=50 lambda=10.0 d=0: 1704 neurons (158 active); median R^2 by d: 0:0.779 5:0.780 10:0.780 15:0.781 20:0.780 25:0.779 30:0.780 35:0.773 40:0.778 45:0.764 50:0.716
+hg4 MN_L  r=10 lambda=0.1 d=0: 14 neurons (2 active); median R^2 by d: 0:0.311 5:0.311 10:0.234 15:-0.000 20:-0.000 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+hg4 MN_L  r=25 lambda=0.1 d=0: 85 neurons (6 active); median R^2 by d: 0:0.459 5:0.459 10:0.447 15:0.434 20:0.434 25:0.247 30:0.016 35:0.004 40:0.002 45:0.001 50:0.000
+hg4 MN_L  r=50 lambda=0.1 d=0: 193 neurons (21 active); median R^2 by d: 0:0.518 5:0.519 10:0.520 15:0.521 20:0.520 25:0.521 30:0.518 35:0.541 40:0.560 45:0.588 50:0.579
+hg4 MN_R  r=10 lambda=0.1 d=0: 9 neurons (2 active); median R^2 by d: 0:0.057 5:0.057 10:0.003 15:0.000 20:-0.000 25:0.000 30:0.000 35:0.000 40:0.000 45:0.000 50:0.000
+hg4 MN_R  r=25 lambda=0.1 d=0: 55 neurons (9 active); median R^2 by d: 0:0.081 5:0.087 10:0.087 15:0.087 20:0.085 25:0.061 30:0.009 35:0.000 40:0.000 45:0.000 50:0.000
