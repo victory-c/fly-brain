@@ -382,7 +382,7 @@ The one-CPU relay jobs of the Scrambled Brains queue (`serial-next`, tools/submi
 | 38882 | 2026-11-15 22:26 | COMPLETED | 00:14:31 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r4_s1_w1.2_cpu trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r4_s1_w1.2_cpu/v4.5_s211/cem.json` | [trackc-38882.out](logs/trackc-38882.out) |
 | 38885 | 2026-11-15 22:41 | COMPLETED | 00:13:13 | 16 cpu, 16G |  | `sbatch --parsable --job-name=tc-r5_s1_w2_cpu trackc.sbatch --rows fly_brain/results/track_c/confirmatory/probe_rows.json fly_brain/results/rungs/conf_r5_s1_w2_cpu/v4.5_s211/cem.json` | [trackc-38885.out](logs/trackc-38885.out) |
 | 38887 | 2026-11-15 22:54 | COMPLETED | 00:11:42 | 16 cpu, 32G |  | `sbatch --parsable --job-name=tc-n90 --time=03:00:00 trackc-analysis.sbatch n90` | [trackc-analysis-38887.out](logs/trackc-analysis-38887.out) |
-| 38889 | 2026-11-15 23:06 | RUNNING | 00:23:32 | 16 cpu, 32G |  | `sbatch --parsable --job-name=tc-calcium --time=10:00:00 trackc-analysis.sbatch calcium` | [trackc-analysis-38889.out](logs/trackc-analysis-38889.out) |
+| 38889 | 2026-11-15 23:06 | RUNNING | 00:53:32 | 16 cpu, 32G |  | `sbatch --parsable --job-name=tc-calcium --time=10:00:00 trackc-analysis.sbatch calcium` | [trackc-analysis-38889.out](logs/trackc-analysis-38889.out) |
 
 ## Full command lines
 
