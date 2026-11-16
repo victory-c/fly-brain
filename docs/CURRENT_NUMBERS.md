@@ -1242,6 +1242,26 @@ Estimated 8 to 13 h in all, so the remaining rides move back about half a day.
 
 **Screens (2026-11-15, CPU, 48 riders, 15 s).** R3.5 at scale 0.47 (job 38856, 10 min): 134 of 1,314 descending neurons above 0.5 Hz, 2,754 neurons above 1 Hz in the whole brain. R5 at scale 2.0 (job 38858, 23 min): 1,185 of 1,314 descending neurons above 0.5 Hz and 139,676 neurons above 20 Hz, 13.2 million spikes/s over the brain against about 80,000 on R3.5, so at the scale it rides at almost the whole R5 brain fires fast. The 13 Track C replays started with R0 (`tc-r0`, job 38860).
 
+**Replays done (2026-11-15, 20:15 to 22:55).** All 13 Track C replays completed on their first try, on CPU, 8 to 15 minutes each. Each replays its brain's 4.5 m/s seed-211 decoder with off-road ending switched off (`--offroad 0`), so riders keep going after they leave the road, and the finish fractions here are higher than the same rides' CEM numbers and are not riding results. Each wrote 10 ms counts for the 1,381 site neurons and 100 ms counts for the 13,208 probe neurons, 48 riders.
+
+| Brain | Job | Minutes | Riding time (s) | Finished | Mean \|y\| (m) | Spikes/s |
+|---|---|---|---|---|---|---|
+| R0 | 38860 | 11 | 14.84 | 96% | 1.25 | 38,439 |
+| R1 draw 3 | 38862 | 13 | 15.00 | 100% | 1.01 | 23,301 |
+| R1 draw 4 | 38864 | 15 | 15.00 | 100% | 1.15 | 24,017 |
+| R1 draw 5 | 38866 | 12 | 14.99 | 98% | 1.44 | 28,206 |
+| R2 draw 3 | 38868 | 10 | 14.90 | 98% | 3.80 | 45,198 |
+| R2 draw 4 | 38870 | 13 | 14.91 | 98% | 0.89 | 41,883 |
+| R2 draw 5 | 38872 | 11 | 14.89 | 98% | 1.63 | 33,249 |
+| R3 draw 3 | 38874 | 13 | 15.00 | 100% | 3.81 | 26,193 |
+| R3 draw 4 | 38876 | 13 | 15.00 | 100% | 2.68 | 32,385 |
+| R3 draw 5 | 38878 | 13 | 15.00 | 100% | 1.20 | 27,838 |
+| R3.5 at 0.47 | 38880 | 8 | 4.61 of 12 | 0% | 4.57 | 44,130 |
+| R4 at 1.2 | 38882 | 15 | 12.29 | 65% | 16.29 | 30,050 |
+| R5 at 2.0 | 38885 | 13 | 8.31 | 2% | 9.54 | 3,475,761 |
+
+R3.5's replay was asked for 15 s, but every rider had fallen by 12.0 s and the run stops when all riders are done, so its counts cover 12 s (1,200 bins of 10 ms); every other replay covers 15 s. On R5, 22 of 48 riders bailed out through the giant-fibre escape, and the brain fires about 3.5 million spikes/s. On R4 the riders stay up for most of the ride but end far from the lane (mean |y| 16 m). The relay then started the N90 analysis (`tc-n90`, job 38887), followed by calcium and the probe sweep.
+
 ## The queue as one chain (2026-11-11)
 
 The cluster's default QoS (`normal`) sets one running job per user (`MaxJobsPU=1`). Slurm does not enforce it here (`AccountingStorageEnforce = none`), but the queue had been running two GPU rides and a CPU replay at once, holding 2 of the node's 3 GPUs while another user waited for one. So on 2026-11-11 at 01:33 the 128 pending jobs (two ride chains and the held-out replay 38462) were cancelled and everything left was queued again as one afterany chain by `tools/submit_serial.py --after 38272`: the held-out replays of R3 draws 3 to 5, then each remaining primary ride followed by its held-out replays, then the 38 secondary rides, then prediction 3's four replays. Jobs 38463 to 38687, 225 links (128 rides, 97 replays); the chain was checked to have no break. The rides and their order are unchanged, so this is not a deviation from the preregistration; it only roughly doubles the time left, to about four weeks at about 5 h per ride and 30 min per replay. List of links: `logs/local/submit-serial-2026-11-11.txt`.
