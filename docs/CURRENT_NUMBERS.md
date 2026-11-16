@@ -1147,6 +1147,14 @@ Last-generation riding time of each finished 60-generation ride, 4.5 m/s, CEM se
 | R2 draw 5 at 4.0 m/s | 38766 | GPU | 271 | 7.92 | 8% |
 | R3 draw 3 at 4.0 m/s | 38778 | GPU | 273 | 10.08 | 27% |
 | R3 draw 4 at 4.0 m/s | 38783 | GPU | 269 | 8.77 | 2% |
+| R3 draw 5 at 4.0 m/s | 38791 | GPU | 282 | 10.37 | 25% |
+| R0 seed 212 | 38798 | GPU | 266 | 12.45 | 52% |
+| R1 draw 3 seed 212 | 38802 | GPU | 269 | 12.38 | 73% |
+| R1 draw 4 seed 212 | 38806 | GPU | 282 | 12.95 | 60% |
+| R1 draw 5 seed 212 | 38815 | GPU | 288 | 11.23 | 38% |
+| R2 draw 3 seed 212 | 38824 | GPU | 290 | 12.77 | 60% |
+| R2 draw 4 seed 212 | 38831 | GPU | 290 | 12.47 | 58% |
+| R2 draw 5 seed 212 | 38835 | GPU | 297 | 11.02 | 48% |
 | R3.5 draw 1, scale 0.47 | 38371 | CPU | 163 | 2.71 | 0% |
 | R4 draw 1, scale 1.2 | 38372 | CPU | 269 | 2.96 | 0% |
 | R5 draw 1, scale 2.0 | 38373 | CPU | 301 | 4.34 | 0% |
@@ -1176,6 +1184,14 @@ Held-out replays of the final mean decoder (CPU, 48 riders, 15 s; jobs 38413 and
 | R2 draw 5, trained at 4.0 m/s (tests at 4.5 and 3.5 m/s) | 10.51 (9) | 10.45 (9) | 9.19 (6) | 7.72 (0) |
 | R3 draw 3, trained at 4.0 m/s (tests at 4.5 and 3.5 m/s) | 10.99 (20) | 11.67 (23) | 7.29 (4) | 6.65 (0) |
 | R3 draw 4, trained at 4.0 m/s (tests at 4.5 and 3.5 m/s) | 9.65 (0) | 9.26 (2) | 9.87 (10) | 6.81 (0) |
+| R3 draw 5, trained at 4.0 m/s (tests at 4.5 and 3.5 m/s) | 13.57 (34) | 13.75 (32) | 14.03 (33) | 7.19 (0) |
+| R0 seed 212 | 13.77 (33) | 13.02 (30) | 11.56 (13) | 7.84 (0) |
+| R1 draw 3 seed 212 | 14.90 (47) | 15.00 (48) | 14.66 (42) | 5.17 (1) |
+| R1 draw 4 seed 212 | 14.94 (47) | 14.88 (46) | 14.54 (42) | 8.91 (1) |
+| R1 draw 5 seed 212 | 13.66 (36) | 12.66 (31) | 11.12 (25) | 7.57 (1) |
+| R2 draw 3 seed 212 | 13.64 (35) | 13.57 (39) | 10.60 (21) | 8.56 (2) |
+| R2 draw 4 seed 212 | 14.92 (47) | 14.34 (43) | 14.91 (46) | 7.01 (1) |
+| R2 draw 5 seed 212 | 14.50 (44) | 14.41 (41) | 12.77 (30) | 5.40 (0) |
 
 Unseen gusts cost little on all three. Slowing to 4.0 m/s costs the most: R0's decoder finishes no rider (35 fall), R1's finish 24 and 10 (R1 draw 4 loses most of the rest off the road, 37 riders). Section 5 makes these descriptive, not tests. R1 draw 5 (job 38442), the weakest of the three rides, also loses the most off the road at both test speeds (31 riders at +0.5, 33 at -0.5) and finishes no rider at 4.0 m/s, like R0.
 R2 draw 3 (job 38445) keeps its training-speed riding time under new gusts and at +0.5 m/s, but about half its riders leave the road in each; at 4.0 m/s 4 finish and 26 fall.
@@ -1193,6 +1209,8 @@ R2 draw 4's 4.0 m/s ride (job 38764): under new gusts 35 and 33 finish, 11 and 1
 R2 draw 5's 4.0 m/s ride (job 38776, 82 min, longer than the usual 30): under new gusts only 9 finish in each, 35 and 34 leave the road; at 4.5 m/s 42 of 48 leave the road and none falls; at 3.5 m/s none finishes, 16 leave the road and 32 fall. Like the weak R1 draw 4 decoder at 4.0 m/s, it loses the lane at the training speed and faster, and falls at the slower one.
 R3 draw 3's 4.0 m/s ride (job 38780, 83 min): under new gusts 20 and 23 finish, 28 and 22 leave the road (0 and 3 fall); at 4.5 m/s 44 of 48 leave the road and none falls; at 3.5 m/s none finishes, 28 leave the road and 20 fall. Its 4.5 m/s test (7.29 s) is the second lowest of the 4.0 m/s decoders, after R1 draw 5 (7.06 s).
 R3 draw 4's 4.0 m/s ride (job 38789, 83 min): under new gusts 0 and 2 finish, 47 and 44 leave the road (1 and 2 fall), the fewest finishers under new gusts of any decoder so far; at 4.5 m/s 10 finish, 38 leave the road and none falls; at 3.5 m/s none finishes, 38 leave the road and 10 fall. It loses the lane under every test, the speed-up included.
+R3 draw 5's 4.0 m/s ride (job 38795): under new gusts 34 and 32 finish; at 4.5 m/s 33 finish, 15 leave the road and none falls; at 3.5 m/s none finishes, 29 leave the road and 19 fall.
+Seed 212 replays (jobs 38800, 38804, 38813, 38822, 38829, 38833, 38845; 31 to 62 min each): new gusts cost little (31 to 48 of 48 finish); slowing to 4.0 m/s costs the most, as for seed 211, with 0 to 2 riders finishing on every decoder. At 4.0 m/s R1 draw 3's seed-212 decoder has 47 of 48 riders fall (5.17 s), and R2 draw 5's 39 (5.40 s); R0's seed-212 decoder has 27 fall and 21 leave the road. At 5.0 m/s R0's seed-212 decoder loses 35 riders off the road, more than any seed-212 rewired decoder (2 to 27).
 R0's first ride at 4.0 m/s (job 38710, finished 2026-11-11) ends at 12.74 s, 60% of riders finishing (last five generations 11.77 s; the rows marked 4.0 m/s are at that speed, every other row at 4.5 m/s), against 12.79 s for R0 at 4.5 m/s and 3.5 s for the bike with no steering at 4.0 m/s (16 riders). The balance-gate pilots at 4.0 m/s (seeds 201 and 202) ended at 11.8 and 9.6 s after 61 and 63 generations.
 R1 draw 3 at 4.0 m/s (job 38714) ends at 13.23 s, 73% finishing (last five generations 12.88 s), 0.49 s above R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 14.65 s.
 R1 draw 4 at 4.0 m/s (job 38728) ends at 9.35 s, 21% finishing (last five generations 9.01 s), 27% below R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 13.72 s. The search sat at 6.7 to 7.1 s from generation 10 to 30 and was still climbing at the end (9.1 s at generation 50, 9.3 at 59). Its lane-filter weight is -0.07, not near zero as in the two stalled pilots (+0.01 and +0.00); R0's 4.0 m/s ride also ends with a lane weight near zero (+0.01) and still rides 12.74 s, so at 4.0 m/s that weight does not mark a stalled search. One seed per rung at 4.0 m/s: this tests nothing yet.
@@ -1202,6 +1220,9 @@ R2 draw 4 at 4.0 m/s (job 38758, finished 2026-11-12) ends at 11.57 s, 46% finis
 R2 draw 5 at 4.0 m/s (job 38766, finished 2026-11-13) ends at 7.92 s, 8% finishing (last five generations 8.30 s), 38% below R0's 4.0 m/s ride and the lowest 4.0 m/s ride so far; at 4.5 m/s the same draw rode 13.26 s. It climbed to 7.5 s by generation 30 and then flattened (7.7 at 40, 8.1 at 50, 7.9 at 59); lane-filter weight -0.04. R2's three draws at 4.0 m/s: 8.16, 11.57 and 7.92 s (median 8.16) against R0's 12.74 s and R1's median 11.11 s. With one R0 seed at 4.0 m/s this tests nothing yet.
 R3 draw 3 at 4.0 m/s (job 38778, finished 2026-11-13) ends at 10.08 s, 27% finishing (last five generations 10.10 s), 21% below R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 13.19 s. It reached 8.3 s by generation 20, dipped to 7.7 at 30, rose to 10.1 by 50 and held there; lane-filter weight -0.05.
 R3 draw 4 at 4.0 m/s (job 38783, finished 2026-11-13) ends at 8.77 s with 1 of 48 riders finishing (last five generations 8.34 s), 31% below R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 13.37 s. It reached 6.7 s by generation 15, sat between 6.6 and 7.6 s to generation 40, and ended near 8 s; its last generation is its highest. Its lane-filter weight is +0.10, the only clearly positive one among the 4.0 m/s rides so far. R3's two draws at 4.0 m/s so far: 10.08 and 8.77 s.
+R3 draw 5 at 4.0 m/s (job 38791, finished 2026-11-13) ends at 10.37 s, 25% finishing (last five generations 10.74 s), 19% below R0's 4.0 m/s ride; at 4.5 m/s the same draw rode 13.54 s. It climbed steadily (6.9 s at generation 20, 9.8 at 40, 10.3 at 50); lane-filter weight -0.10. This completes CEM seed 211 at 4.0 m/s: R0 12.74 s; R1 13.23, 9.35, 11.11 (median 11.11); R2 8.16, 11.57, 7.92 (median 8.16); R3 10.08, 8.77, 10.37 (median 10.08). Every rewired median is below R0's single 4.0 m/s seed, which tests nothing until R0 has five.
+
+**CEM seed 212 at 4.5 m/s (from 2026-11-14).** With seed 211 done on all 20 primary cells, the relay moved to seed 212. Rows marked seed 212 are at 4.5 m/s. R0 seed 212 (job 38798) ends at 12.45 s, 52% finishing (last five generations 11.36 s), against 12.79 s for seed 211, so R0 now has two of its five seeds at 4.5 m/s; the seed-SD that predictions 1 and 5 use needs all five. Seed 212 on the other draws, with seed 211 in brackets: R1 draw 3 12.38 (14.65), draw 4 12.95 (13.72), draw 5 11.23 (10.47); R2 draw 3 12.77 (12.02), draw 4 12.47 (13.05), draw 5 11.02 (13.26). Lane-filter weights for seed 212 run from -0.06 (R2 draw 5) to -0.18 (R1 draw 3, R2 draw 4); none is near zero, and no seed-212 search stalled (each was above 9.8 s by generation 20 except R1 draw 5, 7.7 s, and R2 draw 3, 9.8 s). R1 draw 3 seed 212 peaked earlier (last five generations 13.62 s against 12.38 s in the last one).
 R3's three draws (13.19, 13.37 and 13.54 s, finished 2026-11-11) all ride above R0's first seed; like R1's, this tests nothing until R0 has five seeds.
 
 ## The queue as one chain (2026-11-11)
