@@ -1,0 +1,4 @@
+== /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r0/v4.0_s212: gust301, v 4.0, seed 301
+replay of /tmp/tmpxl5y4ih7/decoder.json: upright 11.77 s (max 15.00,  40% finish)  dist  45.9 m  |y| 2.61 m  v 4.00  bailed 0  pop 33,695 sp/s  636s
+{"riders": 48, "finished": 19, "bailed": 0, "left_road": 27, "fell": 2, "lateral_mean": 2.6094958463994167, "lateral_median": 3.500801205635071, "upright_mean": 11.766007368763288, "upright_max": 15.000247955322266, "offroad_m": 3.5}
+== /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r0/v4.0_s212: gust302, v 4.0, seed 302
