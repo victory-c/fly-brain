@@ -1,0 +1,7 @@
+== 05:58:58 1) probe on results/variants/r3_s3.npz
+    CvN5     CvN5_R        R   cb_motor  2.250000  0.000000   2.25   5.310000
+
+-> results/rungs/conf_r3_s3/v4.0_s212/probe.json
+init_hold: 23.1 W holds 4.0 m/s
+== 05:59:47 gate v0=4.0 seed=212, max 340 min
+== 05:59:47 2) ride_slow_mu trace at v0=4.0
