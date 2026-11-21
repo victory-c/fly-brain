@@ -20,3 +20,13 @@ lane-filter gain starts at 0.00 with width 1.0
   after warm-up, DN rates (Hz): DNp20_L 39, DNp20_R 22, DNp22_R 1, DNg46_L 1, DNg46_R 2, DNge043_L 3, DNge043_R 5, DNb06_L 25, DNpe013_R 1, DNp33_L 20, DNp33_R 9, DNge091_L 2, DNg29_L 47, DNg29_R 28, DNg41_L 20, DNg41_R 22, DNp18_L 38, DNp18_R 46, DNp73_L 56, DNp73_R 9, b2 MN_L 11, b2 MN_R 3, hg1 MN_L 20, hg1 MN_R 12, DNa03_R 2, DNa16_L 1, DNa16_R 4, DNb03_L 6, DNb03_R 5, DNa06_L 2, DNa06_R 3, DNp15_L 5, DNp15_R 28, DNge107_R 10, DNge086_R 2, DNge031_L 23, DNge031_R 22, DNge033_L 1, DNge033_R 3, GNG283_L 3, GNG283_R 12
   population 8,210 spikes/s per brain
 gen  0  fit best   4.47 mean   0.96  upright  0.89 s (max  4.21,   0% finish)  dist   3.9 m  |y| 0.49 m  v 4.50  bailed 0  pop 104,433 sp/s  82s
+gen  1  fit best   2.86 mean   0.92  upright  0.86 s (max  2.70,   0% finish)  dist   3.7 m  |y| 0.52 m  v 4.50  bailed 0  pop 69,887 sp/s  54s
+gen  2  fit best   5.75 mean   1.18  upright  1.09 s (max  5.32,   0% finish)  dist   4.8 m  |y| 0.49 m  v 4.50  bailed 0  pop 119,361 sp/s  102s
+gen  3  fit best   4.00 mean   1.37  upright  1.26 s (max  3.69,   0% finish)  dist   5.5 m  |y| 0.67 m  v 4.50  bailed 0  pop 79,343 sp/s  72s
+gen  4  fit best   6.55 mean   2.06  upright  1.93 s (max  6.10,   0% finish)  dist   8.4 m  |y| 1.08 m  v 4.50  bailed 0  pop 103,888 sp/s  116s
+gen  5  fit best   7.00 mean   2.43  upright  2.27 s (max  6.47,   0% finish)  dist   9.7 m  |y| 1.51 m  v 4.50  bailed 0  pop 73,701 sp/s  122s
+gen  6  fit best  15.75 mean   3.84  upright  3.65 s (max 14.96,   0% finish)  dist  15.5 m  |y| 2.42 m  v 4.50  bailed 0  pop 104,267 sp/s  277s
+gen  7  fit best  12.15 mean   5.08  upright  4.88 s (max 11.89,   0% finish)  dist  20.6 m  |y| 3.07 m  v 4.50  bailed 0  pop 63,362 sp/s  221s
+gen  8  fit best  15.93 mean   5.95  upright  5.69 s (max 15.00,   4% finish)  dist  24.4 m  |y| 2.86 m  v 4.50  bailed 0  pop 57,423 sp/s  277s
+gen  9  fit best  14.89 mean   6.52  upright  6.23 s (max 13.99,   0% finish)  dist  26.8 m  |y| 2.88 m  v 4.50  bailed 0  pop 50,289 sp/s  259s
+gen 10  fit best  15.84 mean   7.67  upright  7.36 s (max 15.00,   8% finish)  dist  32.0 m  |y| 2.88 m  v 4.50  bailed 0  pop 46,632 sp/s  277s
