@@ -1,0 +1,7 @@
+== 13:57:52 1) probe on results/variants/r3_s4.npz
+  GNG283       GNG283_L        L          cb_motor 11.00  3.120000   7.88   6.680000
+
+-> results/rungs/conf_r3_s4/v4.0_s213/probe.json
+init_hold: 23.1 W holds 4.0 m/s
+== 13:58:37 gate v0=4.0 seed=213, max 340 min
+== 13:58:37 2) ride_slow_mu trace at v0=4.0
