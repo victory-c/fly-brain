@@ -1,0 +1,7 @@
+== /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r2_s4/v4.0_s214: gust301, v 4.0, seed 301
+replay of /tmp/tmpy505vppq/decoder.json: upright  9.56 s (max 15.00,   8% finish)  dist  36.3 m  |y| 2.58 m  v 4.00  bailed 0  pop 52,708 sp/s  437s
+{"riders": 48, "finished": 4, "bailed": 0, "left_road": 27, "fell": 17, "lateral_mean": 2.5828002848041556, "lateral_median": 3.5037317276000977, "upright_mean": 9.556165158748627, "upright_max": 15.000247955322266, "offroad_m": 3.5}
+== /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r2_s4/v4.0_s214: gust302, v 4.0, seed 302
+replay of /tmp/tmpyuw382t9/decoder.json: upright  9.03 s (max 15.00,   2% finish)  dist  34.4 m  |y| 2.92 m  v 4.00  bailed 0  pop 51,966 sp/s  438s
+{"riders": 48, "finished": 1, "bailed": 0, "left_road": 30, "fell": 17, "lateral_mean": 2.923832939006388, "lateral_median": 3.5021556615829468, "upright_mean": 9.02615307768186, "upright_max": 15.000247955322266, "offroad_m": 3.5}
+== /home/s/st/stevejobs/flybrain/fly_brain/results/rungs/conf_r2_s4/v4.0_s214: vplus, v 4.5, seed 301
