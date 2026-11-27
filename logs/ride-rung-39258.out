@@ -1,0 +1,7 @@
+== 16:27:17 1) probe on results/variants/r1_s5.npz
+   DNp21 DNp21(PS236)_L        L descending_neuron 23.879999 27.000000  -3.120000  -4.650000
+
+-> results/rungs/conf_r1_s5/v4.0_s214/probe.json
+init_hold: 23.1 W holds 4.0 m/s
+== 16:28:02 gate v0=4.0 seed=214, max 340 min
+== 16:28:02 2) ride_slow_mu trace at v0=4.0
